@@ -13,16 +13,15 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ImportApp.WPF
+namespace ImportApp.WPF.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ArticlesView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ArticlesView : UserControl
     {
-        public MainWindow()
+        public ArticlesView()
         {
-            
             InitializeComponent();
         }
     }

@@ -1,12 +1,23 @@
 ﻿<Application x:Class="ImportApp.WPF.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:ImportApp.WPF">
+             xmlns:local="clr-namespace:ImportApp.WPF"
+             xmlns:viewmodels="clr-namespace:ImportApp.WPF.ViewModels"
+             xmlns:views="clr-namespace:ImportApp.WPF.Views">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="\Styles\CommonThings.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate DataType="{x:Type viewmodels:HomeViewModel}">
+                <views:HomeView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodels:ArticlesViewModel}">
+                <views:ArticlesView/>
+            </DataTemplate>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

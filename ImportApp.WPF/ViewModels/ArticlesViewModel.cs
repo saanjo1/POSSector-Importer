@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ImportApp.WPF.ViewModels
 {
-    public class BaseViewModel 
+    public class ArticlesViewModel : BaseViewModel
     {
     }
 }
