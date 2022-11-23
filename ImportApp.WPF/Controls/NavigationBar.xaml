@@ -15,12 +15,12 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <Grid>
+        <DockPanel Background="{StaticResource BrushPrimary1}" >
+            <iconPacks:PackIconMaterial Kind="FileExcel" Height="40" Width="40" Margin="5 5" VerticalAlignment="Center"/>
             <TextBlock Padding="10" Text="ImpExp Application" Grid.Row="0"
                    FontSize="28"
-                   Foreground="White"
-                   Background="{StaticResource BrushPrimary1}"/>
-        </Grid>
+                   Foreground="White"/>
+        </DockPanel>
 
         <Grid Grid.Row="1" RenderOptions.EdgeMode="Aliased" Background="{StaticResource BrushPrimary2}">
             <Grid.Resources>
