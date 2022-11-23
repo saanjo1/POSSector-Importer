@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using ImportApp.WPF.Commands;
 using ImportApp.WPF.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -17,8 +16,25 @@ namespace ImportApp.WPF.State.Navigators
         [ObservableProperty]
         private BaseViewModel _currentViewModel;
 
-        
-        public ICommand UpdateCurrentViewModelCommand => new UpdateCurrentViewModelCommand(this);
+        [RelayCommand]
+        public void EditCurrentViewModel(object? parameter)
+        {
+            if (parameter is ViewType)
+            {
+                ViewType viewType = (ViewType)parameter;
+                switch (viewType)
+                {
+                    case ViewType.Home:
+                        this.CurrentViewModel = new HomeViewModel();
+                        break;
+                    case ViewType.Articles:
+                        this.CurrentViewModel = new ArticlesViewModel();
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
 
        
     }

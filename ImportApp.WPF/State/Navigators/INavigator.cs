@@ -19,6 +19,6 @@ namespace ImportApp.WPF.State.Navigators
     public interface INavigator
     {
         BaseViewModel CurrentViewModel { get; set; }
-        ICommand UpdateCurrentViewModelCommand { get; }
+        //ICommand UpdateCurrentViewModelCommand { get; }
     }
 }
