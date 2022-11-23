@@ -18,6 +18,29 @@
                 <views:ArticlesView/>
             </DataTemplate>
 
+
+        <Style x:Key="datagridStyle" TargetType="DataGrid">
+            <Setter Property="VerticalGridLinesBrush" Value="#4b6584"/>
+            <Setter Property="HorizontalGridLinesBrush" Value="#4b6584"/>
+            <Setter Property="AlternatingRowBackground" Value="#ff2c3e50"/>
+            <Setter Property="RowBackground" Value="#34495e"/>
+            <Setter Property="RowHeight" Value="25"/>
+            <Setter Property="RowHeaderWidth" Value="0"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="VerticalScrollBarVisibility" Value="Hidden"/>
+           
+        </Style>
+
+        <Style x:Key="DataGCH" TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="#ff2c3e50"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="White"/>
+
+        </Style>
         </ResourceDictionary>
+
     </Application.Resources>
 </Application>

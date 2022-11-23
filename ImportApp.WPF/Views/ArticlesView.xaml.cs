@@ -1,4 +1,7 @@
-﻿using System;
+﻿using ImportApp.Domain.Models;
+using ImportApp.EntityFramework.DBContext;
+using ImportApp.EntityFramework.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +23,7 @@ namespace ImportApp.WPF.Views
     /// </summary>
     public partial class ArticlesView : UserControl
     {
+
         public ArticlesView()
         {
             InitializeComponent();

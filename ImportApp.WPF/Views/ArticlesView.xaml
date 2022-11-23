@@ -6,7 +6,12 @@
              xmlns:local="clr-namespace:ImportApp.WPF.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <TextBlock Text="Articles view"/>
+    <Grid VerticalAlignment="Top" Margin="10, 10, 10, 10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <DataGrid Grid.Row="0" Name="ArticlesList" Style="{StaticResource datagridStyle}">
+            <DataGridColumnHeader Style="{StaticResource DataGCH}"/>
+            </DataGrid>
     </Grid>
 </UserControl>

@@ -8,5 +8,10 @@ namespace ImportApp.WPF.ViewModels
 {
     public class ArticlesViewModel : BaseViewModel
     {
+
+        public ArticlesViewModel()
+        {
+
+        }
     }
 }

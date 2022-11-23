@@ -14,7 +14,7 @@ namespace ImportApp.WPF.State.Navigators
     public partial class Navigator : ObservableObject, INavigator
     {
         [ObservableProperty]
-        private BaseViewModel _currentViewModel;
+        private BaseViewModel? _currentViewModel;
 
         [RelayCommand]
         public void EditCurrentViewModel(object? parameter)

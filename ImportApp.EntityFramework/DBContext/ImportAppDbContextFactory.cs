@@ -10,7 +10,7 @@ namespace ImportApp.EntityFramework.DBContext
 {
     public class ImportAppDbContextFactory : IDesignTimeDbContextFactory<ImportAppDbContext>
     {
-        public ImportAppDbContext CreateDbContext(string[] args = null)
+        public ImportAppDbContext CreateDbContext(string[]? args = null)
         {
             var options = new DbContextOptionsBuilder<ImportAppDbContext>();
 
