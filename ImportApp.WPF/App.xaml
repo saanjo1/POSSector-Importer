@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:ImportApp.WPF"
              xmlns:viewmodels="clr-namespace:ImportApp.WPF.ViewModels"
+            xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"   
              xmlns:views="clr-namespace:ImportApp.WPF.Views">
     <Application.Resources>
         <ResourceDictionary>
@@ -41,6 +42,24 @@
             <Setter Property="Foreground" Value="White"/>
 
         </Style>
+
+            <Style x:Key="buttonIcon" TargetType="iconPacks:PackIconMaterial">
+                <Setter Property="Margin" Value="20 2 20 0" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="Width" Value="15" />
+                <Setter Property="Height" Value="15" />
+            </Style>
+
+            <Style x:Key="txtBlock" TargetType="TextBlock">
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="Padding" Value="10"/>
+            </Style>
+
+
+
+
+
+
         </ResourceDictionary>
 
     </Application.Resources>

@@ -6,15 +6,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ImportApp.WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        Title="MainWindow" Height="720" Width="1080">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
-        <controls:NavigationBar Grid.Row="0" DataContext="{Binding Navigator}"/>
-        <ContentControl Content="{Binding Navigator.CurrentViewModel}" Grid.Row="1">
+        <controls:NavigationBar Grid.Column="0" DataContext="{Binding Navigator}"/>
+        <ContentControl Content="{Binding Navigator.CurrentViewModel}" Grid.Column="1">
             
         </ContentControl>
 

@@ -9,33 +9,45 @@
                  mc:Ignorable="d" 
              
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+    <Grid Background="{StaticResource BrushPrimary2}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="200"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <DockPanel Background="{StaticResource BrushPrimary1}" >
-            <iconPacks:PackIconMaterial Kind="FileExcel" Height="40" Width="40" Margin="5 5" VerticalAlignment="Center"/>
-            <TextBlock Padding="10" Text="ImpExp Application" Grid.Row="0"
+        <DockPanel Background="{StaticResource BrushPrimary2}" >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <iconPacks:PackIconMaterial Kind="Shopping" Height="100" Width="100" HorizontalAlignment="Center"/>
+                <TextBlock Text="Yamamay" Grid.Row="1"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Bottom"
                    FontSize="28"
+                   Padding="30"
                    Foreground="White"/>
+            </Grid>
         </DockPanel>
 
-        <Grid Grid.Row="1" RenderOptions.EdgeMode="Aliased" Background="{StaticResource BrushPrimary2}">
-            <Grid.Resources>
-                <Style TargetType="RadioButton" BasedOn="{StaticResource NavButton}"/>
-            </Grid.Resources>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+        <Grid Grid.Row="1" Background="{StaticResource BrushPrimary2}" >
 
-            <RadioButton Grid.Column="0" Content="Home" Command="{Binding EditCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.Home}"/>
-            <RadioButton Grid.Column="1" Content="Articles" Command="{Binding EditCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.Articles}"/>
-            <RadioButton Grid.Column="2" Content="Discounts"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="191*"/>
+                <ColumnDefinition Width="610*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.ColumnSpan="2">
+                <RadioButton Style="{StaticResource NavButton}" Grid.Row="0" Content="Home" Command="{Binding EditCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.Home}"/>
+                <RadioButton Style="{StaticResource NavButton}" Grid.Row="1" Content="Articles" Command="{Binding EditCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.Articles}"/>
+                <RadioButton Style="{StaticResource NavButton}" Grid.Row="2" Content="Discounts"/>
+            </StackPanel>
         </Grid>
 
     </Grid>

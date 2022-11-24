@@ -5,12 +5,12 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="RadioButton">
-                    <Grid x:Name="gridMain" Background="{TemplateBinding Background}">
+                    <Border x:Name="gridMain" Background="{TemplateBinding Background}" CornerRadius="7">
                         <TextBlock Text="{TemplateBinding Content}"
                                    Padding="{TemplateBinding Padding}"
                                    Cursor="Hand"
-                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
-                    </Grid>
+                                   HorizontalAlignment="Left"/>
+                    </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="True">
                             <Setter Property="Background" Value="{StaticResource BrushPrimary1}" TargetName="gridMain"/>
@@ -21,7 +21,10 @@
         </Setter>
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="Padding" Value="10 5"/>
-        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="Margin" Value="15 3"/>
+        <Setter Property="Height" Value="35"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="Background" Value="{StaticResource BrushPrimary2}"/>
         <Style.Triggers>
             <EventTrigger RoutedEvent="MouseEnter">
