@@ -44,7 +44,7 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <StackPanel Grid.ColumnSpan="2">
-                <RadioButton Style="{StaticResource NavButton}" Grid.Row="0" Content="Home" Command="{Binding EditCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.Home}"/>
+                <RadioButton Style="{StaticResource NavButton}" Grid.Row="0" Content="Dashboard" Command="{Binding EditCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.Home}"/>
                 <RadioButton Style="{StaticResource NavButton}" Grid.Row="1" Content="Articles" Command="{Binding EditCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.Articles}"/>
                 <RadioButton Style="{StaticResource NavButton}" Grid.Row="2" Content="Discounts"/>
             </StackPanel>
