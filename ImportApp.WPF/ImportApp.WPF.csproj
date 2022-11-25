@@ -8,17 +8,25 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Images\**" />
+    <EmbeddedResource Remove="Images\**" />
+    <None Remove="Images\**" />
+    <Page Remove="Images\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ImportApp.Domain\ImportApp.Domain.csproj" />
     <ProjectReference Include="..\ImportApp.EntityFramework\ImportApp.EntityFramework.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
+    <PackageReference Include="DropdownMenu.WPF" Version="1.0.0" />
     <PackageReference Include="MahApps.Metro.IconPacks.Material" Version="4.11.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Images\" />
+    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,6 @@
-﻿using ImportApp.WPF.ViewModels;
+﻿using ImportApp.Domain.Models;
+using ImportApp.EntityFramework.Services;
+using ImportApp.WPF.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -14,10 +16,18 @@ namespace ImportApp.WPF
     /// </summary>
     public partial class App : Application
     {
+
+        private GenericDataService<Article> _dataService;
+
+        public App()
+        {
+            _dataService = new GenericDataService<Article>(new EntityFramework.DBContext.ImportAppDbContextFactory());
+        }
+
         protected override void OnStartup(StartupEventArgs e)
         {
             Window window = new MainWindow();
-            window.DataContext = new MainViewModel();
+            window.DataContext = new MainViewModel(_dataService);
             window.Show();
 
             base.OnStartup(e);

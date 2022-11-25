@@ -1,4 +1,6 @@
-﻿using ImportApp.WPF.State.Navigators;
+﻿using ImportApp.Domain.Models;
+using ImportApp.EntityFramework.Services;
+using ImportApp.WPF.State.Navigators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +11,15 @@ namespace ImportApp.WPF.ViewModels
 {
     public class MainViewModel : BaseViewModel
     {
-        public INavigator Navigator { get; set; } = new Navigator();
+        private static GenericDataService<Article> _dataService;
+
+
+        public MainViewModel(GenericDataService<Article> dataService)
+        {
+            _dataService = dataService;
+        }
+
+        public INavigator Navigator { get; set; } = new Navigator(_dataService);
 
     }
 }

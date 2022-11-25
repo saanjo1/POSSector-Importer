@@ -42,12 +42,15 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <StackPanel Grid.ColumnSpan="2">
-                <RadioButton Style="{StaticResource NavButton}" Grid.Row="0" Content="Dashboard" Command="{Binding EditCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.Home}"/>
-                <RadioButton Style="{StaticResource NavButton}" Grid.Row="1" Content="Articles" Command="{Binding EditCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.Articles}"/>
-                <RadioButton Style="{StaticResource NavButton}" Grid.Row="2" Content="Discounts"/>
-            </StackPanel>
+                <RadioButton Style="{StaticResource NavButton}" Content="Dashboard" Command="{Binding EditCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.Home}"/>
+                <RadioButton Style="{StaticResource NavButton}" Content="Import from Excel" Command="{Binding EditCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.Articles}"/>
+                <RadioButton Style="{StaticResource NavButton}" Content="Import to the discount" Command="{Binding EditCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.Articles}"/>
+                <RadioButton Style="{StaticResource NavButton}" Content="Manage discounts" Command="{Binding EditCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.Articles}"/>
+                <RadioButton Style="{StaticResource NavButton}" Content="Manage articles" Command="{Binding EditCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.Articles}"/>
+       </StackPanel>
         </Grid>
 
     </Grid>

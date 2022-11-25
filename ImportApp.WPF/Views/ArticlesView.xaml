@@ -10,8 +10,10 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <DataGrid Grid.Row="0" Name="ArticlesList" Style="{StaticResource datagridStyle}">
-            <DataGridColumnHeader Style="{StaticResource DataGCH}"/>
-            </DataGrid>
+
+        <DataGrid AutoGenerateColumns="True" ItemsSource="{Binding Articles}">
+            
+        </DataGrid>
+        
     </Grid>
 </UserControl>
