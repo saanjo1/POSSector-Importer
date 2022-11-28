@@ -11,9 +11,21 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <DataGrid AutoGenerateColumns="True" ItemsSource="{Binding Articles}">
-            
-        </DataGrid>
-        
+        <TabControl>
+            <TabItem Header="Articles List">
+                <ListView ItemsSource="{Binding ArticleList}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" />
+                            <GridViewColumn Header="Art. number" DisplayMemberBinding="{Binding ArticleNumber}" />
+                            <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Price}"/>
+                            <GridViewColumn Header="Barcode" DisplayMemberBinding="{Binding BarCode}"/>
+                            <GridViewColumn Header="Order" DisplayMemberBinding="{Binding Order}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </TabItem>
+        </TabControl>
+
     </Grid>
 </UserControl>

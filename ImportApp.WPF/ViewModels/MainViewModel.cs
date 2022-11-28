@@ -11,15 +11,14 @@ namespace ImportApp.WPF.ViewModels
 {
     public class MainViewModel : BaseViewModel
     {
-        private static GenericDataService<Article> _dataService;
+        public static IArticleService _articleService = new IArticleService();  
 
-
-        public MainViewModel(GenericDataService<Article> dataService)
+        public MainViewModel()
         {
-            _dataService = dataService;
+            
         }
 
-        public INavigator Navigator { get; set; } = new Navigator(_dataService);
+        public INavigator Navigator { get; set; } = new Navigator(_articleService);
 
     }
 }

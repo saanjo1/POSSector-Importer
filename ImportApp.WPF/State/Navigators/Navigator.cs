@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ImportApp.Domain.Models;
+using ImportApp.Domain.Services;
 using ImportApp.EntityFramework.Services;
 using ImportApp.WPF.ViewModels;
 using System;
@@ -16,15 +17,14 @@ namespace ImportApp.WPF.State.Navigators
     public partial class Navigator : ObservableObject, INavigator
     {
 
-        private GenericDataService<Article> _dataService;
-
-
         [ObservableProperty]
         private BaseViewModel? _currentViewModel;
 
-        public Navigator(GenericDataService<Article> dataService)
+        private IArticleService _articleService;
+
+        public Navigator(IArticleService articleService)
         {
-            _dataService = dataService;
+            _articleService = articleService;
         }
 
         [RelayCommand]
@@ -39,7 +39,7 @@ namespace ImportApp.WPF.State.Navigators
                         this.CurrentViewModel = new HomeViewModel();
                         break;
                     case ViewType.Articles:
-                        this.CurrentViewModel = new ArticlesViewModel(_dataService);
+                        this.CurrentViewModel = new ArticlesViewModel(_articleService);
                         break;
                     default:
                         break;

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ImportApp.WPF.ViewModels
 {
-    public class ArticleItemViewModel : BaseViewModel
+    public partial class ArticleItemViewModel : BaseViewModel
     {
         public string Name { get; set; }
         public string ArticleNumber { get; set; } 

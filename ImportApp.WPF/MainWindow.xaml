@@ -4,11 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:controls="clr-namespace:ImportApp.WPF.Controls"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ImportApp.WPF"
+        xmlns:local="clr-namespace:ImportApp.WPF" xmlns:local1="clr-namespace:ImportApp.WPF.ViewModels"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         Title="MainWindow" Height="720" Width="1080">
+    <Window.DataContext>
+        <local1:MainViewModel/>
+    </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>

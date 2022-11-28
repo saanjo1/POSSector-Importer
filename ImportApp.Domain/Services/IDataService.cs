@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ImportApp.Domain.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace ImportApp.Domain.Services
 {
-    public interface IDataService<T>
+    public interface IDataService
     {
-        Task<ICollection<T>> GetAll();
+        Task<ICollection<Article>> GetAll();
 
-        Task<T> Get(Guid id);
+        Task<Article> Get(Guid id);
 
-        Task<T> Create(T entity);
+        Task<Article> Create(Article entity);
 
-        Task<T> Update(Guid id, T entity);
+        Task<Article> Update(Guid id, Article entity);
 
         Task<bool> Delete(Guid id);
 
