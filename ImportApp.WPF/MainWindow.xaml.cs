@@ -22,7 +22,6 @@ namespace ImportApp.WPF
     {
         public MainWindow()
         {
-            
             InitializeComponent();
         }
     }

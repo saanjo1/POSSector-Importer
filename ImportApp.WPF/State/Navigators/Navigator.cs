@@ -21,10 +21,12 @@ namespace ImportApp.WPF.State.Navigators
         private BaseViewModel? _currentViewModel;
 
         private IArticleService _articleService;
+        private IExcelDataService _excelDataService;
 
-        public Navigator(IArticleService articleService)
+        public Navigator(IArticleService articleService, IExcelDataService excelDataService)
         {
             _articleService = articleService;
+            _excelDataService = excelDataService;   
         }
 
         [RelayCommand]
@@ -42,7 +44,7 @@ namespace ImportApp.WPF.State.Navigators
                         this.CurrentViewModel = new ArticlesViewModel(_articleService);
                         break;
                     case ViewType.ImportArticles:
-                        this.CurrentViewModel = new ImportArticleViewModel();
+                        this.CurrentViewModel = new ImportArticleViewModel(_excelDataService);
                         break;
                     default:
                         break;

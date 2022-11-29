@@ -14,7 +14,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Button Style="{StaticResource importButton}" Grid.Column="1">
+        <Button Style="{StaticResource importButton}" Grid.Column="1" Command="{Binding OpenDialogCommand}">
             <iconPacks:PackIconMaterial Style="{StaticResource buttonIcon}" Kind="Upload" Width="200" Height="200"/>
         </Button>
     </Grid>
