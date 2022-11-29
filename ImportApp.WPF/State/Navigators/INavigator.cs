@@ -12,7 +12,8 @@ namespace ImportApp.WPF.State.Navigators
     public enum ViewType
     {
         Home,
-        Articles
+        Articles,
+        ImportArticles
     }
 
 

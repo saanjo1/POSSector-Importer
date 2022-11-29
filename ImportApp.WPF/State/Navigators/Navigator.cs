@@ -41,6 +41,9 @@ namespace ImportApp.WPF.State.Navigators
                     case ViewType.Articles:
                         this.CurrentViewModel = new ArticlesViewModel(_articleService);
                         break;
+                    case ViewType.ImportArticles:
+                        this.CurrentViewModel = new ImportArticleViewModel();
+                        break;
                     default:
                         break;
                 }
