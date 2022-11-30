@@ -1,17 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ImportApp.Domain.Models;
-using ImportApp.EntityFramework.DBContext;
 using ImportApp.EntityFramework.Services;
-using Microsoft.Data.SqlClient;
-using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
 
 namespace ImportApp.WPF.ViewModels
@@ -54,7 +46,7 @@ namespace ImportApp.WPF.ViewModels
             if (!string.IsNullOrEmpty(TextToFilter))
             {
                 var filt = obj as Article;
-                return filt != null && filt.Name.Contains(TextToFilter);
+                return filt != null && (filt.Name.Contains(TextToFilter) || filt.BarCode.Contains(TextToFilter) || filt.Price.ToString() == TextToFilter || filt.ArticleNumber.ToString() == TextToFilter);
             }
             return true;
         }

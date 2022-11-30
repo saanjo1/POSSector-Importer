@@ -27,14 +27,14 @@
                 </StackPanel>
             </Button>
 
-            <Button Style="{StaticResource importButton}" Grid.Row="1" Grid.Column="1" Command="{Binding OpenDialogCommand}">
+            <Button Style="{StaticResource importButton}" Grid.Row="1" Grid.Column="1" Command="{Binding MapDataCommand}">
                 <StackPanel>
                     <iconPacks:PackIconMaterial Style="{StaticResource buttonIcon}" Kind="TableColumn" Width="100" Height="100"/>
                     <TextBlock Padding="0 5 0 5" TextAlignment="Center"  Text="Map columns"/>
                 </StackPanel>
             </Button>
 
-            <Button Style="{StaticResource importButton}" Grid.Row="1" Grid.Column="2" Command="{Binding OpenDialogCommand}">
+            <Button Style="{StaticResource importButton}" Grid.Row="1" Grid.Column="2" Command="{Binding ImportDataCommand}">
                 <StackPanel>
                     <iconPacks:PackIconMaterial Style="{StaticResource buttonIcon}" Kind="Import" Width="100" Height="100"/>
                     <TextBlock Padding="0 5 0 5" TextAlignment="Center"  Text="Import to database"/>

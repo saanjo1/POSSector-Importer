@@ -15,14 +15,14 @@ namespace ImportApp.WPF.ViewModels
         private IExcelDataService _excelDataService;
 
         [ObservableProperty]
+        [NotifyCanExecuteChangedFor(nameof(MapDataCommand))]
+        [NotifyCanExecuteChangedFor(nameof(ImportDataCommand))]
         private string excelFile;
 
         public ImportArticleViewModel(IExcelDataService excelDataService)
         {
             _excelDataService = excelDataService;
         }
-
-        public bool cExecute() => ExcelFile != null;
 
         [RelayCommand]
         public void OpenDialog()
@@ -34,9 +34,27 @@ namespace ImportApp.WPF.ViewModels
             catch (System.Exception)
             {
 
-                throw;
             }
 
         }
+
+        [RelayCommand(CanExecute = nameof(CanImport))]
+        public void ImportData()
+        {
+
+        }
+
+        private bool CanImport()
+=> !string.IsNullOrWhiteSpace(ExcelFile);
+
+        [RelayCommand(CanExecute = nameof(CanMap))]
+        public void MapData()
+        {
+
+        }
+
+        private bool CanMap()
+=> !string.IsNullOrWhiteSpace(ExcelFile);
+
     }
 }

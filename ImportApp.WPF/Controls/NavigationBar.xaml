@@ -12,6 +12,7 @@
     <Grid Background="{StaticResource BrushPrimary2}">
         <Grid.RowDefinitions>
             <RowDefinition Height="200"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -22,16 +23,24 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <iconPacks:PackIconMaterial Kind="Shopping" Height="100" Width="100" HorizontalAlignment="Center"/>
-                <TextBlock Text="Yamamay" Grid.Row="1"
+                <StackPanel Grid.Row="1">
+                    <TextBlock Text="Yamamay"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Bottom"
                    FontSize="28"
-                   Padding="30"
+                   Padding="20"
                    Foreground="White"/>
+                    <TextBlock Text="Test Application" Foreground="LightGray" FontSize="14" FontWeight="SemiBold" TextAlignment="Center"/>
+                </StackPanel>
+
             </Grid>
+            
+            
         </DockPanel>
 
-        <Grid Grid.Row="1" Background="{StaticResource BrushPrimary2}" >
+        <Separator Grid.Row="1" Margin="25" Background="#799540" DockPanel.Dock="Top" Height="0.8"/>
+
+        <Grid Grid.Row="2" Background="{StaticResource BrushPrimary2}" >
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="191*"/>
