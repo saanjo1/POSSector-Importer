@@ -104,7 +104,7 @@
                     <EventTrigger RoutedEvent="MouseEnter">
                         <BeginStoryboard>
                             <Storyboard>
-                                <ColorAnimation To="{StaticResource ColorPrimary3}" Duration="0:0:0.1" Storyboard.TargetProperty="Background.Color"/>
+                                <ColorAnimation To="{StaticResource ColorPrimary4}" Duration="0:0:0.1" Storyboard.TargetProperty="Background.Color"/>
                             </Storyboard>
                         </BeginStoryboard>
                     </EventTrigger>
@@ -112,7 +112,7 @@
                     <EventTrigger RoutedEvent="MouseLeave">
                         <BeginStoryboard>
                             <Storyboard>
-                                <ColorAnimation To="{StaticResource ColorPrimary4}" Duration="0:0:0.1" Storyboard.TargetProperty="Background.Color"/>
+                                <ColorAnimation To="{StaticResource ColorPrimary3}" Duration="0:0:0.1" Storyboard.TargetProperty="Background.Color"/>
                             </Storyboard>
                         </BeginStoryboard>
                     </EventTrigger>

@@ -10,7 +10,7 @@
              >
 
     <Border CornerRadius="10">
-        <Grid Background="LightGray">
+        <Grid Background="White">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
@@ -21,11 +21,11 @@
             <StackPanel>
                 <TextBlock Padding="10" Text="Please select one of the sheets:" HorizontalAlignment="Center" Margin="0,0,0,21" Grid.RowSpan="2" Width="175"/>
 
-                <Separator Grid.Row="1" Margin="52,25,52,10" Background="#799540"/>
+                <Separator Grid.Row="1" Margin="52,0,52,20" Background="#799540"/>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="2" Width="274">
-                    <Label Content="Excel sheets:"/>
-                    <ComboBox x:Name="comboBoxSheets"/>
+                    <Label Margin="42 0 0 0" Content="Excel sheets:"/>
+                    <ComboBox x:Name="comboBoxSheets" Width="100"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" Grid.Row="3" Margin="10" HorizontalAlignment="Center">
