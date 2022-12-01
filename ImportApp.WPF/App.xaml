@@ -5,7 +5,7 @@
              xmlns:viewmodels="clr-namespace:ImportApp.WPF.ViewModels"
             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"   
              xmlns:views="clr-namespace:ImportApp.WPF.Views"
-             xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
+             xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" xmlns:controls="clr-namespace:ImportApp.WPF.Controls">
 
     <Application.Resources>
         <ResourceDictionary>
@@ -25,6 +25,101 @@
             <DataTemplate DataType="{x:Type viewmodels:ImportArticleViewModel}">
                 <views:ImportArticleView/>
             </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodels:MapDataViewModel}">
+                <controls:MapDataView/>
+            </DataTemplate>
+
+
+            <Style x:Key="SaveButton" TargetType="Button">
+
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="gridMain" Background="{TemplateBinding Background}" CornerRadius="3">
+                                <TextBlock Text="{TemplateBinding Content}"
+                                   TextAlignment="Center"
+                                           Padding="10"
+                                   Cursor="Hand"
+                                   HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+
+
+                <Setter Property="Background" Value="{StaticResource BrushPrimary2}"/>
+                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                <Setter Property="Height" Value="35"/>
+                <Setter Property="Padding" Value="10 5"/>
+                <Setter Property="Width" Value="100"/>
+                <Setter Property="Foreground" Value="#FFFFFF"/>
+
+                <Style.Triggers>
+                    <EventTrigger RoutedEvent="MouseEnter">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ColorAnimation To="{StaticResource ColorPrimary1}" Duration="0:0:0.1" Storyboard.TargetProperty="Background.Color"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+
+                    <EventTrigger RoutedEvent="MouseLeave">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ColorAnimation To="{StaticResource ColorPrimary2}" Duration="0:0:0.1" Storyboard.TargetProperty="Background.Color"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Style.Triggers>
+                
+                
+            </Style>
+
+            <Style x:Key="CancelButton" TargetType="Button">
+
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="gridMain" Background="{TemplateBinding Background}" CornerRadius="3">
+                                <TextBlock Text="{TemplateBinding Content}"
+                                   TextAlignment="Center"
+                                           Padding="10"
+                                   Cursor="Hand"
+                                   HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+
+
+                <Setter Property="Background" Value="{StaticResource BrushPrimary3}"/>
+                <Setter Property="Foreground" Value="#ffffff"/>
+                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                <Setter Property="Height" Value="35"/>
+                <Setter Property="Width" Value="100"/>
+
+
+                <Style.Triggers>
+                    <EventTrigger RoutedEvent="MouseEnter">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ColorAnimation To="{StaticResource ColorPrimary3}" Duration="0:0:0.1" Storyboard.TargetProperty="Background.Color"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+
+                    <EventTrigger RoutedEvent="MouseLeave">
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ColorAnimation To="{StaticResource ColorPrimary4}" Duration="0:0:0.1" Storyboard.TargetProperty="Background.Color"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Style.Triggers>
+
+            </Style>
+
 
 
             <Style x:Key="gridEditButton" TargetType="Button">

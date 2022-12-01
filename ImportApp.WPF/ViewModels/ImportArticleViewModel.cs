@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using ImportApp.EntityFramework.Services;
 using Microsoft.Win32;
+using ModalControl;
 using System;
 using System.Threading.Tasks;
 using System.Windows;
@@ -19,6 +20,12 @@ namespace ImportApp.WPF.ViewModels
         [NotifyCanExecuteChangedFor(nameof(ImportDataCommand))]
         private string excelFile;
 
+        [ObservableProperty]
+        public bool isOpen;
+
+
+        public MapDataViewModel MapDataViewModel;
+
         public ImportArticleViewModel(IExcelDataService excelDataService)
         {
             _excelDataService = excelDataService;
@@ -33,7 +40,7 @@ namespace ImportApp.WPF.ViewModels
             }
             catch (System.Exception)
             {
-
+                throw;
             }
 
         }
@@ -50,6 +57,7 @@ namespace ImportApp.WPF.ViewModels
         [RelayCommand(CanExecute = nameof(CanMap))]
         public void MapData()
         {
+            IsOpen = true;
 
         }
 

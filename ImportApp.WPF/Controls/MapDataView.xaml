@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="ImportApp.WPF.Controls.MapDataView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ImportApp.WPF.Controls"
+             mc:Ignorable="d" 
+             FontSize="12"
+             FontWeight="Light"
+             >
+
+    <Border CornerRadius="10">
+        <Grid Background="LightGray">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel>
+                <TextBlock Padding="10" Text="Please select one of the sheets:" HorizontalAlignment="Center" Margin="0,0,0,21" Grid.RowSpan="2" Width="175"/>
+
+                <Separator Grid.Row="1" Margin="52,25,52,10" Background="#799540"/>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="2" Width="274">
+                    <Label Content="Excel sheets:"/>
+                    <ComboBox x:Name="comboBoxSheets"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Grid.Row="3" Margin="10" HorizontalAlignment="Center">
+                    <Button Content="Save" Style="{StaticResource SaveButton}" Width="60" Margin="10"/>
+                    <Button Content="Cancel" Style="{StaticResource CancelButton}" Width="60" Margin="10"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>
+
+    

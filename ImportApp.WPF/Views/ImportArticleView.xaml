@@ -4,11 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"   
-             xmlns:local="clr-namespace:ImportApp.WPF.Views"
+             xmlns:local="clr-namespace:ImportApp.WPF.Views" xmlns:modalcontrol="clr-namespace:ModalControl;assembly=ModalControl" xmlns:controls="clr-namespace:ImportApp.WPF.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+    <Grid Background="#f4f4f4">
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
@@ -19,7 +20,13 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="2" Margin="10">
+
+        <modalcontrol:Modal Panel.ZIndex="1" IsOpen="{Binding IsOpen}" Grid.ColumnSpan="4" Grid.RowSpan="4">
+            <controls:MapDataView/>
+        </modalcontrol:Modal>
+
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="2" Margin="10">
             <Button Style="{StaticResource importButton}" Grid.Row="1" Grid.Column="0" Command="{Binding OpenDialogCommand}">
                 <StackPanel>
                     <iconPacks:PackIconMaterial Style="{StaticResource buttonIcon}" Kind="Upload" Width="100" Height="100"/>
@@ -42,6 +49,6 @@
             </Button>
 
         </StackPanel>
-            
+
     </Grid>
 </UserControl>
