@@ -9,5 +9,6 @@ namespace ImportApp.Domain.Services
     public interface IExcelService
     {
         Task<string> OpenDialog();
+        Task<List<string>> ListSheetsFromFile();
     }
 }

@@ -1,9 +1,13 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ImportApp.Domain.Models;
+using ImportApp.EntityFramework.Services;
 using ModalControl;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.OleDb;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,21 +19,28 @@ namespace ImportApp.WPF.ViewModels
     {
 
         [ObservableProperty]
-        private BaseViewModel currentModalViewModel;
+        private List<string> currentSheets;
 
+        [ObservableProperty]
+        private string selectedSheet;
+
+        private IExcelDataService _excelDataService;
+
+        public MapDataViewModel(IExcelDataService excelDataService)
+        {
+            _excelDataService = excelDataService;
+            CurrentSheets = _excelDataService.ListSheetsFromFile().Result;
+        }
 
         [RelayCommand]
         public void Cancel()
         {
-
         }
-
-
 
         [RelayCommand]
         public void Submit()
         {
-
+            
         }
 
 

@@ -37,6 +37,7 @@ namespace ImportApp.WPF.ViewModels
             try
             {
                 ExcelFile = _excelDataService.OpenDialog().Result;
+                
             }
             catch (System.Exception)
             {
@@ -55,7 +56,7 @@ namespace ImportApp.WPF.ViewModels
         public void MapData()
         {
             IsOpen = true;
-            this.MDataModel = new MapDataViewModel();
+            this.MDataModel = new MapDataViewModel(_excelDataService);
         }
 
 
