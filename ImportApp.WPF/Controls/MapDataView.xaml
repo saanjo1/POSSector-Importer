@@ -6,10 +6,8 @@
              xmlns:local="clr-namespace:ImportApp.WPF.Controls"
              mc:Ignorable="d" 
              FontSize="12"
-             FontWeight="Light"
-             >
+             FontWeight="Light">
 
-    <Border CornerRadius="10">
         <Grid Background="White">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
@@ -19,22 +17,21 @@
             </Grid.RowDefinitions>
 
             <StackPanel>
-                <TextBlock Padding="10" Text="Please select one of the sheets:" HorizontalAlignment="Center" Margin="0,0,0,21" Grid.RowSpan="2" Width="175"/>
+                <TextBlock Padding="10 0 0 0" Text="Please select one of the sheets:" HorizontalAlignment="Center" Margin="0,0,0,21" Grid.RowSpan="2" Width="175"/>
 
                 <Separator Grid.Row="1" Margin="52,0,52,20" Background="#799540"/>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="2" Width="274">
                     <Label Margin="42 0 0 0" Content="Excel sheets:"/>
-                    <ComboBox x:Name="comboBoxSheets" Width="100"/>
+                    <ComboBox ItemsSource="{Binding CurrentSheets}" x:Name="comboBoxSheets" Width="100"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" Grid.Row="3" Margin="10" HorizontalAlignment="Center">
-                    <Button Content="Save" Style="{StaticResource SaveButton}" Width="60" Margin="10"/>
-                    <Button Content="Cancel" Style="{StaticResource CancelButton}" Width="60" Margin="10"/>
+                    <Button Content="Save" Style="{StaticResource SaveButton}" Command="{Binding SubmitCommand}" Width="60" Margin="10"/>
+                    <Button Content="Cancel" Style="{StaticResource CancelButton}" Command="{Binding CancelCommand}" Width="60" Margin="10"/>
                 </StackPanel>
             </StackPanel>
         </Grid>
-    </Border>
 </UserControl>
 
     

@@ -23,8 +23,8 @@ namespace ImportApp.WPF.ViewModels
         [ObservableProperty]
         public bool isOpen;
 
-
-        public MapDataViewModel MapDataViewModel;
+        [ObservableProperty]
+        private MapDataViewModel mDataModel;
 
         public ImportArticleViewModel(IExcelDataService excelDataService)
         {
@@ -51,15 +51,18 @@ namespace ImportApp.WPF.ViewModels
 
         }
 
-        private bool CanImport()
-=> !string.IsNullOrWhiteSpace(ExcelFile);
-
         [RelayCommand(CanExecute = nameof(CanMap))]
         public void MapData()
         {
             IsOpen = true;
-
+            this.MDataModel = new MapDataViewModel();
         }
+
+
+        private bool CanImport()
+=> !string.IsNullOrWhiteSpace(ExcelFile);
+
+
 
         private bool CanMap()
 => !string.IsNullOrWhiteSpace(ExcelFile);

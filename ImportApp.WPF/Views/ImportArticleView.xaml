@@ -3,10 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:viewModels="clr-namespace:ImportApp.WPF.ViewModels"
+             xmlns:views="clr-namespace:ImportApp.WPF.Views"
              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"   
-             xmlns:local="clr-namespace:ImportApp.WPF.Views" xmlns:modalcontrol="clr-namespace:ModalControl;assembly=ModalControl" xmlns:controls="clr-namespace:ImportApp.WPF.Controls"
+             xmlns:local="clr-namespace:ImportApp.WPF.Views" 
+             xmlns:modalcontrol="clr-namespace:ModalControl;assembly=ModalControl" 
+             xmlns:controls="clr-namespace:ImportApp.WPF.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
     <Grid Background="#f4f4f4">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -22,7 +27,7 @@
         </Grid.ColumnDefinitions>
 
         <modalcontrol:Modal Panel.ZIndex="1" IsOpen="{Binding IsOpen}" Grid.ColumnSpan="4" Grid.RowSpan="4">
-            <controls:MapDataView/>
+            <ContentControl Content="{Binding MDataModel}"/>
         </modalcontrol:Modal>
 
 
