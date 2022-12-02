@@ -25,16 +25,19 @@ namespace ImportApp.WPF.ViewModels
         private string selectedSheet;
 
         private IExcelDataService _excelDataService;
+        private readonly ImportArticleViewModel _importArticleViewModel;
 
-        public MapDataViewModel(IExcelDataService excelDataService)
+        public MapDataViewModel(IExcelDataService excelDataService, ImportArticleViewModel importArticleViewModel)
         {
             _excelDataService = excelDataService;
+            _importArticleViewModel = importArticleViewModel;
             CurrentSheets = _excelDataService.ListSheetsFromFile().Result;
         }
 
         [RelayCommand]
         public void Cancel()
         {
+            _importArticleViewModel.Close();
         }
 
         [RelayCommand]

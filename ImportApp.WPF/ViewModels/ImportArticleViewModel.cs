@@ -56,9 +56,14 @@ namespace ImportApp.WPF.ViewModels
         public void MapData()
         {
             IsOpen = true;
-            this.MDataModel = new MapDataViewModel(_excelDataService);
+            this.MDataModel = new MapDataViewModel(_excelDataService, this);
         }
 
+        public void Close()
+        {
+            MDataModel = null;
+            IsOpen = false;
+        }
 
         private bool CanImport()
 => !string.IsNullOrWhiteSpace(ExcelFile);

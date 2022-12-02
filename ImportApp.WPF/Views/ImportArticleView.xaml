@@ -27,7 +27,7 @@
         </Grid.ColumnDefinitions>
 
         <modalcontrol:Modal Panel.ZIndex="1" IsOpen="{Binding IsOpen}" Grid.ColumnSpan="4" Grid.RowSpan="4">
-            <ContentControl Content="{Binding MDataModel}"/>
+            <ContentControl Margin="30 20" Content="{Binding MDataModel}"/>
         </modalcontrol:Modal>
 
 
