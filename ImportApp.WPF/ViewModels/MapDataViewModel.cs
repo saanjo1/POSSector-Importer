@@ -43,13 +43,10 @@ namespace ImportApp.WPF.ViewModels
         [RelayCommand]
         public void Submit()
         {
-            
+            if(SelectedSheet != null)
+            {
+                var MapColumnsViewModel = _excelDataService.ListColumnNames();
+            }
         }
-
-
-
-
-
-
     }
 }

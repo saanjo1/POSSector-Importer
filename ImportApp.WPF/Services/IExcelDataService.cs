@@ -63,6 +63,11 @@ namespace ImportApp.EntityFramework.Services
             return await Task.FromResult(listSheet);
         }
 
+        public async Task<List<string>> ListColumnNames()
+        {
+            return null;
+        }
+
 
     }
 }
