@@ -7,60 +7,76 @@
              xmlns:nav="clr-namespace:ImportApp.WPF.State.Navigators"
           xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"   
                  mc:Ignorable="d" 
-             
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="{StaticResource BrushPrimary2}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="200"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-        <DockPanel Background="{StaticResource BrushPrimary2}" >
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <iconPacks:PackIconMaterial Kind="Shopping" Height="100" Width="100" HorizontalAlignment="Center"/>
-                <StackPanel Grid.Row="1">
-                    <TextBlock Text="Yamamay"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Bottom"
-                   FontSize="28"
-                   Padding="20"
-                   Foreground="White"/>
-                    <TextBlock Text="Test Application" Foreground="LightGray" FontSize="14" FontWeight="SemiBold" TextAlignment="Center"/>
-                </StackPanel>
-
-            </Grid>
-            
-            
-        </DockPanel>
-
-        <Separator Grid.Row="1" Margin="25" Background="#799540" DockPanel.Dock="Top" Height="0.8"/>
-
-        <Grid Grid.Row="2" Background="{StaticResource BrushPrimary2}" >
-
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="191*"/>
-                <ColumnDefinition Width="610*"/>
-            </Grid.ColumnDefinitions>
+    <Border CornerRadius="50">
+        <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <StackPanel Grid.ColumnSpan="2">
-                <RadioButton Style="{StaticResource NavButton}" Content="Dashboard" Command="{Binding EditCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.Home}"/>
-                <RadioButton Style="{StaticResource NavButton}" Content="Import from Excel" Command="{Binding EditCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.ImportArticles}"/>
-                <RadioButton Style="{StaticResource NavButton}" Content="Import to the discount" Command="{Binding EditCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.Articles}"/>
-                <RadioButton Style="{StaticResource NavButton}" Content="Manage discounts" Command="{Binding EditCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.Articles}"/>
-                <RadioButton Style="{StaticResource NavButton}" Content="Manage articles" Command="{Binding EditCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.Articles}"/>
-       </StackPanel>
-        </Grid>
 
-    </Grid>
+            
+            
+            <Border Grid.Row="2" BorderThickness="1" BorderBrush="Black" Background="{StaticResource BrushPrimary2}" CornerRadius="0 30 0 15">
+                <Grid Margin="0 30" Grid.Row="2" Background="{StaticResource BrushPrimary2}" >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <DockPanel Margin="10">
+                        <Border Width="80" Height="80" Padding="3" Background="White" CornerRadius="100" DockPanel.Dock="Top" HorizontalAlignment="Left" Margin="20 -30 0 0">
+                            <Ellipse>
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="/Images/p2.jpg"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                        </Border>
+                        <TextBlock Text="Yammamay" Foreground="White" FontSize="22" FontWeight="Light" DockPanel.Dock="Top" Margin="5 25 0 10" TextAlignment="Center"/>
+                        <TextBlock Text="v1.0" Foreground="#D0BFFF" FontSize="14" FontWeight="ExtraLight" DockPanel.Dock="Top" TextAlignment="Center"/>
+                        <Separator Grid.Row="1" Margin="25" Background="#799540" DockPanel.Dock="Top" Height="0.8" Width="150"/>
+                    </DockPanel>
+
+                    <StackPanel Width="200" Grid.Row="1" >
+                        <Border Style="{StaticResource brdStyle}">
+                            <Button Style="{StaticResource menuButton}"  Command="{Binding EditCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.Home}">
+                                <StackPanel Orientation="Horizontal">
+                                    <iconPacks:PackIconMaterial Kind="HomeVariant"/>
+                                    <TextBlock Style="{StaticResource txtMenu}" Text="Dashboard"/>
+                                </StackPanel>
+                            </Button>
+                        </Border>
+                        <Border Style="{StaticResource brdStyle}">
+                            <Button Style="{StaticResource menuButton}"  Command="{Binding EditCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.ImportArticles}">
+                                <StackPanel Orientation="Horizontal">
+                                    <iconPacks:PackIconMaterial Kind="FileExcel"/>
+                                    <TextBlock Style="{StaticResource txtMenu}" Text="Excel"/>
+                                </StackPanel>
+                            </Button>
+                        </Border>
+                        <Border Style="{StaticResource brdStyle}">
+
+                            <Button Style="{StaticResource menuButton}" Command="{Binding EditCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.Articles}">
+                                <StackPanel Orientation="Horizontal">
+                                    <iconPacks:PackIconMaterial Kind="Percent"/>
+                                    <TextBlock Style="{StaticResource txtMenu}" Text="Discount"/>
+
+                                </StackPanel>
+                            </Button>
+                        </Border>
+                        <Border Style="{StaticResource brdStyle}">
+                            <Button Style="{StaticResource menuButton}"  Command="{Binding EditCurrentViewModelCommand}" CommandParameter="{x:Static nav:ViewType.Articles}">
+                                <StackPanel Orientation="Horizontal">
+                                    <iconPacks:PackIconMaterial Kind="ViewList"/>
+                                    <TextBlock Style="{StaticResource txtMenu}" Text="Articles"/>
+                                </StackPanel>
+                            </Button>
+                        </Border>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+        </Grid>
+    </Border>
 </UserControl>

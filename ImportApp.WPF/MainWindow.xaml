@@ -5,23 +5,75 @@
         xmlns:controls="clr-namespace:ImportApp.WPF.Controls"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ImportApp.WPF" xmlns:local1="clr-namespace:ImportApp.WPF.ViewModels"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"   
         mc:Ignorable="d"
-        WindowStartupLocation="CenterScreen"
-        WindowStyle="None"
-        Title="MainWindow" Height="720" Width="1080">
+        Height="720" Width="1080" WindowStartupLocation="CenterScreen" AllowsTransparency="True"
+        Background="Transparent" WindowStyle="None">
     <Window.DataContext>
         <local1:MainViewModel/>
     </Window.DataContext>
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </Window.Resources>
+    <Border CornerRadius="30" Background="#EFF2F7">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-        <controls:NavigationBar Grid.Column="0" DataContext="{Binding Navigator}"/>
-        <ContentControl Content="{Binding Navigator.CurrentViewModel}" Grid.Column="1">
-            
-        </ContentControl>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
 
-    </Grid>
+                <Button Grid.Row="0" Panel.ZIndex="1" Style="{StaticResource topButton}" HorizontalAlignment="Left" Margin="20 28 0 35">
+                    <iconPacks:PackIconMaterial Kind="Menu" Width="15" Height="15" />
+                </Button>
+
+
+                <controls:NavigationBar  DataContext="{Binding Navigator}" Grid.Row="2"/>
+            </Grid>
+
+            <Border Grid.Column="1" CornerRadius="10">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Border Margin="50 30 0 15">
+                        <Grid Width="700" HorizontalAlignment="Left">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                                <TextBlock Margin="30 0" VerticalAlignment="Center" Foreground="#B0B9C6" IsHitTestVisible="False"
+                           Panel.ZIndex="1" Text="Search here ..."
+                           Visibility="{Binding ElementName=textBoxSearch, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}" />
+                                <TextBox Name="textBoxSearch" Style="{StaticResource searchTextbox}" />
+                                <iconPacks:PackIconMaterial Kind="Magnify" Width="15" Height="15" VerticalAlignment="Center" Margin="0 0 15 0" Foreground="#B0B9C6" HorizontalAlignment="Right" />
+
+
+                            <StackPanel Orientation="Horizontal" Grid.Column="1" Margin="0,0,-123,0" HorizontalAlignment="Right">
+                                <Button Style="{StaticResource topButton}" Margin="0 0 20 0" Background="#dcdcdc">
+                                    <iconPacks:PackIconMaterial Kind="Cog"/>
+                                </Button>
+
+                                <Button Style="{StaticResource topButton}" Margin="0 0 55 0">
+                                    <iconPacks:PackIconMaterial Kind="Bell"/>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+
+                    <ContentControl Content="{Binding Navigator.CurrentViewModel}" Grid.Row="1">
+                    </ContentControl>
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
 </Window>

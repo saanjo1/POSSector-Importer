@@ -31,6 +31,74 @@
             </DataTemplate>
 
 
+            <Style x:Key="menuButton" TargetType="Button">
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="Foreground" Value="White" />
+                <Setter Property="Height" Value="35" />
+                <Setter Property="Margin" Value="15 3" />
+                <Setter Property="FontSize" Value="13" />
+                <Setter Property="Cursor" Value="Hand" />
+                <Setter Property="Template" >
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" BorderThickness="1" CornerRadius="7">
+                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+
+                
+            </Style>
+
+
+            <Style x:Key="menuButtonIcon" TargetType="iconPacks:PackIconMaterial">
+                <Setter Property="Margin" Value="20 2 20 0" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="Width" Value="15" />
+                <Setter Property="Height" Value="15" />
+            </Style>
+
+            <Style x:Key="topButton" TargetType="Button">
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="Foreground" Value="#6E7783" />
+                <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+                <Setter Property="Height" Value="30" />
+                <Setter Property="Width" Value="30" />
+                <Setter Property="HorizontalAlignment" Value="Right" />
+                <Setter Property="Template" >
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" CornerRadius="50">
+                                <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="#dcdcdc" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            
+            
+            <Style x:Key="brdStyle" TargetType="Border">
+                <Setter Property="Padding" Value="5"/>
+                <Setter Property="CornerRadius" Value="20"/>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="{StaticResource BrushPrimary1}" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
+            <Style x:Key="txtMenu" TargetType="TextBlock">
+                <Setter Property="Padding" Value="10 0 0 0"/>
+            </Style>
+
             <Style x:Key="SaveButton" TargetType="Button">
                 <Setter Property="Foreground" Value="White"/>
                 <Setter Property="Background" Value="{StaticResource BrushPrimary2}"/>

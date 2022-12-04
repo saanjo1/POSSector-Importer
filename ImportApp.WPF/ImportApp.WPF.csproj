@@ -8,10 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Images\**" />
-    <EmbeddedResource Remove="Images\**" />
-    <None Remove="Images\**" />
-    <Page Remove="Images\**" />
+    <None Remove="Images\p1.jpg" />
+    <None Remove="Images\p1.png" />
+    <None Remove="Images\p2.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\p2.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -42,6 +45,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Translations.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\p1.jpg" />
   </ItemGroup>
 
 </Project>
