@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"   
-             xmlns:local="clr-namespace:ImportApp.WPF.Views"
+             xmlns:local="clr-namespace:ImportApp.WPF.Views" xmlns:sys="clr-namespace:System;assembly=netstandard"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -12,13 +12,24 @@
     </UserControl.Resources>
     <Grid VerticalAlignment="Top" Margin="10, 10, 10, 10">
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <Border>
-            <Grid Width="200" HorizontalAlignment="Right">
-                <TextBlock Margin="15 0" VerticalAlignment="Center" Foreground="#B0B9C6" IsHitTestVisible="False"
+        <Border Grid.Row="0">
+            <Grid Margin="533,0,22,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock FontSize="18" Text="{Binding Count}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="-518,0,0,0" Width="215"/>
+                <TextBlock Margin="15 0" HorizontalAlignment="Stretch" VerticalAlignment="Center" Foreground="#B0B9C6" IsHitTestVisible="False"
                            Panel.ZIndex="1" Text="Search in Articles ..."
                            Visibility="{Binding ElementName=textBoxFilter, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}" />
 
@@ -60,5 +71,23 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+
+        <StackPanel Margin="20" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="&lt;&lt;" Width="40" IsEnabled="{Binding IsFirstEnabled}"  ToolTip="First page" Margin="5" Command="{Binding FirstPageCommand}" />
+            <Button Content="&lt;" Width="40" IsEnabled="{Binding IsPreviousEnabled}" Margin="5" ToolTip="Previous page" Command="{Binding PreviousPageCommand}" />
+
+            <TextBlock VerticalAlignment="Center">
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="{} {0} of {1}">
+                        <Binding Path="CurrentPage"/>
+                        <Binding Path="NumberOfPages"/>
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+            
+            <Button Content=">" Width="40" IsEnabled="{Binding IsNextEnabled}" ToolTip="Next page" Margin="5" Command="{Binding NextPageCommand}"/>
+            <Button Content=">>" Width="40" IsEnabled="{Binding IsLastEnabled}" ToolTip="Last page" Margin="5" Command="{Binding LastPageCommand}" />
+        </StackPanel>
+        
     </Grid>
 </UserControl>
