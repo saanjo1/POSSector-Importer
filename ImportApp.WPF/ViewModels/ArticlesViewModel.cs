@@ -139,7 +139,7 @@ namespace ImportApp.WPF.ViewModels
         private void UpdateEnableState()
         {
             IsFirstEnabled = CurrentPage > 1;
-            isPreviousEnabled = CurrentPage > 1;
+            IsPreviousEnabled = CurrentPage > 1;
             IsNextEnabled = CurrentPage < NumberOfPages;
             IsLastEnabled = CurrentPage < NumberOfPages;
         }
