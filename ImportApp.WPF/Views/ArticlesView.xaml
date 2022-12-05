@@ -72,7 +72,19 @@
             </DataGrid.Columns>
         </DataGrid>
 
+        
+        
+        
         <StackPanel Margin="20" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+
+            <TextBlock Text="Records per page" VerticalAlignment="Center" Margin="5"/>
+            <ComboBox Margin="5"  Width="100" SelectedItem="{Binding SelectedRecord,UpdateSourceTrigger=PropertyChanged}">
+                <sys:Int32>10</sys:Int32>
+                <sys:Int32>15</sys:Int32>
+                <sys:Int32>20</sys:Int32>
+                <sys:Int32>25</sys:Int32>
+            </ComboBox>
+
             <Button Content="&lt;&lt;" Width="40" IsEnabled="{Binding IsFirstEnabled}"  ToolTip="First page" Margin="5" Command="{Binding FirstPageCommand}" />
             <Button Content="&lt;" Width="40" IsEnabled="{Binding IsPreviousEnabled}" Margin="5" ToolTip="Previous page" Command="{Binding PreviousPageCommand}" />
 
