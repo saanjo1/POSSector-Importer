@@ -29,11 +29,17 @@
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
                 <TextBlock FontSize="18" Text="{Binding Count}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="-518,0,0,0" Width="215"/>
-                <TextBlock Margin="15 0" HorizontalAlignment="Stretch" VerticalAlignment="Center" Foreground="#B0B9C6" IsHitTestVisible="False"
+                <TextBlock Grid.Row="1" Margin="15 0" HorizontalAlignment="Stretch" VerticalAlignment="Center" Foreground="#B0B9C6" IsHitTestVisible="False"
                            Panel.ZIndex="1" Text="Search in Articles ..."
                            Visibility="{Binding ElementName=textBoxFilter, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}" />
 
-                <TextBox Name="textBoxFilter" Style="{StaticResource filterTextBox}" Text="{Binding TextToFilter, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox Name="textBoxFilter" Style="{StaticResource filterTextBox}" Text="{Binding TextToFilter, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1"/>
+
+                <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="-540,10,0,0" Grid.RowSpan="6">
+                    <Button Style="{StaticResource tabButton}" Content="Articles" BorderBrush="{StaticResource BrushPrimary2}" Width="84"/>
+                    <Button Style="{StaticResource tabButton}" Content="Economato" Margin="5" Width="84"/>
+                </StackPanel>
+
             </Grid>
         </Border>
 
