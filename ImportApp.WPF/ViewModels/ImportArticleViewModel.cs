@@ -24,7 +24,13 @@ namespace ImportApp.WPF.ViewModels
         public bool isOpen;
 
         [ObservableProperty]
+        public bool isMapped;
+
+        [ObservableProperty]
         private MapDataViewModel mDataModel;
+
+        [ObservableProperty]
+        private MapColumnViewModel mColumnModel;
 
         public ImportArticleViewModel(IExcelDataService excelDataService)
         {
@@ -56,7 +62,7 @@ namespace ImportApp.WPF.ViewModels
         public void MapData()
         {
             IsOpen = true;
-            this.MDataModel = new MapDataViewModel(_excelDataService, this);
+            this.MDataModel = new MapDataViewModel(_excelDataService, this, mColumnModel);
         }
 
         public void Close()
