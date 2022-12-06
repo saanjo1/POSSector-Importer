@@ -57,7 +57,7 @@ namespace ImportApp.WPF.ViewModels
             {
                 List<string>? columnNamesList = _excelDataService.ListColumnNames(SelectedSheet).Result;
 
-                MapColumnViewModel mColumnModel = new MapColumnViewModel(_excelDataService, SelectedSheet, columnNamesList);
+                MapColumnViewModel mColumnModel = new MapColumnViewModel(_excelDataService, SelectedSheet, columnNamesList, _importArticleViewModel);
                 IsMapped = true;
                 _importArticleViewModel.IsMapped = true;
                 _importArticleViewModel.IsOpen = false;

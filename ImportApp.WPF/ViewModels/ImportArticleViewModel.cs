@@ -67,8 +67,17 @@ namespace ImportApp.WPF.ViewModels
 
         public void Close()
         {
-            MDataModel = null;
-            IsOpen = false;
+            if(MDataModel != null)
+            {
+                MDataModel = null;
+                IsOpen = false;
+            }
+
+            if(MColumnModel != null)
+            {
+                MColumnModel = null;
+                IsMapped = false;
+            }
         }
 
         private bool CanImport()
