@@ -22,16 +22,26 @@ namespace ImportApp.WPF.ViewModels
         private List<string> currentSheets;
 
         [ObservableProperty]
+        [NotifyCanExecuteChangedFor(nameof(SaveCommand))]
         private string selectedSheet;
 
         private IExcelDataService _excelDataService;
         private readonly ImportArticleViewModel _importArticleViewModel;
 
-        public MapDataViewModel(IExcelDataService excelDataService, ImportArticleViewModel importArticleViewModel)
+
+        [ObservableProperty]
+        private MapColumnViewModel? mColumnModel;
+
+        [ObservableProperty]
+        private bool isMapped;
+
+        public MapDataViewModel(IExcelDataService excelDataService, ImportArticleViewModel importArticleViewModel, MapColumnViewModel mapColumnViewModel)
         {
             _excelDataService = excelDataService;
+            mColumnModel = mapColumnViewModel;
             _importArticleViewModel = importArticleViewModel;
             CurrentSheets = _excelDataService.ListSheetsFromFile().Result;
+
         }
 
         [RelayCommand]
@@ -40,13 +50,23 @@ namespace ImportApp.WPF.ViewModels
             _importArticleViewModel.Close();
         }
 
-        [RelayCommand]
-        public void Submit()
+        [RelayCommand(CanExecute = nameof(CanSave))]
+        public void Save()
         {
-            if(SelectedSheet != null)
+            if (SelectedSheet != null)
             {
-                var MapColumnsViewModel = _excelDataService.ListColumnNames();
+                List<string>? columnNamesList = _excelDataService.ListColumnNames(SelectedSheet).Result;
+
+                MapColumnViewModel mColumnModel = new MapColumnViewModel(_excelDataService, SelectedSheet, columnNamesList);
+                IsMapped = true;
+                _importArticleViewModel.IsMapped = true;
+                _importArticleViewModel.IsOpen = false;
+                _importArticleViewModel.MColumnModel = mColumnModel;
             }
         }
+
+
+        private bool CanSave()
+=> !string.IsNullOrWhiteSpace(SelectedSheet);
     }
 }

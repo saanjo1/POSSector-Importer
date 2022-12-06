@@ -21,6 +21,15 @@ namespace ImportApp.WPF.Helpers
         }
 
 
+        public static string SetOleDbConnection(string excelfile)
+        {
+            string con =
+       @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + excelfile + ";" +
+       @"Extended Properties='Excel 12.0;HDR=No;IMEX=1'";
+            return con;
+        }
+
+
 
     }
 }

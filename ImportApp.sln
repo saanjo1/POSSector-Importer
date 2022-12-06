@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImportApp.Domain", "ImportA
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImportApp.EntityFramework", "ImportApp.EntityFramework\ImportApp.EntityFramework.csproj", "{A4974805-5153-4179-AAE4-4BB2715E3AE9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImportApp.WPF", "ImportApp.WPF\ImportApp.WPF.csproj", "{BB242225-4D9E-42D1-9C7E-352171B35CDF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImportApp.WPF", "ImportApp.WPF\ImportApp.WPF.csproj", "{BB242225-4D9E-42D1-9C7E-352171B35CDF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

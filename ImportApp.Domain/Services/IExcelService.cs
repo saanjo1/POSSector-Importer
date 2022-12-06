@@ -10,6 +10,6 @@ namespace ImportApp.Domain.Services
     {
         Task<string> OpenDialog();
         Task<List<string>> ListSheetsFromFile();
-        Task<List<string>> ListColumnNames();
+        Task<List<string>> ListColumnNames(string excelName);
     }
 }

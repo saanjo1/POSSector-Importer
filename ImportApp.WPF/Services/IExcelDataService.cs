@@ -6,13 +6,19 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.OleDb;
 using System.IO;
+using ImportApp.WPF.Helpers;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace ImportApp.EntityFramework.Services
 {
     public class IExcelDataService : IExcelService
     {
         public string ExcelFile { get; set; }
+
+        public static OleDbConnection _oleDbConnection;
+        public static OleDbCommand Command;
+
 
 
         public async Task<string> OpenDialog()
@@ -63,9 +69,44 @@ namespace ImportApp.EntityFramework.Services
             return await Task.FromResult(listSheet);
         }
 
-        public async Task<List<string>> ListColumnNames()
+        public async Task<List<string>> ListColumnNames(string sheetName)
         {
-            return null;
+            var connection = WPF.Helpers.Extensions.SetOleDbConnection(ExcelFile);
+
+            _oleDbConnection = new OleDbConnection(connection);
+
+            var lines = new List<string>();
+
+            await _oleDbConnection.OpenAsync();
+
+            Command = new OleDbCommand();
+            Command.Connection = _oleDbConnection;
+            Command.CommandText = "select top 1 * from [" + sheetName + "]";
+
+            var Reader = await Command.ExecuteReaderAsync();
+
+
+            while (Reader.Read())
+            {
+                var fieldCount = Reader.FieldCount;
+
+                var fieldIncrementor = 1;
+                var fields = new List<string>();
+                while(fieldCount >= fieldIncrementor)
+                {
+                    string test = Reader[fieldIncrementor - 1].ToString();
+                    fields.Add(test);
+                    fieldIncrementor++;
+                }
+
+                lines = fields;
+            }
+
+            Reader.Close();
+            _oleDbConnection.Close();
+
+
+            return await Task.FromResult(lines);
         }
 
 

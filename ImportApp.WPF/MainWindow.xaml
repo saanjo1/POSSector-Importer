@@ -34,7 +34,7 @@
                 </Button>
 
 
-                <controls:NavigationBar  DataContext="{Binding Navigator}" Grid.Row="2"/>
+                <controls:NavigationBar DataContext="{Binding Navigator}" Grid.Row="2"/>
             </Grid>
 
             <Border Grid.Column="1" CornerRadius="10">

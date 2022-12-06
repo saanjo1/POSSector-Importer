@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using ImportApp.EntityFramework.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,24 +11,21 @@ namespace ImportApp.WPF.ViewModels
     [ObservableObject]
     public partial class MapColumnViewModel : BaseViewModel
     {
-        [ObservableProperty]
-        private string name;
+        public static string SheetName;
+
+
+        public static IExcelDataService _excelDataService;
 
         [ObservableProperty]
-        private string articleNumber;
-
-        [ObservableProperty]
-        private string price;
-
-        [ObservableProperty]
-        private string barCode;
-
-        [ObservableProperty]
-        private string order;
+        private List<string> columnNamesList;
 
 
-
-
+        public MapColumnViewModel(IExcelDataService excelDataService, string sheetName, List<string> _columnNames)
+        {
+            _excelDataService = excelDataService;
+            columnNamesList = _columnNames;
+            SheetName = sheetName;
+        }
 
 
     }
