@@ -50,8 +50,8 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <Border Width="25" Height="25" CornerRadius="50" Margin="0 0 10 0" Background="{Binding BgColor}">
-                                    <TextBlock Text="{Binding Character}" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Margin="0 0 0 1"/>
+                                <Border Width="25" Height="25" CornerRadius="50" Margin="0 0 10 0">
+                                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Margin="0 0 0 1"/>
                                 </Border>
                                 <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
                             </StackPanel>

@@ -38,6 +38,13 @@ namespace ImportApp.WPF.ViewModels
             }
         }
 
+
+        [RelayCommand]
+        private void HideNav(Navigator navigator)
+        {
+
+        }
+
         public INavigator Navigator { get; set; } = new Navigator(_articleService, _excelDataService);
 
     }
