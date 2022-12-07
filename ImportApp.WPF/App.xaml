@@ -33,6 +33,24 @@
             <DataTemplate DataType="{x:Type viewmodels:MapColumnViewModel}">
                 <controls:MapColumnsView/>
             </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type viewmodels:MainViewModel}">
+                <local:MainWindow/>
+            </DataTemplate>
+
+
+
+
+            <Style x:Key="CustomWindowStyle" TargetType="{x:Type Window}">
+
+                <Setter Property="WindowStyle" Value="None"/>
+                <Setter Property="WindowState" Value="Maximized"/>
+                <Setter Property="AllowsTransparency" Value="True"/>
+                <Setter Property="ResizeMode" Value="NoResize"/>
+                <Setter Property="Background" Value="Transparent"/>
+            </Style>
+            
+            
 
 
             <Style x:Key="menuButton" TargetType="Button">

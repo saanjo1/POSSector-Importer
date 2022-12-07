@@ -7,7 +7,9 @@
         xmlns:local="clr-namespace:ImportApp.WPF" xmlns:local1="clr-namespace:ImportApp.WPF.ViewModels"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"   
         mc:Ignorable="d"
-        Height="720" Width="1080" WindowStartupLocation="CenterScreen" AllowsTransparency="True"
+        WindowState="Maximized"
+        x:Name="TestWindow"
+         WindowStartupLocation="CenterScreen" AllowsTransparency="True"
         Background="Transparent" WindowStyle="None">
     <Window.DataContext>
         <local1:MainViewModel/>
@@ -22,19 +24,38 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <Button Grid.Row="0" Panel.ZIndex="1" Style="{StaticResource topButton}" HorizontalAlignment="Left" Margin="20 28 0 35">
+                <StackPanel
+                      Orientation="Horizontal"
+                      HorizontalAlignment="Right"
+                      VerticalAlignment="Top"
+                      Margin="0 10 -1210 10">
+                    <Button Style="{StaticResource topButton}"  Command="{Binding MinimizeCommand}" CommandParameter="{Binding ElementName=TestWindow}"  Margin="0 0 20 0">
+                        <iconPacks:PackIconMaterial Kind="WindowMinimize"/>
+                    </Button>
+                    <Button Style="{StaticResource topButton}" Command="{Binding CloseCommand}" CommandParameter="{Binding ElementName=TestWindow}"  Margin="0 0 55 0">
+                        <iconPacks:PackIconMaterial Kind="Close"/>
+                    </Button>
+                </StackPanel>
+
+                <Button Grid.Row="0" Panel.ZIndex="1" Style="{StaticResource topButton}"  HorizontalAlignment="Left" Margin="20 28 0 35">
                     <iconPacks:PackIconMaterial Kind="Menu" Width="15" Height="15" />
                 </Button>
 
 
-                <controls:NavigationBar DataContext="{Binding Navigator}" Grid.Row="2"/>
+                <controls:NavigationBar DataContext="{Binding Navigator}" Grid.Row="1" Height="680"/>
             </Grid>
 
             <Border Grid.Column="1" CornerRadius="10">
@@ -51,14 +72,16 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
+                            <Grid>
                                 <TextBlock Margin="30 0" VerticalAlignment="Center" Foreground="#B0B9C6" IsHitTestVisible="False"
                            Panel.ZIndex="1" Text="Search here ..."
                            Visibility="{Binding ElementName=textBoxSearch, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}" />
                                 <TextBox Name="textBoxSearch" Style="{StaticResource searchTextbox}" />
                                 <iconPacks:PackIconMaterial Kind="Magnify" Width="15" Height="15" VerticalAlignment="Center" Margin="0 0 15 0" Foreground="#B0B9C6" HorizontalAlignment="Right" />
+                            </Grid>
 
 
-                            <StackPanel Orientation="Horizontal" Grid.Column="1" Margin="0,0,-123,0" HorizontalAlignment="Right">
+                            <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.ColumnSpan="4"  HorizontalAlignment="Right" Margin="0 0 -450 0">
                                 <Button Style="{StaticResource topButton}" Margin="0 0 20 0" Background="#dcdcdc">
                                     <iconPacks:PackIconMaterial Kind="Cog"/>
                                 </Button>

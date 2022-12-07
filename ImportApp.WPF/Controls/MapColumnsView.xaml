@@ -34,9 +34,11 @@
             <ComboBox ItemsSource="{Binding ColumnNamesList}" SelectedItem="{Binding Price}" Grid.Row="5" Grid.Column="1" Margin="0,5,57,5"/>
             <Label Grid.Row="6">Order:</Label>
             <ComboBox ItemsSource="{Binding ColumnNamesList}" SelectedItem="{Binding Order}" Grid.Row="6" Grid.Column="1" Margin="0,5,57,5"/>
-            <Button Content="Save" Style="{StaticResource SaveButton}" Grid.Row="7" Command="{Binding SubmitCommand}" Width="80" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Margin="18,10,0,0" Grid.ColumnSpan="2">
+            <Label Grid.Row="7">Quantity:</Label>
+            <ComboBox ItemsSource="{Binding ColumnNamesList}" SelectedItem="{Binding Quantity}" Grid.Row="7" Grid.Column="1" Margin="0,5,57,5"/>
+            <Button Content="Save" Style="{StaticResource SaveButton}" Grid.Row="8" Command="{Binding SubmitCommand}" Width="80" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Margin="18,10,0,0" Grid.ColumnSpan="2">
             </Button>
-            <Button Content="Cancel" Style="{StaticResource CancelButton}" Grid.Row="7" Grid.Column="1" Command="{Binding CancelCommand}" Width="80" Margin="61,10,0,0" HorizontalAlignment="Left"/>
+            <Button Content="Cancel" Style="{StaticResource CancelButton}" Grid.Row="8" Grid.Column="1" Command="{Binding CancelCommand}" Width="80" Margin="61,10,0,0" HorizontalAlignment="Left"/>
         </Grid>
     </Border>
 </UserControl>

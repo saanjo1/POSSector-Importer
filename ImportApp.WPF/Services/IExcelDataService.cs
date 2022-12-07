@@ -136,6 +136,7 @@ namespace ImportApp.EntityFramework.Services
                         ArticleNumber = Reader[mColumnModel.ArticleNumber].ToString(),
                         BarCode = Reader[mColumnModel.BarCode].ToString(),
                         Price = Reader[mColumnModel.Price].ToString(),
+                        Quantity = Reader[mColumnModel.Quantity].ToString(),
                         Order = Reader[mColumnModel.Order].ToString(),
                     });
                 }

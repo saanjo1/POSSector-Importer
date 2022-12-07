@@ -1,4 +1,5 @@
-﻿using ImportApp.Domain.Models;
+﻿using CommunityToolkit.Mvvm.Input;
+using ImportApp.Domain.Models;
 using ImportApp.EntityFramework.Services;
 using ImportApp.WPF.State.Navigators;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ImportApp.WPF.ViewModels
 {
-    public class MainViewModel : BaseViewModel
+    public partial class MainViewModel : BaseViewModel
     {
         public static IArticleService _articleService = new IArticleService();  
         public static IExcelDataService _excelDataService = new IExcelDataService();  
@@ -17,6 +18,24 @@ namespace ImportApp.WPF.ViewModels
         public MainViewModel()
         {
             
+        }
+
+        [RelayCommand]
+        private void Close(MainWindow window)
+        {
+            if(window != null)
+            {
+                window.Close();
+            }
+        }
+
+        [RelayCommand]
+        private void Minimize(MainWindow window)
+        {
+            if(window != null)
+            {
+                window.WindowState = System.Windows.WindowState.Minimized;
+            }
         }
 
         public INavigator Navigator { get; set; } = new Navigator(_articleService, _excelDataService);
