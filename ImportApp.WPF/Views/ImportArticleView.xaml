@@ -91,7 +91,5 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-
-
     </Grid>
 </UserControl>
