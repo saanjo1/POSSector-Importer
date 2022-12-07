@@ -17,7 +17,6 @@ namespace ImportApp.WPF.ViewModels
     [ObservableObject]
     public partial class MapDataViewModel : BaseViewModel
     {
-
         [ObservableProperty]
         private List<string> currentSheets;
 
@@ -62,6 +61,9 @@ namespace ImportApp.WPF.ViewModels
                 _importArticleViewModel.IsMapped = true;
                 _importArticleViewModel.IsOpen = false;
                 _importArticleViewModel.MColumnModel = mColumnModel;
+
+
+                App.Current.Properties["SheetName"] = SelectedSheet;
             }
         }
 

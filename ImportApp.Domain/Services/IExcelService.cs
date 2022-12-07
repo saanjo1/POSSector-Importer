@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 
 namespace ImportApp.Domain.Services
 {
-    public interface IExcelService
+    public interface IExcelService 
     {
         Task<string> OpenDialog();
         Task<List<string>> ListSheetsFromFile();
         Task<List<string>> ListColumnNames(string excelName);
+        
     }
 }

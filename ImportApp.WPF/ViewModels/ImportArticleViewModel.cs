@@ -4,8 +4,12 @@ using ImportApp.EntityFramework.Services;
 using Microsoft.Win32;
 using ModalControl;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Data;
 
 namespace ImportApp.WPF.ViewModels
 {
@@ -32,9 +36,19 @@ namespace ImportApp.WPF.ViewModels
         [ObservableProperty]
         private MapColumnViewModel mColumnModel;
 
+        [ObservableProperty]
+        private ICollectionView articleCollection;
+
         public ImportArticleViewModel(IExcelDataService excelDataService)
         {
             _excelDataService = excelDataService;
+        }
+
+        [RelayCommand]
+        public void LoadData(ObservableCollection<MapColumnViewModel>? vm)
+        {
+            ArticleCollection = CollectionViewSource.GetDefaultView(vm);
+            IsMapped = false;
         }
 
         [RelayCommand]

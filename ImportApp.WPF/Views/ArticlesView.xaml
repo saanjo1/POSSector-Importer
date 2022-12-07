@@ -61,6 +61,7 @@
                 <DataGridTextColumn Header="Article number" Binding="{Binding ArticleNumber}" IsReadOnly="True" Width="*"/>
                 <DataGridTextColumn Header="Price" Binding="{Binding Price}" IsReadOnly="True" Width="*"/>
                 <DataGridTextColumn Header="Barcode" Binding="{Binding BarCode}" IsReadOnly="True" Width="*"/>
+                <DataGridTextColumn Header="Quantity" Binding="{Binding ReturnFee}" IsReadOnly="True" Width="*"/>
                 <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="auto">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

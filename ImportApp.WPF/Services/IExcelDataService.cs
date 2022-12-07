@@ -1,14 +1,14 @@
 ﻿using ImportApp.Domain.Services;
-using ImportApp.WPF;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.OleDb;
 using System.IO;
-using ImportApp.WPF.Helpers;
 using System.Threading.Tasks;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using ImportApp.WPF.ViewModels;
+using System.Collections.ObjectModel;
+using ImportApp.WPF;
 
 namespace ImportApp.EntityFramework.Services
 {
@@ -19,6 +19,7 @@ namespace ImportApp.EntityFramework.Services
         public static OleDbConnection _oleDbConnection;
         public static OleDbCommand Command;
 
+        private static ObservableCollection<MapColumnViewModel> mapColumnViewModels = new ObservableCollection<MapColumnViewModel>();
 
 
         public async Task<string> OpenDialog()
@@ -107,6 +108,48 @@ namespace ImportApp.EntityFramework.Services
 
 
             return await Task.FromResult(lines);
+        }
+
+        public async Task<ObservableCollection<MapColumnViewModel>> ReadFromExcel(MapColumnViewModel mColumnModel)
+        {
+            try
+            {
+                string _connection =
+       @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + ExcelFile + ";" +
+       @"Extended Properties='Excel 8.0;HDR=Yes;'";
+
+                _oleDbConnection = new OleDbConnection(_connection);
+
+                await _oleDbConnection.OpenAsync();
+
+                Command = new OleDbCommand();
+                Command.Connection = _oleDbConnection;
+                Command.CommandText = "select * from [" + App.Current.Properties["SheetName"] + "]";
+
+                var Reader = await Command.ExecuteReaderAsync();
+
+                while (Reader.Read())
+                {
+                    mapColumnViewModels.Add(new MapColumnViewModel()
+                    {
+                        Name = Reader[mColumnModel.Name].ToString(),
+                        ArticleNumber = Reader[mColumnModel.ArticleNumber].ToString(),
+                        BarCode = Reader[mColumnModel.BarCode].ToString(),
+                        Price = Reader[mColumnModel.Price].ToString(),
+                        Order = Reader[mColumnModel.Order].ToString(),
+                    });
+                }
+
+                Reader.Close();
+                _oleDbConnection.Close();
+
+                return mapColumnViewModels;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
 
