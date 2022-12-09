@@ -18,7 +18,7 @@
                      CommandParameter="{x:Static nav:ViewType.Home}">
 
                 <StackPanel Orientation="Horizontal">
-                    <fa:IconImage Icon="Home" Style="{StaticResource radioButtonIcon}"/>
+                    <fa:IconImage Icon="Home" Style="{StaticResource radioButtonIcon}" Foreground="{StaticResource color2}"/>
                     <TextBlock Text="Dashboard" Style="{StaticResource radioButtonText}"/>
                 </StackPanel>
             </RadioButton>
@@ -29,7 +29,7 @@
                      CommandParameter="{x:Static nav:ViewType.Articles}">
 
                 <StackPanel Orientation="Horizontal">
-                    <fa:IconImage Icon="TableList" Style="{StaticResource radioButtonIcon}"/>
+                    <fa:IconImage Icon="TableList" Style="{StaticResource radioButtonIcon}" Foreground="{StaticResource color6}"/>
                     <TextBlock Text="Articles" Style="{StaticResource radioButtonText}"/>
                 </StackPanel>
             </RadioButton>
@@ -40,7 +40,7 @@
                      CommandParameter="{x:Static nav:ViewType.Home}">
 
                 <StackPanel Orientation="Horizontal">
-                    <fa:IconImage Icon="Percentage" Style="{StaticResource radioButtonIcon}"/>
+                    <fa:IconImage Icon="Percentage" Style="{StaticResource radioButtonIcon}"  Foreground="{StaticResource color4}"/>
                     <TextBlock Text="Discount" Style="{StaticResource radioButtonText}"/>
                 </StackPanel>
             </RadioButton>
@@ -51,7 +51,7 @@
                      CommandParameter="{x:Static nav:ViewType.ImportArticles}">
 
                 <StackPanel Orientation="Horizontal">
-                    <fa:IconImage Icon="FileExcel" Style="{StaticResource radioButtonIcon}"/>
+                    <fa:IconImage Icon="FileExcel" Style="{StaticResource radioButtonIcon}"  Foreground="{StaticResource color9}"/>
                     <TextBlock Text="Import" Style="{StaticResource radioButtonText}"/>
                 </StackPanel>
             </RadioButton>
@@ -62,7 +62,7 @@
                      CommandParameter="{x:Static nav:ViewType.Home}">
 
                 <StackPanel Orientation="Horizontal">
-                    <fa:IconImage Icon="Gear" Style="{StaticResource radioButtonIcon}"/>
+                    <fa:IconImage Icon="Gear" Style="{StaticResource radioButtonIcon}" Foreground="{StaticResource color10}"/>
                     <TextBlock Text="Settings" Style="{StaticResource radioButtonText}"/>
                 </StackPanel>
             </RadioButton>

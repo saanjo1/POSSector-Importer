@@ -59,7 +59,7 @@ namespace ImportApp.WPF.ViewModels
             }
         }
 
-        private int selectedRecord = 10;
+        private int selectedRecord = 15;
         public int SelectedRecord
         {
             get { return selectedRecord; }
@@ -80,7 +80,7 @@ namespace ImportApp.WPF.ViewModels
         }
 
         [ObservableProperty]
-        private int numberOfPages = 10;
+        private int numberOfPages = 15;
 
         [ObservableProperty]
         private bool isFirstEnabled;

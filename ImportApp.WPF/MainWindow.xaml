@@ -54,23 +54,34 @@
                   
                     <StackPanel
                       Orientation="Horizontal"
-                      Height="35"
-                      Margin="50 30">
+                      Height="55"
+                      Margin="31">
 
 
-                        <Ellipse Height="30" Width="30">
+                        <Ellipse Height="45" Width="45">
                             <Ellipse.Fill>
                                 <ImageBrush ImageSource="/Images/p2.jpg"/>
                             </Ellipse.Fill>
                         </Ellipse>
-                        
-                        <TextBlock Text="Yammamay v1.0"
+
+                        <StackPanel Orientation="Vertical" Margin="5">
+                            <TextBlock Text="Yammamay"
                                Foreground="{StaticResource titleColor2}"
                                FontSize="20"
                                FontFamily="Montserrat"
                                FontWeight="Medium"
                                VerticalAlignment="Center"
                                Margin="10, 0, 0, 0"/>
+
+                            <TextBlock Text="v1.0"
+                               Foreground="{StaticResource titleColor3}"
+                               FontSize="12"
+                               HorizontalAlignment="Center"
+                               FontFamily="Montserrat"
+                               FontWeight="Medium"
+                               VerticalAlignment="Center"
+                               Margin="10, 0, 0, 0"/>
+                        </StackPanel>
 
                     </StackPanel>
 

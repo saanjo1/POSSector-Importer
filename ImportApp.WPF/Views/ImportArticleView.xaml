@@ -39,13 +39,13 @@
                 </StackPanel>
             </Button>
 
-            <Button Style="{StaticResource controlButton}"  Width="60" Height="60" Grid.Row="1" Grid.Column="1" Command="{Binding MapDataCommand}" Margin="5">
+            <Button ToolTip="Map columns" Style="{StaticResource controlButton}"  Width="60" Height="60" Grid.Row="1" Grid.Column="1" Command="{Binding MapDataCommand}" Margin="5">
                 <StackPanel>
                     <fa:IconImage Style="{StaticResource controlButtonIcon}" Icon="Columns"  Width="20" Height="20"/>
                 </StackPanel>
             </Button>
 
-            <Button Style="{StaticResource controlButton}" Width="60" Height="60" Grid.Row="1" Grid.Column="2" Command="{Binding ImportDataCommand}" Margin="5">
+            <Button ToolTip="Import columns" Style="{StaticResource controlButton}" Width="60" Height="60" Grid.Row="1" Grid.Column="2" Command="{Binding ImportDataCommand}" Margin="5">
                 <StackPanel>
                     <fa:IconImage Style="{StaticResource controlButtonIcon}" Icon="FileImport" Width="20" Height="20"/>
                 </StackPanel>
