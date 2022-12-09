@@ -33,24 +33,21 @@
 
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="0" Margin="10,10,0,10" Width="300">
-            <Button Style="{StaticResource importButton}" Width="100" Height="100" Grid.Row="1" Grid.Column="0" Command="{Binding OpenDialogCommand}">
+            <Button ToolTip="Upload Excel file" Style="{StaticResource controlButton}" Width="60" Height="60" Grid.Row="1" Grid.Column="0" Command="{Binding OpenDialogCommand}" Margin="5">
                 <StackPanel>
-                    <fa:IconImage Style="{StaticResource controlButtonIcon}" Icon="Upload" Width="40" Height="40"/>
-                    <TextBlock Padding="0 5 0 5"  TextAlignment="Center"  Text="Upload ExcelFile"/>
+                    <fa:IconImage Style="{StaticResource controlButtonIcon}" Icon="Upload" Width="20" Height="20"/>
                 </StackPanel>
             </Button>
 
-            <Button Style="{StaticResource importButton}" Width="100" Height="100" Grid.Row="1" Grid.Column="1" Command="{Binding MapDataCommand}">
+            <Button Style="{StaticResource controlButton}"  Width="60" Height="60" Grid.Row="1" Grid.Column="1" Command="{Binding MapDataCommand}" Margin="5">
                 <StackPanel>
-                    <fa:IconImage Style="{StaticResource buttonIcon}" Icon="Columns" Width="40" Height="40"/>
-                    <TextBlock Padding="0 5 0 5" TextAlignment="Center"  Text="Map columns"/>
+                    <fa:IconImage Style="{StaticResource controlButtonIcon}" Icon="Columns"  Width="20" Height="20"/>
                 </StackPanel>
             </Button>
 
-            <Button Style="{StaticResource importButton}" Width="100" Height="100" Grid.Row="1" Grid.Column="2" Command="{Binding ImportDataCommand}">
+            <Button Style="{StaticResource controlButton}" Width="60" Height="60" Grid.Row="1" Grid.Column="2" Command="{Binding ImportDataCommand}" Margin="5">
                 <StackPanel>
-                    <fa:IconImage Style="{StaticResource buttonIcon}" Icon="FileImport" Width="40" Height="40"/>
-                    <TextBlock Padding="0 5" TextAlignment="Center"  Text="Import"/>
+                    <fa:IconImage Style="{StaticResource controlButtonIcon}" Icon="FileImport" Width="20" Height="20"/>
                 </StackPanel>
             </Button>
 

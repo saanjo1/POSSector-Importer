@@ -86,7 +86,6 @@
 
             <TextBlock Text="Records per page" Foreground="{StaticResource titleColor1}"  VerticalAlignment="Center" Margin="5"/>
             <ComboBox  Margin="5"  Width="100" SelectedItem="{Binding SelectedRecord,UpdateSourceTrigger=PropertyChanged}">
-                <sys:Int32>10</sys:Int32>
                 <sys:Int32>15</sys:Int32>
                 <sys:Int32>20</sys:Int32>
                 <sys:Int32>25</sys:Int32>
