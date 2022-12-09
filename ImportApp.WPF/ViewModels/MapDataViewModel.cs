@@ -40,7 +40,6 @@ namespace ImportApp.WPF.ViewModels
             mColumnModel = mapColumnViewModel;
             _importArticleViewModel = importArticleViewModel;
             CurrentSheets = _excelDataService.ListSheetsFromFile().Result;
-
         }
 
         [RelayCommand]
@@ -61,8 +60,6 @@ namespace ImportApp.WPF.ViewModels
                 _importArticleViewModel.IsMapped = true;
                 _importArticleViewModel.IsOpen = false;
                 _importArticleViewModel.MColumnModel = mColumnModel;
-
-
                 App.Current.Properties["SheetName"] = SelectedSheet;
             }
         }

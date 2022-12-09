@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:ImportApp.WPF"
              xmlns:viewmodels="clr-namespace:ImportApp.WPF.ViewModels"
-            xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"   
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              xmlns:views="clr-namespace:ImportApp.WPF.Views"
              xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" xmlns:controls="clr-namespace:ImportApp.WPF.Controls">
 
@@ -74,7 +74,7 @@
             </Style>
 
 
-            <Style x:Key="menuButtonIcon" TargetType="iconPacks:PackIconMaterial">
+            <Style x:Key="menuButtonIcon" TargetType="fa:IconImage">
                 <Setter Property="Margin" Value="20 2 20 0" />
                 <Setter Property="VerticalAlignment" Value="Center" />
                 <Setter Property="HorizontalAlignment" Value="Center" />
@@ -240,7 +240,7 @@
 
 
 
-            <Style x:Key="gridButtonIcon" TargetType="iconPacks:PackIconMaterial">
+            <Style x:Key="gridButtonIcon" TargetType="fa:IconImage">
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="Width" Value="12" />
             <Setter Property="Height" Value="12" />
@@ -259,7 +259,7 @@
 
             <Style x:Key="tabButton" TargetType="Button">
                 <Setter Property="Background" Value="Transparent" />
-                <Setter Property="Foreground" Value="#121518" />
+                <Setter Property="Foreground" Value="White" />
                 <Setter Property="FocusVisualStyle" Value="{x:Null}" />
                 <Setter Property="Height" Value="45" />
                 <Setter Property="Width" Value="70" />
@@ -278,14 +278,14 @@
 
                 <Style.Triggers>
                     <Trigger Property="IsMouseOver" Value="True">
-                        <Setter Property="BorderBrush" Value="{StaticResource BrushPrimary2}" />
+                        <Setter Property="BorderBrush" Value="{StaticResource color5}" />
                     </Trigger>
                 </Style.Triggers>
             </Style>
 
 
 
-            <Style x:Key="buttonIcon" TargetType="iconPacks:PackIconMaterial">
+            <Style x:Key="buttonIcon" TargetType="fa:IconImage">
                 <Setter Property="Margin" Value="20 2 20 0" />
                 <Setter Property="VerticalAlignment" Value="Center" />
                 <Setter Property="Width" Value="15" />
@@ -340,6 +340,7 @@
             <Style x:Key="DataGridStyle1" TargetType="{x:Type DataGrid}">
                 <Setter Property="Background" Value="Transparent"/>
                 <Setter Property="Foreground" Value="#222528"/>
+                <Setter Property="Height" Value="500"/>
                 <Setter Property="BorderThickness" Value="0"/>
                 <Setter Property="RowDetailsVisibilityMode" Value="VisibleWhenSelected"/>
                 <Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
@@ -358,7 +359,6 @@
                 <Setter Property="FontSize" Value="13" />
                 <Setter Property="GridLinesVisibility" Value="None" />
                 <Setter Property="ColumnWidth" Value="*" />
-
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type DataGrid}">
@@ -373,7 +373,7 @@
                                                     <ColumnDefinition Width="Auto"/>
                                                 </Grid.ColumnDefinitions>
                                                 <Grid.RowDefinitions>
-                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto" />
                                                     <RowDefinition Height="*"/>
                                                     <RowDefinition Height="Auto"/>
                                                 </Grid.RowDefinitions>
@@ -444,11 +444,11 @@
 
                 <Style.Triggers>
                     <Trigger Property="IsMouseOver" Value="True">
-                        <Setter Property="Background" Value="{StaticResource BrushPrimary1}"/>
+                        <Setter Property="Background" Value="{StaticResource color2}"/>
                         <Setter Property="Foreground" Value="#ffffff"/>
                     </Trigger>
                     <Trigger Property="IsSelected" Value="True">
-                        <Setter Property="Background" Value="{StaticResource BrushPrimary1}"/>
+                        <Setter Property="Background" Value="{StaticResource color2}"/>
                         <Setter Property="Foreground" Value="#ffffff"/>
                     </Trigger>
                     <MultiTrigger>
@@ -469,7 +469,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type DataGridCell}">
-                            <Border Background="{TemplateBinding Background}" BorderThickness="0" SnapsToDevicePixels="True">
+                            <Border Background="{TemplateBinding Background}" BorderThickness="3" SnapsToDevicePixels="True">
                                 <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                             </Border>
                         </ControlTemplate>
@@ -493,7 +493,7 @@
             <Style x:Key="DataGridColumnHeaderStyle1" TargetType="{x:Type DataGridColumnHeader}">
                 <Setter Property="VerticalContentAlignment" Value="Center"/>
                 <Setter Property="Background" Value="Transparent" />
-                <Setter Property="Foreground" Value="#69717D" />
+                <Setter Property="Foreground" Value="{StaticResource titleColor2}" />
                 <Setter Property="Margin" Value="15 0 15 10" />
                 <Setter Property="Template">
                     <Setter.Value>
@@ -567,7 +567,7 @@
 
             <Style x:Key="pagingButton" TargetType="Button">
                 <Setter Property="Background" Value="Transparent" />
-                <Setter Property="Foreground" Value="Black" />
+                <Setter Property="Foreground" Value="White" />
                 <Setter Property="FontWeight" Value="Bold" />
                 <Setter Property="FocusVisualStyle" Value="{x:Null}" />
                 <Setter Property="Margin" Value="1 0" />
@@ -581,12 +581,12 @@
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
-                
-                
+
+
 
                 <Style.Triggers>
                     <Trigger Property="IsMouseOver" Value="True">
-                        <Setter Property="Background" Value="{StaticResource BrushPrimary1}" />
+                        <Setter Property="Background" Value="{StaticResource color8}" />
                         <Setter Property="Foreground" Value="#ffffff" />
                     </Trigger>
 
@@ -608,15 +608,15 @@
                   x:Name="Border" 
                   Grid.ColumnSpan="2"
                   CornerRadius="5"
-                  Background="{StaticResource BrushPrimary1}"
-                  BorderBrush="#FF97A0A5"
+                  Background="{StaticResource color8}"
+                  BorderBrush="White"
                   BorderThickness="1" />
                     <Border 
                   Grid.Column="0"
                   CornerRadius="5" 
                   Margin="1" 
-                  Background="{StaticResource BrushPrimary1}"
-                  BorderBrush="#FF97A0A5"
+                  Background="{StaticResource color8}"
+                  BorderBrush="White"
                   BorderThickness="0,0,1,0" />
                     <Path 
                   x:Name="Arrow"
@@ -686,10 +686,9 @@
                               MaxHeight="{TemplateBinding MaxDropDownHeight}">
                                         <Border 
                                 x:Name="DropDownBorder"
-                                Background="#888888"
-
+                                Background="{StaticResource color8}"
                                 BorderThickness="1"
-                                BorderBrush="#888888"/>
+                                BorderBrush="{StaticResource color8}"/>
                                         <ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
                                             <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
                                         </ScrollViewer>
@@ -701,7 +700,7 @@
                                     <Setter TargetName="DropDownBorder" Property="MinHeight" Value="95"/>
                                 </Trigger>
                                 <Trigger Property="IsEnabled" Value="false">
-                                    <Setter Property="Foreground" Value="#888888"/>
+                                    <Setter Property="Foreground" Value="{StaticResource color8}"/>
                                 </Trigger>
                                 <Trigger Property="IsGrouping" Value="true">
                                     <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
@@ -738,7 +737,7 @@
                             </Border>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsHighlighted" Value="true">
-                                    <Setter TargetName="Border" Property="Background" Value="#FF4F4F4F"/>
+                                    <Setter TargetName="Border" Property="Background" Value="Gray"/>
                                 </Trigger>
                                 <Trigger Property="IsEnabled" Value="false">
                                     <Setter Property="Foreground" Value="#888888"/>

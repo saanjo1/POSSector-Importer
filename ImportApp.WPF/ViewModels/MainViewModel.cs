@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace ImportApp.WPF.ViewModels
 {
@@ -21,12 +22,10 @@ namespace ImportApp.WPF.ViewModels
         }
 
         [RelayCommand]
-        private void Close(MainWindow window)
+        private void Close()
         {
-            if(window != null)
-            {
-                window.Close();
-            }
+            Application.Current.Shutdown();
+
         }
 
         [RelayCommand]
@@ -40,9 +39,12 @@ namespace ImportApp.WPF.ViewModels
 
 
         [RelayCommand]
-        private void HideNav(Navigator navigator)
+        private void Maximize(MainWindow _window)
         {
-
+            if (_window.WindowState == WindowState.Normal)
+                _window.WindowState = WindowState.Maximized;
+            else
+                _window.WindowState = WindowState.Normal;
         }
 
         public INavigator Navigator { get; set; } = new Navigator(_articleService, _excelDataService);

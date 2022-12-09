@@ -4,99 +4,214 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:controls="clr-namespace:ImportApp.WPF.Controls"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ImportApp.WPF" xmlns:local1="clr-namespace:ImportApp.WPF.ViewModels"
-        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"   
+        xmlns:local="clr-namespace:ImportApp.WPF" 
+        xmlns:local1="clr-namespace:ImportApp.WPF.ViewModels"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks" 
+        xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         mc:Ignorable="d"
-        WindowState="Maximized"
+        Title="MainWindowView" Height="700" Width="1300"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
         x:Name="TestWindow"
-         WindowStartupLocation="CenterScreen" AllowsTransparency="True"
-        Background="Transparent" WindowStyle="None">
+        Background="Transparent"
+        AllowsTransparency="True">
     <Window.DataContext>
         <local1:MainViewModel/>
     </Window.DataContext>
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
     </Window.Resources>
-    <Border CornerRadius="30" Background="#EFF2F7">
+    <Border CornerRadius="30" BorderThickness="1">
+
+        <Border.BorderBrush>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="{StaticResource winBorderColor1}" Offset="0"/>
+                <GradientStop Color="{StaticResource winBorderColor2}" Offset="0.5"/>
+                <GradientStop Color="{StaticResource winBorderColor3}" Offset="1"/>
+            </LinearGradientBrush>
+        </Border.BorderBrush>
+        
+        
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200"/>
+                <!--Navigation Bar-->
+                <ColumnDefinition Width="250"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
+            
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-            </Grid.RowDefinitions>
 
-            <Grid Grid.Row="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
+            <Border CornerRadius="10, 0, 0, 10" Grid.Column="0">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1, 0.7">
+                        <GradientStop Color="{StaticResource secondaryBackColor1}" Offset="0"/>
+                        <GradientStop Color="{StaticResource secondaryBackColor2}" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
 
-                <StackPanel
+
+                <StackPanel>
+                  
+                    <StackPanel
                       Orientation="Horizontal"
-                      HorizontalAlignment="Right"
-                      VerticalAlignment="Top"
-                      Margin="0 10 -1210 10">
-                    <Button Style="{StaticResource topButton}"  Command="{Binding MinimizeCommand}" CommandParameter="{Binding ElementName=TestWindow}"  Margin="0 0 20 0">
-                        <iconPacks:PackIconMaterial Kind="WindowMinimize"/>
-                    </Button>
-                    <Button Style="{StaticResource topButton}" Command="{Binding CloseCommand}" CommandParameter="{Binding ElementName=TestWindow, Mode=OneWay}"  Margin="0 0 55 0">
-                        <iconPacks:PackIconMaterial Kind="Close"/>
-                    </Button>
+                      Height="35"
+                      Margin="50 30">
+
+
+                        <Ellipse Height="30" Width="30">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="/Images/p2.jpg"/>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        
+                        <TextBlock Text="Yammamay v1.0"
+                               Foreground="{StaticResource titleColor2}"
+                               FontSize="20"
+                               FontFamily="Montserrat"
+                               FontWeight="Medium"
+                               VerticalAlignment="Center"
+                               Margin="10, 0, 0, 0"/>
+
+                    </StackPanel>
+
+                    <controls:NavigationBar DataContext="{Binding Navigator}" Grid.Row="1" Height="680"/>
+
                 </StackPanel>
 
-                <ToggleButton Grid.Row="0" Style="{StaticResource toggleButton}" IsChecked="True" Panel.ZIndex="1" x:Name="VisibilityToggle" HorizontalAlignment="Left" Margin="20 28 0 35">
-                    <iconPacks:PackIconMaterial Kind="Menu" Width="15" Height="15" />
-                </ToggleButton>
+            </Border>
 
 
-                <controls:NavigationBar Visibility="{Binding IsChecked, ElementName=VisibilityToggle, Converter={StaticResource BoolToVis}}" DataContext="{Binding Navigator}" Grid.Row="1" Height="680"/>
-            </Grid>
+            <Border CornerRadius="0, 10, 10, 0" Grid.Column="1">
 
-            <Border Grid.Column="1" CornerRadius="10">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="1,1" EndPoint="0,0">
+                        <GradientStop Color="{StaticResource primaryBackColor1}" Offset="0"/>
+                        <GradientStop Color="{StaticResource primaryBackColor2}" Offset="1"/>
+                    </LinearGradientBrush>
+
+                </Border.Background>
+
+
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="35"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <Border Margin="50 30 0 15">
-                        <Grid Width="700" HorizontalAlignment="Left">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="200"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
 
-                            <Grid>
-                                <TextBlock Margin="30 0" VerticalAlignment="Center" Foreground="#B0B9C6" IsHitTestVisible="False"
-                           Panel.ZIndex="1" Text="Search here ..."
-                           Visibility="{Binding ElementName=textBoxSearch, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}" />
-                                <TextBox Name="textBoxSearch" Style="{StaticResource searchTextbox}" />
-                                <iconPacks:PackIconMaterial Kind="Magnify" Width="15" Height="15" VerticalAlignment="Center" Margin="0 0 15 0" Foreground="#B0B9C6" HorizontalAlignment="Right" />
-                            </Grid>
+                    <StackPanel x:Name="pnlControlBar"
+                                Grid.Row="0"
+                                Orientation="Horizontal"
+                                FlowDirection="RightToLeft"
+                                Background="Transparent"
+                                Margin="0,0,5,0"
+                                MouseLeftButtonDown="pnlControlBar_MouseLeftButtonDown"
+                                MouseEnter="pnlControlBar_MouseEnter">
+
+                        <Button x:Name="btnClose"
+                                Style="{StaticResource controlButton}"
+                                Tag="{StaticResource color4}"
+                                Command="{Binding CloseCommand}">
+                            <fa:IconImage Icon="WindowClose" Width="12" Style="{StaticResource controlButtonIcon}"/>
+                        </Button>
+
+                        <Button x:Name="btnMaximize"
+                                Style="{StaticResource controlButton}"
+                                Tag="{StaticResource color6}"
+                                Command="{Binding MaximizeCommand}"
+                                CommandParameter="{Binding ElementName=TestWindow}">
+                            <fa:IconImage Icon="Square" Width="12" Style="{StaticResource controlButtonIcon}"/>
+                        </Button>
+
+                        <Button x:Name="btnMinimize"
+                                Style="{StaticResource controlButton}"
+                                Tag="{StaticResource color8}"
+                                Command="{Binding MinimizeCommand}"
+                                CommandParameter="{Binding ElementName=TestWindow}">
+                            <fa:IconImage Icon="WindowMinimize" Width="12" Style="{StaticResource controlButtonIcon}"/>
+                        </Button>
+                    </StackPanel>
 
 
-                            <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.ColumnSpan="4"  HorizontalAlignment="Right" Margin="0 0 -450 0">
-                                <Button Style="{StaticResource topButton}" Margin="0 0 20 0" Background="#dcdcdc">
-                                    <iconPacks:PackIconMaterial Kind="Cog"/>
-                                </Button>
+                    <!--Header-->
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                    </Grid>
 
-                                <Button Style="{StaticResource topButton}" Margin="0 0 55 0">
-                                    <iconPacks:PackIconMaterial Kind="Bell"/>
-                                </Button>
-                            </StackPanel>
-                        </Grid>
-                    </Border>
+                    <!--Caption-->
+                    <StackPanel Grid.Column="0"
+                                Grid.Row="1"
+                                Orientation="Horizontal"
+                                VerticalAlignment="Center">
 
-                    <ContentControl Content="{Binding Navigator.CurrentViewModel}" Grid.Row="1">
-                    </ContentControl>
+                        <fa:IconImage Icon="{Binding Navigator.Icon}"
+                                      Height="20"
+                                      Width="20"
+                                      Foreground="{StaticResource titleColor2}"
+                                      Margin="35, 0, 10, 0"/>
+
+                        <TextBlock Text="{Binding Navigator.Caption}"
+                                   Foreground="{StaticResource titleColor2}"
+                                   FontSize="16"
+                                   FontFamily="Monserrat"
+                                   FontWeight="Medium"
+                                   VerticalAlignment="Center"/>
+
+                    </StackPanel>
+
+
+                    <!--User options-->
+                    <StackPanel Grid.Column="1"
+                                Grid.Row="1"
+                                Orientation="Horizontal"
+                                FlowDirection="RightToLeft"
+                                VerticalAlignment="Center"
+                                Margin="0,0,10,0">
+
+                        <Button Style="{StaticResource iconButton}"
+                                Tag="{StaticResource color1}">
+                            <fa:IconImage Icon="AngleDown" Height="12" Width="12" Style="{StaticResource iconButtonIcon}"/>
+                        </Button>
+
+                        <TextBlock Text="User 1" 
+                                   Foreground="{StaticResource titleColor3}"
+                                   FontFamily="Monserrat"
+                                   FontSize="12"
+                                   VerticalAlignment="Center"/>
+
+                        <Ellipse Height="35" Width="35"
+                                     Stroke="{StaticResource color2}"
+                                     StrokeThickness="2"
+                                     Margin="10,0,10,0">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="/Images/p1.jpg"/>
+                            </Ellipse.Fill>
+                        </Ellipse>
+
+                        <Button Style="{StaticResource iconButton}"
+                                    Tag="{StaticResource color3}">
+                            <fa:IconImage Icon="Clock" Style="{StaticResource iconButtonIcon}"/>
+                        </Button>
+                        <Button Style="{StaticResource iconButton}"
+                                    Tag="{StaticResource color4}">
+                            <fa:IconImage Icon="Envelope" Style="{StaticResource iconButtonIcon}"/>
+                        </Button>
+                        <Button Style="{StaticResource iconButton}"
+                                    Tag="{StaticResource color5}">
+                            <fa:IconImage Icon="Bell" Style="{StaticResource iconButtonIcon}"/>
+                        </Button>
+
+
+                    </StackPanel>
+
                 </Grid>
             </Border>
+
+            <ContentControl Content="{Binding Navigator.CurrentViewModel}" Grid.Row="2" Grid.Column="2" Margin="30 100"/>
         </Grid>
     </Border>
 </Window>

@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"   
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              xmlns:local="clr-namespace:ImportApp.WPF.Views" xmlns:sys="clr-namespace:System;assembly=netstandard"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -28,7 +28,7 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
-                <TextBlock FontSize="18" Text="{Binding Count}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="-518,0,0,0" Width="215"/>
+                <TextBlock FontSize="18" Text="{Binding Count}" Foreground="{StaticResource titleColor1}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="-518,0,0,0" Width="215"/>
                 <TextBlock Grid.Row="1" Margin="15 0" HorizontalAlignment="Stretch" VerticalAlignment="Center" Foreground="#B0B9C6" IsHitTestVisible="False"
                            Panel.ZIndex="1" Text="Search in Articles ..."
                            Visibility="{Binding ElementName=textBoxFilter, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}" />
@@ -36,8 +36,8 @@
                 <TextBox Name="textBoxFilter" Style="{StaticResource filterTextBox}" Text="{Binding TextToFilter, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1"/>
 
                 <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="-540,10,0,0" Grid.RowSpan="6">
-                    <Button Style="{StaticResource tabButton}" Content="Articles" BorderBrush="{StaticResource BrushPrimary2}" Width="84"/>
-                    <Button Style="{StaticResource tabButton}" Content="Economato" Margin="5" Width="84"/>
+                    <Button Style="{StaticResource tabButton}" Foreground="{StaticResource titleColor1}" Content="Articles" BorderBrush="{StaticResource color5}" Width="84"/>
+                    <Button Style="{StaticResource tabButton}" Foreground="{StaticResource titleColor1}" Content="Economato" Margin="5" Width="84"/>
                 </StackPanel>
 
             </Grid>
@@ -67,10 +67,10 @@
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
                                 <Button Style="{StaticResource gridEditButton}">
-                                    <iconPacks:PackIconMaterial Kind="PencilOutline" Style="{StaticResource gridButtonIcon}"/>
+                                    <fa:IconImage Icon="Pencil" Style="{StaticResource gridButtonIcon}"/>
                                 </Button>
                                 <Button Margin="5 0 0 0" Style="{StaticResource gridRemoveButton}">
-                                    <iconPacks:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}"/>
+                                    <fa:IconImage Icon="Remove" Style="{StaticResource gridButtonIcon}"/>
                                 </Button>
                             </StackPanel>
                         </DataTemplate>
@@ -84,7 +84,7 @@
         
         <StackPanel Margin="20" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
 
-            <TextBlock Text="Records per page" VerticalAlignment="Center" Margin="5"/>
+            <TextBlock Text="Records per page" Foreground="{StaticResource titleColor1}"  VerticalAlignment="Center" Margin="5"/>
             <ComboBox  Margin="5"  Width="100" SelectedItem="{Binding SelectedRecord,UpdateSourceTrigger=PropertyChanged}">
                 <sys:Int32>10</sys:Int32>
                 <sys:Int32>15</sys:Int32>
@@ -95,7 +95,7 @@
             <Button Content="&lt;&lt;" Style="{StaticResource pagingButton}" Width="40" IsEnabled="{Binding IsFirstEnabled}"  ToolTip="First page" Margin="5" Command="{Binding FirstPageCommand}" />
             <Button Content="&lt;" Style="{StaticResource pagingButton}" Width="40" IsEnabled="{Binding IsPreviousEnabled}" Margin="5" ToolTip="Previous page" Command="{Binding PreviousPageCommand}" />
 
-            <TextBlock VerticalAlignment="Center">
+            <TextBlock VerticalAlignment="Center" Foreground="White">
                 <TextBlock.Text>
                     <MultiBinding StringFormat="{} {0} of {1}">
                         <Binding Path="CurrentPage"/>

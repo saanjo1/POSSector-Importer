@@ -5,20 +5,71 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ImportApp.WPF.Controls"
              xmlns:nav="clr-namespace:ImportApp.WPF.State.Navigators"
-          xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"   
-                 mc:Ignorable="d" 
+          xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks" xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+             mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Border CornerRadius="50">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
 
-            
-            
-            <Border Grid.Row="2" BorderThickness="1" BorderBrush="Black" Background="{StaticResource BrushPrimary2}" CornerRadius="0 30 0 15">
+        <StackPanel>
+            <RadioButton Style="{StaticResource radioButton1}"
+                     Tag="{StaticResource color2}"
+                     IsChecked="True"
+                     Command="{Binding EditCurrentViewModelCommand}" 
+                     CommandParameter="{x:Static nav:ViewType.Home}">
+
+                <StackPanel Orientation="Horizontal">
+                    <fa:IconImage Icon="Home" Style="{StaticResource radioButtonIcon}"/>
+                    <TextBlock Text="Dashboard" Style="{StaticResource radioButtonText}"/>
+                </StackPanel>
+            </RadioButton>
+
+            <RadioButton Style="{StaticResource radioButton1}"
+                     Tag="{StaticResource color2}"
+                     Command="{Binding EditCurrentViewModelCommand}" 
+                     CommandParameter="{x:Static nav:ViewType.Articles}">
+
+                <StackPanel Orientation="Horizontal">
+                    <fa:IconImage Icon="TableList" Style="{StaticResource radioButtonIcon}"/>
+                    <TextBlock Text="Articles" Style="{StaticResource radioButtonText}"/>
+                </StackPanel>
+            </RadioButton>
+
+            <RadioButton Style="{StaticResource radioButton1}"
+                     Tag="{StaticResource color2}"
+                     Command="{Binding EditCurrentViewModelCommand}" 
+                     CommandParameter="{x:Static nav:ViewType.Home}">
+
+                <StackPanel Orientation="Horizontal">
+                    <fa:IconImage Icon="Percentage" Style="{StaticResource radioButtonIcon}"/>
+                    <TextBlock Text="Discount" Style="{StaticResource radioButtonText}"/>
+                </StackPanel>
+            </RadioButton>
+
+            <RadioButton Style="{StaticResource radioButton1}"
+                     Tag="{StaticResource color2}"
+                     Command="{Binding EditCurrentViewModelCommand}" 
+                     CommandParameter="{x:Static nav:ViewType.ImportArticles}">
+
+                <StackPanel Orientation="Horizontal">
+                    <fa:IconImage Icon="FileExcel" Style="{StaticResource radioButtonIcon}"/>
+                    <TextBlock Text="Import" Style="{StaticResource radioButtonText}"/>
+                </StackPanel>
+            </RadioButton>
+
+            <RadioButton Style="{StaticResource radioButton1}"
+                     Tag="{StaticResource color2}"
+                     Command="{Binding EditCurrentViewModelCommand}" 
+                     CommandParameter="{x:Static nav:ViewType.Home}">
+
+                <StackPanel Orientation="Horizontal">
+                    <fa:IconImage Icon="Gear" Style="{StaticResource radioButtonIcon}"/>
+                    <TextBlock Text="Settings" Style="{StaticResource radioButtonText}"/>
+                </StackPanel>
+            </RadioButton>
+        </StackPanel>
+
+
+        <!--<Border Grid.Row="2" BorderThickness="1" BorderBrush="Black" Background="{StaticResource BrushPrimary2}" CornerRadius="0 30 0 15">
                 <Grid Margin="0 30" Grid.Row="2" Background="{StaticResource BrushPrimary2}" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
@@ -75,8 +126,7 @@
                         </Border>
                     </StackPanel>
                 </Grid>
-            </Border>
+            </Border>-->
 
-        </Grid>
     </Border>
 </UserControl>

@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using FontAwesome.Sharp;
 using ImportApp.Domain.Models;
 using ImportApp.Domain.Services;
 using ImportApp.EntityFramework.Services;
@@ -20,6 +21,13 @@ namespace ImportApp.WPF.State.Navigators
         [ObservableProperty]
         private BaseViewModel? _currentViewModel;
 
+        [ObservableProperty]
+        private string caption;
+
+        [ObservableProperty]
+        private IconChar icon;
+
+
         private IArticleService _articleService;
         private IExcelDataService _excelDataService;
 
@@ -39,12 +47,18 @@ namespace ImportApp.WPF.State.Navigators
                 {
                     case ViewType.Home:
                         this.CurrentViewModel = new HomeViewModel();
+                        Caption = "Dashboard";
+                        Icon = IconChar.Home;
                         break;
                     case ViewType.Articles:
                         this.CurrentViewModel = new ArticlesViewModel(_articleService);
+                        Caption = "Articles";
+                        Icon = IconChar.TableList;
                         break;
                     case ViewType.ImportArticles:
                         this.CurrentViewModel = new ImportArticleViewModel(_excelDataService);
+                        Caption = "Import";
+                        Icon = IconChar.FileExcel;
                         break;
                     default:
                         break;
