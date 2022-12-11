@@ -31,7 +31,7 @@
             </DataTemplate>
             
             <DataTemplate DataType="{x:Type viewmodels:MapColumnViewModel}">
-                <controls:MapColumnsView/>
+                <controls:MapExcelColumns/>
             </DataTemplate>
             
             <DataTemplate DataType="{x:Type viewmodels:MainViewModel}">
@@ -152,7 +152,7 @@
 
             <Style x:Key="SaveButton" TargetType="Button">
                 <Setter Property="Foreground" Value="White"/>
-                <Setter Property="Background" Value="{StaticResource BrushPrimary2}"/>
+                <Setter Property="Background" Value="{StaticResource color1}"/>
                 <Setter Property="Padding" Value="10 10"/>
                 <Setter Property="Cursor" Value="Hand"/>
                 <Setter Property="VerticalAlignment" Value="Center"/>

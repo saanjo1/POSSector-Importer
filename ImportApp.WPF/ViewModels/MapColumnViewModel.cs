@@ -7,6 +7,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace ImportApp.WPF.ViewModels
 {
@@ -57,9 +59,9 @@ namespace ImportApp.WPF.ViewModels
         }
 
         [RelayCommand]
-        public void Cancel()
+        public void CloseModal(UserControl modal)
         {
-            _viewModel.Close();
+            modal.Visibility = Visibility.Hidden;
         }
 
         [RelayCommand]

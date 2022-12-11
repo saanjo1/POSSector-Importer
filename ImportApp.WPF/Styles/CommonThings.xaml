@@ -5,7 +5,7 @@
     <Color x:Key="ColorPrimary1">#799540</Color>
     <Color x:Key="ColorPrimary2">#50632b</Color>
     <Color x:Key="ColorPrimary3">#C30606</Color>
-    <Color x:Key="ColorPrimary4">#Bf3333</Color>
+    <Color x:Key="ColorPrimary4">#F70000</Color>
                     
     <!--Brushes-->
     <SolidColorBrush x:Key="BrushPrimary1" Color="{StaticResource ColorPrimary1}"/>

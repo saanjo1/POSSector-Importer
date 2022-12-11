@@ -22,12 +22,19 @@ namespace ImportApp.WPF.ViewModels
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(MapDataCommand))]
         [NotifyCanExecuteChangedFor(nameof(ImportDataCommand))]
+        [NotifyCanExecuteChangedFor(nameof(OpenDialogCommand))]
         private string excelFile;
 
         [ObservableProperty]
+        [NotifyCanExecuteChangedFor(nameof(MapDataCommand))]
+        [NotifyCanExecuteChangedFor(nameof(OpenDialogCommand))]
+        [NotifyCanExecuteChangedFor(nameof(ImportDataCommand))]
         public bool isOpen;
 
         [ObservableProperty]
+        [NotifyCanExecuteChangedFor(nameof(MapDataCommand))]
+        [NotifyCanExecuteChangedFor(nameof(OpenDialogCommand))]
+        [NotifyCanExecuteChangedFor(nameof(ImportDataCommand))]
         public bool isMapped;
 
         [ObservableProperty]
@@ -75,7 +82,7 @@ namespace ImportApp.WPF.ViewModels
             IsMapped = false;
         }
 
-        [RelayCommand]
+        [RelayCommand(CanExecute = nameof(CanUpload))]
         public void OpenDialog()
         {
             try
@@ -119,12 +126,33 @@ namespace ImportApp.WPF.ViewModels
         }
 
         private bool CanImport()
-=> !string.IsNullOrWhiteSpace(ExcelFile);
+        {
+            if (IsMapped == true || IsOpen == true)
+            {
+                return false;
+            }
+            return true;
+        }
 
 
 
         private bool CanMap()
-=> !string.IsNullOrWhiteSpace(ExcelFile);
+        {
+            if (string.IsNullOrWhiteSpace(ExcelFile) || IsOpen == true || IsMapped == true)
+            {
+                return false;
+            }
+            return true;
+        }
 
+
+        private bool CanUpload()
+        {
+            if (IsMapped == true || IsOpen == true)
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }

@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
-             xmlns:modalcontrol="clr-namespace:ModalControl;assembly=ModalControl"
+             xmlns:modalcontrol="clr-namespace:ModalControl;assembly=ModalControl" xmlns:controls="clr-namespace:ImportApp.WPF.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -13,86 +13,86 @@
     </UserControl.Resources>
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto" MinHeight="32"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
+        <modalcontrol:Modal Panel.ZIndex="1" Background="Transparent" IsOpen="{Binding IsMapped}" Grid.RowSpan="3">
+            <controls:MapExcelColumns></controls:MapExcelColumns>
+        </modalcontrol:Modal>
 
-        <Grid.ColumnDefinitions>
-
-        </Grid.ColumnDefinitions>
-
-        <modalcontrol:Modal Panel.ZIndex="1" IsOpen="{Binding IsOpen}" Grid.RowSpan="3">
+        <modalcontrol:Modal Grid.Row="0" VerticalAlignment="Center" Panel.ZIndex="1" Padding="100" IsOpen="{Binding IsOpen}" Grid.RowSpan="3">
             <ContentControl Margin="30 20" Content="{Binding MDataModel}"/>
         </modalcontrol:Modal>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto" MinHeight="32"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
 
-        <modalcontrol:Modal Panel.ZIndex="1" IsOpen="{Binding IsMapped}" Grid.RowSpan="3">
-            <ContentControl Margin="30 20" Content="{Binding MColumnModel}"/>
-        </modalcontrol:Modal>
+            <Grid.ColumnDefinitions>
 
+            </Grid.ColumnDefinitions>
 
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="0" Margin="10,10,0,10" Width="300">
-            <Button ToolTip="Upload Excel file" Style="{StaticResource controlButton}" Width="60" Height="60" Grid.Row="1" Grid.Column="0" Command="{Binding OpenDialogCommand}" Margin="5">
-                <StackPanel>
-                    <fa:IconImage Style="{StaticResource controlButtonIcon}" Icon="Upload" Width="20" Height="20"/>
-                </StackPanel>
-            </Button>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="0" Margin="10,10,0,10" Width="300">
+                <Button ToolTip="Upload Excel file" Style="{StaticResource controlButton}" Width="60" Height="60" Grid.Row="1" Grid.Column="0" Command="{Binding OpenDialogCommand}" Margin="5">
+                    <StackPanel>
+                        <fa:IconImage Style="{StaticResource controlButtonIcon}" Icon="Upload" Width="20" Height="20"/>
+                    </StackPanel>
+                </Button>
 
-            <Button ToolTip="Map columns" Style="{StaticResource controlButton}"  Width="60" Height="60" Grid.Row="1" Grid.Column="1" Command="{Binding MapDataCommand}" Margin="5">
-                <StackPanel>
-                    <fa:IconImage Style="{StaticResource controlButtonIcon}" Icon="Columns"  Width="20" Height="20"/>
-                </StackPanel>
-            </Button>
+                <Button ToolTip="Map columns" Style="{StaticResource controlButton}"  Width="60" Height="60" Grid.Row="1" Grid.Column="1" Command="{Binding MapDataCommand}" Margin="5">
+                    <StackPanel>
+                        <fa:IconImage Style="{StaticResource controlButtonIcon}" Icon="Columns"  Width="20" Height="20"/>
+                    </StackPanel>
+                </Button>
 
-            <Button ToolTip="Import columns" Style="{StaticResource controlButton}" Width="60" Height="60" Grid.Row="1" Grid.Column="2" Command="{Binding ImportDataCommand}" Margin="5">
-                <StackPanel>
-                    <fa:IconImage Style="{StaticResource controlButtonIcon}" Icon="FileImport" Width="20" Height="20"/>
-                </StackPanel>
-            </Button>
+                <Button ToolTip="Import columns" Style="{StaticResource controlButton}" Width="60" Height="60" Grid.Row="1" Grid.Column="2" Command="{Binding ImportDataCommand}" Margin="5">
+                    <StackPanel>
+                        <fa:IconImage Style="{StaticResource controlButtonIcon}" Icon="FileImport" Width="20" Height="20"/>
+                    </StackPanel>
+                </Button>
 
-        </StackPanel>
-        
-        <TextBlock Grid.Row="0" Margin="0 0 20 0" HorizontalAlignment="Right" Width="180" VerticalAlignment="Center" Foreground="#B0B9C6" IsHitTestVisible="False"
+            </StackPanel>
+
+            <TextBlock Grid.Row="0" Margin="0 0 20 0" HorizontalAlignment="Right" Width="180" VerticalAlignment="Center" Foreground="#B0B9C6" IsHitTestVisible="False"
                            Panel.ZIndex="1" Text="Search ..."
                            Visibility="{Binding ElementName=textBoxFilter, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}" Height="16" />
 
-        <TextBox Width="200" Grid.Row="0" HorizontalAlignment="Right" Margin="15" Name="textBoxFilter" Style="{StaticResource filterTextBox}" Text="{Binding TextToFilter, UpdateSourceTrigger=PropertyChanged}" Height="32"/>
+            <TextBox Width="200" Grid.Row="0" HorizontalAlignment="Right" Margin="15" Name="textBoxFilter" Style="{StaticResource filterTextBox}" Text="{Binding TextToFilter, UpdateSourceTrigger=PropertyChanged}" Height="32"/>
 
-        <DataGrid Grid.Row="1" Margin="10,0,10,68" ItemsSource="{Binding ArticleCollection}" RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" x:Name="membersDataGrid" Style="{DynamicResource DataGridStyle1}">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="#" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding Order}"/>
-                <DataGridTemplateColumn Header="Name" IsReadOnly="True" Width="*">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <Border Width="25" Height="25" CornerRadius="50" Margin="0 0 10 0" Background="{Binding BgColor}">
-                                    <TextBlock Text="{Binding Character}" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Margin="0 0 0 1"/>
-                                </Border>
-                                <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Article number" Binding="{Binding ArticleNumber}" IsReadOnly="True" Width="*"/>
-                <DataGridTextColumn Header="Price" Binding="{Binding Price}" IsReadOnly="True" Width="*"/>
-                <DataGridTextColumn Header="Barcode" Binding="{Binding BarCode}" IsReadOnly="True" Width="*"/>
-                <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" IsReadOnly="True" Width="*"/>
-                <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="auto">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <Button Style="{StaticResource gridEditButton}">
-                                    <fa:IconImage Icon="Edit" Style="{StaticResource gridButtonIcon}"/>
-                                </Button>
-                                <Button Margin="5 0 0 0" Style="{StaticResource gridRemoveButton}">
-                                    <fa:IconImage Icon="DeleteLeft" Style="{StaticResource gridButtonIcon}"/>
-                                </Button>
-                            </StackPanel>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
+            <DataGrid Grid.Row="1" Margin="10,0,10,68" ItemsSource="{Binding ArticleCollection}" RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" x:Name="membersDataGrid" Style="{DynamicResource DataGridStyle1}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="#" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding Order}"/>
+                    <DataGridTemplateColumn Header="Name" IsReadOnly="True" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Border Width="25" Height="25" CornerRadius="50" Margin="0 0 10 0" Background="{Binding BgColor}">
+                                        <TextBlock Text="{Binding Character}" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Margin="0 0 0 1"/>
+                                    </Border>
+                                    <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="Article number" Binding="{Binding ArticleNumber}" IsReadOnly="True" Width="*"/>
+                    <DataGridTextColumn Header="Price" Binding="{Binding Price}" IsReadOnly="True" Width="*"/>
+                    <DataGridTextColumn Header="Barcode" Binding="{Binding BarCode}" IsReadOnly="True" Width="*"/>
+                    <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" IsReadOnly="True" Width="*"/>
+                    <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Style="{StaticResource gridEditButton}">
+                                        <fa:IconImage Icon="Edit" Style="{StaticResource gridButtonIcon}"/>
+                                    </Button>
+                                    <Button Margin="5 0 0 0" Style="{StaticResource gridRemoveButton}">
+                                        <fa:IconImage Icon="DeleteLeft" Style="{StaticResource gridButtonIcon}"/>
+                                    </Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
     </Grid>
 </UserControl>
