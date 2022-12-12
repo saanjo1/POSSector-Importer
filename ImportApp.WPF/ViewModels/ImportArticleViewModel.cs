@@ -29,13 +29,13 @@ namespace ImportApp.WPF.ViewModels
         [NotifyCanExecuteChangedFor(nameof(MapDataCommand))]
         [NotifyCanExecuteChangedFor(nameof(OpenDialogCommand))]
         [NotifyCanExecuteChangedFor(nameof(ImportDataCommand))]
-        public bool isOpen;
-
+        private bool isOpen;   
+        
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(MapDataCommand))]
         [NotifyCanExecuteChangedFor(nameof(OpenDialogCommand))]
         [NotifyCanExecuteChangedFor(nameof(ImportDataCommand))]
-        public bool isMapped;
+        private bool isMapped;
 
         [ObservableProperty]
         private MapDataViewModel mDataModel;
@@ -73,6 +73,7 @@ namespace ImportApp.WPF.ViewModels
         public ImportArticleViewModel(IExcelDataService excelDataService)
         {
             _excelDataService = excelDataService;
+            
         }
 
         [RelayCommand]

@@ -9,7 +9,7 @@
              x:Name="modalControl"
              FontFamily="Montserrat"
              FontWeight="Regular"
-             Height="500"
+             Height="438"
              Width="500">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -36,11 +36,47 @@
                      Margin="0,5,5,0"
                      VerticalAlignment="Top"
                      Grid.Column="1">
-            <Button Width="35" Height="35" Background="{StaticResource BrushPrimary4}" Command="{Binding CloseModalCommand}" CommandParameter="{Binding ElementName=modalControl}">
+            <Button Width="35" Height="35" Background="{StaticResource BrushPrimary4}" Style="{StaticResource CloseButton}" Command="{Binding CloseModalCommand}">
                 <fa:IconImage Icon="Close" Foreground="White" Width="20"/>
             </Button>
 
         </StackPanel>
+
+        <Border HorizontalAlignment="Center" Grid.ColumnSpan="3" Grid.Row="1">
+            <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Height="326" Width="391">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" MinWidth="69"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Margin="10" FontSize="18" FontWeight="Light" Grid.ColumnSpan="2" HorizontalAlignment="Center">Choose which columns you want to store:</Label>
+                <Label Grid.Row="2">Name:</Label>
+                <ComboBox ItemsSource="{Binding ColumnNamesList}" SelectedItem="{Binding Name}" Grid.Row="2" Grid.Column="1" Margin="0,5,57,5"/>
+                <Label Grid.Row="3">Article number:</Label>
+                <ComboBox ItemsSource="{Binding ColumnNamesList}" SelectedItem="{Binding ArticleNumber}" Grid.Row="3" Grid.Column="1" Margin="0,5,57,5"/>
+                <Label Grid.Row="4">Barcode:</Label>
+                <ComboBox ItemsSource="{Binding ColumnNamesList}" SelectedItem="{Binding BarCode}" Grid.Row="4" Grid.Column="1" Margin="0,5,57,5"/>
+                <Label Grid.Row="5">Price:</Label>
+                <ComboBox ItemsSource="{Binding ColumnNamesList}" SelectedItem="{Binding Price}" Grid.Row="5" Grid.Column="1" Margin="0,5,57,5"/>
+                <Label Grid.Row="6">Order:</Label>
+                <ComboBox ItemsSource="{Binding ColumnNamesList}" SelectedItem="{Binding Order}" Grid.Row="6" Grid.Column="1" Margin="0,5,57,5"/>
+                <Label Grid.Row="7">Quantity:</Label>
+                <ComboBox ItemsSource="{Binding ColumnNamesList}" SelectedItem="{Binding Quantity}" Grid.Row="7" Grid.Column="1" Margin="0,5,57,5"/>
+                <Button Content="Save" Style="{StaticResource SaveButton}" Grid.Row="8" Command="{Binding SubmitCommand}" Width="100" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Margin="80,40,0,0" Grid.ColumnSpan="2">
+                </Button>
+                <Button Content="Cancel" Style="{StaticResource CancelButton}" Grid.Row="8" Grid.Column="1" Command="{Binding CancelCommand}" Width="100" Margin="120,40,0,0" HorizontalAlignment="Left"/>
+            </Grid>
+        </Border>
 
     </Grid>
 </UserControl>

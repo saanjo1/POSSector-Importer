@@ -37,7 +37,7 @@
                      Margin="0,5,5,0"
                      VerticalAlignment="Top"
                      Grid.Column="1">
-            <Button Width="35" Height="35" Background="{StaticResource BrushPrimary4}" Command="{Binding CloseModalCommand}" CommandParameter="{Binding ElementName=modalControl}">
+            <Button Width="35" Height="35" Background="{StaticResource BrushPrimary4}" Style="{StaticResource CloseButton}" Command="{Binding CancelCommand}">
                 <fa:IconImage Icon="Close" Foreground="White" Width="20"/>
             </Button>
 
@@ -50,7 +50,7 @@
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Grid.Row="3" Margin="20" HorizontalAlignment="Center">
-                <Button BorderThickness="2" Content="Next" Background="{StaticResource panelActiveColor}" Style="{StaticResource SaveButton}" Command="{Binding SaveCommand}" Width="60" Margin="10"/>
+                <Button BorderThickness="2" Content="Next" Style="{StaticResource SaveButton}" Command="{Binding SaveCommand}" Width="60" Margin="10"/>
                 <Button BorderBrush="Black" Content="Cancel" Style="{StaticResource CancelButton}" Command="{Binding CancelCommand}" Width="60" Margin="10"/>
             </StackPanel>
         </StackPanel>

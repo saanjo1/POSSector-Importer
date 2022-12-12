@@ -14,11 +14,11 @@
 
     <Grid>
         <modalcontrol:Modal Panel.ZIndex="1" Background="Transparent" IsOpen="{Binding IsMapped}" Grid.RowSpan="3">
-            <controls:MapExcelColumns></controls:MapExcelColumns>
+                <ContentControl Content="{Binding MColumnModel}" Background="{StaticResource panelActiveColor}"/>
         </modalcontrol:Modal>
 
         <modalcontrol:Modal Margin="0" Grid.Row="0" VerticalAlignment="Center" Panel.ZIndex="1" Background="Transparent" IsOpen="{Binding IsOpen}" Grid.RowSpan="3">
-            <ContentControl Margin="30 20" Content="{Binding MDataModel}"/>
+            <ContentControl VerticalAlignment="Top"  Content="{Binding MDataModel}"/>
         </modalcontrol:Modal>
         <Grid>
             <Grid.RowDefinitions>

@@ -59,9 +59,10 @@ namespace ImportApp.WPF.ViewModels
         }
 
         [RelayCommand]
-        public void CloseModal(UserControl modal)
+        public void CloseModal()
         {
-            modal.Visibility = Visibility.Hidden;
+            _viewModel.Close();        
+        
         }
 
         [RelayCommand]
