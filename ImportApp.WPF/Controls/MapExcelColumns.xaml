@@ -24,7 +24,7 @@
                              Grid.Row="0"
                              Padding="10"
                              Margin="0"
-                             Background="{StaticResource color2}"
+                             Background="{StaticResource panelActiveColor}"
                              Foreground="White"
                              Visibility="Visible"
                              Grid.ColumnSpan="2">

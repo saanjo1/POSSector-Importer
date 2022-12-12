@@ -17,7 +17,7 @@
             <controls:MapExcelColumns></controls:MapExcelColumns>
         </modalcontrol:Modal>
 
-        <modalcontrol:Modal Grid.Row="0" VerticalAlignment="Center" Panel.ZIndex="1" Padding="100" IsOpen="{Binding IsOpen}" Grid.RowSpan="3">
+        <modalcontrol:Modal Margin="0" Grid.Row="0" VerticalAlignment="Center" Panel.ZIndex="1" Background="Transparent" IsOpen="{Binding IsOpen}" Grid.RowSpan="3">
             <ContentControl Margin="30 20" Content="{Binding MDataModel}"/>
         </modalcontrol:Modal>
         <Grid>

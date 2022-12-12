@@ -175,14 +175,14 @@
                         <Trigger.EnterActions>
                             <BeginStoryboard>
                                 <Storyboard>
-                                    <ColorAnimation Storyboard.TargetProperty="Background.(SolidColorBrush.Color)" To="{StaticResource ColorPrimary1}" Duration="0:0:0.1"/>
+                                    <ColorAnimation Storyboard.TargetProperty="Background.(SolidColorBrush.Color)" To="{StaticResource winBorderColor1}" Duration="0:0:0.1"/>
                                 </Storyboard>
                             </BeginStoryboard>
                         </Trigger.EnterActions>
                         <Trigger.ExitActions>
                             <BeginStoryboard>
                                 <Storyboard>
-                                    <ColorAnimation Storyboard.TargetProperty="Background.(SolidColorBrush.Color)" To="{StaticResource ColorPrimary2}" Duration="0:0:0.1"/>
+                                    <ColorAnimation Storyboard.TargetProperty="Background.(SolidColorBrush.Color)" To="{StaticResource primaryBackColor1}" Duration="0:0:0.1"/>
                                 </Storyboard>
                             </BeginStoryboard>
                         </Trigger.ExitActions>
@@ -233,7 +233,7 @@
                 </Setter>
                 <Style.Triggers>
                     <Trigger Property="IsMouseOver" Value="True">
-                        <Setter Property="Background" Value="{StaticResource BrushPrimary1}"/>
+                        <Setter Property="Background" Value="{StaticResource color5}"/>
                     </Trigger>
                 </Style.Triggers>
             </Style>
