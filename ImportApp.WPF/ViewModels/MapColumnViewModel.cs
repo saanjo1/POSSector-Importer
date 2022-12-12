@@ -41,6 +41,9 @@ namespace ImportApp.WPF.ViewModels
         private string? quantity;
 
         [ObservableProperty]
+        private string? collection;
+
+        [ObservableProperty]
         private List<string> columnNamesList;
 
         private ImportArticleViewModel _viewModel;

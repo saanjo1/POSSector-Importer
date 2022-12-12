@@ -17,9 +17,21 @@ namespace ImportApp.EntityFramework.Services
 
 
 
-        public Task<Article> Create(Article entity)
+        public Task<bool> Create(Article entity)
         {
-            throw new NotImplementedException();
+            using (ImportAppDbContext context = factory.CreateDbContext())
+            {
+                try
+                {
+                    context.Add(entity);
+                    context.SaveChanges();
+                    return Task.FromResult(true);
+                }
+                catch (Exception)
+                {
+                    return Task.FromResult(false);
+                }
+            }
         }
 
         public Task<bool> Delete(Guid id)
@@ -27,9 +39,13 @@ namespace ImportApp.EntityFramework.Services
             throw new NotImplementedException();
         }
 
-        public Task<Article> Get(Guid id)
+        public Task<Article> Get(string id)
         {
-            throw new NotImplementedException();
+            using (ImportAppDbContext context = factory.CreateDbContext())
+            {
+                Article? entity = context.Articles.FirstOrDefault(x => x.BarCode == id);
+                return Task.FromResult(entity);
+            }
         }
 
         public Task<ICollection<Article>> GetAll()
@@ -41,9 +57,19 @@ namespace ImportApp.EntityFramework.Services
             }
         }
 
+        public Task<Article> Compare(string value)
+        {
+            using (ImportAppDbContext context = factory.CreateDbContext())
+            {
+                var entity = context.Articles.FirstOrDefault(x => x.BarCode == value);
+
+                return Task.FromResult(entity);
+            }
+        }
         public Task<Article> Update(Guid id, Article entity)
         {
             throw new NotImplementedException();
         }
+
     }
 }

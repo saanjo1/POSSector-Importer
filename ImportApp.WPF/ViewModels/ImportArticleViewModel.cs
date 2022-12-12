@@ -1,15 +1,16 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ImportApp.EntityFramework.Services;
-using Microsoft.Win32;
-using ModalControl;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Data;
+using ImportApp.Domain;
+using ImportApp.Domain.Models;
+using ImportApp.EntityFramework.DBContext;
+using ImportApp.Domain.Services;
+using CustomMessageBox;
+using System.Diagnostics.Metrics;
 
 namespace ImportApp.WPF.ViewModels
 {
@@ -18,6 +19,9 @@ namespace ImportApp.WPF.ViewModels
     {
        
         private IExcelDataService _excelDataService;
+
+        private IArticleService _articleService = new IArticleService();
+        private GenericDataService<Category> _genericCategoryService = new GenericDataService<Category>(new ImportAppDbContextFactory());
 
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(MapDataCommand))]
@@ -47,6 +51,7 @@ namespace ImportApp.WPF.ViewModels
         private ICollectionView articleCollection;
 
         [ObservableProperty]
+        [NotifyCanExecuteChangedFor(nameof(ImportDataCommand))]
         ObservableCollection<MapColumnViewModel>? articleList;
 
         private string textToFilter;
@@ -109,7 +114,39 @@ namespace ImportApp.WPF.ViewModels
         [RelayCommand(CanExecute = nameof(CanImport))]
         public void ImportData()
         {
+            var counter = 0;
+            try
+            {
+                for (int i = 0; i < articleList.Count; i++)
+                {
+                    var value = articleList[i].BarCode;
+                    Article temp = _articleService.Compare(value).Result;
 
+                    if(temp == null)
+                    {
+                        counter++;
+                        Article newArticle = new Article()
+                        {
+                            Id = Guid.NewGuid(),
+                            Name = articleList[i].Name,
+                            ArticleNumber = 123456789,
+                            Price = Helpers.Extensions.GetDecimal(articleList[i].Price),
+                            BarCode = articleList[i].BarCode,
+                            SubCategoryId = _genericCategoryService.ManageSubcategories(articleList[i].Gender, articleList[i].Collection),
+                            Deleted = false,
+                            Order = 1
+                        };
+
+                        _articleService.Create(newArticle);
+                    }
+                }
+                bool? Result = new MessageBoxCustom(counter + " articles imported.", MessageType.Success, MessageButtons.Ok).ShowDialog();
+
+            }
+            catch (Exception)
+            {
+                bool? _rez = new MessageBoxCustom("Please check your input and try again.", MessageType.Error, MessageButtons.Ok).ShowDialog();
+            }
         }
 
         [RelayCommand(CanExecute = nameof(CanMap))]
@@ -136,7 +173,7 @@ namespace ImportApp.WPF.ViewModels
 
         private bool CanImport()
         {
-            if (IsMapped == true || IsOpen == true)
+            if (IsMapped == true || IsOpen == true || articleList == null)
             {
                 return false;
             }

@@ -1,4 +1,5 @@
-﻿using ImportApp.WPF.Resources;
+﻿using ImportApp.Domain.Models;
+using ImportApp.WPF.Resources;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -29,6 +30,17 @@ namespace ImportApp.WPF.Helpers
             return con;
         }
 
+
+        public static decimal GetDecimal(string value)
+        {
+            decimal decimalValue;
+            if (value == "" || value == null)
+                decimalValue = decimal.Parse("0");
+            else
+                decimalValue = decimal.Parse(value);
+
+            return decimalValue;
+        }
 
 
     }

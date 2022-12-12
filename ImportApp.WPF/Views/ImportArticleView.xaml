@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
-             xmlns:modalcontrol="clr-namespace:ModalControl;assembly=ModalControl" xmlns:controls="clr-namespace:ImportApp.WPF.Controls"
+             xmlns:modalcontrol="clr-namespace:ModalControl;assembly=ModalControl"
+             xmlns:controls="clr-namespace:ImportApp.WPF.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -77,7 +78,7 @@
                     <DataGridTextColumn Header="Article number" Binding="{Binding ArticleNumber}" IsReadOnly="True" Width="*"/>
                     <DataGridTextColumn Header="Price" Binding="{Binding Price}" IsReadOnly="True" Width="*"/>
                     <DataGridTextColumn Header="Barcode" Binding="{Binding BarCode}" IsReadOnly="True" Width="*"/>
-                    <DataGridTextColumn Header="Barcode" Binding="{Binding Gender}" IsReadOnly="True" Width="*"/>
+                    <DataGridTextColumn Header="Gender" Binding="{Binding Gender}" IsReadOnly="True" Width="*"/>
                     <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" IsReadOnly="True" Width="*"/>
                     <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="auto">
                         <DataGridTemplateColumn.CellTemplate>

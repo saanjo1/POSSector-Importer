@@ -7,17 +7,16 @@ using System.Threading.Tasks;
 
 namespace ImportApp.Domain.Services
 {
-    public interface IDataService
+    public interface IGenericDataService<T> 
     {
-        Task<ICollection<Article>> GetAll();
+        Task<ICollection<T>> GetAll();
 
-        Task<Article> Get(string id);
+        Task<T> Get(string id);
 
-        Task<bool> Create(Article entity);
+        Task<bool> Create(T entity);
 
-        Task<Article> Update(Guid id, Article entity);
+        Task<T> Update(Guid id, T entity);
 
         Task<bool> Delete(Guid id);
-
     }
 }

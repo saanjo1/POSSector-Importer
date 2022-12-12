@@ -137,6 +137,7 @@ namespace ImportApp.EntityFramework.Services
                         BarCode = Reader[mColumnModel.BarCode].ToString(),
                         Price = Reader[mColumnModel.Price].ToString(),
                         Gender = Reader[mColumnModel.Gender].ToString(),
+                        Collection = Reader[mColumnModel.Collection].ToString(),
                         Quantity = Reader[mColumnModel.Quantity].ToString(),
                         Order = Reader[mColumnModel.Order].ToString(),
                     });
