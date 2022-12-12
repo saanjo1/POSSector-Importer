@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CustomMessageBox;
 using ImportApp.EntityFramework.Services;
 using System;
 using System.Collections.Generic;
@@ -68,8 +69,17 @@ namespace ImportApp.WPF.ViewModels
         [RelayCommand]
         public void Submit()
         {
-           ObservableCollection<MapColumnViewModel>? excelDataList = _excelDataService.ReadFromExcel(this).Result;
-            _viewModel.LoadData(excelDataList);
+            try
+            {
+                ObservableCollection<MapColumnViewModel>? excelDataList;
+                excelDataList = _excelDataService.ReadFromExcel(this).Result;
+                bool? Result = new MessageBoxCustom(excelDataList.Count + " articles pulled.", MessageType.Success, MessageButtons.Ok).ShowDialog();
+                _viewModel.LoadData(excelDataList);
+            }
+            catch (Exception)
+            {
+               bool? _rez = new MessageBoxCustom("Please check your input and try again.", MessageType.Error, MessageButtons.Ok).ShowDialog();
+            }
         }
 
 

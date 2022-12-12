@@ -4,9 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ImportApp.WPF.Controls"
-             mc:Ignorable="d" Height="332" Width="430">
+             mc:Ignorable="d" Height="402" Width="430">
     <Border Margin="80 10 80 10" HorizontalAlignment="Center">
-        <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Height="311" Width="277">
+        <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Height="315" Width="270">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" MinWidth="69"/>
                 <ColumnDefinition />
@@ -24,8 +24,10 @@
             </Grid.RowDefinitions>
             <Label Grid.Row="0" Margin="10" Grid.ColumnSpan="2" HorizontalAlignment="Center">Choose which columns you want to store:</Label>
             <Separator Grid.Row="1" Margin="10 11" Width="80" Grid.ColumnSpan="2"/>
-            <Label Grid.Row="2">Name:</Label>
-            <ComboBox ItemsSource="{Binding ColumnNamesList}" SelectedItem="{Binding Name}" Grid.Row="2" Grid.Column="1" Margin="0,5,57,5"/>
+            <Label Grid.Row="1">Name:</Label>
+            <ComboBox ItemsSource="{Binding ColumnNamesList}" SelectedItem="{Binding Name}" Grid.Row="1" Grid.Column="1" Margin="0,5,57,5"/>
+            <Label Grid.Row="2">Gender:</Label>
+            <ComboBox ItemsSource="{Binding ColumnNamesList}" SelectedItem="{Binding Gender}" Grid.Row="2" Grid.Column="1" Margin="0,5,57,5"/>
             <Label Grid.Row="3">Article number:</Label>
             <ComboBox ItemsSource="{Binding ColumnNamesList}" SelectedItem="{Binding ArticleNumber}" Grid.Row="3" Grid.Column="1" Margin="0,5,57,5"/>
             <Label Grid.Row="4">Barcode:</Label>

@@ -16,7 +16,7 @@ namespace ImportApp.WPF.ViewModels
     [ObservableObject]
     public partial class ImportArticleViewModel : BaseViewModel
     {
-
+       
         private IExcelDataService _excelDataService;
 
         [ObservableProperty]
@@ -45,6 +45,9 @@ namespace ImportApp.WPF.ViewModels
 
         [ObservableProperty]
         private ICollectionView articleCollection;
+
+        [ObservableProperty]
+        ObservableCollection<MapColumnViewModel>? articleList;
 
         private string textToFilter;
 
@@ -79,8 +82,13 @@ namespace ImportApp.WPF.ViewModels
         [RelayCommand]
         public void LoadData(ObservableCollection<MapColumnViewModel>? vm)
         {
-            ArticleCollection = CollectionViewSource.GetDefaultView(vm);
+           if(vm != null)
+            {
+                articleList = vm;
+                ArticleCollection = CollectionViewSource.GetDefaultView(vm);
+            }
             IsMapped = false;
+
         }
 
         [RelayCommand(CanExecute = nameof(CanUpload))]

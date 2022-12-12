@@ -57,6 +57,7 @@
                            Visibility="{Binding ElementName=textBoxFilter, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}" Height="16" />
 
             <TextBox Width="200" Grid.Row="0" HorizontalAlignment="Right" Margin="15" Name="textBoxFilter" Style="{StaticResource filterTextBox}" Text="{Binding TextToFilter, UpdateSourceTrigger=PropertyChanged}" Height="32"/>
+            <TextBlock FontSize="18" Text="{Binding Count}" Foreground="{StaticResource titleColor1}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="50" Width="215"/>
 
             <DataGrid Grid.Row="1" Margin="10,0,10,68" ItemsSource="{Binding ArticleCollection}" RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" x:Name="membersDataGrid" Style="{DynamicResource DataGridStyle1}">
                 <DataGrid.Columns>
@@ -76,6 +77,7 @@
                     <DataGridTextColumn Header="Article number" Binding="{Binding ArticleNumber}" IsReadOnly="True" Width="*"/>
                     <DataGridTextColumn Header="Price" Binding="{Binding Price}" IsReadOnly="True" Width="*"/>
                     <DataGridTextColumn Header="Barcode" Binding="{Binding BarCode}" IsReadOnly="True" Width="*"/>
+                    <DataGridTextColumn Header="Barcode" Binding="{Binding Gender}" IsReadOnly="True" Width="*"/>
                     <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" IsReadOnly="True" Width="*"/>
                     <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="auto">
                         <DataGridTemplateColumn.CellTemplate>
