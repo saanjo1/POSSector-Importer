@@ -8,13 +8,20 @@ using System.Threading.Tasks;
 
 namespace ImportApp.EntityFramework.DBContext
 {
-    public class ImportAppDbContextFactory : IDesignTimeDbContextFactory<ImportAppDbContext>
+    public class ImportAppDbContextFactory
     {
-        public ImportAppDbContext CreateDbContext(string[]? args = null)
-        {
-            var options = new DbContextOptionsBuilder<ImportAppDbContext>();
+        private readonly Action<DbContextOptionsBuilder> _optionsBuilder;
 
-            options.UseSqlServer("Server=.;Database=possector;Trusted_Connection=True;Encrypt=False");
+        public ImportAppDbContextFactory(Action<DbContextOptionsBuilder> optionsBuilder)
+        {
+            _optionsBuilder = optionsBuilder;
+        }
+
+        public ImportAppDbContext CreateDbContext(string[]? args = null)
+        { 
+            DbContextOptionsBuilder<ImportAppDbContext> options = new DbContextOptionsBuilder<ImportAppDbContext>();
+
+            _optionsBuilder(options);
 
             return new ImportAppDbContext(options.Options);
         }

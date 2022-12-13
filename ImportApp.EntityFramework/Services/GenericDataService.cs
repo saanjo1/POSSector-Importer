@@ -2,17 +2,10 @@
 using ImportApp.Domain.Services;
 using ImportApp.EntityFramework.DBContext;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Microsoft.EntityFrameworkCore.Internal;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ImportApp.EntityFramework.Services
 {
-    public class GenericDataService<T> : IGenericDataService<T> where T : BaseModel
+    public class GenericDataService<T> : IDataGService<T> where T : BaseModel
     {
         private readonly ImportAppDbContextFactory _contextFactory;
 
@@ -135,6 +128,16 @@ namespace ImportApp.EntityFramework.Services
                 {
                     return subcategory.Id;
                 }
+            }
+        }
+
+        public Task<Article> Compare(string value)
+        {
+            using (ImportAppDbContext context = _contextFactory.CreateDbContext())
+            {
+                var entity = context.Articles.FirstOrDefault(x => x.BarCode == value);
+
+                return Task.FromResult(entity);
             }
         }
 

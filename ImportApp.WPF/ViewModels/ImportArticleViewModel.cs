@@ -20,8 +20,9 @@ namespace ImportApp.WPF.ViewModels
        
         private IExcelDataService _excelDataService;
 
-        private IArticleService _articleService = new IArticleService();
-        private GenericDataService<Category> _genericCategoryService = new GenericDataService<Category>(new ImportAppDbContextFactory());
+        private IArticleDataService _articleService;
+        private ICategoryDataService _categoryService;
+
 
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(MapDataCommand))]
@@ -78,10 +79,11 @@ namespace ImportApp.WPF.ViewModels
         }
 
 
-        public ImportArticleViewModel(IExcelDataService excelDataService)
+        public ImportArticleViewModel(IExcelDataService excelDataService, ICategoryDataService categoryService, IArticleDataService articleService)
         {
             _excelDataService = excelDataService;
-            
+            _categoryService = categoryService;
+            _articleService = articleService;
         }
 
         [RelayCommand]
@@ -132,7 +134,7 @@ namespace ImportApp.WPF.ViewModels
                             ArticleNumber = 123456789,
                             Price = Helpers.Extensions.GetDecimal(articleList[i].Price),
                             BarCode = articleList[i].BarCode,
-                            SubCategoryId = _genericCategoryService.ManageSubcategories(articleList[i].Gender, articleList[i].Collection),
+                            SubCategoryId = _categoryService.ManageSubcategories(articleList[i].Gender, articleList[i].Collection).Result,
                             Deleted = false,
                             Order = 1
                         };

@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using ImportApp.Domain.Models;
+using ImportApp.Domain.Services;
+using ImportApp.EntityFramework.DBContext;
 using ImportApp.EntityFramework.Services;
 using ImportApp.WPF.State.Navigators;
 using System;
@@ -13,14 +15,14 @@ namespace ImportApp.WPF.ViewModels
 {
     public partial class MainViewModel : BaseViewModel
     {
-        public static IArticleService _articleService = new IArticleService();  
-        public static IExcelDataService _excelDataService = new IExcelDataService();
-        public INavigator Navigator { get; set; } = new Navigator(_articleService, _excelDataService);
 
+        public INavigator Navigator { get; set; }
 
-        public MainViewModel()
+        public MainViewModel(IArticleDataService articleService, ICategoryDataService categoryService, IExcelDataService excelDataService)
         {
-            
+
+            Navigator = new Navigator(articleService, excelDataService, categoryService);
+
         }
 
         [RelayCommand]

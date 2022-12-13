@@ -28,13 +28,15 @@ namespace ImportApp.WPF.State.Navigators
         private IconChar icon;
 
 
-        private IArticleService _articleService;
+        private IArticleDataService _articleService;
+        private ICategoryDataService _categoryService;
         private IExcelDataService _excelDataService;
 
-        public Navigator(IArticleService articleService, IExcelDataService excelDataService)
+        public Navigator(IArticleDataService articleService, IExcelDataService excelDataService, ICategoryDataService categoryService)
         {
             _articleService = articleService;
-            _excelDataService = excelDataService;   
+            _excelDataService = excelDataService;
+            _categoryService = categoryService;
         }
 
         [RelayCommand]
@@ -56,7 +58,7 @@ namespace ImportApp.WPF.State.Navigators
                         Icon = IconChar.TableList;
                         break;
                     case ViewType.ImportArticles:
-                        this.CurrentViewModel = new ImportArticleViewModel(_excelDataService);
+                        this.CurrentViewModel = new ImportArticleViewModel(_excelDataService,_categoryService, _articleService);
                         Caption = "Import";
                         Icon = IconChar.FileExcel;
                         break;

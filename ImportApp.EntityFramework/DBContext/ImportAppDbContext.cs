@@ -11,7 +11,7 @@ public partial class ImportAppDbContext : DbContext
     {
     }
 
-    public ImportAppDbContext(DbContextOptions<ImportAppDbContext> options)
+    public ImportAppDbContext(DbContextOptions options)
         : base(options)
     {
     }

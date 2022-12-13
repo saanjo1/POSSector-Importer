@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ImportApp.Domain.Services
 {
-    public interface IGenericDataService<T> 
+    public interface IDataGService<T> 
     {
         Task<ICollection<T>> GetAll();
 

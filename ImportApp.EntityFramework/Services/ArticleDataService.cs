@@ -1,21 +1,28 @@
 ﻿using ImportApp.Domain.Models;
 using ImportApp.Domain.Services;
 using ImportApp.EntityFramework.DBContext;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace ImportApp.EntityFramework.Services
 {
-    public class IArticleService : IDataService
+    public class ArticleDataService : IArticleDataService
     {
+        public static ImportAppDbContextFactory factory;
 
-        public static ImportAppDbContextFactory factory = new ImportAppDbContextFactory();
+        public ArticleDataService(ImportAppDbContextFactory _factory)
+        {
+            factory = _factory;
+        }
 
+        public Task<Article> Compare(string value)
+        {
+            using (ImportAppDbContext context = factory.CreateDbContext())
+            {
+                var entity = context.Articles.FirstOrDefault(x => x.BarCode == value);
 
+                return Task.FromResult(entity);
+            }
+        }
 
         public Task<bool> Create(Article entity)
         {
@@ -57,15 +64,7 @@ namespace ImportApp.EntityFramework.Services
             }
         }
 
-        public Task<Article> Compare(string value)
-        {
-            using (ImportAppDbContext context = factory.CreateDbContext())
-            {
-                var entity = context.Articles.FirstOrDefault(x => x.BarCode == value);
 
-                return Task.FromResult(entity);
-            }
-        }
         public Task<Article> Update(Guid id, Article entity)
         {
             throw new NotImplementedException();

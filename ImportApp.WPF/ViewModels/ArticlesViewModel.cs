@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ImportApp.Domain.Models;
+using ImportApp.Domain.Services;
 using ImportApp.EntityFramework.Services;
 using System;
 using System.Collections.Generic;
@@ -15,10 +16,10 @@ namespace ImportApp.WPF.ViewModels
     [ObservableObject]
     public partial class ArticlesViewModel : BaseViewModel
     {
-        private IArticleService _articleService;
+        private IArticleDataService _articleService;
         public string Count { get { return articleList.Count + " articles found"; } }
 
-        public ArticlesViewModel(IArticleService articleService)
+        public ArticlesViewModel(IArticleDataService articleService)
         {
             _articleService = articleService;
             LoadData();
