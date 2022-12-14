@@ -11,6 +11,5 @@ namespace ImportApp.Domain.Services
     {
         Task<Category> Compare(string value);
         Task<Guid> ManageSubcategories(string value1, string value2);
-        Task<Guid> ManageCategories(string value1);
     }
 }
