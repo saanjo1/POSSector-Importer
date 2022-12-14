@@ -14,12 +14,17 @@ namespace ImportApp.WPF.Services
 {
     public class ExcelDataService : IExcelDataService
     {
+
         public static string ExcelFile { get; set; }
 
         public static OleDbConnection _oleDbConnection;
         public static OleDbCommand Command;
 
         private static ObservableCollection<MapColumnViewModel> mapColumnViewModels = new ObservableCollection<MapColumnViewModel>();
+
+        public ExcelDataService()
+        {
+        }
 
 
         public async Task<string> OpenDialog()

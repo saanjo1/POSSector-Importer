@@ -15,9 +15,7 @@
         x:Name="TestWindow"
         Background="Transparent"
         AllowsTransparency="True">
-    <Window.DataContext>
-        <local1:MainViewModel/>
-    </Window.DataContext>
+
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
     </Window.Resources>
