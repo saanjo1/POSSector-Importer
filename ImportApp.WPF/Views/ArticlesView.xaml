@@ -36,8 +36,8 @@
                 <TextBox Name="textBoxFilter" Style="{StaticResource filterTextBox}" Text="{Binding TextToFilter, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1"/>
 
                 <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="-540,10,0,0" Grid.RowSpan="6">
-                    <Button Style="{StaticResource tabButton}" Foreground="{StaticResource titleColor1}" Content="Articles" BorderBrush="{StaticResource color5}" Width="84"/>
-                    <Button Style="{StaticResource tabButton}" Foreground="{StaticResource titleColor1}" Content="Economato" Margin="5" Width="84"/>
+                    <Button Style="{StaticResource tabButton}" Foreground="{StaticResource titleColor1}" Content="Articles"  Width="84"/>
+                    <Button Style="{StaticResource tabButton}" Foreground="{StaticResource titleColor1}" Content="Economato" Command="{Binding SwitchTabCommand}" Margin="5" Width="84"/>
                 </StackPanel>
 
             </Grid>

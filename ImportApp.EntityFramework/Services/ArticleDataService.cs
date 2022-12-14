@@ -67,7 +67,14 @@ namespace ImportApp.EntityFramework.Services
 
         public Task<Article> Update(Guid id, Article entity)
         {
-            throw new NotImplementedException();
+            using (ImportAppDbContext context = factory.CreateDbContext())
+            {
+                entity.Id = id;
+                context.Articles.Update(entity);
+                context.SaveChanges();
+
+                return Task.FromResult(entity);
+            }
         }
 
     }

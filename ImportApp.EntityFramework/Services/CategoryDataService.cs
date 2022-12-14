@@ -1,13 +1,6 @@
 ﻿using ImportApp.Domain.Models;
 using ImportApp.Domain.Services;
 using ImportApp.EntityFramework.DBContext;
-using Microsoft.EntityFrameworkCore.Internal;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ImportApp.EntityFramework.Services
 {
@@ -111,7 +104,7 @@ namespace ImportApp.EntityFramework.Services
             }
         }
 
-       public Task<Guid> ManageCategories(string col)
+        public Task<Guid> ManageCategories(string col)
         {
             using (ImportAppDbContext context = _contextFactory.CreateDbContext())
             {
@@ -125,7 +118,7 @@ namespace ImportApp.EntityFramework.Services
                         Name = col,
                         Deleted = false,
                         Order = 1,
-                        StorageId = null
+                        StorageId = this.ManageStorages(col).Result
                     };
                     var id = newCategory.Id;
                     context.Categories.Add(newCategory);
@@ -138,5 +131,33 @@ namespace ImportApp.EntityFramework.Services
                 }
             }
         }
+
+
+        public Task<Guid> ManageStorages(string storageName)
+        {
+            using (ImportAppDbContext _context = _contextFactory.CreateDbContext())
+            {
+                var storage = _context.Storages.FirstOrDefault(x => x.Name == storageName);
+
+                if (storage != null)
+                {
+                    return Task.FromResult(storage.Id);
+                }
+                else
+                {
+                    Storage newStorage = new Storage()
+                    {
+                        Id = Guid.NewGuid(),
+                        Name = storageName
+                    };
+
+                    _context.Storages.Add(newStorage);
+                    _context.SaveChanges();
+
+                    return Task.FromResult(newStorage.Id);
+                }
+            }
+        }
     }
 }
+

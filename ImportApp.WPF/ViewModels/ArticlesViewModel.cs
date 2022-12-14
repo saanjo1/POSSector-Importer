@@ -154,6 +154,15 @@ namespace ImportApp.WPF.ViewModels
             }
         }
 
+
+        [RelayCommand]
+        public void SwitchTab()
+        {
+
+        }
+
+
+
         [RelayCommand]
         public void LoadData()
         {

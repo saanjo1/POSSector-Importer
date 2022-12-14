@@ -6,7 +6,7 @@
         mc:Ignorable="d"
         Title="MessageBoxWindow"
         Height="220"
-        Width="400"
+        Width="450"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         Background="White"

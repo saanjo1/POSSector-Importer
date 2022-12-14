@@ -117,32 +117,36 @@ namespace ImportApp.WPF.ViewModels
         public void ImportData()
         {
             var counter = 0;
+            var updatedCounter = 0;
             try
             {
                 for (int i = 0; i < articleList.Count; i++)
                 {
                     var value = articleList[i].BarCode;
                     Article temp = _articleService.Compare(value).Result;
+                    Article newArticle = new Article()
+                    {
+                        Id = Guid.NewGuid(),
+                        Name = articleList[i].Name,
+                        ArticleNumber = 123456789,
+                        Price = Helpers.Extensions.GetDecimal(articleList[i].Price),
+                        BarCode = articleList[i].BarCode,
+                        SubCategoryId = _categoryService.ManageSubcategories(articleList[i].Gender, articleList[i].Collection).Result,
+                        Deleted = false,
+                        Order = 1
+                    };
 
-                    if(temp == null)
+                    if (temp == null)
                     {
                         counter++;
-                        Article newArticle = new Article()
-                        {
-                            Id = Guid.NewGuid(),
-                            Name = articleList[i].Name,
-                            ArticleNumber = 123456789,
-                            Price = Helpers.Extensions.GetDecimal(articleList[i].Price),
-                            BarCode = articleList[i].BarCode,
-                            SubCategoryId = _categoryService.ManageSubcategories(articleList[i].Gender, articleList[i].Collection).Result,
-                            Deleted = false,
-                            Order = 1
-                        };
-
                         _articleService.Create(newArticle);
+                    } else
+                    {
+                        updatedCounter++;
+                        _articleService.Update(temp.Id, newArticle);
                     }
                 }
-                bool? Result = new MessageBoxCustom(counter + " articles imported.", MessageType.Success, MessageButtons.Ok).ShowDialog();
+                bool? Result = new MessageBoxCustom(counter + " articles imported. " + updatedCounter + " articles updated.", MessageType.Success, MessageButtons.Ok).ShowDialog();
 
             }
             catch (Exception)
