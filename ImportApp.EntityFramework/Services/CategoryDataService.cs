@@ -46,41 +46,12 @@ namespace ImportApp.EntityFramework.Services
 
 
 
-        public Guid ManageSubcategories(string gender, string collection)
+        Task<Guid> ICategoryDataService.ManageSubcategories(string gender, string collection, string storageId)
         {
             using (ImportAppDbContext context = _contextFactory.CreateDbContext())
             {
                 SubCategory subcategory = context.SubCategories.Where(x => x.Name == gender).FirstOrDefault();
-                var season = ManageCategories(collection);
-
-                if (subcategory == null)
-                {
-                    SubCategory subCategory = new SubCategory()
-                    {
-                        Id = Guid.NewGuid(),
-                        Name = gender,
-                        Deleted = false,
-                        CategoryId = season.Result
-                    };
-
-                    var Id = subCategory.Id;
-                    context.Add(subCategory);
-                    context.SaveChanges();
-                    return Id;
-                }
-                else
-                {
-                    return subcategory.Id;
-                }
-            }
-        }
-
-        Task<Guid> ICategoryDataService.ManageSubcategories(string gender, string collection)
-        {
-            using (ImportAppDbContext context = _contextFactory.CreateDbContext())
-            {
-                SubCategory subcategory = context.SubCategories.Where(x => x.Name == gender).FirstOrDefault();
-                var season = this.ManageCategories(collection).Result;
+                var season = this.ManageCategories(collection, storageId).Result;
 
                 if (subcategory == null)
                 {
@@ -104,7 +75,7 @@ namespace ImportApp.EntityFramework.Services
             }
         }
 
-        public Task<Guid> ManageCategories(string col)
+        public Task<Guid> ManageCategories(string col, string storageId)
         {
             using (ImportAppDbContext context = _contextFactory.CreateDbContext())
             {
@@ -118,7 +89,7 @@ namespace ImportApp.EntityFramework.Services
                         Name = col,
                         Deleted = false,
                         Order = 1,
-                        StorageId = this.ManageStorages(col).Result
+                        StorageId = this.ManageStorages(storageId).Result
                     };
                     var id = newCategory.Id;
                     context.Categories.Add(newCategory);
@@ -137,27 +108,41 @@ namespace ImportApp.EntityFramework.Services
         {
             using (ImportAppDbContext _context = _contextFactory.CreateDbContext())
             {
-                var storage = _context.Storages.FirstOrDefault(x => x.Name == storageName);
-
-                if (storage != null)
+                Storage newStorage = new Storage
                 {
-                    return Task.FromResult(storage.Id);
+                    Id = Guid.NewGuid(),
+                };
+
+                switch (storageName)
+                {
+                    case "1":
+                        newStorage.Name = "Articles";
+                        break;
+                    case "2":
+                        newStorage.Name = "Economato";
+                        break;
+                    default:
+                        break;
+                }
+
+                var storage = _context.Storages.FirstOrDefault(x => x.Name == newStorage.Name);
+
+                if(storage == null)
+                {
+                    _context.Storages.Add(newStorage);
+                    _context.SaveChanges();
+                    return Task.FromResult(newStorage.Id);
                 }
                 else
                 {
-                    Storage newStorage = new Storage()
-                    {
-                        Id = Guid.NewGuid(),
-                        Name = storageName
-                    };
-
-                    _context.Storages.Add(newStorage);
-                    _context.SaveChanges();
-
-                    return Task.FromResult(newStorage.Id);
+                    return Task.FromResult(storage.Id);
                 }
+
             }
         }
+
+        
     }
+
 }
 

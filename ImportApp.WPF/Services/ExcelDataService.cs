@@ -138,7 +138,7 @@ namespace ImportApp.WPF.Services
                     mapColumnViewModels.Add(new MapColumnViewModel()
                     {
                         Name = Reader[mColumnModel.Name].ToString(),
-                        ArticleNumber = Reader[mColumnModel.ArticleNumber].ToString(),
+                        Storage = Reader[mColumnModel.Storage].ToString(),
                         BarCode = Reader[mColumnModel.BarCode].ToString(),
                         Price = Reader[mColumnModel.Price].ToString(),
                         Gender = Reader[mColumnModel.Gender].ToString(),

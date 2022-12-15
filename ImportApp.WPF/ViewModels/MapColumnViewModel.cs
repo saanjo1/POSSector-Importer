@@ -27,7 +27,7 @@ namespace ImportApp.WPF.ViewModels
         private string? price;
 
         [ObservableProperty]
-        private string? articleNumber;
+        private string? storage;
 
         [ObservableProperty]
         private string? barCode;
@@ -60,7 +60,7 @@ namespace ImportApp.WPF.ViewModels
 
         public MapColumnViewModel()
         {
-
+            
         }
 
         [RelayCommand]

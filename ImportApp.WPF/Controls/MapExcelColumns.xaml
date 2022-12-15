@@ -63,10 +63,10 @@
                 <Label Grid.Row="0" Margin="10 10 10 15" FontSize="18" FontWeight="Light" Grid.ColumnSpan="2" HorizontalAlignment="Center">Choose which columns you want to store:</Label>
                 <Label Grid.Row="1">Name:</Label>
                 <ComboBox ItemsSource="{Binding ColumnNamesList}" SelectedItem="{Binding Name}" Grid.Row="1" Grid.Column="1" Margin="0,5,57,5"/>
-                <Label Grid.Row="2">Gender:</Label>
+                <Label Grid.Row="2">SubCategory:</Label>
                 <ComboBox ItemsSource="{Binding ColumnNamesList}" SelectedItem="{Binding Gender}" Grid.Row="2" Grid.Column="1" Margin="0,5,57,5"/>
-                <Label Grid.Row="3">Article number:</Label>
-                <ComboBox ItemsSource="{Binding ColumnNamesList}" SelectedItem="{Binding ArticleNumber}" Grid.Row="3" Grid.Column="1" Margin="0,5,57,5"/>
+                <Label Grid.Row="3">Storage:</Label>
+                <ComboBox ItemsSource="{Binding ColumnNamesList}" SelectedItem="{Binding Storage}" Grid.Row="3" Grid.Column="1" Margin="0,5,57,5"/>
                 <Label Grid.Row="4">Barcode:</Label>
                 <ComboBox ItemsSource="{Binding ColumnNamesList}" SelectedItem="{Binding BarCode}" Grid.Row="4" Grid.Column="1" Margin="0,5,57,5"/>
                 <Label Grid.Row="5">Price:</Label>
@@ -75,7 +75,7 @@
                 <ComboBox ItemsSource="{Binding ColumnNamesList}" SelectedItem="{Binding Order}" Grid.Row="6" Grid.Column="1" Margin="0,5,57,5"/>
                 <Label Grid.Row="7">Quantity:</Label>
                 <ComboBox ItemsSource="{Binding ColumnNamesList}" SelectedItem="{Binding Quantity}" Grid.Row="7" Grid.Column="1" Margin="0,5,57,5"/>
-                <Label Grid.Row="8">Collection:</Label>
+                <Label Grid.Row="8">Category:</Label>
                 <ComboBox ItemsSource="{Binding ColumnNamesList}" SelectedItem="{Binding Collection}" Grid.Row="8" Grid.Column="1" Margin="0,5,57,5"/>
                 <Button Content="Save" Style="{StaticResource SaveButton}" Grid.Row="9" Command="{Binding SubmitCommand}" Width="100" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Margin="80,15,0,0" Grid.ColumnSpan="2">
                 </Button>

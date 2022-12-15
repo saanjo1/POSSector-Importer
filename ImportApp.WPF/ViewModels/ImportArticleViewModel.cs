@@ -73,7 +73,7 @@ namespace ImportApp.WPF.ViewModels
             if (!string.IsNullOrEmpty(TextToFilter))
             {
                 var filt = obj as MapColumnViewModel;
-                return filt != null && (filt.Name.Contains(TextToFilter) || filt.BarCode.Contains(TextToFilter) || filt.Price.ToString() == TextToFilter || filt.ArticleNumber.ToString() == TextToFilter);
+                return filt != null && (filt.Name.Contains(TextToFilter) || filt.BarCode.Contains(TextToFilter) || filt.Price.ToString() == TextToFilter || filt.Price.ToString() == TextToFilter);
             }
             return true;
         }
@@ -131,9 +131,9 @@ namespace ImportApp.WPF.ViewModels
                         ArticleNumber = 123456789,
                         Price = Helpers.Extensions.GetDecimal(articleList[i].Price),
                         BarCode = articleList[i].BarCode,
-                        SubCategoryId = _categoryService.ManageSubcategories(articleList[i].Gender, articleList[i].Collection).Result,
+                        SubCategoryId = _categoryService.ManageSubcategories(articleList[i].Gender, articleList[i].Collection, articleList[i].Storage).Result,
                         Deleted = false,
-                        Order = 1
+                        Order = 1,
                     };
 
                     if (temp == null)

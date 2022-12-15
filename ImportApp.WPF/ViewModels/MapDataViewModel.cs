@@ -60,7 +60,7 @@ namespace ImportApp.WPF.ViewModels
                 IsMapped = true;
                 _importArticleViewModel.IsMapped = true;
                 _importArticleViewModel.IsOpen = false;
-                _importArticleViewModel.MColumnModel = mColumnModel;
+                _importArticleViewModel.MColumnModel = Helpers.Extensions.SelectedColumns(mColumnModel, columnNamesList);
                 App.Current.Properties["SheetName"] = SelectedSheet;
             }
         }

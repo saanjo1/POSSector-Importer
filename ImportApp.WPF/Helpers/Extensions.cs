@@ -1,5 +1,6 @@
 ﻿using ImportApp.Domain.Models;
 using ImportApp.WPF.Resources;
+using ImportApp.WPF.ViewModels;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -42,6 +43,31 @@ namespace ImportApp.WPF.Helpers
             return decimalValue;
         }
 
+        public static MapColumnViewModel SelectedColumns(MapColumnViewModel mColumnModel, List<string> columnNamesList)
+        {
+            for (int i = 0; i < columnNamesList.Count(); i++)
+            {
+                if (columnNamesList[i].Contains("SKU"))
+                    mColumnModel.Name = columnNamesList[i];
+
+                if (columnNamesList[i].Contains("BARCODE"))
+                    mColumnModel.BarCode = columnNamesList[i];
+
+                if (columnNamesList[i].Contains("PRICE"))
+                    mColumnModel.Price = columnNamesList[i];
+
+                if (columnNamesList[i].Contains("STORAGE"))
+                    mColumnModel.Storage = columnNamesList[i];
+
+                if (columnNamesList[i].Contains("SEASON"))
+                    mColumnModel.Collection = columnNamesList[i];
+
+                if (columnNamesList[i].Contains("GENDER"))
+                    mColumnModel.Gender = columnNamesList[i];
+            }
+
+            return mColumnModel;  
+        }
 
     }
 }
