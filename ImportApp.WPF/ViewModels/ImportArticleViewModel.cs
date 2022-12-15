@@ -24,6 +24,14 @@ namespace ImportApp.WPF.ViewModels
         private ICategoryDataService _categoryService;
 
 
+        public ImportArticleViewModel(IExcelDataService excelDataService, ICategoryDataService categoryService, IArticleDataService articleService)
+        {
+            _excelDataService = excelDataService;
+            _categoryService = categoryService;
+            _articleService = articleService;
+        }
+
+
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(MapDataCommand))]
         [NotifyCanExecuteChangedFor(nameof(ImportDataCommand))]
@@ -53,6 +61,8 @@ namespace ImportApp.WPF.ViewModels
 
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(ImportDataCommand))]
+        [NotifyCanExecuteChangedFor(nameof(MapDataCommand))]
+        [NotifyCanExecuteChangedFor(nameof(OpenDialogCommand))]
         ObservableCollection<MapColumnViewModel>? articleList;
 
         private string textToFilter;
@@ -79,12 +89,6 @@ namespace ImportApp.WPF.ViewModels
         }
 
 
-        public ImportArticleViewModel(IExcelDataService excelDataService, ICategoryDataService categoryService, IArticleDataService articleService)
-        {
-            _excelDataService = excelDataService;
-            _categoryService = categoryService;
-            _articleService = articleService;
-        }
 
         [RelayCommand]
         public void LoadData(ObservableCollection<MapColumnViewModel>? vm)
@@ -104,11 +108,17 @@ namespace ImportApp.WPF.ViewModels
             try
             {
                 ExcelFile = _excelDataService.OpenDialog().Result;
-                
+
+                if(ExcelFile != null)
+                {
+                    bool? Result = new MessageBoxCustom("Excel file selected.", MessageType.Info, MessageButtons.Ok).ShowDialog();
+                }
+
             }
             catch (System.Exception)
             {
-                throw;
+                bool? Result = new MessageBoxCustom("An error occured while selecting file.", MessageType.Error, MessageButtons.Ok).ShowDialog();
+
             }
 
         }
@@ -190,7 +200,7 @@ namespace ImportApp.WPF.ViewModels
 
         private bool CanMap()
         {
-            if (string.IsNullOrWhiteSpace(ExcelFile) || IsOpen == true || IsMapped == true)
+            if (string.IsNullOrWhiteSpace(ExcelFile) || IsOpen == true || IsMapped == true || articleList != null)
             {
                 return false;
             }
@@ -200,7 +210,7 @@ namespace ImportApp.WPF.ViewModels
 
         private bool CanUpload()
         {
-            if (IsMapped == true || IsOpen == true)
+            if (IsMapped == true || IsOpen == true || articleList != null)
             {
                 return false;
             }

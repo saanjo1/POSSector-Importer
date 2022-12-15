@@ -64,6 +64,9 @@ namespace ImportApp.WPF.Helpers
 
                 if (columnNamesList[i].Contains("GENDER"))
                     mColumnModel.Gender = columnNamesList[i];
+                
+                if (columnNamesList[i].Contains("QTYC"))
+                    mColumnModel.Quantity = columnNamesList[i];
             }
 
             return mColumnModel;  

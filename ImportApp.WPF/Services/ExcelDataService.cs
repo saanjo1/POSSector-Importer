@@ -144,7 +144,6 @@ namespace ImportApp.WPF.Services
                         Gender = Reader[mColumnModel.Gender].ToString(),
                         Collection = Reader[mColumnModel.Collection].ToString(),
                         Quantity = Reader[mColumnModel.Quantity].ToString(),
-                        Order = Reader[mColumnModel.Order].ToString(),
                     });
                 }
 

@@ -24,8 +24,8 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto" MinHeight="32"/>
-                <RowDefinition/>
+                <RowDefinition Height="450"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
@@ -33,21 +33,15 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="0" Margin="10,10,0,10" Width="300">
-                <Button ToolTip="Upload Excel file" Style="{StaticResource controlButton}" Width="60" Height="60" Grid.Row="1" Grid.Column="0" Command="{Binding OpenDialogCommand}" Margin="5">
+                <Button ToolTip="Upload Excel file" Style="{StaticResource controlButton}" Width="100" Height="100" Grid.Row="1" Grid.Column="0" Command="{Binding OpenDialogCommand}" Margin="5">
                     <StackPanel>
-                        <fa:IconImage Style="{StaticResource controlButtonIcon}" Icon="Upload" Width="20" Height="20"/>
+                        <fa:IconImage Style="{StaticResource controlButtonIcon}" Icon="Upload" Width="40" Height="40"/>
                     </StackPanel>
                 </Button>
 
-                <Button ToolTip="Map columns" Style="{StaticResource controlButton}"  Width="60" Height="60" Grid.Row="1" Grid.Column="1" Command="{Binding MapDataCommand}" Margin="5">
+                <Button ToolTip="Map columns" Style="{StaticResource controlButton}"  Width="100" Height="100" Grid.Row="1" Grid.Column="1" Command="{Binding MapDataCommand}" Margin="5">
                     <StackPanel>
-                        <fa:IconImage Style="{StaticResource controlButtonIcon}" Icon="Columns"  Width="20" Height="20"/>
-                    </StackPanel>
-                </Button>
-
-                <Button ToolTip="Import columns" Style="{StaticResource controlButton}" Width="60" Height="60" Grid.Row="1" Grid.Column="2" Command="{Binding ImportDataCommand}" Margin="5">
-                    <StackPanel>
-                        <fa:IconImage Style="{StaticResource controlButtonIcon}" Icon="FileImport" Width="20" Height="20"/>
+                        <fa:IconImage Style="{StaticResource controlButtonIcon}" Icon="Columns"  Width="40" Height="40"/>
                     </StackPanel>
                 </Button>
 
@@ -60,9 +54,8 @@
             <TextBox Width="200" Grid.Row="0" HorizontalAlignment="Right" Margin="15" Name="textBoxFilter" Style="{StaticResource filterTextBox}" Text="{Binding TextToFilter, UpdateSourceTrigger=PropertyChanged}" Height="32"/>
             <TextBlock FontSize="18" Text="{Binding Count}" Foreground="{StaticResource titleColor1}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="50" Width="215"/>
 
-            <DataGrid Grid.Row="1" Margin="10,0,10,68" ItemsSource="{Binding ArticleCollection}" RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" x:Name="membersDataGrid" Style="{DynamicResource DataGridStyle1}">
+            <DataGrid Grid.Row="1" Margin="30,0,30,68" ItemsSource="{Binding ArticleCollection}" RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" x:Name="membersDataGrid" Style="{DynamicResource DataGridStyle1}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="#" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding Order}"/>
                     <DataGridTemplateColumn Header="Name" IsReadOnly="True" Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -75,10 +68,8 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn Header="Article number" Binding="{Binding ArticleNumber}" IsReadOnly="True" Width="*"/>
                     <DataGridTextColumn Header="Price" Binding="{Binding Price}" IsReadOnly="True" Width="*"/>
                     <DataGridTextColumn Header="Barcode" Binding="{Binding BarCode}" IsReadOnly="True" Width="*"/>
-                    <DataGridTextColumn Header="Gender" Binding="{Binding Gender}" IsReadOnly="True" Width="*"/>
                     <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" IsReadOnly="True" Width="*"/>
                     <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="auto">
                         <DataGridTemplateColumn.CellTemplate>
@@ -96,6 +87,20 @@
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
+
+          
         </Grid>
+        <Button ToolTip="Import columns" Style="{StaticResource ImportButton}"
+                Width="180" Height="53" Grid.Row="2" Grid.Column="2"
+                Margin="-30 -30 50 -30"
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Right"
+                Command="{Binding ImportDataCommand}">
+            <StackPanel Orientation="Horizontal">
+                <fa:IconImage Style="{StaticResource controlButtonIcon}" Icon="FileImport" Width="30" Height="30"/>
+                <TextBlock TextAlignment="Center" Padding="10 0 0 0" Margin="6 6 0 0" FontSize="15">Import articles</TextBlock>
+
+            </StackPanel>
+        </Button>
     </Grid>
 </UserControl>

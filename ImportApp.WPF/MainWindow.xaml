@@ -4,15 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:controls="clr-namespace:ImportApp.WPF.Controls"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ImportApp.WPF" 
-        xmlns:local1="clr-namespace:ImportApp.WPF.ViewModels"
-        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks" 
-        xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp" xmlns:modalcontrol="clr-namespace:ModalControl;assembly=ModalControl"
+        xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
         mc:Ignorable="d"
         Title="MainWindowView" Height="700" Width="1300"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         x:Name="TestWindow"
+        WindowState="Maximized"
         Background="Transparent"
         AllowsTransparency="True">
 
@@ -122,14 +120,6 @@
                                 Tag="{StaticResource color4}"
                                 Command="{Binding CloseCommand}">
                             <fa:IconImage Icon="WindowClose" Width="12" Style="{StaticResource controlButtonIcon}"/>
-                        </Button>
-
-                        <Button x:Name="btnMaximize"
-                                Style="{StaticResource controlButton}"
-                                Tag="{StaticResource color6}"
-                                Command="{Binding MaximizeCommand}"
-                                CommandParameter="{Binding ElementName=TestWindow}">
-                            <fa:IconImage Icon="Square" Width="12" Style="{StaticResource controlButtonIcon}"/>
                         </Button>
 
                         <Button x:Name="btnMinimize"

@@ -4,14 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:local="clr-namespace:ImportApp.WPF.Controls" xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+             xmlns:local="clr-namespace:ImportApp.WPF.Controls"
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              mc:Ignorable="d"
              x:Name="modalControl"
              FontFamily="Montserrat"
-             FontWeight="Regular"
-             Height="478"
-             Width="548">
-    <Grid>
+             FontWeight="SemiBold"
+             FontSize="22"
+             Height="578"
+             Width="718">
+    <Grid Background="#d6d6cd">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="197*" />
             <ColumnDefinition Width="295*" />
@@ -43,7 +45,51 @@
         </StackPanel>
 
         <Border HorizontalAlignment="Center" Grid.ColumnSpan="3" Grid.Row="1">
-            <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Height="350" Width="391">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Orientation="Vertical" Grid.Row="0" Margin="-225,18,92,139">
+                    <Label Margin="0 5 0 0">Category:</Label>
+                    <ComboBox ItemsSource="{Binding ColumnNamesList}" SelectedItem="{Binding Collection}" Grid.Column="1" Margin="0 5 60 0"/>
+                    <Label  Margin="0 5 0 0">SubCategory:</Label>
+                    <ComboBox ItemsSource="{Binding ColumnNamesList}" SelectedItem="{Binding Gender}" Grid.Column="1"  Margin="0 5 60 0" />
+                    <Label Margin="0 0 0 0">Storage:</Label>
+                    <ComboBox ItemsSource="{Binding ColumnNamesList}" SelectedItem="{Binding Storage}" Grid.Column="1"  Margin="0 5 60 0" />
+                </StackPanel>
+
+
+                <StackPanel Orientation="Vertical" Grid.Row="0" Margin="80,100,-249,27" Width="300" Height="auto">
+                    <Label>Name:</Label>
+                    <ComboBox ItemsSource="{Binding ColumnNamesList}" SelectedItem="{Binding Name}"/>
+                    <Label>Barcode:</Label>
+                    <ComboBox ItemsSource="{Binding ColumnNamesList}" SelectedItem="{Binding BarCode}"/>
+                    <Label >Price:</Label>
+                    <ComboBox ItemsSource="{Binding ColumnNamesList}" SelectedItem="{Binding Price}"/>
+                    <Label>Quantity:</Label>
+                    <ComboBox ItemsSource="{Binding ColumnNamesList}" SelectedItem="{Binding Quantity}" />
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Grid.Row="2">
+                    <Button Content="Save" Style="{StaticResource SaveButton}" Margin="0 0 30 0" Command="{Binding SubmitCommand}" Width="100" />
+                    <Button Content="Cancel" Style="{StaticResource CancelButton}" Command="{Binding CloseCommand}" Width="100" />
+                </StackPanel>
+
+            </Grid>
+
+
+
+        </Border>
+
+    </Grid>
+</UserControl>
+
+
+
+<!--<Grid VerticalAlignment="Center" HorizontalAlignment="Center" Height="350" Width="391">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" MinWidth="69"/>
                     <ColumnDefinition />
@@ -80,8 +126,4 @@
                 <Button Content="Save" Style="{StaticResource SaveButton}" Grid.Row="9" Command="{Binding SubmitCommand}" Width="100" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Margin="80,15,0,0" Grid.ColumnSpan="2">
                 </Button>
                 <Button Content="Cancel" Style="{StaticResource CancelButton}" Grid.Row="9" Grid.Column="1" Command="{Binding CancelCommand}" Width="100" Margin="120,15,0,0" HorizontalAlignment="Left"/>
-            </Grid>
-        </Border>
-
-    </Grid>
-</UserControl>
+            </Grid>-->

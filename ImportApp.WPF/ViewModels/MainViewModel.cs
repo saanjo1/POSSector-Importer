@@ -41,16 +41,5 @@ namespace ImportApp.WPF.ViewModels
             }
         }
 
-
-        [RelayCommand]
-        private void Maximize(MainWindow _window)
-        {
-            if (_window.WindowState == WindowState.Normal)
-                _window.WindowState = WindowState.Maximized;
-            else
-                _window.WindowState = WindowState.Normal;
-        }
-
-
     }
 }
