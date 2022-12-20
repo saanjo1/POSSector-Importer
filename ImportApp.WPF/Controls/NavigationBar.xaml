@@ -30,7 +30,7 @@
 
                 <StackPanel Orientation="Horizontal">
                     <fa:IconImage Icon="TableList" Style="{StaticResource radioButtonIcon}" Foreground="{StaticResource color6}"/>
-                    <TextBlock Text="Articles" Style="{StaticResource radioButtonText}"/>
+                    <TextBlock Text="Store" Style="{StaticResource radioButtonText}"/>
                 </StackPanel>
             </RadioButton>
 

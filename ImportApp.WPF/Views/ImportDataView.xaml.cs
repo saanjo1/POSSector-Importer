@@ -1,7 +1,4 @@
-﻿using ImportApp.Domain.Models;
-using ImportApp.EntityFramework.DBContext;
-using ImportApp.EntityFramework.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,19 +16,13 @@ using System.Windows.Shapes;
 namespace ImportApp.WPF.Views
 {
     /// <summary>
-    /// Interaction logic for ArticlesView.xaml
+    /// Interaction logic for ImportArticleView.xaml
     /// </summary>
-    public partial class ArticlesView : UserControl
+    public partial class ImportDataView : UserControl
     {
-
-        public ArticlesView()
+        public ImportDataView()
         {
             InitializeComponent();
-        }
-
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
     }
 }

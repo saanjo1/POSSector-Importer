@@ -26,7 +26,7 @@ namespace ImportApp.WPF.ViewModels
         private string selectedSheet;
 
         private IExcelDataService _excelDataService;
-        private readonly ImportArticleViewModel _importArticleViewModel;
+        private readonly ImportDataViewModel _importArticleViewModel;
 
 
         [ObservableProperty]
@@ -35,7 +35,7 @@ namespace ImportApp.WPF.ViewModels
         [ObservableProperty]
         private bool isMapped;
 
-        public MapDataViewModel(IExcelDataService excelDataService, ImportArticleViewModel importArticleViewModel, MapColumnViewModel mapColumnViewModel)
+        public MapDataViewModel(IExcelDataService excelDataService, ImportDataViewModel importArticleViewModel, MapColumnViewModel mapColumnViewModel)
         {
             _excelDataService = excelDataService;
             mColumnModel = mapColumnViewModel;

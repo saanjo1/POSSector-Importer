@@ -15,11 +15,11 @@ namespace ImportApp.WPF.HostBuilders
         {
             host.ConfigureServices(services =>
             {
-                services.AddTransient<ArticlesViewModel>();
+                services.AddTransient<StoreViewModel>();
                 services.AddTransient<MapColumnViewModel>();
                 services.AddTransient<MapDataViewModel>();
                 services.AddTransient<MainViewModel>();
-                services.AddTransient<ImportArticleViewModel>();
+                services.AddTransient<ImportDataViewModel>();
                 services.AddTransient<HomeViewModel>();
             });
 

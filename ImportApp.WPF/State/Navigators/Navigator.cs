@@ -1,17 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using FontAwesome.Sharp;
-using ImportApp.Domain.Models;
 using ImportApp.Domain.Services;
-using ImportApp.EntityFramework.Services;
 using ImportApp.WPF.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace ImportApp.WPF.State.Navigators
 {
@@ -53,12 +44,12 @@ namespace ImportApp.WPF.State.Navigators
                         Icon = IconChar.Home;
                         break;
                     case ViewType.Articles:
-                        this.CurrentViewModel = new ArticlesViewModel(_articleService);
-                        Caption = "Articles";
+                        this.CurrentViewModel = new StoreViewModel(_articleService);
+                        Caption = "Store";
                         Icon = IconChar.TableList;
                         break;
                     case ViewType.ImportArticles:
-                        this.CurrentViewModel = new ImportArticleViewModel(_excelDataService,_categoryService, _articleService);
+                        this.CurrentViewModel = new ImportDataViewModel(_excelDataService,_categoryService, _articleService);
                         Caption = "Import";
                         Icon = IconChar.FileExcel;
                         break;

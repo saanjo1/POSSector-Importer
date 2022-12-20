@@ -1,10 +1,11 @@
-﻿<UserControl x:Class="ImportApp.WPF.Views.ArticlesView"
+﻿<UserControl x:Class="ImportApp.WPF.Views.StoreView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
-             xmlns:local="clr-namespace:ImportApp.WPF.Views" xmlns:sys="clr-namespace:System;assembly=netstandard"
+             xmlns:local="clr-namespace:ImportApp.WPF.Views"
+             xmlns:sys="clr-namespace:System;assembly=netstandard"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -31,19 +32,22 @@
                 <TextBlock FontSize="18" Text="{Binding Count}" Foreground="{StaticResource titleColor1}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="-518,0,0,0" Width="215"/>
                 <TextBlock Grid.Row="1" Margin="15 0" HorizontalAlignment="Stretch" VerticalAlignment="Center" Foreground="#B0B9C6" IsHitTestVisible="False"
                            Panel.ZIndex="1" Text="Search in Articles ..."
-                           Visibility="{Binding ElementName=textBoxFilter, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}" />
+                           Visibility="{Binding ElementName=textBoxFilter, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}" Width="320" />
 
-                <TextBox Name="textBoxFilter" Style="{StaticResource filterTextBox}" Text="{Binding TextToFilter, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1"/>
+                <TextBox Name="textBoxFilter" Style="{StaticResource filterTextBox}" Text="{Binding TextToFilter, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Width="350" />
 
                 <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="-540,10,0,0" Grid.RowSpan="6">
-                    <Button Style="{StaticResource tabButton}" Foreground="{StaticResource titleColor1}" Content="Articles"  Width="84"/>
-                    <Button Style="{StaticResource tabButton}" Foreground="{StaticResource titleColor1}" Content="Economato" Command="{Binding SwitchTabCommand}" Margin="5" Width="84"/>
+                    <RadioButton Style="{StaticResource tabButton}" Foreground="{StaticResource titleColor1}" Content="Articles"  Width="84"/>
+                    <RadioButton Style="{StaticResource tabButton}" Foreground="{StaticResource titleColor1}" Content="Economato" Command="{Binding SwitchTabCommand}" Margin="5" Width="84"/>
                 </StackPanel>
 
             </Grid>
         </Border>
 
-        <DataGrid Grid.Row="1" ItemsSource="{Binding ArticleCollection}" RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" x:Name="membersDataGrid" Style="{DynamicResource DataGridStyle1}">
+        <TextBlock Grid.Row="1" FontSize="24" Style="{StaticResource textBlockStyle}" Text="No records to show." Visibility="{Binding Items.IsEmpty, Converter={StaticResource BoolToVis}, ElementName=membersDataGrid}"/>
+
+        <DataGrid Grid.Row="1" Name="membersDataGrid" ItemsSource="{Binding ArticleCollection}" RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" Style="{DynamicResource DataGridStyle1}">
+            
             <DataGrid.Columns>
                 <DataGridTextColumn Header="#" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding Order}"/>
                 <DataGridTemplateColumn Header="Name" IsReadOnly="True" Width="*">
@@ -61,7 +65,6 @@
                 <DataGridTextColumn Header="Article number" Binding="{Binding ArticleNumber}" IsReadOnly="True" Width="*"/>
                 <DataGridTextColumn Header="Price" Binding="{Binding Price}" IsReadOnly="True" Width="*"/>
                 <DataGridTextColumn Header="Barcode" Binding="{Binding BarCode}" IsReadOnly="True" Width="*"/>
-                <DataGridTextColumn Header="Quantity" Binding="{Binding ReturnFee}" IsReadOnly="True" Width="*"/>
                 <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="auto">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -79,9 +82,7 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        
-        
-        
+
         <StackPanel Margin="20" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
 
             <TextBlock Text="Records per page" Foreground="{StaticResource titleColor1}"  VerticalAlignment="Center" Margin="5"/>
@@ -102,10 +103,9 @@
                     </MultiBinding>
                 </TextBlock.Text>
             </TextBlock>
-            
+
             <Button Content=">" Style="{StaticResource pagingButton}" Width="40" IsEnabled="{Binding IsNextEnabled}" ToolTip="Next page" Margin="5" Command="{Binding NextPageCommand}"/>
             <Button Content=">>" Style="{StaticResource pagingButton}" Width="40" IsEnabled="{Binding IsLastEnabled}" ToolTip="Last page" Margin="5" Command="{Binding LastPageCommand}" />
         </StackPanel>
-        
     </Grid>
 </UserControl>

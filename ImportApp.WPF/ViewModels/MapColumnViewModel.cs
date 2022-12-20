@@ -47,10 +47,10 @@ namespace ImportApp.WPF.ViewModels
         [ObservableProperty]
         private List<string> columnNamesList;
 
-        private ImportArticleViewModel _viewModel;
+        private ImportDataViewModel _viewModel;
 
 
-        public MapColumnViewModel(IExcelDataService excelDataService, string sheetName, List<string> _columnNames, ImportArticleViewModel viewModel)
+        public MapColumnViewModel(IExcelDataService excelDataService, string sheetName, List<string> _columnNames, ImportDataViewModel viewModel)
         {
             _excelDataService = excelDataService;
             columnNamesList = _columnNames;

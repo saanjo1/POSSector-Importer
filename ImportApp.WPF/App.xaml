@@ -20,12 +20,12 @@
                 <views:HomeView/>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type viewmodels:ArticlesViewModel}">
-                <views:ArticlesView/>
+            <DataTemplate DataType="{x:Type viewmodels:StoreViewModel}">
+                <views:StoreView/>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type viewmodels:ImportArticleViewModel}">
-                <views:ImportArticleView/>
+            <DataTemplate DataType="{x:Type viewmodels:ImportDataViewModel}">
+                <views:ImportDataView/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewmodels:MapDataViewModel}">
@@ -39,6 +39,10 @@
             <DataTemplate DataType="{x:Type viewmodels:MainViewModel}">
                 <local:MainWindow/>
             </DataTemplate>
+
+
+   
+
 
 
         </ResourceDictionary>

@@ -1,21 +1,17 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using ImportApp.EntityFramework.Services;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Data;
-using ImportApp.Domain;
 using ImportApp.Domain.Models;
-using ImportApp.EntityFramework.DBContext;
 using ImportApp.Domain.Services;
 using CustomMessageBox;
-using System.Diagnostics.Metrics;
 
 namespace ImportApp.WPF.ViewModels
 {
     [ObservableObject]
-    public partial class ImportArticleViewModel : BaseViewModel
+    public partial class ImportDataViewModel : BaseViewModel
     {
        
         private IExcelDataService _excelDataService;
@@ -24,7 +20,7 @@ namespace ImportApp.WPF.ViewModels
         private ICategoryDataService _categoryService;
 
 
-        public ImportArticleViewModel(IExcelDataService excelDataService, ICategoryDataService categoryService, IArticleDataService articleService)
+        public ImportDataViewModel(IExcelDataService excelDataService, ICategoryDataService categoryService, IArticleDataService articleService)
         {
             _excelDataService = excelDataService;
             _categoryService = categoryService;
@@ -132,13 +128,13 @@ namespace ImportApp.WPF.ViewModels
             {
                 for (int i = 0; i < articleList.Count; i++)
                 {
-                    var value = articleList[i].BarCode;
+                    string? value = articleList[i].BarCode;
                     Article temp = _articleService.Compare(value).Result;
                     Article newArticle = new Article()
                     {
                         Id = Guid.NewGuid(),
                         Name = articleList[i].Name,
-                        ArticleNumber = 123456789,
+                        ArticleNumber = i,
                         Price = Helpers.Extensions.GetDecimal(articleList[i].Price),
                         BarCode = articleList[i].BarCode,
                         SubCategoryId = _categoryService.ManageSubcategories(articleList[i].Gender, articleList[i].Collection, articleList[i].Storage).Result,
@@ -156,6 +152,7 @@ namespace ImportApp.WPF.ViewModels
                         _articleService.Update(temp.Id, newArticle);
                     }
                 }
+                articleList.Clear();
                 bool? Result = new MessageBoxCustom(counter + " articles imported. " + updatedCounter + " articles updated.", MessageType.Success, MessageButtons.Ok).ShowDialog();
 
             }

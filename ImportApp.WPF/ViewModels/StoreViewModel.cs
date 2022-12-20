@@ -14,12 +14,12 @@ namespace ImportApp.WPF.ViewModels
 {
 
     [ObservableObject]
-    public partial class ArticlesViewModel : BaseViewModel
+    public partial class StoreViewModel : BaseViewModel
     {
         private IArticleDataService _articleService;
         public string Count { get { return articleList.Count + " articles found"; } }
 
-        public ArticlesViewModel(IArticleDataService articleService)
+        public StoreViewModel(IArticleDataService articleService)
         {
             _articleService = articleService;
             LoadData();
@@ -85,7 +85,7 @@ namespace ImportApp.WPF.ViewModels
 
         [ObservableProperty]
         private bool isFirstEnabled;
-        
+
         [ObservableProperty]
         private bool isPreviousEnabled;
 
