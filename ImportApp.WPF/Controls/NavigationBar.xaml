@@ -13,7 +13,6 @@
         <StackPanel>
             <RadioButton Style="{StaticResource radioButton1}"
                      Tag="{StaticResource color2}"
-                     IsChecked="True"
                      Command="{Binding EditCurrentViewModelCommand}" 
                      CommandParameter="{x:Static nav:ViewType.Home}">
 

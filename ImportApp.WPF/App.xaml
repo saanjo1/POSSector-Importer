@@ -20,6 +20,14 @@
                 <views:HomeView/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewmodels:ArticleStorageViewModel}">
+                <views:ArticlesStorageView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodels:EconomatoStorageViewModel}">
+                <views:EconomatoStorageView/>
+            </DataTemplate>
+
             <DataTemplate DataType="{x:Type viewmodels:StoreViewModel}">
                 <views:StoreView/>
             </DataTemplate>
