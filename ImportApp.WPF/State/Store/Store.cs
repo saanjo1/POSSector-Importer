@@ -20,32 +20,6 @@ namespace ImportApp.WPF.State.Store
 
         private IArticleDataService _articleService;
 
-        private string textToFilter;
-
-        public string TextToFilter
-        {
-            get { return textToFilter; }
-            set
-            {
-                textToFilter = value;
-                OnPropertyChanged(nameof(TextToFilter));
-                //ArticleCollection.Filter = FilterFunction;
-            }
-        }
-
-
-
-        private bool FilterFunction(object obj)
-        {
-            if (!string.IsNullOrEmpty(TextToFilter))
-            {
-                var filt = obj as Article;
-                return filt != null && (filt.Name.Contains(TextToFilter) || filt.BarCode.Contains(TextToFilter) || filt.Price.ToString() == TextToFilter || filt.ArticleNumber.ToString() == TextToFilter);
-            }
-            return true;
-        }
-
-
         public Store(IArticleDataService articleService)
         {
             _articleService = articleService;   

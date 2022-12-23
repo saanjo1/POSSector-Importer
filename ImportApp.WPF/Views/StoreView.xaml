@@ -32,11 +32,9 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock FontSize="18" Text="{Binding Count}" Foreground="{StaticResource titleColor1}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="-518,0,0,0" Width="215"/>
+                <controls:StoreControl DataContext="{Binding Store}" Grid.Row="0" Grid.RowSpan="3" Grid.ColumnSpan="4" Margin="529 -50 9 9 "/>
 
-                <controls:StoreControl DataContext="{Binding Store}" Grid.Row="0" Grid.RowSpan="3" Grid.ColumnSpan="4" Margin="529 -20 9 9 "/>
-
-                <ContentControl Content="{Binding Store.CurrentDataGrid}" Grid.Row="1" Grid.Column="0" Margin="10 20 20 20"  Grid.RowSpan="3" Grid.ColumnSpan="4"/>
+                <ContentControl Content="{Binding Store.CurrentDataGrid}" Grid.Row="1" Grid.Column="0" Margin="10 20 20 20"  Grid.RowSpan="5" Grid.ColumnSpan="5"/>
 
 
 

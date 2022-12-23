@@ -21,13 +21,9 @@
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Foreground="#B0B9C6" IsHitTestVisible="False"
-                           Panel.ZIndex="1" Text="Search in Articles ..."
-                           Visibility="{Binding ElementName=textBoxFilter, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}" Width="320" />
 
-        <TextBox Name="textBoxFilter" Style="{StaticResource filterTextBox}" Text="{Binding TextToFilter, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Width="350" />
 
-        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Margin="-540 15">
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Grid.RowSpan="5" Grid.ColumnSpan="4" Margin="-540 30">
             <RadioButton Style="{StaticResource tabButton}" 
                          Foreground="{StaticResource titleColor1}"
                           Command="{Binding EditCurrentDataGridCommand}" 

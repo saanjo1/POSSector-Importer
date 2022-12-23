@@ -3,11 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:ImportApp.WPF.Views" xmlns:sys="clr-namespace:System;assembly=System.Runtime" xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+             xmlns:local="clr-namespace:ImportApp.WPF.Views"
+             xmlns:sys="clr-namespace:System;assembly=System.Runtime" xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+    <Grid Margin="10">
         <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
@@ -17,7 +19,15 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <DataGrid Grid.ColumnSpan="3" Grid.Row="0" Name="membersDataGrid" ItemsSource="{Binding ArticleCollection}" RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" Style="{DynamicResource DataGridStyle1}">
+        <TextBlock Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Foreground="#B0B9C6" IsHitTestVisible="False"
+                           Panel.ZIndex="1" Text="Search in Articles ..."
+                           Visibility="{Binding ElementName=textBoxFilter, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}" Width="320" />
+
+        <TextBox Grid.Column="1" Name="textBoxFilter" Style="{StaticResource filterTextBox}" Text="{Binding TextToFilter, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Width="350" />
+
+        <TextBlock FontSize="16" Text="{Binding Count}" Foreground="{StaticResource titleColor1}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+
+        <DataGrid Grid.ColumnSpan="3" Grid.Row="1" Name="membersDataGrid" ItemsSource="{Binding ArticleCollection}" RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" Style="{DynamicResource DataGridStyle1}" Height="400">
             <DataGrid.Columns>
         <DataGridTextColumn Header="#" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding Order}"/>
         <DataGridTemplateColumn Header="Name" IsReadOnly="True" Width="*">
@@ -53,7 +63,7 @@
 </DataGrid>
 
 
-<StackPanel Margin="20" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+<StackPanel Margin="500 20 0 0" Grid.Row="2" Orientation="Horizontal" Grid.ColumnSpan="5">
 
     <TextBlock Text="Records per page" Foreground="{StaticResource titleColor1}"  VerticalAlignment="Center" Margin="5"/>
     <ComboBox  Margin="5"  Width="100" SelectedItem="{Binding SelectedRecord,UpdateSourceTrigger=PropertyChanged}">
