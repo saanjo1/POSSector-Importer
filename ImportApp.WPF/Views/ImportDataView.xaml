@@ -33,15 +33,15 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="0" Margin="10,10,0,10" Width="300">
-                <Button ToolTip="Upload Excel file" Style="{StaticResource controlButton}" Width="100" Height="100" Grid.Row="1" Grid.Column="0" Command="{Binding OpenDialogCommand}" Margin="5">
+                <Button ToolTip="Upload Excel file" Style="{StaticResource controlButton}" Width="80" Height="80" Grid.Row="1" Grid.Column="0" Command="{Binding OpenDialogCommand}" Margin="5">
                     <StackPanel>
-                        <fa:IconImage Style="{StaticResource controlButtonIcon}" Icon="Upload" Width="40" Height="40"/>
+                        <fa:IconImage Style="{StaticResource controlButtonIcon}" Icon="Upload" Width="30" Height="30"/>
                     </StackPanel>
                 </Button>
 
-                <Button ToolTip="Map columns" Style="{StaticResource controlButton}"  Width="100" Height="100" Grid.Row="1" Grid.Column="1" Command="{Binding MapDataCommand}" Margin="5">
+                <Button ToolTip="Map columns" Style="{StaticResource controlButton}"  Width="80" Height="80" Grid.Row="1" Grid.Column="1" Command="{Binding MapDataCommand}" Margin="5">
                     <StackPanel>
-                        <fa:IconImage Style="{StaticResource controlButtonIcon}" Icon="Columns"  Width="40" Height="40"/>
+                        <fa:IconImage Style="{StaticResource controlButtonIcon}" Icon="Columns"  Width="30" Height="30"/>
                     </StackPanel>
                 </Button>
 

@@ -75,7 +75,7 @@
 
                 <StackPanel Orientation="Horizontal" Grid.Row="2">
                     <Button Content="Save" Style="{StaticResource SaveButton}" Margin="0 0 30 0" Command="{Binding SubmitCommand}" Width="100" />
-                    <Button Content="Cancel" Style="{StaticResource CancelButton}" Command="{Binding CloseCommand}" Width="100" />
+                    <Button Content="Cancel" Style="{StaticResource CancelButton}" Command="{Binding CloseModalCommand}" Width="100" />
                 </StackPanel>
 
             </Grid>

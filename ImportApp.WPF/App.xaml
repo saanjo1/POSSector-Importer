@@ -24,7 +24,6 @@
                 <views:ArticlesStorageView/>
             </DataTemplate>
 
-
             <DataTemplate DataType="{x:Type viewmodels:StoreViewModel}">
                 <views:StoreView/>
             </DataTemplate>

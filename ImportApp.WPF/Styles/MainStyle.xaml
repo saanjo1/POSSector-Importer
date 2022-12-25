@@ -200,6 +200,10 @@
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="BorderBrush" Value="{StaticResource color5}" />
             </Trigger>
+
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="BorderBrush" Value="{StaticResource color5}" />
+            </Trigger>
         </Style.Triggers>
     </Style>
 
