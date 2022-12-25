@@ -51,7 +51,9 @@ namespace ImportApp.EntityFramework.Services
             using (ImportAppDbContext context = _contextFactory.CreateDbContext())
             {
                 SubCategory subcategory = context.SubCategories.Where(x => x.Name == gender).FirstOrDefault();
-                var season = this.ManageCategories(collection, storageId).Result;
+                Guid season = this.ManageCategories(collection, storageId).Result;
+
+                var category = context.Categories.Where(x => x.Id == season).FirstOrDefault();
 
                 if (subcategory == null)
                 {
@@ -60,6 +62,7 @@ namespace ImportApp.EntityFramework.Services
                         Id = Guid.NewGuid(),
                         Name = gender,
                         Deleted = false,
+                        StorageId = category.StorageId,
                         CategoryId = season
                     };
 

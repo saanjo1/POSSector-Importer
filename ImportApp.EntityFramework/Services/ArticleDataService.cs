@@ -64,6 +64,50 @@ namespace ImportApp.EntityFramework.Services
             }
         }
 
+        public Task<ICollection<Article>> GetArticles()
+        {
+            using (ImportAppDbContext context = factory.CreateDbContext())
+            {
+                List<Article> entities = new List<Article>();
+
+                foreach (var item in context.Articles)
+                {
+                    SubCategory? subCategory = context.SubCategories.Where(x => x.Id == item.SubCategoryId).FirstOrDefault();
+
+                    Storage? storage = context.Storages.Where(x => x.Id == subCategory.StorageId).FirstOrDefault();
+
+                    if(storage?.Name == "Articles")
+                    {
+                        entities.Add(item);
+                    }
+                }
+
+                ICollection<Article> entitiesCollection = entities;
+                return Task.FromResult(entitiesCollection);
+            }
+        }
+        public Task<ICollection<Article>> GetEconomato()
+        {
+            using (ImportAppDbContext context = factory.CreateDbContext())
+            {
+                List<Article> entities = new List<Article>();
+
+                foreach (var item in context.Articles)
+                {
+                    SubCategory? subCategory = context.SubCategories.Where(x => x.Id == item.SubCategoryId).FirstOrDefault();
+
+                    Storage? storage = context.Storages.Where(x => x.Id == subCategory.StorageId).FirstOrDefault();
+
+                    if (storage?.Name == "Economato")
+                    {
+                        entities.Add(item);
+                    }
+                }
+
+                ICollection<Article> entitiesCollection = entities;
+                return Task.FromResult(entitiesCollection);
+            }
+        }
 
         public Task<Article> Update(Guid id, Article entity)
         {

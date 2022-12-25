@@ -34,11 +34,11 @@ namespace ImportApp.WPF.State.Store
                 switch (storeType)
                 {
                     case StoreType.Articles:
-                        this.CurrentDataGrid = new ArticleStorageViewModel(_articleService);
+                        this.CurrentDataGrid = new ArticleStorageViewModel(_articleService, "Articles");
                         break;
                     case StoreType.Economato:
-                        this.CurrentDataGrid = new EconomatoStorageViewModel();
-                       break;
+                        this.CurrentDataGrid = new ArticleStorageViewModel(_articleService, "Economato");
+                        break;
                     default:
                         break;
                 }

@@ -11,6 +11,7 @@ namespace ImportApp.Domain.Services
     {
 
         Task<Article> Compare(string value);
-
+        Task<ICollection<Article>> GetArticles();
+        Task<ICollection<Article>> GetEconomato();
     }
 }

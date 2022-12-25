@@ -2,9 +2,6 @@
 using CommunityToolkit.Mvvm.Input;
 using ImportApp.Domain.Models;
 using ImportApp.Domain.Services;
-using ImportApp.EntityFramework.Services;
-using ImportApp.WPF.State.Navigators;
-using ImportApp.WPF.State.Store;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -19,6 +16,10 @@ namespace ImportApp.WPF.ViewModels
     public partial class ArticleStorageViewModel : BaseViewModel
     {
         private IArticleDataService _articleService;
+
+        [ObservableProperty]
+        private string storageName;
+
         public string Count { get { return articleList.Count + " articles found"; } }
 
         private string textToFilter;
@@ -48,9 +49,10 @@ namespace ImportApp.WPF.ViewModels
 
 
 
-        public ArticleStorageViewModel(IArticleDataService articleService)
+        public ArticleStorageViewModel(IArticleDataService articleService, string _storageName)
         {
             _articleService = articleService;
+            storageName = _storageName;
             LoadData();
         }
 
@@ -174,7 +176,14 @@ namespace ImportApp.WPF.ViewModels
         [RelayCommand]
         public void LoadData()
         {
-            ArticleList = _articleService.GetAll().Result;
+            if(StorageName == "Articles")
+            {
+                ArticleList = _articleService.GetArticles().Result;
+            }
+            else
+            {
+                ArticleList = _articleService.GetEconomato().Result;
+            }
             ArticleCollection = CollectionViewSource.GetDefaultView(ArticlesCollection);
             UpdateCollection(articlesCollection.Take(SelectedRecord));
             UpdateRecordCount();
