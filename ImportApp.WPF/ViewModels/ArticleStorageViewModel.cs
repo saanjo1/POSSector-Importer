@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CustomMessageBox;
 using ImportApp.Domain.Models;
 using ImportApp.Domain.Services;
 using System;
@@ -20,7 +21,19 @@ namespace ImportApp.WPF.ViewModels
         [ObservableProperty]
         private string storageName;
 
-        public string Count { get { return articleList.Count + " articles found"; } }
+
+        private string count;
+
+        public string Count
+        {
+            get { return articleList.Count + "articles found"; }
+            set
+            {
+                count = value;
+                OnPropertyChanged(nameof(TextToFilter));
+            }
+        }
+
 
         private string textToFilter;
 
@@ -34,8 +47,6 @@ namespace ImportApp.WPF.ViewModels
                 ArticleCollection.Filter = FilterFunction;
             }
         }
-
-
 
         private bool FilterFunction(object obj)
         {
@@ -64,6 +75,7 @@ namespace ImportApp.WPF.ViewModels
         private ObservableCollection<Article> articlesCollection = new ObservableCollection<Article>();
 
         [ObservableProperty]
+        [NotifyCanExecuteChangedFor(nameof(DeleteArticleCommand))]
         private ICollectionView articleCollection;
 
         private int currentPage = 1;
@@ -172,6 +184,21 @@ namespace ImportApp.WPF.ViewModels
             }
         }
 
+        [RelayCommand]
+        private void DeleteArticle(Article parameter)
+        {
+            try
+            {
+                var deletedArticle = _articleService.Delete(parameter.Id);
+                bool? Result = new MessageBoxCustom("Article is successfully deleted.", MessageType.Warning, MessageButtons.Ok).ShowDialog();
+                LoadData();
+            }
+            catch (Exception)
+            {
+                bool? Result = new MessageBoxCustom("An error occured while attempting to delete article.", MessageType.Error, MessageButtons.Ok).ShowDialog();
+                throw;
+            }
+        }
 
         [RelayCommand]
         public void LoadData()

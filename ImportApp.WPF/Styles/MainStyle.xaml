@@ -131,7 +131,7 @@
 
 
     <Style x:Key="gridEditButton" TargetType="Button">
-        <Setter Property="Background" Value="{StaticResource BrushPrimary1}" />
+        <Setter Property="Background" Value="{StaticResource BrushPrimary2}" />
         <Setter Property="BorderBrush" Value="{StaticResource BrushPrimary2}" />
         <Setter Property="Foreground" Value="#ffffff" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
@@ -147,7 +147,7 @@
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{StaticResource color5}"/>
+                <Setter Property="Background" Value="{StaticResource BrushPrimary1}"/>
             </Trigger>
         </Style.Triggers>
     </Style>

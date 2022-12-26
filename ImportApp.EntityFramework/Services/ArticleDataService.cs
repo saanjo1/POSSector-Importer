@@ -70,9 +70,17 @@ namespace ImportApp.EntityFramework.Services
 
         }
 
-        public Task<bool> Delete(Guid id)
+        public Task<ICollection<Article>> Delete(Guid id)
         {
-            throw new NotImplementedException();
+            using (ImportAppDbContext context = factory.CreateDbContext())
+            {
+                Article? entity = context.Articles.FirstOrDefault(x => x.Id == id);
+                entity.Deleted = true;
+
+                context.SaveChanges();
+                ICollection<Article> entities = context.Articles.ToList();
+                return Task.FromResult(entities);
+            }
         }
 
         public Task<Article> Get(string id)
@@ -105,7 +113,7 @@ namespace ImportApp.EntityFramework.Services
 
                     Storage? storage = context.Storages.Where(x => x.Id == subCategory.StorageId).FirstOrDefault();
 
-                    if(storage?.Name == "Articles")
+                    if(storage?.Name == "Articles" && item.Deleted == false)
                     {
                         entities.Add(item);
                     }
@@ -127,7 +135,7 @@ namespace ImportApp.EntityFramework.Services
 
                     Storage? storage = context.Storages.Where(x => x.Id == subCategory.StorageId).FirstOrDefault();
 
-                    if (storage?.Name == "Economato")
+                    if (storage?.Name == "Economato" && item.Deleted == false)
                     {
                         entities.Add(item);
                     }

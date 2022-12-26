@@ -24,7 +24,7 @@ namespace ImportApp.EntityFramework.Services
             throw new NotImplementedException();
         }
 
-        public Task<bool> Delete(Guid id)
+        public Task<ICollection<Category>> Delete(Guid id)
         {
             throw new NotImplementedException();
         }

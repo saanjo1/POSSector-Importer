@@ -17,6 +17,6 @@ namespace ImportApp.Domain.Services
 
         Task<T> Update(Guid id, T entity);
 
-        Task<bool> Delete(Guid id);
+        Task<ICollection<T>> Delete(Guid id);
     }
 }
