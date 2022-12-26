@@ -53,6 +53,11 @@ namespace ImportApp.WPF.State.Navigators
                         Caption = "Import";
                         Icon = IconChar.FileExcel;
                         break;
+                    case ViewType.Settings:
+                        this.CurrentViewModel = new SettingsViewModel();
+                        Caption = "Settings";
+                        Icon = IconChar.Gear;
+                        break;
                     default:
                         break;
                 }

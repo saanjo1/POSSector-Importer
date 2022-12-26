@@ -13,7 +13,8 @@ namespace ImportApp.WPF.State.Navigators
     {
         Home,
         Articles,
-        ImportArticles
+        ImportArticles,
+        Settings
     }
 
 

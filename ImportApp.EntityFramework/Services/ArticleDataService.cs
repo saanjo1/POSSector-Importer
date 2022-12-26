@@ -41,6 +41,35 @@ namespace ImportApp.EntityFramework.Services
             }
         }
 
+        public Task<bool> ManageArticleGood(ArticleGood article)
+        {
+            using (ImportAppDbContext context = factory.CreateDbContext())
+            {
+                try
+                {
+                    var articleGood = context.ArticleGoods.Where(x => x.Id == article.Id).FirstOrDefault();
+
+                    if(articleGood == null)
+                    {
+                        context.ArticleGoods.Add(article);
+                    }
+                    else
+                    {
+                        articleGood.Quantity += article.Quantity;
+                    }
+
+                    context.SaveChanges();
+                    return Task.FromResult(true);
+
+                }
+                catch (Exception)
+                {
+                    return Task.FromResult(false);
+                }
+            }
+
+        }
+
         public Task<bool> Delete(Guid id)
         {
             throw new NotImplementedException();
@@ -120,6 +149,5 @@ namespace ImportApp.EntityFramework.Services
                 return Task.FromResult(entity);
             }
         }
-
     }
 }

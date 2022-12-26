@@ -58,7 +58,7 @@
             <RadioButton Style="{StaticResource radioButton1}"
                      Tag="{StaticResource color2}"
                      Command="{Binding EditCurrentViewModelCommand}" 
-                     CommandParameter="{x:Static nav:ViewType.Home}">
+                     CommandParameter="{x:Static nav:ViewType.Settings}">
 
                 <StackPanel Orientation="Horizontal">
                     <fa:IconImage Icon="Gear" Style="{StaticResource radioButtonIcon}" Foreground="{StaticResource color10}"/>

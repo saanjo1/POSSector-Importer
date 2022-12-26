@@ -137,7 +137,7 @@ namespace ImportApp.WPF.ViewModels
                         ArticleNumber = i,
                         Price = Helpers.Extensions.GetDecimal(articleList[i].Price),
                         BarCode = articleList[i].BarCode,
-                        SubCategoryId = _categoryService.ManageSubcategories(articleList[i].Gender, articleList[i].Collection, articleList[i].Storage).Result,
+                        SubCategoryId = _categoryService.ManageSubcategories(articleList[i]?.Gender, articleList[i]?.Collection, articleList[i]?.Storage).Result,
                         Deleted = false,
                         Order = 1,
                     };
@@ -145,11 +145,26 @@ namespace ImportApp.WPF.ViewModels
                     if (temp == null)
                     {
                         counter++;
-                        _articleService.Create(newArticle);
-                    } else
+                        if (_articleService.Create(newArticle).Result)
+                        {
+                            ArticleGood newArticleGood = new ArticleGood()
+                            {
+                                ArticleId = newArticle.Id,
+                                Id = Guid.NewGuid(),
+                                Quantity = Helpers.Extensions.GetDecimal(articleList[i]?.Quantity),
+                                GoodId = null,
+                                ValidFrom = DateTime.Now,
+                                ValidUntil = DateTime.Now
+                            };
+
+                            _articleService.ManageArticleGood(newArticleGood);
+                        }
+                    }
+                    else
                     {
-                        updatedCounter++;
                         _articleService.Update(temp.Id, newArticle);
+                        updatedCounter++;
+
                     }
                 }
                 articleList.Clear();
