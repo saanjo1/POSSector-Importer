@@ -21,19 +21,9 @@ namespace ImportApp.WPF.ViewModels
         [ObservableProperty]
         private string storageName;
 
-
-        private string count;
-
-        public string Count
-        {
-            get { return articleList.Count + "articles found"; }
-            set
-            {
-                count = value;
-                OnPropertyChanged(nameof(TextToFilter));
-            }
-        }
-
+        [ObservableProperty]
+        [NotifyCanExecuteChangedFor(nameof(DeleteArticleCommand))]
+        private int count;
 
         private string textToFilter;
 
@@ -214,6 +204,7 @@ namespace ImportApp.WPF.ViewModels
             ArticleCollection = CollectionViewSource.GetDefaultView(ArticlesCollection);
             UpdateCollection(articlesCollection.Take(SelectedRecord));
             UpdateRecordCount();
+            Count = ArticleList.Count;
         }
 
 

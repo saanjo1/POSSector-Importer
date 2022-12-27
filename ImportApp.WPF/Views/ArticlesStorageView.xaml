@@ -31,6 +31,7 @@
         <TextBox Grid.Column="1" Name="textBoxFilter" Style="{StaticResource filterTextBox}" Text="{Binding TextToFilter, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Width="350" />
 
         <TextBlock FontSize="16" Text="{Binding Count}" Foreground="{StaticResource titleColor1}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+        <TextBlock FontSize="16" Text=" article(s) found" Foreground="{StaticResource titleColor1}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="27 0 0 0"/>
 
         <DataGrid Grid.ColumnSpan="3" Grid.Row="1" Name="membersDataGrid" ItemsSource="{Binding ArticleCollection}" RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" Style="{DynamicResource DataGridStyle1}" Height="400" CanUserDeleteRows="True" IsReadOnly="False">
             <DataGrid.Columns>
