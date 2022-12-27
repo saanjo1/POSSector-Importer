@@ -43,7 +43,11 @@
             <DataTemplate DataType="{x:Type viewmodels:MapColumnViewModel}">
                 <controls:MapExcelColumns/>
             </DataTemplate>
-            
+
+            <DataTemplate DataType="{x:Type viewmodels:CreateNewDiscountViewModel}">
+                <controls:CreateNewDiscount/>
+            </DataTemplate>
+
             <DataTemplate DataType="{x:Type viewmodels:MainViewModel}">
                 <local:MainWindow/>
             </DataTemplate>

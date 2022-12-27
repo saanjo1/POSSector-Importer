@@ -3,10 +3,32 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:ImportApp.WPF.Views"
+             xmlns:local="clr-namespace:ImportApp.WPF.Views" xmlns:modalcontrol="clr-namespace:ModalControl;assembly=ModalControl"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBlock Text="Testiranje" Foreground="White" FontSize="35"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <DockPanel>
+            <Label Grid.Row="0" Grid.Column="0" Content="Add new discount" Style="{StaticResource controlLabel}"></Label>
+            <Button Grid.Column="1" Style="{StaticResource ImportButton}" Content="Click" Command="{Binding CreateRuleCommand}" Padding="25 10 25 10"/>
+        </DockPanel>
+
+        <modalcontrol:Modal Panel.ZIndex="1" Background="Transparent" IsOpen="{Binding IsOpen}" Grid.ColumnSpan="3" Grid.RowSpan="3" Margin="30">
+            <ContentControl Content="{Binding RuleViewModel}" Background="{StaticResource panelActiveColor}"/>
+        </modalcontrol:Modal>
+
+
     </Grid>
 </UserControl>
