@@ -25,6 +25,9 @@ namespace ImportApp.WPF.HostBuilders
                 services.AddSingleton<IExcelServiceProvider<MapColumnViewModel>, ExcelDataService>();
                 services.AddSingleton<IExcelDataService, ExcelDataService>();
 
+                services.AddSingleton<IDataGService<Rule>, DiscountDataService>();
+                services.AddSingleton<IDiscountDataService, DiscountDataService>();
+
                 services.AddSingleton<IDataGService<Category>, CategoryDataService>();
                 services.AddSingleton<ICategoryDataService, CategoryDataService>();
             });

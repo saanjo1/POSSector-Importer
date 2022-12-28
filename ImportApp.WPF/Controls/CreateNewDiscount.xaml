@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              mc:Ignorable="d" 
@@ -10,7 +11,7 @@
              FontFamily="Montserrat"
              FontWeight="SemiBold"
              FontSize="20"
-             Height="450"
+             Height="400"
              Width="450">
 
     <Grid Background="#FFFFFF">
@@ -59,22 +60,19 @@
             </Grid.ColumnDefinitions>
 
             <Label Grid.Row="0" Content="Name: " FontSize="18" Style="{StaticResource controlLabel}" Foreground="Black" VerticalAlignment="Center"  HorizontalAlignment="Left" Margin="20 0 0 0"/>
-            <TextBox Grid.Row="0" Grid.Column="1"  Width="200" Height="30" VerticalAlignment="Center"/>
+            <TextBox Grid.Row="0" Grid.Column="1"  Width="200" Height="30" VerticalAlignment="Center" Text="{Binding Name}" />
 
             <Label Grid.Row="1" Content="Value: " FontSize="18" Style="{StaticResource controlLabel}" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Left"  Margin="20 0 0 0"/>
-            <TextBox Grid.Row="1" Grid.Column="1"  Width="200" Height="30" VerticalAlignment="Center"/>
+            <TextBox Grid.Row="1" Grid.Column="1"  Width="200" Height="30" VerticalAlignment="Center" Text="{Binding Value}"/>
 
             <Label Grid.Row="2" Content="Valid from:" FontSize="18" Style="{StaticResource controlLabel}" Foreground="Black" VerticalAlignment="Center"  HorizontalAlignment="Left"  Margin="20 0 0 0"/>
-            <TextBox Grid.Row="2" Grid.Column="1"  Width="200" Height="30" VerticalAlignment="Center"/>
+            <DatePicker SelectedDate="{Binding ValidFrom}"  Grid.Row="2" Grid.Column="1"  Width="200" Height="30" VerticalAlignment="Center"/>
 
             <Label Grid.Row="3" Content="Valid to: " FontSize="18" Style="{StaticResource controlLabel}" Foreground="Black" VerticalAlignment="Center"  HorizontalAlignment="Left"  Margin="20 0 0 0"/>
-            <TextBox Grid.Row="3" Grid.Column="1"  Width="200" Height="30" VerticalAlignment="Center"/>
+            <DatePicker SelectedDate="{Binding ValidTo}" Grid.Row="3" Grid.Column="1"  Width="200" Height="30" VerticalAlignment="Center"/>
 
             <Label Grid.Row="4" Content="Active" FontSize="18" Style="{StaticResource controlLabel}" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Left"  Margin="20 0 0 0"/>
-            <CheckBox Grid.Row="4" Grid.Column="1" VerticalContentAlignment="Center" HorizontalAlignment="Center" />
-
-
-
+            <CheckBox Grid.Row="4" Grid.Column="1" VerticalContentAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding Active}" />
 
 
             <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Center" Grid.ColumnSpan="5">

@@ -9,7 +9,7 @@
              mc:Ignorable="d"
              x:Name="modalControl"
              FontFamily="Montserrat"
-             FontWeight="SemiBold"
+             FontWeight="ExtraLight"
              FontSize="22"
              Height="578"
              Width="718">

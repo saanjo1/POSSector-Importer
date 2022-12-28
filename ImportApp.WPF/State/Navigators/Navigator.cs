@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using FontAwesome.Sharp;
 using ImportApp.Domain.Services;
 using ImportApp.WPF.ViewModels;
+using System.Collections.Concurrent;
 
 namespace ImportApp.WPF.State.Navigators
 {
@@ -22,12 +23,16 @@ namespace ImportApp.WPF.State.Navigators
         private IArticleDataService _articleService;
         private ICategoryDataService _categoryService;
         private IExcelDataService _excelDataService;
+        private ConcurrentDictionary<string, string> _myDictionary;
+        private IDiscountDataService _discountDataService;
 
-        public Navigator(IArticleDataService articleService, IExcelDataService excelDataService, ICategoryDataService categoryService)
+        public Navigator(IArticleDataService articleService, IExcelDataService excelDataService, ICategoryDataService categoryService, IDiscountDataService discountDataService, ConcurrentDictionary<string, string> myDictionary)
         {
             _articleService = articleService;
             _excelDataService = excelDataService;
             _categoryService = categoryService;
+            _discountDataService = discountDataService;
+            _myDictionary = myDictionary;
         }
 
         [RelayCommand]
@@ -54,7 +59,7 @@ namespace ImportApp.WPF.State.Navigators
                         Icon = IconChar.FileExcel;
                         break;
                     case ViewType.Settings:
-                        this.CurrentViewModel = new SettingsViewModel();
+                        this.CurrentViewModel = new SettingsViewModel(_discountDataService, _myDictionary);
                         Caption = "Settings";
                         Icon = IconChar.Gear;
                         break;

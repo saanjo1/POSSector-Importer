@@ -48,6 +48,14 @@
                 <controls:CreateNewDiscount/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewmodels:MultipleColumnNameSmallViewModel}">
+                <controls:MultipleColumnName/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodels:PremapExcelColumnsViewModel}">
+                <controls:PremapColumnNames/>
+            </DataTemplate>
+
             <DataTemplate DataType="{x:Type viewmodels:MainViewModel}">
                 <local:MainWindow/>
             </DataTemplate>
