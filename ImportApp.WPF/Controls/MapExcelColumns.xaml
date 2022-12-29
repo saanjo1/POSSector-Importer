@@ -13,7 +13,7 @@
              FontSize="22"
              Height="578"
              Width="718">
-    <Grid Background="#d6d6cd">
+    <Grid Background="#ebebeb">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="197*" />
             <ColumnDefinition Width="295*" />
@@ -26,23 +26,21 @@
                              Grid.Row="0"
                              Padding="10"
                              Margin="0"
-                             Background="{StaticResource panelActiveColor}"
+                             Background="{StaticResource BrushPrimary7}"
                              Foreground="White"
                              Visibility="Visible"
                              Grid.ColumnSpan="2">
             <StackPanel>
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Stretch" FontSize="20" Text="Map your Excel data"/>
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Stretch" FontSize="20" Text="Map your Excel data"/>
             </StackPanel>
         </materialDesign:Card>
-        <StackPanel  HorizontalAlignment="Right"
-                     Margin="0,5,5,0"
-                     VerticalAlignment="Top"
-                     Grid.Column="1">
-            <Button Width="35" Height="35" Background="{StaticResource BrushPrimary4}" Style="{StaticResource CloseButton}" Command="{Binding CloseModalCommand}">
-                <fa:IconImage Icon="Close" Foreground="White" Width="20"/>
-            </Button>
-
-        </StackPanel>
+        <Border Margin="372 0 0 0" Grid.Column="1" VerticalAlignment="Top">
+            <StackPanel>
+                <Button Height="47" Background="{StaticResource BrushPrimary5}" Style="{StaticResource CloseButton}" Command="{Binding CloseModalCommand}">
+                    <TextBlock Text="close" Foreground="White" FontWeight="Light" FontSize="18"/>
+                </Button>
+            </StackPanel>
+        </Border>
 
         <Border HorizontalAlignment="Center" Grid.ColumnSpan="3" Grid.Row="1">
             <Grid>
@@ -74,7 +72,7 @@
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" Grid.Row="2">
-                    <Button Content="Save" Style="{StaticResource SaveButton}" Margin="0 0 30 0" Command="{Binding SubmitCommand}" Width="100" />
+                    <Button Content="Save" Style="{StaticResource saveModalButton}" Margin="0 0 30 0" Command="{Binding SubmitCommand}" Width="100" />
                     <Button Content="Cancel" Style="{StaticResource CancelButton}" Command="{Binding CloseModalCommand}" Width="100" />
                 </StackPanel>
 

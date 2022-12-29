@@ -91,7 +91,7 @@
         <Setter Property="Width" Value="130"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="Background" Value="DarkRed"/>
+        <Setter Property="Background" Value="{StaticResource BrushPrimary4}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -145,21 +145,21 @@
 
     <Style x:Key="CancelButton" TargetType="Button" BasedOn="{StaticResource SaveButton}">
         <Setter Property="Foreground" Value="Black"/>
-        <Setter Property="Background" Value="#E1E1E1"/>
+        <Setter Property="Background" Value="#D2cfcf"/>
 
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Trigger.EnterActions>
                     <BeginStoryboard>
                         <Storyboard>
-                            <ColorAnimation Storyboard.TargetProperty="Background.(SolidColorBrush.Color)" To="Gray" Duration="0:0:0.1"/>
+                            <ColorAnimation Storyboard.TargetProperty="Background.(SolidColorBrush.Color)" To="LightGray" Duration="0:0:0.01"/>
                         </Storyboard>
                     </BeginStoryboard>
                 </Trigger.EnterActions>
                 <Trigger.ExitActions>
                     <BeginStoryboard>
                         <Storyboard>
-                            <ColorAnimation Storyboard.TargetProperty="Background.(SolidColorBrush.Color)" To="#E1E1E1" Duration="0:0:0.1"/>
+                            <ColorAnimation Storyboard.TargetProperty="Background.(SolidColorBrush.Color)" To="#D2cfcf" Duration="0:0:0.01"/>
                         </Storyboard>
                     </BeginStoryboard>
                 </Trigger.ExitActions>
@@ -173,21 +173,21 @@
 
     <Style x:Key="CloseButton" TargetType="Button" BasedOn="{StaticResource SaveButton}">
         <Setter Property="Foreground" Value="Black"/>
-        <Setter Property="Background" Value="{StaticResource BrushPrimary4}"/>
+        <Setter Property="Background" Value="{StaticResource BrushPrimary5}"/>
 
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Trigger.EnterActions>
                     <BeginStoryboard>
                         <Storyboard>
-                            <ColorAnimation Storyboard.TargetProperty="Background.(SolidColorBrush.Color)" To="{StaticResource ColorPrimary4}" Duration="0:0:0.1"/>
+                            <ColorAnimation Storyboard.TargetProperty="Background.(SolidColorBrush.Color)" To="{StaticResource colorSecondaryZavrsi}" Duration="0:0:0.1"/>
                         </Storyboard>
                     </BeginStoryboard>
                 </Trigger.EnterActions>
                 <Trigger.ExitActions>
                     <BeginStoryboard>
                         <Storyboard>
-                            <ColorAnimation Storyboard.TargetProperty="Background.(SolidColorBrush.Color)" To="{StaticResource ColorPrimary3}" Duration="0:0:0.1"/>
+                            <ColorAnimation Storyboard.TargetProperty="Background.(SolidColorBrush.Color)" To="{StaticResource ColorPrimaryZavrsi}" Duration="0:0:0.1"/>
                         </Storyboard>
                     </BeginStoryboard>
                 </Trigger.ExitActions>
@@ -195,6 +195,29 @@
         </Style.Triggers>
     </Style>
 
+
+    <Style x:Key="saveModalButton" TargetType="Button" BasedOn="{StaticResource SaveButton}">
+        <Setter Property="Background" Value="{StaticResource BrushPrimary7}"/>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetProperty="Background.(SolidColorBrush.Color)" To="{StaticResource colorModalButton}" Duration="0:0:0.01"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetProperty="Background.(SolidColorBrush.Color)" To="{StaticResource colorModalTitle}" Duration="0:0:0.01"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 
 
     <Style x:Key="gridEditButton" TargetType="Button">

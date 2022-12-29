@@ -18,7 +18,15 @@ namespace ImportApp.WPF.ViewModels
         private string newColumn;
 
         private ConcurrentDictionary<string, string> _myDictionary;
-        private PremapExcelColumnsViewModel _viewModel;
+
+        [ObservableProperty]
+        [NotifyCanExecuteChangedFor(nameof(SaveCommand))]
+        [NotifyCanExecuteChangedFor(nameof(ClearCurrentCommand))]
+        private PremapExcelColumnsViewModel settingsModel;
+
+
+        [ObservableProperty]
+        private string parameterName;
 
 
         [ObservableProperty]
@@ -26,12 +34,13 @@ namespace ImportApp.WPF.ViewModels
         [NotifyCanExecuteChangedFor(nameof(ClearCurrentCommand))]
         private string currentFormOfName;
 
-        public MultipleColumnNameSmallViewModel(ConcurrentDictionary<string, string> myDictionary, PremapExcelColumnsViewModel viewModel)
+        public MultipleColumnNameSmallViewModel(ConcurrentDictionary<string, string> myDictionary, PremapExcelColumnsViewModel viewModel, string _parameterName)
         {
             _myDictionary = myDictionary;
-            _viewModel = viewModel;
+            SettingsModel = viewModel;
+            parameterName = _parameterName;
             string value;
-            if(myDictionary.TryGetValue("Name", out value))
+            if(myDictionary.TryGetValue(parameterName, out value))
             {
                 CurrentFormOfName = value;
             }
@@ -43,7 +52,7 @@ namespace ImportApp.WPF.ViewModels
             if (CurrentFormOfName == null)
                 CurrentFormOfName = newCol;
             else
-                CurrentFormOfName += " + " + newCol;
+                CurrentFormOfName += " ; " + newCol;
         }
 
 
@@ -52,7 +61,13 @@ namespace ImportApp.WPF.ViewModels
         {
             if(CurrentFormOfName != null)
             {
-                _myDictionary.TryAdd("Name", CurrentFormOfName);
+                _myDictionary.AddOrUpdate(parameterName, CurrentFormOfName, (key, oldValue) => CurrentFormOfName);
+                SettingsModel.LoadingData();
+
+                Cancel();
+            }
+            else
+            {
                 Cancel();
             }
         }
@@ -62,7 +77,7 @@ namespace ImportApp.WPF.ViewModels
         {
             if (CurrentFormOfName != null)
             {
-                _myDictionary.Clear();
+                _myDictionary.TryRemove(parameterName, out string value);
                 CurrentFormOfName = null;
             }
         }
@@ -70,7 +85,7 @@ namespace ImportApp.WPF.ViewModels
         [RelayCommand]
         public void Cancel()
         {
-            _viewModel.Close();
+            SettingsModel.Close();
         }
     }
 }

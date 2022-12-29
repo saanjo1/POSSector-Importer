@@ -6,12 +6,19 @@
     <Color x:Key="ColorPrimary1">#1F7312</Color>
     <Color x:Key="ColorPrimary3">#C30606</Color>
     <Color x:Key="ColorPrimary4">#F70000</Color>
+    <Color x:Key="ColorPrimaryZavrsi">#313131</Color>
+    <Color x:Key="colorModalTitle">#1b76a2</Color>
+    <Color x:Key="colorSecondaryZavrsi">#454545</Color>
+    <Color x:Key="colorModalButton">#2991d0</Color>
                     
     <!--Brushes-->
     <SolidColorBrush x:Key="BrushPrimary1" Color="{StaticResource ColorPrimary1}"/>
     <SolidColorBrush x:Key="BrushPrimary2" Color="{StaticResource ColorPrimary2}"/>
     <SolidColorBrush x:Key="BrushPrimary3" Color="{StaticResource ColorPrimary3}"/>
     <SolidColorBrush x:Key="BrushPrimary4" Color="{StaticResource ColorPrimary4}"/>
+    <SolidColorBrush x:Key="BrushPrimary5" Color="{StaticResource ColorPrimaryZavrsi}"/>
+    <SolidColorBrush x:Key="BrushPrimary6" Color="{StaticResource colorModalButton}"/>
+    <SolidColorBrush x:Key="BrushPrimary7" Color="{StaticResource colorModalTitle}"/>
 
 
     <!--Background Colors-->

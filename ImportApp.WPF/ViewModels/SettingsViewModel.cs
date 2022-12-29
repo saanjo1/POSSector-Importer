@@ -52,13 +52,14 @@ namespace ImportApp.WPF.ViewModels
         public void CreateMapRule()
         {
             IsEnableToMap = true;
-            this.PreMapRuleViewModel = new PremapExcelColumnsViewModel(_myDictionary);
+            this.PreMapRuleViewModel = new PremapExcelColumnsViewModel(_myDictionary, this);
         }
 
         [RelayCommand]
         public void Cancel()
         {
             IsOpen = false;
+            IsEnableToMap = false;
         }
 
     }

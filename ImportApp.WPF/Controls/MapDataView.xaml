@@ -8,18 +8,18 @@
              mc:Ignorable="d" 
              x:Name="modalControl"
              FontFamily="Montserrat"
-             FontWeight="SemiBold"
-             FontSize="20"
-             Height="256"
+             FontWeight="ExtraLight"
+             FontSize="18"
+             Height="226"
              Width="450">
 
-    <Grid Background="#d6d6cd">
+    <Grid Background="#ebebeb">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="197*" />
             <ColumnDefinition Width="295*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
+            <RowDefinition Height="42" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -27,33 +27,30 @@
                              Grid.Row="0"
                              Padding="10"
                              Margin="0"
-                             Background="{StaticResource panelActiveColor}"
+                             Background="{StaticResource BrushPrimary7}"
                              Foreground="White"
                              Visibility="Visible"
                              Grid.ColumnSpan="2">
             <StackPanel>
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Stretch" FontSize="20" Text="Choose excel sheet"/>
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Stretch" FontSize="20" Text="Choose excel sheet"/>
             </StackPanel>
         </materialDesign:Card>
-        <StackPanel  HorizontalAlignment="Right"
-                     Margin="0,5,5,0"
-                     VerticalAlignment="Top"
-                     Grid.Column="1">
-            <Button Width="35" Height="35" Background="{StaticResource BrushPrimary4}" Style="{StaticResource CloseButton}" Command="{Binding CancelCommand}">
-                <fa:IconImage Icon="Close" Foreground="White" Width="20"/>
-            </Button>
-
-        </StackPanel>
-
-        <StackPanel Margin="0,30,0,20" Grid.Row="1" Grid.ColumnSpan="4" VerticalAlignment="Center" HorizontalAlignment="Center" Width="440">
+        <Border Margin="212 0 0 0" Grid.Column="1" VerticalAlignment="Top">
+            <StackPanel>
+                <Button Height="47" Background="{StaticResource BrushPrimary5}" Style="{StaticResource CloseButton}" Command="{Binding CancelCommand}">
+                    <TextBlock Text="close" Foreground="White" FontWeight="Light" FontSize="18"/>
+                </Button>
+            </StackPanel>
+        </Border>
+        <StackPanel Margin="0 40" Grid.Row="1" Grid.ColumnSpan="4" VerticalAlignment="Top" HorizontalAlignment="Center" Width="440">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="2">
                 <Label Content="List of sheets:" Padding="5" Margin="0 0 20 0" />
                 <ComboBox ItemsSource="{Binding CurrentSheets}" SelectedItem="{Binding SelectedSheet}" x:Name="comboBoxSheets" Width="190"/>
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Grid.Row="3" Margin="30 50 30 30" HorizontalAlignment="Center">
-                <Button BorderThickness="2" Content="Next" Padding="10" Width="100" Style="{StaticResource SaveButton}" Margin="0 0 20 0" Command="{Binding SaveCommand}"/>
-                <Button BorderBrush="Black" Content="Cancel" Style="{StaticResource CancelButton}" Command="{Binding CancelCommand}" Width="100"/>
+            <StackPanel Grid.Row="3" Margin="0 23"  Orientation="Horizontal" HorizontalAlignment="Center" Grid.ColumnSpan="5">
+                <Button BorderThickness="2" Content="Next" Padding="10" Width="80" Style="{StaticResource saveModalButton}" Margin="0 0 20 0" Command="{Binding SaveCommand}"/>
+                <Button BorderBrush="Black" Content="Cancel" Style="{StaticResource CancelButton}" Command="{Binding CancelCommand}" Width="80"/>
             </StackPanel>
         </StackPanel>
     </Grid>

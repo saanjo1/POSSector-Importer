@@ -3,40 +3,42 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:ImportApp.WPF.Controls" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
-             mc:Ignorable="d" 
+             xmlns:local="clr-namespace:ImportApp.WPF.Controls"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+             mc:Ignorable="d"
+             FontWeight="ExtraLight"
+             FontFamily="Lucidatypewriter"
              FontSize="18"
              Height="441" Width="573">
-    <Grid Background="#FFFFFF">
+    <Grid Background="#ebebeb">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="197*" />
             <ColumnDefinition Width="295*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
+            <RowDefinition Height="42" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <materialDesign:Card x:Name="cardHeader"
                              Grid.Row="0"
+                             Background="#1b76a2"
                              Padding="10"
                              Margin="0"
-                             Background="{StaticResource color5}"
                              Foreground="White"
                              Visibility="Visible"
                              Grid.ColumnSpan="2">
             <StackPanel>
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Stretch" FontSize="20" Text="Options"/>
+                <TextBlock HorizontalAlignment="Left" Foreground="White" FontWeight="Light" VerticalAlignment="Stretch" FontSize="20" Text="Options"/>
             </StackPanel>
         </materialDesign:Card>
-        <StackPanel  HorizontalAlignment="Right"
-                     Margin="0,5,5,0"
-                     VerticalAlignment="Top"
-                     Grid.Column="1">
-            <Button Width="35" Height="35" Background="{StaticResource BrushPrimary4}" Style="{StaticResource CloseButton}" Command="{Binding CancelCommand}">
-                <fa:IconImage Icon="Close" Foreground="White" Width="20"/>
+        <Border HorizontalAlignment="Right" Grid.Column="1" VerticalAlignment="Top">
+            <StackPanel>
+                <Button Background="{StaticResource BrushPrimary5}" Style="{StaticResource CloseButton}" Command="{Binding CancelCommand}">
+                <TextBlock Text="close" Foreground="White" FontWeight="Light"/>
             </Button>
         </StackPanel>
+        </Border>
         <Grid Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,5,27">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
@@ -48,32 +50,32 @@
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="284*"/>
+                <ColumnDefinition Width="167*"/>
+                <ColumnDefinition Width="117*"/>
             </Grid.ColumnDefinitions>
 
 
-            <Label Grid.Row="1" Content="Current form: " FontSize="18" Style="{StaticResource controlLabel}" Foreground="Black" VerticalAlignment="Center"  HorizontalAlignment="Left" Margin="20 0 0 0"/>
-            <Border Grid.Row="1" BorderThickness="1" BorderBrush="Gray" Grid.ColumnSpan="2" Margin="181,0,25,0" >
-                <TextBlock Height="30" VerticalAlignment="Center" Text="{Binding CurrentFormOfName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+            <Label Grid.Row="1" Content="Current form: " FontSize="18" Style="{StaticResource controlLabel}" Foreground="Black" VerticalAlignment="Center"  HorizontalAlignment="Left" Margin="20,0,0,0"/>
+            <Border BorderThickness="3" BorderBrush="Gray" Grid.ColumnSpan="3" Margin="181,61,25,0" Grid.RowSpan="2" >
+                <TextBlock FontSize="14" TextWrapping="WrapWithOverflow" Height="40" Padding="5" FontWeight="SemiBold" VerticalAlignment="Center" Text="{Binding CurrentFormOfName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
             </Border>
-            <Button Grid.Row="2" Style="{StaticResource clearDict}" Grid.Column="1" Margin="138,8,16,0" Command="{Binding ClearCurrentCommand}">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Očisti" Foreground="White" Margin="20 0 0 0" VerticalAlignment="Center"/>
-                    <fa:IconImage Icon="X" Foreground="White" Height="20" Margin="20 0 0 0"/>
-                </StackPanel>
+            <Border Grid.Row="2" Grid.Column="1" Margin="168,10,0,0" Grid.ColumnSpan="2" CornerRadius="15">
+                <Button Style="{StaticResource clearDict}" Command="{Binding ClearCurrentCommand}"  VerticalAlignment="Center" Width="80">
+                        <TextBlock Text="clear" Padding="10" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Button>
+            </Border>
+
+
+            <Label Grid.Row="3" Content="New column: " FontSize="18" Style="{StaticResource controlLabel}" Foreground="Black" VerticalAlignment="Center"  HorizontalAlignment="Left" Margin="20,0,0,0"/>
+            <TextBox x:Name="textName" FontSize="18" Grid.Row="3" Height="30" VerticalAlignment="Center" Text="{Binding NewColumn}" Grid.ColumnSpan="3" Margin="184,0,63,0" />
+            <Button Grid.Row="3" Height="30" Width="30" VerticalAlignment="Center" Grid.Column="2" Margin="69,0,18,0" Background="#2991d0" Command="{Binding AddNewColumnCommand}" CommandParameter="{Binding ElementName=textName, Path=Text}">
+                <fa:IconImage Icon="Plus" Foreground="White" Width="20"/>
             </Button>
 
 
-            <Label Grid.Row="3" Content="New column: " FontSize="18" Style="{StaticResource controlLabel}" Foreground="Black" VerticalAlignment="Center"  HorizontalAlignment="Left" Margin="20 0 0 0"/>
-            <TextBox x:Name="textName" FontSize="18" Grid.Row="3" Height="30" VerticalAlignment="Center" Text="{Binding NewColumn}" Grid.ColumnSpan="2" Margin="184,0,63,0" />
-            <Button Grid.Row="3" Height="30" Width="30" VerticalAlignment="Center" Grid.Column="1" Margin="232,0,13,0" Background="DarkGreen" Command="{Binding AddNewColumnCommand}" CommandParameter="{Binding ElementName=textName, Path=Text}">
-                <fa:IconImage Icon="Check" Foreground="White"/>
-            </Button>
-
-
-            <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Center" Grid.ColumnSpan="5" Margin="0">
-                <Button BorderThickness="2" Content="Save" Padding="10" Width="80" Style="{StaticResource ImportButton}" Margin="0 0 20 0" Command="{Binding SaveCommand}"/>
+            <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Left" Grid.ColumnSpan="2" Margin="194,61,0,0" Grid.RowSpan="2">
+                <Button BorderThickness="2" Content="Save" Padding="10" Width="80" Style="{StaticResource saveModalButton}" Margin="0 0 20 0" Command="{Binding SaveCommand}"/>
                 <Button BorderBrush="Black" Content="Cancel" Style="{StaticResource CancelButton}" Command="{Binding CancelCommand}" Width="80"/>
             </StackPanel>
         </Grid>
