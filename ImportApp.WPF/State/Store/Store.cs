@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ToastNotifications;
 
 namespace ImportApp.WPF.State.Store
 {
@@ -17,12 +18,14 @@ namespace ImportApp.WPF.State.Store
     {
         [ObservableProperty]
         private BaseViewModel? currentDataGrid;
+        private Notifier _notifier;
 
         private IArticleDataService _articleService;
 
-        public Store(IArticleDataService articleService)
+        public Store(IArticleDataService articleService, Notifier notifier)
         {
-            _articleService = articleService;   
+            _articleService = articleService;
+            _notifier = notifier;
         }
 
         [RelayCommand]
@@ -34,10 +37,10 @@ namespace ImportApp.WPF.State.Store
                 switch (storeType)
                 {
                     case StoreType.Articles:
-                        this.CurrentDataGrid = new ArticleStorageViewModel(_articleService, "Articles");
+                        this.CurrentDataGrid = new ArticleStorageViewModel(_articleService, "Articles", _notifier);
                         break;
                     case StoreType.Economato:
-                        this.CurrentDataGrid = new ArticleStorageViewModel(_articleService, "Economato");
+                        this.CurrentDataGrid = new ArticleStorageViewModel(_articleService, "Economato", _notifier);
                         break;
                     default:
                         break;

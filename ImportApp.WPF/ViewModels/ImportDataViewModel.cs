@@ -6,7 +6,8 @@ using System.ComponentModel;
 using System.Windows.Data;
 using ImportApp.Domain.Models;
 using ImportApp.Domain.Services;
-using CustomMessageBox;
+using ToastNotifications;
+using ToastNotifications.Messages;
 
 namespace ImportApp.WPF.ViewModels
 {
@@ -15,16 +16,18 @@ namespace ImportApp.WPF.ViewModels
     {
        
         private IExcelDataService _excelDataService;
+        private Notifier _notifier;
 
         private IArticleDataService _articleService;
         private ICategoryDataService _categoryService;
 
 
-        public ImportDataViewModel(IExcelDataService excelDataService, ICategoryDataService categoryService, IArticleDataService articleService)
+        public ImportDataViewModel(IExcelDataService excelDataService, ICategoryDataService categoryService, IArticleDataService articleService, Notifier notifier)
         {
             _excelDataService = excelDataService;
             _categoryService = categoryService;
             _articleService = articleService;
+            _notifier = notifier;
         }
 
 
@@ -107,13 +110,13 @@ namespace ImportApp.WPF.ViewModels
 
                 if(ExcelFile != null)
                 {
-                    bool? Result = new MessageBoxCustom("Excel file selected.", MessageType.Info, MessageButtons.Ok).ShowDialog();
+                    _notifier.ShowInformation("Excel file selected.");
                 }
 
             }
             catch (System.Exception)
             {
-                bool? Result = new MessageBoxCustom("An error occured while selecting file.", MessageType.Error, MessageButtons.Ok).ShowDialog();
+                _notifier.ShowError("An error occurred. Try again.");
 
             }
 
@@ -168,12 +171,12 @@ namespace ImportApp.WPF.ViewModels
                     }
                 }
                 articleList.Clear();
-                bool? Result = new MessageBoxCustom(counter + " articles imported. " + updatedCounter + " articles updated.", MessageType.Success, MessageButtons.Ok).ShowDialog();
+                _notifier.ShowSuccess(counter + " article(s) imported. " + updatedCounter + " article(s) updated.");
 
             }
             catch (Exception)
             {
-                bool? _rez = new MessageBoxCustom("Please check your input and try again.", MessageType.Error, MessageButtons.Ok).ShowDialog();
+                _notifier.ShowError("Your input is not valid. Please try again.");
             }
         }
 
@@ -181,7 +184,7 @@ namespace ImportApp.WPF.ViewModels
         public void MapData()
         {
             IsOpen = true;
-            this.MDataModel = new MapDataViewModel(_excelDataService, this, mColumnModel);
+            this.MDataModel = new MapDataViewModel(_excelDataService, this, mColumnModel, _notifier);
         }
 
         public void Close()

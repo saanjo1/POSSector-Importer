@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ToastNotifications;
 
 namespace ImportApp.WPF.ViewModels
 {
@@ -16,13 +17,15 @@ namespace ImportApp.WPF.ViewModels
     {
 
         private IDiscountDataService _discountDataService;
+        private Notifier _notifier;
         private ConcurrentDictionary<string, string> _myDictionary;
 
 
-        public SettingsViewModel(IDiscountDataService discountDataService, ConcurrentDictionary<string, string> myDictionary)
+        public SettingsViewModel(IDiscountDataService discountDataService, ConcurrentDictionary<string, string> myDictionary, Notifier notifier)
         {
             _discountDataService = discountDataService;
             _myDictionary = myDictionary;
+            _notifier = notifier;
         }
 
         [ObservableProperty]
@@ -45,7 +48,7 @@ namespace ImportApp.WPF.ViewModels
         public void CreateRule()
         {
             IsOpen = true;
-            this.RuleViewModel = new CreateNewDiscountViewModel(this, _discountDataService);
+            this.RuleViewModel = new CreateNewDiscountViewModel(this, _discountDataService, _notifier);
         }
 
         [RelayCommand]

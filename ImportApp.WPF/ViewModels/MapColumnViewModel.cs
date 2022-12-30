@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using CustomMessageBox;
 using ImportApp.Domain.Services;
 using ImportApp.EntityFramework.Services;
 using System;
@@ -11,6 +10,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using ToastNotifications;
+using ToastNotifications.Messages;
 
 namespace ImportApp.WPF.ViewModels
 {
@@ -18,6 +19,7 @@ namespace ImportApp.WPF.ViewModels
     public partial class MapColumnViewModel : BaseViewModel
     {
         public static string SheetName;
+        private Notifier _notifier;
         public static IExcelDataService? _excelDataService;
 
         [ObservableProperty]
@@ -50,12 +52,13 @@ namespace ImportApp.WPF.ViewModels
         private ImportDataViewModel _viewModel;
 
 
-        public MapColumnViewModel(IExcelDataService excelDataService, string sheetName, List<string> _columnNames, ImportDataViewModel viewModel)
+        public MapColumnViewModel(IExcelDataService excelDataService, string sheetName, List<string> _columnNames, ImportDataViewModel viewModel, Notifier notifier)
         {
             _excelDataService = excelDataService;
             columnNamesList = _columnNames;
             SheetName = sheetName;
             _viewModel = viewModel;
+            _notifier = notifier;
         }
 
         public MapColumnViewModel()
@@ -77,12 +80,12 @@ namespace ImportApp.WPF.ViewModels
             {
                 ObservableCollection<MapColumnViewModel>? excelDataList;
                 excelDataList = _excelDataService.ReadFromExcel(this).Result;
-                bool? Result = new MessageBoxCustom(excelDataList.Count + " articles pulled.", MessageType.Success, MessageButtons.Ok).ShowDialog();
+                _notifier.ShowInformation(excelDataList.Count() + " articles pulled. ");
                 _viewModel.LoadData(excelDataList);
             }
             catch (Exception)
             {
-               bool? _rez = new MessageBoxCustom("Please check your input and try again.", MessageType.Error, MessageButtons.Ok).ShowDialog();
+                _notifier.ShowError("Please check your input and try again.");
             }
         }
 

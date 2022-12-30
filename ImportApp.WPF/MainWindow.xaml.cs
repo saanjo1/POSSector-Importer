@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ToastNotifications;
 
 namespace ImportApp.WPF
 {
@@ -30,7 +31,7 @@ namespace ImportApp.WPF
 
         private void pnlControlBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-
+            
         }
 
         private void pnlControlBar_MouseEnter(object sender, MouseEventArgs e)

@@ -4,6 +4,7 @@ using FontAwesome.Sharp;
 using ImportApp.Domain.Services;
 using ImportApp.WPF.ViewModels;
 using System.Collections.Concurrent;
+using ToastNotifications;
 
 namespace ImportApp.WPF.State.Navigators
 {
@@ -25,14 +26,16 @@ namespace ImportApp.WPF.State.Navigators
         private IExcelDataService _excelDataService;
         private ConcurrentDictionary<string, string> _myDictionary;
         private IDiscountDataService _discountDataService;
+        private Notifier _notifier;
 
-        public Navigator(IArticleDataService articleService, IExcelDataService excelDataService, ICategoryDataService categoryService, IDiscountDataService discountDataService, ConcurrentDictionary<string, string> myDictionary)
+        public Navigator(IArticleDataService articleService, IExcelDataService excelDataService, ICategoryDataService categoryService, IDiscountDataService discountDataService, ConcurrentDictionary<string, string> myDictionary, Notifier notifier)
         {
             _articleService = articleService;
             _excelDataService = excelDataService;
             _categoryService = categoryService;
             _discountDataService = discountDataService;
             _myDictionary = myDictionary;
+            _notifier = notifier;
         }
 
         [RelayCommand]
@@ -49,17 +52,17 @@ namespace ImportApp.WPF.State.Navigators
                         Icon = IconChar.Home;
                         break;
                     case ViewType.Articles:
-                        this.CurrentViewModel = new StoreViewModel(_articleService);
+                        this.CurrentViewModel = new StoreViewModel(_articleService, _notifier);
                         Caption = "Store";
                         Icon = IconChar.TableList;
                         break;
                     case ViewType.ImportArticles:
-                        this.CurrentViewModel = new ImportDataViewModel(_excelDataService,_categoryService, _articleService);
+                        this.CurrentViewModel = new ImportDataViewModel(_excelDataService,_categoryService, _articleService, _notifier);
                         Caption = "Import";
                         Icon = IconChar.FileExcel;
                         break;
                     case ViewType.Settings:
-                        this.CurrentViewModel = new SettingsViewModel(_discountDataService, _myDictionary);
+                        this.CurrentViewModel = new SettingsViewModel(_discountDataService, _myDictionary, _notifier);
                         Caption = "Settings";
                         Icon = IconChar.Gear;
                         break;

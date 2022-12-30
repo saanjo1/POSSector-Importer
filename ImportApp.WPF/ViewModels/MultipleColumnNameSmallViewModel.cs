@@ -59,17 +59,9 @@ namespace ImportApp.WPF.ViewModels
         [RelayCommand]
         public void Save()
         {
-            if(CurrentFormOfName != null)
-            {
                 _myDictionary.AddOrUpdate(parameterName, CurrentFormOfName, (key, oldValue) => CurrentFormOfName);
                 SettingsModel.LoadingData();
 
-                Cancel();
-            }
-            else
-            {
-                Cancel();
-            }
         }
 
         [RelayCommand]

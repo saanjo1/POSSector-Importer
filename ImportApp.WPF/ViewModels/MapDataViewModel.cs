@@ -12,12 +12,16 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ToastNotifications;
 
 namespace ImportApp.WPF.ViewModels
 {
     [ObservableObject]
     public partial class MapDataViewModel : BaseViewModel
     {
+        private Notifier _notifier;
+
+
         [ObservableProperty]
         private List<string> currentSheets;
 
@@ -35,13 +39,14 @@ namespace ImportApp.WPF.ViewModels
         [ObservableProperty]
         private bool isMapped;
 
-        public MapDataViewModel(IExcelDataService excelDataService, ImportDataViewModel importArticleViewModel, MapColumnViewModel mapColumnViewModel)
+        public MapDataViewModel(IExcelDataService excelDataService, ImportDataViewModel importArticleViewModel, MapColumnViewModel mapColumnViewModel, Notifier notifier)
         {
             _excelDataService = excelDataService;
             mColumnModel = mapColumnViewModel;
             _importArticleViewModel = importArticleViewModel;
             CurrentSheets = _excelDataService.ListSheetsFromFile().Result;
             SelectedSheet = CurrentSheets[0];
+            _notifier = notifier;
         }
 
         [RelayCommand]
@@ -57,7 +62,7 @@ namespace ImportApp.WPF.ViewModels
             {
                 List<string>? columnNamesList = _excelDataService.ListColumnNames(SelectedSheet).Result;
 
-                MapColumnViewModel mColumnModel = new MapColumnViewModel(_excelDataService, SelectedSheet, columnNamesList, _importArticleViewModel);
+                MapColumnViewModel mColumnModel = new MapColumnViewModel(_excelDataService, SelectedSheet, columnNamesList, _importArticleViewModel, _notifier);
                 IsMapped = true;
                 _importArticleViewModel.IsMapped = true;
                 _importArticleViewModel.IsOpen = false;

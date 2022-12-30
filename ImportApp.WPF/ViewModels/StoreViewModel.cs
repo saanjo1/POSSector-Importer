@@ -11,6 +11,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Data;
+using ToastNotifications;
 
 namespace ImportApp.WPF.ViewModels
 {
@@ -19,14 +20,16 @@ namespace ImportApp.WPF.ViewModels
     public partial class StoreViewModel : BaseViewModel
     {
         private IArticleDataService _articleService;
+        private Notifier _notifier;
 
         public IStore Store { get; set; }
 
 
-        public StoreViewModel(IArticleDataService articleService)
+        public StoreViewModel(IArticleDataService articleService, Notifier notifier)
         {
             _articleService = articleService;
-            Store = new Store(_articleService);
+            _notifier = notifier;
+            Store = new Store(_articleService, _notifier);
         }
 
 

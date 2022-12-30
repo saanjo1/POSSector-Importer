@@ -11,6 +11,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using ToastNotifications;
+using ToastNotifications.Lifetime;
+using ToastNotifications.Position;
 
 namespace ImportApp.WPF.ViewModels
 {
@@ -21,11 +24,27 @@ namespace ImportApp.WPF.ViewModels
 
         public ConcurrentDictionary<string, string> myDictionary;
 
+        Notifier notifier = new Notifier(cfg =>
+        {
+            cfg.PositionProvider = new WindowPositionProvider(
+                parentWindow: Application.Current.MainWindow,
+                corner: Corner.TopRight,
+                offsetX: 10,
+                offsetY: 10);
+
+            cfg.LifetimeSupervisor = new TimeAndCountBasedLifetimeSupervisor(
+                notificationLifetime: TimeSpan.FromSeconds(3),
+                maximumNotificationCount: MaximumNotificationCount.FromCount(5));
+
+            cfg.Dispatcher = Application.Current.Dispatcher;
+        });
+
+
         public MainViewModel(IArticleDataService articleService, ICategoryDataService categoryService, IExcelDataService excelDataService, IDiscountDataService discountDataService)
         {
             myDictionary = new ConcurrentDictionary<string, string>();
             LoadDictionary();
-            Navigator = new Navigator(articleService, excelDataService, categoryService, discountDataService, myDictionary);
+            Navigator = new Navigator(articleService, excelDataService, categoryService, discountDataService, myDictionary, notifier);
 
         }
 
@@ -33,7 +52,6 @@ namespace ImportApp.WPF.ViewModels
         private void Close()
         {
             Application.Current.Shutdown();
-
         }
 
         [RelayCommand]

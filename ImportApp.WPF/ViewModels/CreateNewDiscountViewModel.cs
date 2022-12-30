@@ -1,9 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using CustomMessageBox;
 using ImportApp.Domain.Models;
 using ImportApp.Domain.Services;
 using System;
+using ToastNotifications;
+using ToastNotifications.Messages;
 
 namespace ImportApp.WPF.ViewModels
 {
@@ -12,6 +13,7 @@ namespace ImportApp.WPF.ViewModels
     {
 
         private readonly SettingsViewModel _settings;
+        private Notifier _notifier;
         private IDiscountDataService _discountDataService;
 
 
@@ -31,12 +33,13 @@ namespace ImportApp.WPF.ViewModels
         private bool active;
 
 
-        public CreateNewDiscountViewModel(SettingsViewModel settings, IDiscountDataService discountDataService)
+        public CreateNewDiscountViewModel(SettingsViewModel settings, IDiscountDataService discountDataService, Notifier notifier)
         {
             _settings = settings;
             _discountDataService = discountDataService;
             ValidFrom = DateTime.Now;
             ValidTo = DateTime.Now;
+            _notifier = notifier;
         }
 
         [ObservableProperty]
@@ -65,12 +68,12 @@ namespace ImportApp.WPF.ViewModels
                     IsExecuted = true
                 };
                 _discountDataService.Create(newRule);
-                bool? Result = new MessageBoxCustom("Successfully created discount.", MessageType.Success, MessageButtons.Ok).ShowDialog();
+                _notifier.ShowSuccess("Rule successfully created.");
                 Cancel();   
             }
             catch (Exception)
             {
-                bool? Result = new MessageBoxCustom("An error occured while creating discount.", MessageType.Error, MessageButtons.Ok).ShowDialog();
+                _notifier.ShowError("An error occured while creating discount.");
                 Cancel();
             }
 

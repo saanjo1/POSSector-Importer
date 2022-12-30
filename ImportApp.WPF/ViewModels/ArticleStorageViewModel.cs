@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using CustomMessageBox;
 using ImportApp.Domain.Models;
 using ImportApp.Domain.Services;
 using System;
@@ -9,6 +8,8 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Data;
+using ToastNotifications;
+using ToastNotifications.Messages;
 
 namespace ImportApp.WPF.ViewModels
 {
@@ -17,6 +18,7 @@ namespace ImportApp.WPF.ViewModels
     public partial class ArticleStorageViewModel : BaseViewModel
     {
         private IArticleDataService _articleService;
+        private Notifier _notifier;
 
         [ObservableProperty]
         private string storageName;
@@ -50,8 +52,9 @@ namespace ImportApp.WPF.ViewModels
 
 
 
-        public ArticleStorageViewModel(IArticleDataService articleService, string _storageName)
+        public ArticleStorageViewModel(IArticleDataService articleService, string _storageName, Notifier notifier)
         {
+            _notifier = notifier;
             _articleService = articleService;
             storageName = _storageName;
             LoadData();
@@ -180,12 +183,12 @@ namespace ImportApp.WPF.ViewModels
             try
             {
                 var deletedArticle = _articleService.Delete(parameter.Id);
-                bool? Result = new MessageBoxCustom("Article is successfully deleted.", MessageType.Warning, MessageButtons.Ok).ShowDialog();
+                _notifier.ShowSuccess("Article successfully deleted.");
                 LoadData();
             }
             catch (Exception)
             {
-                bool? Result = new MessageBoxCustom("An error occured while attempting to delete article.", MessageType.Error, MessageButtons.Ok).ShowDialog();
+                _notifier.ShowError("An error occurred while deleting article.");
                 throw;
             }
         }
