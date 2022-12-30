@@ -70,50 +70,50 @@
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Grid.Row="1"  Margin="0 10 0 10">
-                        <Label Margin="5 0 6 0" Content="SubCategory" Style="{StaticResource controlLabel}" Foreground="Black" VerticalAlignment="Center"  HorizontalAlignment="Left" />
+                        <Label x:Name="subctgName" Margin="5 0 6 0" Content="SubCategory" Style="{StaticResource controlLabel}" Foreground="Black" VerticalAlignment="Center"  HorizontalAlignment="Left" />
                         <TextBox  FontSize="18" Width="200" Height="30" Text="{Binding Subcategory, Mode=TwoWay}"/>
-                        <Button Style="{StaticResource plusButton}" Width="20" Height="20" Margin="10 0 0 0" Command="{Binding SetMultipleValuesCommand}" CommandParameter="{Binding ElementName=ctgName, Path=Content}">
+                        <Button Style="{StaticResource plusButton}" Width="20" Height="20" Margin="10 0 0 0" Command="{Binding SetMultipleValuesCommand}" CommandParameter="{Binding ElementName=subctgName, Path=Content}">
                             <fa:IconImage Icon="Gear"/>
                         </Button>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="0 10 0 10">
-                        <Label Content="Storage" Margin="10 0 40 0" Style="{StaticResource controlLabel}" Foreground="Black"  HorizontalContentAlignment="Center" RenderTransformOrigin="0.498,0.26"/>
+                        <Label x:Name="strgName" Content="Storage" Margin="10 0 40 0" Style="{StaticResource controlLabel}" Foreground="Black"  HorizontalContentAlignment="Center" RenderTransformOrigin="0.498,0.26"/>
                         <TextBox FontSize="18"  Width="200" Height="30" Text="{Binding Storage, Mode=TwoWay}" />
-                        <Button Style="{StaticResource plusButton}" Width="20" Height="20" Margin="10 0 0 0" Command="{Binding SetMultipleValuesCommand}" CommandParameter="{Binding ElementName=ctgName, Path=Content}">
+                        <Button Style="{StaticResource plusButton}" Width="20" Height="20" Margin="10 0 0 0" Command="{Binding SetMultipleValuesCommand}" CommandParameter="{Binding ElementName=strgName, Path=Content}">
                             <fa:IconImage Icon="Gear"/>
                         </Button>
                     </StackPanel>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" Grid.Column="2" Grid.ColumnSpan="3" Grid.RowSpan="3" Margin="0 -100 0 10">
-                    <Label Margin="10 0 30 0" Content="Name" Style="{StaticResource controlLabel}" Foreground="Black" VerticalAlignment="Center"  HorizontalAlignment="Left" />
+                    <Label x:Name="name" Margin="10 0 30 0" Content="Name" Style="{StaticResource controlLabel}" Foreground="Black" VerticalAlignment="Center"  HorizontalAlignment="Left" />
                     <TextBox FontSize="18"  AcceptsReturn="True" TextWrapping="Wrap" Width="200" Height="30" VerticalAlignment="Center" Text="{Binding Name, Mode=TwoWay}" Grid.ColumnSpan="4" />
-                    <Button Style="{StaticResource plusButton}" Width="20" Height="20" Margin="10 0 0 0" Command="{Binding SetMultipleValuesCommand}" CommandParameter="{Binding ElementName=ctgName, Path=Content}">
+                    <Button Style="{StaticResource plusButton}" Width="20" Height="20" Margin="10 0 0 0" Command="{Binding SetMultipleValuesCommand}" CommandParameter="{Binding ElementName=name, Path=Content}">
                         <fa:IconImage Icon="Gear"/>
                     </Button>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" Grid.Column="2" Grid.ColumnSpan="3" Grid.RowSpan="3" Margin="0 20 0 10">
-                    <Label Margin="10 0 13 0" Content="BarCode" Style="{StaticResource controlLabel}" Foreground="Black" VerticalAlignment="Center"  HorizontalAlignment="Left" />
+                    <Label x:Name="barCdName" Margin="10 0 13 0" Content="BarCode" Style="{StaticResource controlLabel}" Foreground="Black" VerticalAlignment="Center"  HorizontalAlignment="Left" />
                     <TextBox FontSize="18"  AcceptsReturn="True" TextWrapping="Wrap" Width="200" Height="30" VerticalAlignment="Center" Text="{Binding BarCode, Mode=TwoWay}" Grid.ColumnSpan="4" />
-                    <Button Style="{StaticResource plusButton}" Width="20" Height="20" Margin="10 0 0 0" Command="{Binding SetMultipleValuesCommand}" CommandParameter="{Binding ElementName=ctgName, Path=Content}">
+                    <Button Style="{StaticResource plusButton}" Width="20" Height="20" Margin="10 0 0 0" Command="{Binding SetMultipleValuesCommand}" CommandParameter="{Binding ElementName=barCdName, Path=Content}">
                         <fa:IconImage Icon="Gear"/>
                     </Button>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" Grid.Column="2" Grid.ColumnSpan="3" Grid.RowSpan="3" Margin="0 143 0 10">
-                    <Label Margin="10 0 13 0" Content="Quantity" Style="{StaticResource controlLabel}" Foreground="Black" VerticalAlignment="Center"  HorizontalAlignment="Left" />
+                    <Label x:Name="qtyName" Margin="10 0 13 0" Content="Quantity" Style="{StaticResource controlLabel}" Foreground="Black" VerticalAlignment="Center"  HorizontalAlignment="Left" />
                     <TextBox FontSize="18"  AcceptsReturn="True" TextWrapping="Wrap" Width="200" Height="30" VerticalAlignment="Center" Text="{Binding Quantity, Mode=TwoWay}" Grid.ColumnSpan="4" />
-                    <Button Style="{StaticResource plusButton}" Width="20" Height="20" Margin="10 0 0 0" Command="{Binding SetMultipleValuesCommand}" CommandParameter="{Binding ElementName=ctgName, Path=Content}">
+                    <Button Style="{StaticResource plusButton}" Width="20" Height="20" Margin="10 0 0 0" Command="{Binding SetMultipleValuesCommand}" CommandParameter="{Binding ElementName=qtyName, Path=Content}">
                         <fa:IconImage Icon="Gear"/>
                     </Button>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" Grid.Column="2" Grid.ColumnSpan="3" Grid.RowSpan="5" Margin="0 93 0 10">
-                    <Label Margin="15 0 35 0" Content="Price" Style="{StaticResource controlLabel}" Foreground="Black" VerticalAlignment="Center"  HorizontalAlignment="Left" />
+                    <Label x:Name="priceName" Margin="15 0 35 0" Content="Price" Style="{StaticResource controlLabel}" Foreground="Black" VerticalAlignment="Center"  HorizontalAlignment="Left" />
                     <TextBox FontSize="18"  AcceptsReturn="True" TextWrapping="Wrap" Width="200" Height="30" VerticalAlignment="Center" Text="{Binding Price, Mode=TwoWay}" Grid.ColumnSpan="4" />
-                    <Button Style="{StaticResource plusButton}" Width="20" Height="20" Margin="10 0 0 0" Command="{Binding SetMultipleValuesCommand}" CommandParameter="{Binding ElementName=ctgName, Path=Content}">
+                    <Button Style="{StaticResource plusButton}" Width="20" Height="20" Margin="10 0 0 0" Command="{Binding SetMultipleValuesCommand}" CommandParameter="{Binding ElementName=priceName, Path=Content}">
                         <fa:IconImage Icon="Gear"/>
                     </Button>
                 </StackPanel>

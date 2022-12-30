@@ -77,7 +77,7 @@ namespace ImportApp.WPF.ViewModels
         [RelayCommand]
         public void Cancel()
         {
-            SettingsModel.Close();
+            SettingsModel.Cancel();
         }
     }
 }

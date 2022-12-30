@@ -1,10 +1,15 @@
 ﻿using ImportApp.Domain.Models;
 using ImportApp.WPF.Resources;
 using ImportApp.WPF.ViewModels;
+using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Win32;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Data.Common;
+using System.Diagnostics;
 using System.Linq;
+using System.Printing;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -43,7 +48,7 @@ namespace ImportApp.WPF.Helpers
             return decimalValue;
         }
 
-        public static MapColumnViewModel SelectedColumns(MapColumnViewModel mColumnModel, List<string> columnNamesList)
+        public static MapColumnViewModel SelectedColumns(MapColumnViewModel mColumnModel, List<string> columnNamesList, ConcurrentDictionary<string, string> _myDictionary)
         {
             for (int i = 0; i < columnNamesList.Count(); i++)
             {
@@ -72,5 +77,25 @@ namespace ImportApp.WPF.Helpers
             return mColumnModel;  
         }
 
+     
+        public static string ReaderHelper(DbDataReader reader, string flag, ConcurrentDictionary<string, string> _myDictionary)
+        {
+            string value;
+            string outputvalue = String.Empty;
+            _myDictionary.TryGetValue(flag, out value);
+
+            if (value != null)
+            {
+                string[] substrings = value.Split(';').Select(s => s.Trim()).ToArray();
+
+                    foreach (string substring in substrings)
+                    {
+                        outputvalue += reader[substring] + " ";
+                    }
+            }
+
+            return outputvalue;
+        }
+                
     }
 }

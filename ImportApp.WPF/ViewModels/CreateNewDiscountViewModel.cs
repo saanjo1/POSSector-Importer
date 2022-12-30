@@ -16,7 +16,6 @@ namespace ImportApp.WPF.ViewModels
         private Notifier _notifier;
         private IDiscountDataService _discountDataService;
 
-
         [ObservableProperty]
         private string? name;
 

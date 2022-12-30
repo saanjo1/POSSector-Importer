@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using ImportApp.WPF.ViewModels;
 using System.Collections.ObjectModel;
 using ImportApp.WPF;
+using System.Collections.Concurrent;
 
 namespace ImportApp.WPF.Services
 {
@@ -115,7 +116,7 @@ namespace ImportApp.WPF.Services
             return await Task.FromResult(lines);
         }
 
-        public async Task<ObservableCollection<MapColumnViewModel>> ReadFromExcel(MapColumnViewModel mColumnModel)
+        public async Task<ObservableCollection<MapColumnViewModel>> ReadFromExcel(ConcurrentDictionary<string,string> _myDictionary)
         {
             try
             {
@@ -131,20 +132,20 @@ namespace ImportApp.WPF.Services
                 Command.Connection = _oleDbConnection;
                 Command.CommandText = "select * from [" + App.Current.Properties["SheetName"] + "]";
 
-                var Reader = await Command.ExecuteReaderAsync();
+                System.Data.Common.DbDataReader Reader = await Command.ExecuteReaderAsync();
 
                 while (Reader.Read())
                 {
                     mapColumnViewModels.Add(new MapColumnViewModel()
                     {
-                        Name = Reader[mColumnModel.Name].ToString(),
-                        Storage = Reader[mColumnModel.Storage].ToString(),
-                        BarCode = Reader[mColumnModel.BarCode].ToString(),
-                        Price = Reader[mColumnModel.Price].ToString(),
-                        Gender = Reader[mColumnModel.Gender].ToString(),
-                        Collection = Reader[mColumnModel.Collection].ToString(),
-                        Quantity = Reader[mColumnModel.Quantity].ToString(),
-                    });
+                        Name = Helpers.Extensions.ReaderHelper(Reader, "Name", _myDictionary),
+                        Storage = Helpers.Extensions.ReaderHelper(Reader, "Storage", _myDictionary),
+                        BarCode = Helpers.Extensions.ReaderHelper(Reader, "BarCode", _myDictionary),
+                        Price = Helpers.Extensions.ReaderHelper(Reader, "Price", _myDictionary),
+                        Gender = Helpers.Extensions.ReaderHelper(Reader, "SubCategory", _myDictionary),
+                        Collection = Helpers.Extensions.ReaderHelper(Reader, "Category", _myDictionary),
+                        Quantity = Helpers.Extensions.ReaderHelper(Reader, "Quantity", _myDictionary)
+                    }) ;
                 }
 
                 Reader.Close();

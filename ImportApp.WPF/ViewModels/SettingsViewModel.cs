@@ -61,8 +61,13 @@ namespace ImportApp.WPF.ViewModels
         [RelayCommand]
         public void Cancel()
         {
+            if(IsOpen)
             IsOpen = false;
-            IsEnableToMap = false;
+
+
+            if (IsEnableToMap)
+                IsEnableToMap = false;
+           
         }
 
     }

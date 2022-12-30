@@ -92,9 +92,9 @@ namespace ImportApp.WPF.ViewModels
 
 
         [RelayCommand]
-        public void Close() {
+        public void Cancel() {
 
-           IsOpened = false;
+            _settingsViewModel.Cancel();
         }
 
 

@@ -57,7 +57,7 @@ namespace ImportApp.WPF.State.Navigators
                         Icon = IconChar.TableList;
                         break;
                     case ViewType.ImportArticles:
-                        this.CurrentViewModel = new ImportDataViewModel(_excelDataService,_categoryService, _articleService, _notifier);
+                        this.CurrentViewModel = new ImportDataViewModel(_excelDataService,_categoryService, _articleService, _notifier, _myDictionary);
                         Caption = "Import";
                         Icon = IconChar.FileExcel;
                         break;

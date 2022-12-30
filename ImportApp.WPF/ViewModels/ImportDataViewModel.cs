@@ -8,6 +8,7 @@ using ImportApp.Domain.Models;
 using ImportApp.Domain.Services;
 using ToastNotifications;
 using ToastNotifications.Messages;
+using System.Collections.Concurrent;
 
 namespace ImportApp.WPF.ViewModels
 {
@@ -17,17 +18,19 @@ namespace ImportApp.WPF.ViewModels
        
         private IExcelDataService _excelDataService;
         private Notifier _notifier;
+        private ConcurrentDictionary<string, string> _myDictionary;
 
         private IArticleDataService _articleService;
         private ICategoryDataService _categoryService;
 
 
-        public ImportDataViewModel(IExcelDataService excelDataService, ICategoryDataService categoryService, IArticleDataService articleService, Notifier notifier)
+        public ImportDataViewModel(IExcelDataService excelDataService, ICategoryDataService categoryService, IArticleDataService articleService, Notifier notifier, ConcurrentDictionary<string, string> myDictionary)
         {
             _excelDataService = excelDataService;
             _categoryService = categoryService;
             _articleService = articleService;
             _notifier = notifier;
+            _myDictionary = myDictionary;
         }
 
 
@@ -154,7 +157,7 @@ namespace ImportApp.WPF.ViewModels
                             {
                                 ArticleId = newArticle.Id,
                                 Id = Guid.NewGuid(),
-                                Quantity = Helpers.Extensions.GetDecimal(articleList[i]?.Quantity),
+                                Quantity = Helpers.Extensions.GetDecimal(articleList[i]?.Quantity.ToString()),
                                 GoodId = null,
                                 ValidFrom = DateTime.Now,
                                 ValidUntil = DateTime.Now
@@ -184,7 +187,7 @@ namespace ImportApp.WPF.ViewModels
         public void MapData()
         {
             IsOpen = true;
-            this.MDataModel = new MapDataViewModel(_excelDataService, this, mColumnModel, _notifier);
+            this.MDataModel = new MapDataViewModel(_excelDataService, this, mColumnModel, _notifier, _myDictionary);
         }
 
         public void Close()

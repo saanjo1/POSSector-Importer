@@ -76,17 +76,17 @@ namespace ImportApp.WPF.ViewModels
         [RelayCommand]
         public void Submit()
         {
-            try
-            {
-                ObservableCollection<MapColumnViewModel>? excelDataList;
-                excelDataList = _excelDataService.ReadFromExcel(this).Result;
-                _notifier.ShowInformation(excelDataList.Count() + " articles pulled. ");
-                _viewModel.LoadData(excelDataList);
-            }
-            catch (Exception)
-            {
-                _notifier.ShowError("Please check your input and try again.");
-            }
+            //try
+            //{
+            //    ObservableCollection<MapColumnViewModel>? excelDataList;
+            //    excelDataList = _excelDataService.ReadFromExcel(this).Result;
+            //    _notifier.ShowInformation(excelDataList.Count() + " articles pulled. ");
+            //    _viewModel.LoadData(excelDataList);
+            //}
+            //catch (Exception)
+            //{
+            //    _notifier.ShowError("Please check your input and try again.");
+            //}
         }
 
 

@@ -5,7 +5,9 @@ using ImportApp.Domain.Services;
 using ImportApp.EntityFramework.Services;
 using ModalControl;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.OleDb;
 using System.IO;
@@ -13,6 +15,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ToastNotifications;
+using ToastNotifications.Messages;
 
 namespace ImportApp.WPF.ViewModels
 {
@@ -31,6 +34,7 @@ namespace ImportApp.WPF.ViewModels
 
         private IExcelDataService _excelDataService;
         private readonly ImportDataViewModel _importArticleViewModel;
+        private ConcurrentDictionary<string, string> _myDictionary;
 
 
         [ObservableProperty]
@@ -39,7 +43,7 @@ namespace ImportApp.WPF.ViewModels
         [ObservableProperty]
         private bool isMapped;
 
-        public MapDataViewModel(IExcelDataService excelDataService, ImportDataViewModel importArticleViewModel, MapColumnViewModel mapColumnViewModel, Notifier notifier)
+        public MapDataViewModel(IExcelDataService excelDataService, ImportDataViewModel importArticleViewModel, MapColumnViewModel mapColumnViewModel, Notifier notifier, ConcurrentDictionary<string, string> myDictionary)
         {
             _excelDataService = excelDataService;
             mColumnModel = mapColumnViewModel;
@@ -47,6 +51,7 @@ namespace ImportApp.WPF.ViewModels
             CurrentSheets = _excelDataService.ListSheetsFromFile().Result;
             SelectedSheet = CurrentSheets[0];
             _notifier = notifier;
+            _myDictionary = myDictionary;
         }
 
         [RelayCommand]
@@ -60,14 +65,12 @@ namespace ImportApp.WPF.ViewModels
         {
             if (SelectedSheet != null)
             {
-                List<string>? columnNamesList = _excelDataService.ListColumnNames(SelectedSheet).Result;
-
-                MapColumnViewModel mColumnModel = new MapColumnViewModel(_excelDataService, SelectedSheet, columnNamesList, _importArticleViewModel, _notifier);
-                IsMapped = true;
-                _importArticleViewModel.IsMapped = true;
-                _importArticleViewModel.IsOpen = false;
-                _importArticleViewModel.MColumnModel = Helpers.Extensions.SelectedColumns(mColumnModel, columnNamesList);
+                ObservableCollection<MapColumnViewModel>? excelDataList;
                 App.Current.Properties["SheetName"] = SelectedSheet;
+                excelDataList = _excelDataService.ReadFromExcel(_myDictionary).Result;
+                _notifier.ShowInformation(excelDataList.Count() + " articles pulled. ");
+                _importArticleViewModel.LoadData(excelDataList);
+                _importArticleViewModel.Close();
             }
         }
 
