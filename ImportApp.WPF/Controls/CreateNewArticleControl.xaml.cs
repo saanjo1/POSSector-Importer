@@ -1,7 +1,4 @@
-﻿using LiveCharts;
-using LiveCharts.Defaults;
-using LiveCharts.Wpf;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,20 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ImportApp.WPF.Views
+namespace ImportApp.WPF.Controls
 {
     /// <summary>
-    /// Interaction logic for HomeView.xaml
+    /// Interaction logic for CreateNewArticleControl.xaml
     /// </summary>
-    public partial class HomeView : UserControl
+    public partial class CreateNewArticleControl : UserControl
     {
-
-        public HomeView()
+        public CreateNewArticleControl()
         {
             InitializeComponent();
-           
         }
-
     }
 }
-

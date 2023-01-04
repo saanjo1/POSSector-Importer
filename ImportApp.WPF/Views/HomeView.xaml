@@ -1,13 +1,94 @@
-﻿<UserControl x:Class="ImportApp.WPF.Views.HomeView"
+﻿<UserControl xmlns:Controls="clr-namespace:ImportApp.WPF.Controls" 
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ImportApp.WPF.Views"
-             mc:Ignorable="d" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf" xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp" xmlns:modalcontrol="clr-namespace:ModalControl;assembly=ModalControl"
+             x:Class="ImportApp.WPF.Views.HomeView"
+             mc:Ignorable="d"
+             FontWeight="ExtraLight"
+             FontFamily="Lucidatypewriter"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBlock Text="Home view"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <modalcontrol:Modal Margin="0" VerticalAlignment="Center" Panel.ZIndex="1" Background="Transparent" IsOpen="{Binding IsOpen}" Grid.RowSpan="3" Grid.ColumnSpan="5">
+            <ContentControl VerticalAlignment="Top"  Content="{Binding AddArticleModel}"/>
+        </modalcontrol:Modal>
+
+        <Label Grid.ColumnSpan="5" Grid.Row="0" Margin="30 0 0 0" FontSize="38" Foreground="White" Content="Welcome, User 1!"/>
+
+        <materialDesign:Card x:Name="card"
+                             Padding="10"
+                             Height="300"
+                             Width="560"
+                             Background="{StaticResource plainTextColor3}"
+                             Foreground="White"
+                             Margin="0 80 0 0"
+                             HorizontalAlignment="Center"
+                             Visibility="Visible"
+                             Grid.Row="1"
+                             Grid.ColumnSpan="4" Grid.RowSpan="3">
+
+            <StackPanel>
+                <Label Grid.ColumnSpan="5" FontSize="20" HorizontalAlignment="Center" Foreground="White" Content="QUICK ACTIONS"/>
+                <ProgressBar Margin="0 25 0 0" Height="4" Width="173" Background="White" RenderTransformOrigin="0.5,0.5">
+                    <ProgressBar.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleY="-1"/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </ProgressBar.RenderTransform>
+                </ProgressBar>
+                <StackPanel Orientation="Horizontal" Margin="0 35 0 0" HorizontalAlignment="Center">
+                    <Button Command="{Binding AddArticleCommand}" Grid.Row="0" Style="{StaticResource SaveButton}" Margin="10" Width="150">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="ListAlt" Width="20" Foreground="{StaticResource color4}" />
+                            <Label Content="Add an article" Foreground="White" Margin="5"/>
+                        </StackPanel>
+                    </Button>
+
+                    <Button Grid.Row="1" Style="{StaticResource SaveButton}" Margin="10" Width="150">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="Percent" Width="15" Foreground="{StaticResource color6}" />
+                            <Label Content="Add a discount" Foreground="White" Margin="5"/>
+                        </StackPanel>
+                    </Button>
+
+                    <Button Grid.Row="0" Style="{StaticResource SaveButton}" Margin="10" Width="150">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:IconImage Icon="Store" Width="20" Foreground="{StaticResource color3}"  />
+                            <Label Content="Add a store" Foreground="White" Margin="5"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+                <ProgressBar Margin="0 55 0 0" Height="4" Width="173" Background="White" RenderTransformOrigin="0.5,0.5">
+                    <ProgressBar.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleY="-1"/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </ProgressBar.RenderTransform>
+                </ProgressBar>
+            </StackPanel>
+        </materialDesign:Card>
 
     </Grid>
 </UserControl>

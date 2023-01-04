@@ -2,6 +2,8 @@
 using ImportApp.Domain.Services;
 using ImportApp.EntityFramework.DBContext;
 using Microsoft.EntityFrameworkCore.Internal;
+using System.Diagnostics.Metrics;
+using System.Reflection;
 
 namespace ImportApp.EntityFramework.Services
 {
@@ -156,6 +158,17 @@ namespace ImportApp.EntityFramework.Services
 
                 return Task.FromResult(entity);
             }
+        }
+
+        public Task<int> GetLastArticleNumber()
+        {
+            using (ImportAppDbContext context = factory.CreateDbContext())
+            {
+                int counter = context.Articles.Count();
+
+                return Task.FromResult(++counter);
+            }
+
         }
     }
 }

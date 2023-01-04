@@ -61,10 +61,9 @@
                 <local:MainWindow/>
             </DataTemplate>
 
-
-   
-
-
+            <DataTemplate DataType="{x:Type viewmodels:CreateNewArticleViewModel}">
+                <controls:CreateNewArticleControl/>
+            </DataTemplate>
 
         </ResourceDictionary>
 

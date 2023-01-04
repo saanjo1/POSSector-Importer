@@ -36,6 +36,7 @@ namespace ImportApp.WPF.State.Navigators
             _discountDataService = discountDataService;
             _myDictionary = myDictionary;
             _notifier = notifier;
+            DefaultLoad();
         }
 
         [RelayCommand]
@@ -47,7 +48,7 @@ namespace ImportApp.WPF.State.Navigators
                 switch (viewType)
                 {
                     case ViewType.Home:
-                        this.CurrentViewModel = new HomeViewModel();
+                        this.CurrentViewModel = new HomeViewModel(_articleService);
                         Caption = "Dashboard";
                         Icon = IconChar.Home;
                         break;
@@ -57,7 +58,7 @@ namespace ImportApp.WPF.State.Navigators
                         Icon = IconChar.TableList;
                         break;
                     case ViewType.ImportArticles:
-                        this.CurrentViewModel = new ImportDataViewModel(_excelDataService,_categoryService, _articleService, _notifier, _myDictionary);
+                        this.CurrentViewModel = new ImportDataViewModel(_excelDataService, _categoryService, _articleService, _notifier, _myDictionary);
                         Caption = "Import";
                         Icon = IconChar.FileExcel;
                         break;
@@ -72,6 +73,13 @@ namespace ImportApp.WPF.State.Navigators
             }
         }
 
-       
+        public void DefaultLoad()
+        {
+            this.CurrentViewModel = new HomeViewModel(_articleService);
+            Caption = "Dashboard";
+            Icon = IconChar.Home;
+        }
+
+
     }
 }

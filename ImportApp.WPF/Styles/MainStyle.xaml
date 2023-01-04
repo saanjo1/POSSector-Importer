@@ -7,6 +7,18 @@
              xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2"
              xmlns:controls="clr-namespace:ImportApp.WPF.Controls">
 
+
+
+
+    <Style TargetType="{x:Type TextBox}">
+        <Style.Resources>
+            <Style TargetType="{x:Type Border}">
+                <Setter Property="CornerRadius" Value="6" />
+                <Setter Property="Padding" Value="2"/>
+            </Style>
+        </Style.Resources>
+    </Style>
+
     <Style x:Key="SaveButton" TargetType="Button">
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="Background" Value="{StaticResource panelActiveColor}"/>
@@ -599,14 +611,14 @@
                   x:Name="Border" 
                   Grid.ColumnSpan="2"
                   CornerRadius="5"
-                  Background="{StaticResource color8}"
+                  Background="{StaticResource plainTextColor2}"
                   BorderBrush="White"
                   BorderThickness="1" />
             <Border 
                   Grid.Column="0"
                   CornerRadius="5" 
                   Margin="1" 
-                  Background="{StaticResource color8}"
+                  Background="{StaticResource plainTextColor2}"
                   BorderBrush="White"
                   BorderThickness="0,0,1,0" />
             <Path 
