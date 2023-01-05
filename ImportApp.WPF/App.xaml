@@ -45,8 +45,16 @@
                 <controls:MapExcelColumns/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewmodels:CreateNewStoreViewModel}">
+                <controls:CreateNewStore/>
+            </DataTemplate>
+
             <DataTemplate DataType="{x:Type viewmodels:CreateNewDiscountViewModel}">
                 <controls:CreateNewDiscount/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodels:CreateCategoryViewModel}">
+                <controls:CreateNewCategory/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewmodels:MultipleColumnNameSmallViewModel}">

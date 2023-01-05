@@ -28,12 +28,8 @@ namespace ImportApp.WPF.ViewModels
             _notifier = notifier;
         }
 
-        [ObservableProperty]
-        [NotifyCanExecuteChangedFor(nameof(CreateRuleCommand))]
-        private bool isOpen;
+ 
 
-        [ObservableProperty]
-        private CreateNewDiscountViewModel ruleViewModel;
 
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(CreateMapRuleCommand))]
@@ -42,14 +38,6 @@ namespace ImportApp.WPF.ViewModels
         [ObservableProperty]
         private PremapExcelColumnsViewModel preMapRuleViewModel;
 
-
-
-        [RelayCommand]
-        public void CreateRule()
-        {
-            IsOpen = true;
-            this.RuleViewModel = new CreateNewDiscountViewModel(this, _discountDataService, _notifier);
-        }
 
         [RelayCommand]
         public void CreateMapRule()
@@ -61,13 +49,8 @@ namespace ImportApp.WPF.ViewModels
         [RelayCommand]
         public void Cancel()
         {
-            if(IsOpen)
-            IsOpen = false;
-
-
             if (IsEnableToMap)
                 IsEnableToMap = false;
-           
         }
 
     }

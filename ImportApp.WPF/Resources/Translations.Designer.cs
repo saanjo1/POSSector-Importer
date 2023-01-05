@@ -61,6 +61,60 @@ namespace ImportApp.WPF.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Article successfully created..
+        /// </summary>
+        internal static string CreatedArticle {
+            get {
+                return ResourceManager.GetString("CreatedArticle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Category successfully created..
+        /// </summary>
+        internal static string CreatedCategory {
+            get {
+                return ResourceManager.GetString("CreatedCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rule successfully created..
+        /// </summary>
+        internal static string CreatedDiscount {
+            get {
+                return ResourceManager.GetString("CreatedDiscount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Storage successfully created..
+        /// </summary>
+        internal static string CreatedStorage {
+            get {
+                return ResourceManager.GetString("CreatedStorage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occured. Try again..
+        /// </summary>
+        internal static string ErrorMessage {
+            get {
+                return ResourceManager.GetString("ErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create button disabled. No SubCategories in DB..
+        /// </summary>
+        internal static string NoSubcategories {
+            get {
+                return ResourceManager.GetString("NoSubcategories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Excel Worksheets|*.xls;*.xlsx;*.xlsm.
         /// </summary>
         internal static string OpenDialogFilter {

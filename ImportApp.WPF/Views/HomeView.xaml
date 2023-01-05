@@ -29,15 +29,30 @@
             <ContentControl VerticalAlignment="Top"  Content="{Binding AddArticleModel}"/>
         </modalcontrol:Modal>
 
+        <modalcontrol:Modal Panel.ZIndex="1" Background="Transparent" IsOpen="{Binding IsDiscountOpen}" Grid.ColumnSpan="3" Grid.RowSpan="3" Margin="30">
+            <ContentControl Content="{Binding AddRuleViewModel}" Background="{StaticResource panelActiveColor}"/>
+        </modalcontrol:Modal>
+
+        <modalcontrol:Modal Panel.ZIndex="1" Background="Transparent" IsOpen="{Binding IsStoreOpen}" Grid.ColumnSpan="3" Grid.RowSpan="3" Margin="30">
+            <ContentControl Content="{Binding AddStoreViewModel}" Background="{StaticResource panelActiveColor}"/>
+        </modalcontrol:Modal>
+        
+        <modalcontrol:Modal Panel.ZIndex="1" Background="Transparent" IsOpen="{Binding IsCategoryOpen}" Grid.ColumnSpan="5" Grid.RowSpan="3" Margin="0 90 15 0">
+            <ContentControl Content="{Binding AddCategoryViewModel}" Background="{StaticResource panelActiveColor}"/>
+        </modalcontrol:Modal>
+
         <Label Grid.ColumnSpan="5" Grid.Row="0" Margin="30 0 0 0" FontSize="38" Foreground="White" Content="Welcome, User 1!"/>
 
         <materialDesign:Card x:Name="card"
                              Padding="10"
                              Height="300"
-                             Width="560"
-                             Background="{StaticResource plainTextColor3}"
+                             Width="760"
+                             Style="{StaticResource card}"
+                             Background="{StaticResource panelColor}"
                              Foreground="White"
                              Margin="0 80 0 0"
+                             BorderThickness="10"
+                             BorderBrush="White"
                              HorizontalAlignment="Center"
                              Visibility="Visible"
                              Grid.Row="1"
@@ -56,28 +71,43 @@
                     </ProgressBar.RenderTransform>
                 </ProgressBar>
                 <StackPanel Orientation="Horizontal" Margin="0 35 0 0" HorizontalAlignment="Center">
-                    <Button Command="{Binding AddArticleCommand}" Grid.Row="0" Style="{StaticResource SaveButton}" Margin="10" Width="150">
-                        <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="ListAlt" Width="20" Foreground="{StaticResource color4}" />
-                            <Label Content="Add an article" Foreground="White" Margin="5"/>
+                    <Button Command="{Binding AddArticleCommand}" Grid.Row="0" Style="{StaticResource controlButton}" Margin="10" Width="130" Height="100">
+                        <StackPanel Orientation="Vertical">
+                            <fa:IconImage Icon="Barcode" Width="40" Foreground="{StaticResource color4}" />
+                            <Label Content="Create article" Foreground="White"  HorizontalAlignment="Center" Margin="0 20 0 0" FontSize="14"/>
                         </StackPanel>
                     </Button>
 
-                    <Button Grid.Row="1" Style="{StaticResource SaveButton}" Margin="10" Width="150">
-                        <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="Percent" Width="15" Foreground="{StaticResource color6}" />
-                            <Label Content="Add a discount" Foreground="White" Margin="5"/>
+                    <Button Command="{Binding AddCategoryCommand}" Grid.Row="0" Style="{StaticResource controlButton}" Margin="10" Width="130" Height="100">
+                        <StackPanel Orientation="Vertical">
+                            <fa:IconImage Icon="List12" Width="40" Foreground="{StaticResource color1}" />
+                            <Label Content="Create category" Foreground="White"  HorizontalAlignment="Center" Margin="0 20 0 0" FontSize="14"/>
                         </StackPanel>
                     </Button>
 
-                    <Button Grid.Row="0" Style="{StaticResource SaveButton}" Margin="10" Width="150">
-                        <StackPanel Orientation="Horizontal">
-                            <fa:IconImage Icon="Store" Width="20" Foreground="{StaticResource color3}"  />
-                            <Label Content="Add a store" Foreground="White" Margin="5"/>
+                    <Button Command="{Binding AddArticleCommand}" Grid.Row="0" Style="{StaticResource controlButton}" Margin="10" Width="130" Height="100">
+                        <StackPanel Orientation="Vertical">
+                            <fa:IconImage Icon="RectangleList" Width="40" Foreground="{StaticResource color10}" />
+                            <Label Content="Create SubCategory" Foreground="White"  HorizontalAlignment="Center" Margin="0 20 0 0" FontSize="14"/>
+                        </StackPanel>
+                    </Button>
+
+
+                    <Button Grid.Row="1" Command="{Binding AddRuleCommand}" Style="{StaticResource controlButton}" Margin="10" Width="130" Height="100">
+                        <StackPanel Orientation="Vertical">
+                            <fa:IconImage Icon="Percent" Width="37" Foreground="{StaticResource color6}" />
+                            <Label Content="Create discount" Foreground="White" HorizontalAlignment="Center" Margin="0 20 0 0" FontSize="14"/>
+                        </StackPanel>
+                    </Button>
+
+                    <Button Command="{Binding AddStoreCommand}"  Grid.Row="0" Style="{StaticResource controlButton}" Margin="10" Width="130" Height="100">
+                        <StackPanel Orientation="Vertical">
+                            <fa:IconImage Icon="Store" Width="40" Foreground="{StaticResource color3}"  />
+                            <Label Content="Create store" Foreground="White" HorizontalAlignment="Center" Margin="0 20 0 0" FontSize="14"/>
                         </StackPanel>
                     </Button>
                 </StackPanel>
-                <ProgressBar Margin="0 55 0 0" Height="4" Width="173" Background="White" RenderTransformOrigin="0.5,0.5">
+                <ProgressBar Margin="0 25 0 0" Height="4" Width="173" Background="White" RenderTransformOrigin="0.5,0.5">
                     <ProgressBar.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform ScaleY="-1"/>

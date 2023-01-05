@@ -30,10 +30,6 @@
             <Button Grid.Column="1" Style="{StaticResource ImportButton}" Content="Click" Command="{Binding CreateMapRuleCommand}" Padding="25 10 25 10"/>
         </DockPanel>
 
-        <modalcontrol:Modal Panel.ZIndex="1" Background="Transparent" IsOpen="{Binding IsOpen}" Grid.ColumnSpan="3" Grid.RowSpan="3" Margin="30">
-            <ContentControl Content="{Binding RuleViewModel}" Background="{StaticResource panelActiveColor}"/>
-        </modalcontrol:Modal>
-
         <modalcontrol:Modal Panel.ZIndex="1" Background="Transparent" IsOpen="{Binding IsEnableToMap}" Grid.ColumnSpan="3" Grid.RowSpan="3" Margin="30">
             <ContentControl Content="{Binding PreMapRuleViewModel}" Background="{StaticResource panelActiveColor}"/>
         </modalcontrol:Modal>

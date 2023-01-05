@@ -170,5 +170,24 @@ namespace ImportApp.EntityFramework.Services
             }
 
         }
+
+        public Task<ICollection<SubCategory>> GetAllSubcategories()
+        {
+            using(ImportAppDbContext context = factory.CreateDbContext())
+            {
+                ICollection<SubCategory> entities = context.SubCategories.ToList();
+                return Task.FromResult(entities);
+            }
+        }
+
+        public Task<Guid> GetSubCategory(string name)
+        {
+            using(ImportAppDbContext context = factory.CreateDbContext())
+            {
+                SubCategory? subcategory = context.SubCategories.FirstOrDefault(x=> x.Name == name);
+
+                return Task.FromResult(subcategory.Id);
+            }
+        }
     }
 }

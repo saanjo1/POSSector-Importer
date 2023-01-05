@@ -15,5 +15,9 @@ namespace ImportApp.Domain.Services
         Task<ICollection<Article>> GetArticles();
         Task<ICollection<Article>> GetEconomato();
         Task<bool> ManageArticleGood(ArticleGood article);
+
+        Task<ICollection<SubCategory>> GetAllSubcategories();
+        Task<Guid> GetSubCategory(string name);
+
     }
 }

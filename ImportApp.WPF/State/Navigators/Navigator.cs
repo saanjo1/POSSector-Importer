@@ -23,16 +23,18 @@ namespace ImportApp.WPF.State.Navigators
 
         private IArticleDataService _articleService;
         private ICategoryDataService _categoryService;
+        private IStoreDataService _storeService;
         private IExcelDataService _excelDataService;
         private ConcurrentDictionary<string, string> _myDictionary;
         private IDiscountDataService _discountDataService;
         private Notifier _notifier;
 
-        public Navigator(IArticleDataService articleService, IExcelDataService excelDataService, ICategoryDataService categoryService, IDiscountDataService discountDataService, ConcurrentDictionary<string, string> myDictionary, Notifier notifier)
+        public Navigator(IArticleDataService articleService, IExcelDataService excelDataService, ICategoryDataService categoryService, IDiscountDataService discountDataService, ConcurrentDictionary<string, string> myDictionary, Notifier notifier, IStoreDataService storeService)
         {
             _articleService = articleService;
             _excelDataService = excelDataService;
             _categoryService = categoryService;
+            _storeService = storeService;
             _discountDataService = discountDataService;
             _myDictionary = myDictionary;
             _notifier = notifier;
@@ -48,7 +50,7 @@ namespace ImportApp.WPF.State.Navigators
                 switch (viewType)
                 {
                     case ViewType.Home:
-                        this.CurrentViewModel = new HomeViewModel(_articleService);
+                        this.CurrentViewModel = new HomeViewModel(_articleService, _notifier, _discountDataService, _storeService, _categoryService);
                         Caption = "Dashboard";
                         Icon = IconChar.Home;
                         break;
@@ -75,7 +77,7 @@ namespace ImportApp.WPF.State.Navigators
 
         public void DefaultLoad()
         {
-            this.CurrentViewModel = new HomeViewModel(_articleService);
+            this.CurrentViewModel = new HomeViewModel(_articleService, _notifier, _discountDataService, _storeService, _categoryService);
             Caption = "Dashboard";
             Icon = IconChar.Home;
         }

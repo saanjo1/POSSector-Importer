@@ -117,6 +117,24 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CreatedArticle" xml:space="preserve">
+    <value>Article successfully created.</value>
+  </data>
+  <data name="CreatedCategory" xml:space="preserve">
+    <value>Category successfully created.</value>
+  </data>
+  <data name="CreatedDiscount" xml:space="preserve">
+    <value>Rule successfully created.</value>
+  </data>
+  <data name="CreatedStorage" xml:space="preserve">
+    <value>Storage successfully created.</value>
+  </data>
+  <data name="ErrorMessage" xml:space="preserve">
+    <value>An error occured. Try again.</value>
+  </data>
+  <data name="NoSubcategories" xml:space="preserve">
+    <value>Create button disabled. No SubCategories in DB.</value>
+  </data>
   <data name="OpenDialogFilter" xml:space="preserve">
     <value>Excel Worksheets|*.xls;*.xlsx;*.xlsm</value>
   </data>

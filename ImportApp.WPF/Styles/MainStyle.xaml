@@ -4,6 +4,7 @@
              xmlns:viewmodels="clr-namespace:ImportApp.WPF.ViewModels"
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              xmlns:views="clr-namespace:ImportApp.WPF.Views"
+              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2"
              xmlns:controls="clr-namespace:ImportApp.WPF.Controls">
 
@@ -15,8 +16,18 @@
             <Style TargetType="{x:Type Border}">
                 <Setter Property="CornerRadius" Value="6" />
                 <Setter Property="Padding" Value="2"/>
+                <Setter Property="BorderBrush" Value="White"/>
+                <Setter Property="BorderThickness" Value="5"/>
             </Style>
         </Style.Resources>
+    </Style>
+
+    <Style x:Key="card" TargetType="{x:Type materialDesign:Card}">
+    <Style.Resources>
+        <Style TargetType="{x:Type Border}">
+            <Setter Property="CornerRadius" Value="20" />
+        </Style>
+    </Style.Resources>
     </Style>
 
     <Style x:Key="SaveButton" TargetType="Button">
@@ -611,14 +622,14 @@
                   x:Name="Border" 
                   Grid.ColumnSpan="2"
                   CornerRadius="5"
-                  Background="{StaticResource plainTextColor2}"
+                  Background="{StaticResource BrushPrimary7}"
                   BorderBrush="White"
                   BorderThickness="1" />
             <Border 
                   Grid.Column="0"
                   CornerRadius="5" 
                   Margin="1" 
-                  Background="{StaticResource plainTextColor2}"
+                  Background="{StaticResource BrushPrimary7}"
                   BorderBrush="White"
                   BorderThickness="0,0,1,0" />
             <Path 

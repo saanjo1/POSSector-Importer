@@ -21,7 +21,19 @@ namespace ImportApp.EntityFramework.Services
 
         public Task<bool> Create(Category entity)
         {
-            throw new NotImplementedException();
+            using (ImportAppDbContext context = _contextFactory.CreateDbContext())
+            {
+                try
+                {
+                    context.Add(entity);
+                    context.SaveChanges();
+                    return Task.FromResult(true);
+                }
+                catch (Exception)
+                {
+                    return Task.FromResult(false);
+                }
+            }
         }
 
         public Task<ICollection<Category>> Delete(Guid id)
