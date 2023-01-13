@@ -1,0 +1,108 @@
+﻿<UserControl x:Class="ImportApp.WPF.Views.DiscountView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ImportApp.WPF.Views" xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp" xmlns:modalcontrol="clr-namespace:ModalControl;assembly=ModalControl"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <modalcontrol:Modal Panel.ZIndex="20" Background="Transparent" IsOpen="{Binding IsMapped}" Grid.RowSpan="3">
+            <ContentControl Content="{Binding MapDataModel}" Background="{StaticResource panelActiveColor}"/>
+        </modalcontrol:Modal>
+
+
+        <StackPanel Orientation="Horizontal">
+            
+            <Button Style="{StaticResource saveModalButton}" Command="{Binding MapDataCommand}" Height="50" Width="150" Margin="10">
+                <StackPanel Orientation="Horizontal">
+                    <fa:IconImage Style="{StaticResource controlButtonIcon}" Icon="Database" Width="30" Height="30"/>
+                    <TextBlock TextAlignment="Center" FontSize="12" HorizontalAlignment="Center" Margin="10 5 5 5" VerticalAlignment="Stretch" FontWeight="ExtraLight" >Map data</TextBlock>
+                </StackPanel>
+            </Button>
+
+            <Button Style="{StaticResource saveModalButton}" Command="{Binding OptionsCommand}" Height="50" Width="150" >
+                <StackPanel Orientation="Horizontal">
+                    <fa:IconImage Style="{StaticResource controlButtonIcon}" Icon="Gear" Width="30" Height="30"/>
+                    <TextBlock TextAlignment="Center" FontSize="12" HorizontalAlignment="Center" Margin="10 5 5 5" VerticalAlignment="Stretch" FontWeight="ExtraLight">Options</TextBlock>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+
+        <TextBlock Grid.Row="1" Margin="0 5 35 0" HorizontalAlignment="Right" Width="180" VerticalAlignment="Center" Foreground="#B0B9C6" IsHitTestVisible="False"
+                           Panel.ZIndex="1" Text="Search ..."
+                           Visibility="{Binding ElementName=textBoxFilter, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}" Height="16" />
+
+        <TextBox Width="200" Grid.Row="1" Margin="0 5 30 0" HorizontalAlignment="Right" Name="textBoxFilter" Style="{StaticResource filterTextBox}" Text="{Binding TextToFilter, UpdateSourceTrigger=PropertyChanged}" Height="32"/>
+        <TextBlock Grid.Row="1" FontSize="19" Text="{Binding Count}" Foreground="{StaticResource titleColor1}" Margin="10 25 0 0"/>
+        <TextBlock Grid.Row="1" FontSize="19" Text="article(s) in list" Foreground="{StaticResource titleColor1}" Margin="70 25 0 0"/>
+
+        <DataGrid Grid.ColumnSpan="3" Margin="0 30 0 0" Grid.Row="2" Name="membersDataGrid" ItemsSource="{Binding ArticleCollection}" RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" Style="{DynamicResource DataGridStyle1}" Height="400" CanUserDeleteRows="True" IsReadOnly="False">
+        <DataGrid.Columns>
+            <DataGridTemplateColumn Header="SubCategory" IsReadOnly="True" Width="140">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Border Width="25" Height="25" CornerRadius="50" Margin="0 0 10 0">
+                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"/>
+                            </Border>
+                                <TextBlock Text="{Binding SubCategory}" VerticalAlignment="Center" Margin="-30"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Category" Binding="{Binding Category}" Width="130"/>
+                <DataGridTextColumn Header="Storage" Binding="{Binding Storage}" Width="130"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="150"/>
+                <DataGridTextColumn Header="Barcode" Binding="{Binding BarCode}" Width="auto"/>
+                <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="100"/>
+                <DataGridTextColumn Header="Discount" Binding="{Binding Discount}" Width="100"/>
+                <DataGridTextColumn Header="New price" Binding="{Binding NewPrice}" Width="100"/>
+            <DataGridTemplateColumn Header="Operations" Width="auto">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Button Style="{StaticResource gridEditButton}">
+                                <fa:IconImage Icon="Pencil" Style="{StaticResource gridButtonIcon}"/>
+                            </Button>
+                            <Button Margin="5 0 0 0" Style="{StaticResource gridRemoveButton}" Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=DataContext.DeleteArticleCommand}" CommandParameter="{Binding}">
+                                <fa:IconImage Icon="Remove" Style="{StaticResource gridButtonIcon}"/>
+                            </Button>
+                        </StackPanel>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+        </DataGrid.Columns>
+        </DataGrid>
+
+        <Button Grid.Row="4" Style="{StaticResource ImportButton}" Command="{Binding ImportItemsCommand}" Height="50" Width="160" HorizontalAlignment="Right" Margin="0 5 10 -30" >
+            <StackPanel Orientation="Horizontal">
+                <fa:IconImage Foreground="White"  Style="{StaticResource controlButtonIcon}" Icon="FileImage" Width="30" Height="30" Margin="5"/>
+                <TextBlock Foreground="White" TextAlignment="Center" FontSize="18" HorizontalAlignment="Center" Margin="3 12 5 5" VerticalAlignment="Stretch" FontWeight="ExtraLight">Import items</TextBlock>
+            </StackPanel>
+        </Button>
+
+        <Button Grid.Row="4" Style="{StaticResource clearDict}" Command="{Binding ClearListCommand}" Height="50" Width="150" HorizontalAlignment="Left" Margin="0 5 80 -30" >
+            <StackPanel Orientation="Horizontal">
+                <fa:IconImage Foreground="White"  Style="{StaticResource controlButtonIcon}" Icon="Remove" Width="30" Height="30" Margin="5"/>
+                <TextBlock Foreground="White" TextAlignment="Center" FontSize="18" HorizontalAlignment="Center" Margin="10 10 5 5" VerticalAlignment="Stretch" FontWeight="ExtraLight">Clear list</TextBlock>
+            </StackPanel>
+        </Button>
+
+    </Grid>
+</UserControl>

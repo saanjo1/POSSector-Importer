@@ -31,8 +31,11 @@ namespace ImportApp.WPF.HostBuilders
                 services.AddSingleton<IDataGService<Category>, CategoryDataService>();
                 services.AddSingleton<ICategoryDataService, CategoryDataService>();
 
-                services.AddSingleton<IDataGService<Storage>, StoreDataService>();
-                services.AddSingleton<IStoreDataService, StoreDataService>();
+                services.AddSingleton<IDataGService<SubCategory>, SubCategoryDataService>();
+                services.AddSingleton<ISubcategoryDataService, SubCategoryDataService>();
+
+                services.AddSingleton<IDataGService<Storage>, StorageDataService>();
+                services.AddSingleton<IStorageDataService, StorageDataService>();
             });
 
             return host;

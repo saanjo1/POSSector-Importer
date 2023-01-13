@@ -14,9 +14,8 @@ using ToastNotifications.Messages;
 namespace ImportApp.WPF.ViewModels
 {
     [ObservableObject]
-    public partial class CreateNewStoreViewModel
+    public partial class CreateCategoryViewModel
     {
-
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(SaveCommand))]
         private string? name;
@@ -25,15 +24,16 @@ namespace ImportApp.WPF.ViewModels
         [ObservableProperty]
         private Guid id;
 
+
         private readonly HomeViewModel _homeViewModel;
         private Notifier _notifier;
-        private IStoreDataService _storeDataService;
+        private ICategoryDataService _categoryDataService;
 
-        public CreateNewStoreViewModel(HomeViewModel homeViewModel, Notifier notifier, IStoreDataService storeDataService)
+        public CreateCategoryViewModel(HomeViewModel homeViewModel, Notifier notifier, ICategoryDataService categoryDataService)
         {
             _homeViewModel = homeViewModel;
             _notifier = notifier;
-            _storeDataService = storeDataService;
+            _categoryDataService = categoryDataService;
             Id = Guid.NewGuid();
         }
 
@@ -41,21 +41,29 @@ namespace ImportApp.WPF.ViewModels
         [RelayCommand(CanExecute = nameof(CanSave))]
         public void Save()
         {
-            try
+            if (_categoryDataService.GetCategoryByName(Name) == null)
             {
-                Storage newStorage = new Storage()
+                try
                 {
-                   Id = Id,
-                   Name = Name,
-                   Deleted = false
-                };
-                _storeDataService.Create(newStorage);
-                _notifier.ShowSuccess(Translations.CreatedStorage);
-                Cancel();
+                    Category newCategory = new Category()
+                    {
+                        Id = Id,
+                        Name = Name,
+                        Deleted = false
+                    };
+                    _categoryDataService.Create(newCategory);
+                    _notifier.ShowSuccess(Translations.CreatedCategory);
+                    Cancel();
+                }
+                catch (Exception)
+                {
+                    _notifier.ShowError(Translations.ErrorMessage);
+                    Cancel();
+                }
             }
-            catch (Exception)
+            else
             {
-                _notifier.ShowError(Translations.ErrorMessage);
+                _notifier.ShowError(Translations.DuplicateCategory);
                 Cancel();
             }
         }
@@ -73,6 +81,5 @@ namespace ImportApp.WPF.ViewModels
                 return true;
             return false;
         }
-
     }
 }

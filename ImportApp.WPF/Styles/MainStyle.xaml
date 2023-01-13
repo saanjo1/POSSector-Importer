@@ -30,6 +30,16 @@
     </Style.Resources>
     </Style>
 
+
+        <Style x:Key="cmbBox1" TargetType="ComboBox">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsrbOption1Checked}" Value="True">
+                    <Setter Property="ComboBox.SelectedItem" Value="{Binding SubCategory}"  />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+
     <Style x:Key="SaveButton" TargetType="Button">
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="Background" Value="{StaticResource panelActiveColor}"/>
@@ -75,6 +85,7 @@
 
     <Style x:Key="ImportButton" TargetType="Button" BasedOn="{StaticResource SaveButton}">
         <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Padding" Value="0"/>
         <Setter Property="Background" Value="{StaticResource BrushPrimary2}"/>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
@@ -114,7 +125,7 @@
         <Setter Property="Width" Value="130"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="Background" Value="{StaticResource BrushPrimary4}"/>
+        <Setter Property="Background" Value="DarkRed"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -733,6 +744,7 @@
             </Setter.Value>
         </Setter>
         <Style.Triggers>
+           
         </Style.Triggers>
     </Style>
 
@@ -761,4 +773,71 @@
         </Setter>
     </Style>
 
+
+    <Style x:Key="comboBoxTrigger" TargetType="ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}">
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding IsrbOption1Checked}" Value="True">
+                <Setter Property="ComboBox.SelectedItem" Value="{Binding SubCategory}"  />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding IsrbOption2Checked}" Value="True">
+                <Setter Property="ComboBox.SelectedItem" Value="{Binding SubCategory}" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="comboBoxTriggerQ" TargetType="ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}">
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding IsOption1Checked}" Value="True">
+                <Setter Property="ComboBox.SelectedItem" Value="{Binding SubCategory}"  />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding IsOption2Checked}" Value="True">
+                <Setter Property="ComboBox.SelectedItem" Value="{Binding SubCategory}" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="comboBoxTrigger1" TargetType="ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}">
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding IsrbOption1Checked}" Value="True">
+                <Setter Property="ComboBox.SelectedItem" Value="{Binding Category}"  />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding IsrbOption2Checked}" Value="True">
+                <Setter Property="ComboBox.SelectedItem" Value="{Binding Category}" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="comboBoxTriggerQ1" TargetType="ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}">
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding IsOption1Checked}" Value="True">
+                <Setter Property="ComboBox.SelectedItem" Value="{Binding Category}"  />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding IsOption2Checked}" Value="True">
+                <Setter Property="ComboBox.SelectedItem" Value="{Binding Category}" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="comboBoxTrigger2" TargetType="ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}">
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding IsrbOption1Checked}" Value="True">
+                <Setter Property="ComboBox.SelectedItem" Value="{Binding Storage}"  />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding IsrbOption2Checked}" Value="True">
+                <Setter Property="ComboBox.SelectedItem" Value="{Binding Storage}" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+
+    <Style x:Key="comboBoxTriggerQ2" TargetType="ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}">
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding IsOption1Checked}" Value="True">
+                <Setter Property="ComboBox.SelectedItem" Value="{Binding Storage}"  />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding IsOption2Checked}" Value="True">
+                <Setter Property="ComboBox.SelectedItem" Value="{Binding Storage}" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
 </ResourceDictionary>

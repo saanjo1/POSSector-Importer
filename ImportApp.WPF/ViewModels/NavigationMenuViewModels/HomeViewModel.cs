@@ -20,8 +20,9 @@ namespace ImportApp.WPF.ViewModels
 
         private IArticleDataService _articleService;
         private IDiscountDataService _discountDataService;
-        private IStoreDataService _storeDataService;
+        private IStorageDataService _storeDataService;
         private ICategoryDataService _categoryDataService;
+        private ISubcategoryDataService _subCategoryDataService;
         private Notifier _notifier;
 
 
@@ -41,6 +42,12 @@ namespace ImportApp.WPF.ViewModels
         [NotifyCanExecuteChangedFor(nameof(AddCategoryCommand))]
         private bool isCategoryOpen;
 
+
+        [ObservableProperty]
+        [NotifyCanExecuteChangedFor(nameof(AddSubCategoryCommand))]
+        private bool isSubCategoryOpen;
+
+
         [ObservableProperty]
         private CreateNewArticleViewModel addArticleModel;
         
@@ -53,15 +60,19 @@ namespace ImportApp.WPF.ViewModels
         [ObservableProperty]
         private CreateCategoryViewModel addCategoryViewModel;
 
+        [ObservableProperty]
+        private CreateNewSubcategoryViewModel addSubCategoryViewModel;
 
 
-        public HomeViewModel(IArticleDataService articleService, Notifier notifier, IDiscountDataService discountDataService, IStoreDataService storeDataService, ICategoryDataService categoryDataService)
+
+        public HomeViewModel(IArticleDataService articleService, Notifier notifier, IDiscountDataService discountDataService, IStorageDataService storeDataService, ICategoryDataService categoryDataService, ISubcategoryDataService subCategoryDataService)
         {
             _articleService = articleService;
             _notifier = notifier;
             _discountDataService = discountDataService;
             _storeDataService = storeDataService;
             _categoryDataService = categoryDataService;
+            _subCategoryDataService = subCategoryDataService;
         }
 
         [RelayCommand]
@@ -95,6 +106,14 @@ namespace ImportApp.WPF.ViewModels
         }
 
         [RelayCommand]
+        private void AddSubCategory()
+        {
+            IsSubCategoryOpen = true;
+            AddSubCategoryViewModel = new CreateNewSubcategoryViewModel(this, _notifier, _subCategoryDataService, _categoryDataService, _storeDataService);
+
+        }
+
+        [RelayCommand]
         public void Close()
         {
             if (IsOpen)
@@ -105,6 +124,8 @@ namespace ImportApp.WPF.ViewModels
                 IsStoreOpen = false;
             else if (IsCategoryOpen)
                 IsCategoryOpen = false;
+            else if (IsSubCategoryOpen)
+                IsSubCategoryOpen = false;
         }
 
     }

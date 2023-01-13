@@ -110,31 +110,35 @@ namespace ImportApp.WPF.ViewModels
         [RelayCommand(CanExecute = nameof(CanSave))]
         private void Save()
         {
-            try
+            if (articleDataService.GetArticleByName(Name) == null)
             {
-                Article newArticle = new Article
+                try
                 {
-                    Id = Id,
-                    ArticleNumber = ArticleNumber,
-                    Price = Price,
-                    BarCode = Barcode,
-                    Order = Order,
-                    Deleted = false,
-                    ReturnFee = 0,
-                    FreeModifiers = 0,
-                    Code = null,
-                    Tag = null,
-                    Image = null,
-                    Name = Name,
-                    SubCategoryId = articleDataService.GetSubCategory(SelectedSubCategory).Result
-                };
-                articleDataService.Create(newArticle);
-                _notifier.ShowSuccess(Translations.CreatedArticle);
-                Cancel();
-            }
-            catch
-            {
-                _notifier.ShowError(Translations.ErrorMessage);
+                    Article newArticle = new Article
+                    {
+                        Id = Id,
+                        ArticleNumber = ArticleNumber,
+                        Price = Price,
+                        BarCode = Barcode,
+                        Order = Order,
+                        Deleted = false,
+                        ReturnFee = 0,
+                        FreeModifiers = 0,
+                        Code = null,
+                        Tag = null,
+                        Image = null,
+                        Name = Name,
+                        SubCategoryId = articleDataService.GetSubCategory(SelectedSubCategory).Result
+                    };
+                    articleDataService.Create(newArticle);
+                    _notifier.ShowSuccess(Translations.CreatedArticle);
+                    Cancel();
+                }
+                catch
+                {
+                    _notifier.ShowError(Translations.DuplicateArticle);
+                    Cancel();
+                }
             }
 
         }

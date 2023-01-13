@@ -16,7 +16,12 @@ namespace ImportApp.EntityFramework.Services
 
         public Task<Category> Compare(string value)
         {
-            throw new NotImplementedException();
+            using (ImportAppDbContext context = _contextFactory.CreateDbContext())
+            {
+                var entity = context.Categories.FirstOrDefault(x => x.Id.ToString() == value);
+
+                return Task.FromResult(entity);
+            }
         }
 
         public Task<bool> Create(Category entity)
@@ -38,44 +43,82 @@ namespace ImportApp.EntityFramework.Services
 
         public Task<ICollection<Category>> Delete(Guid id)
         {
-            throw new NotImplementedException();
+            using (ImportAppDbContext context = _contextFactory.CreateDbContext())
+            {
+                Category? entity = context.Categories.FirstOrDefault(x => x.Id == id);
+                entity.Deleted = true;
+
+                context.SaveChanges();
+                ICollection<Category> entities = context.Categories.ToList();
+                return Task.FromResult(entities);
+            }
         }
 
         public Task<Category> Get(string id)
         {
-            throw new NotImplementedException();
+            using (ImportAppDbContext context = _contextFactory.CreateDbContext())
+            {
+                Category? entity = context.Categories.FirstOrDefault(x => x.Id.ToString() == id);
+                return Task.FromResult(entity);
+            }
         }
 
         public Task<ICollection<Category>> GetAll()
         {
-            throw new NotImplementedException();
+            using (ImportAppDbContext context = _contextFactory.CreateDbContext())
+            {
+                ICollection<Category> entities = context.Categories.ToList();
+                return Task.FromResult(entities);
+            }
         }
 
         public Task<Category> Update(Guid id, Category entity)
         {
-            throw new NotImplementedException();
+            using (ImportAppDbContext context = _contextFactory.CreateDbContext())
+            {
+                entity.Id = id;
+                context.Categories.Update(entity);
+                context.SaveChanges();
+
+                return Task.FromResult(entity);
+            }
+        }
+
+        public Task<List<string>> GetNamesOfCategories()
+        {
+            ICollection<Category> categoryCollection = GetAll().Result;
+            List<string> categories = new List<string>();
+
+            if (categoryCollection.Count > 0)
+            {
+                foreach (Category item in categoryCollection)
+                {
+                    categories.Add(item.Name);
+                }
+            }
+
+            return Task.FromResult(categories);
         }
 
 
-
-        Task<Guid> ICategoryDataService.ManageSubcategories(string gender, string collection, string storageId)
+        Task<Guid> ICategoryDataService.ManageSubcategories(string subCtgry, string ctgry, string storageId)
         {
             using (ImportAppDbContext context = _contextFactory.CreateDbContext())
             {
-                SubCategory subcategory = context.SubCategories.Where(x => x.Name == gender).FirstOrDefault();
-                Guid season = this.ManageCategories(collection, storageId).Result;
+                SubCategory subcategory = context.SubCategories.Where(x => x.Name == subCtgry).FirstOrDefault();
+                Guid ctgryId = this.ManageCategories(ctgry, storageId).Result;
 
-                var category = context.Categories.Where(x => x.Id == season).FirstOrDefault();
+                var category = context.Categories.Where(x => x.Id == ctgryId).FirstOrDefault();
 
                 if (subcategory == null)
                 {
                     SubCategory subCategory = new SubCategory()
                     {
                         Id = Guid.NewGuid(),
-                        Name = gender,
+                        Name = subCtgry,
                         Deleted = false,
                         StorageId = category.StorageId,
-                        CategoryId = season
+                        CategoryId = ctgryId
                     };
 
                     var Id = subCategory.Id;
@@ -90,18 +133,18 @@ namespace ImportApp.EntityFramework.Services
             }
         }
 
-        public Task<Guid> ManageCategories(string col, string storageId)
+        public Task<Guid> ManageCategories(string ctgry, string storageId)
         {
             using (ImportAppDbContext context = _contextFactory.CreateDbContext())
             {
-                var category = context.Categories.Where(x => x.Name == col).FirstOrDefault();
+                var category = context.Categories.Where(x => x.Name == ctgry).FirstOrDefault();
 
                 if (category == null)
                 {
                     Category newCategory = new Category()
                     {
                         Id = Guid.NewGuid(),
-                        Name = col,
+                        Name = ctgry,
                         Deleted = false,
                         Order = 1,
                         StorageId = this.ManageStorages(storageId).Result
@@ -123,27 +166,18 @@ namespace ImportApp.EntityFramework.Services
         {
             using (ImportAppDbContext _context = _contextFactory.CreateDbContext())
             {
-                Storage newStorage = new Storage
-                {
-                    Id = Guid.NewGuid(),
-                };
-
-                switch (storageName)
-                {
-                    case "1":
-                        newStorage.Name = "Articles";
-                        break;
-                    case "2":
-                        newStorage.Name = "Economato";
-                        break;
-                    default:
-                        break;
-                }
-
-                var storage = _context.Storages.FirstOrDefault(x => x.Name == newStorage.Name);
+               
+                var storage = _context.Storages.FirstOrDefault(x => x.Name == storageName);
 
                 if(storage == null)
-                {
+                { 
+                    Storage newStorage = new Storage
+                    {
+                        Id = Guid.NewGuid(),
+                        Name = storageName, 
+                        Deleted = false,
+                    };
+
                     _context.Storages.Add(newStorage);
                     _context.SaveChanges();
                     return Task.FromResult(newStorage.Id);
@@ -156,7 +190,18 @@ namespace ImportApp.EntityFramework.Services
             }
         }
 
-        
+        public Task<Guid> GetCategoryByName(string name)
+        {
+            using (ImportAppDbContext context = _contextFactory.CreateDbContext())
+            {
+                var _category = context.Categories.FirstOrDefault(x => x.Name == name);
+
+                if(_category != null &&_category.Deleted == false)
+                    return Task.FromResult(_category.Id);
+
+                return null;
+            }
+        }
     }
 
 }

@@ -10,6 +10,8 @@ using ImportApp.WPF.ViewModels;
 using System.Collections.ObjectModel;
 using ImportApp.WPF;
 using System.Collections.Concurrent;
+using ImportApp.WPF.Resources;
+using CommunityToolkit.Mvvm.Input;
 
 namespace ImportApp.WPF.Services
 {
@@ -22,6 +24,7 @@ namespace ImportApp.WPF.Services
         public static OleDbCommand Command;
 
         private static ObservableCollection<MapColumnViewModel> mapColumnViewModels = new ObservableCollection<MapColumnViewModel>();
+        private static ObservableCollection<ArticleQtycViewModel> _articleQtycViewModels = new ObservableCollection<ArticleQtycViewModel>();
 
         public ExcelDataService()
         {
@@ -42,11 +45,11 @@ namespace ImportApp.WPF.Services
         }
 
 
-        public async Task<List<string>> ListSheetsFromFile()
+        public async Task<List<string>> ListSheetsFromFile(string excelFile)
         {
             OleDbConnectionStringBuilder sbConnection = new OleDbConnectionStringBuilder();
             String strExtendedProperties = String.Empty;
-            sbConnection.DataSource = ExcelFile;
+            sbConnection.DataSource = excelFile;
             if (Path.GetExtension(ExcelFile).Equals(".xls"))//for 97-03 Excel file
             {
                 sbConnection.Provider = "Microsoft.ACE.OLEDB.12.0";
@@ -99,7 +102,7 @@ namespace ImportApp.WPF.Services
 
                 var fieldIncrementor = 1;
                 var fields = new List<string>();
-                while(fieldCount >= fieldIncrementor)
+                while (fieldCount >= fieldIncrementor)
                 {
                     string test = Reader[fieldIncrementor - 1].ToString();
                     fields.Add(test);
@@ -116,50 +119,123 @@ namespace ImportApp.WPF.Services
             return await Task.FromResult(lines);
         }
 
-        public async Task<ObservableCollection<MapColumnViewModel>> ReadFromExcel(ConcurrentDictionary<string,string> _myDictionary)
+        public async Task<ObservableCollection<MapColumnViewModel>> ReadFromExcel(ConcurrentDictionary<string, string> _myDictionary, MapColumnViewModel viewModel)
         {
-            try
+            bool success = _myDictionary.TryGetValue(Translations.CurrentExcelFile, out string value);
+            bool sheet = _myDictionary.TryGetValue(Translations.CurrentExcelSheet, out string sheetValue);
+
+            if (success)
             {
-                string _connection =
-       @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + ExcelFile + ";" +
-       @"Extended Properties='Excel 8.0;HDR=Yes;'";
-
-                _oleDbConnection = new OleDbConnection(_connection);
-
-                await _oleDbConnection.OpenAsync();
-
-                Command = new OleDbCommand();
-                Command.Connection = _oleDbConnection;
-                Command.CommandText = "select * from [" + App.Current.Properties["SheetName"] + "]";
-
-                System.Data.Common.DbDataReader Reader = await Command.ExecuteReaderAsync();
-
-                while (Reader.Read())
+                try
                 {
-                    mapColumnViewModels.Add(new MapColumnViewModel()
+                    string _connection =
+           @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + value + ";" +
+           @"Extended Properties='Excel 8.0;HDR=Yes;'";
+
+                    _oleDbConnection = new OleDbConnection(_connection);
+
+                    await _oleDbConnection.OpenAsync();
+
+                    Command = new OleDbCommand();
+                    Command.Connection = _oleDbConnection;
+                    Command.CommandText = "select * from [" + sheetValue + "]";
+
+                    System.Data.Common.DbDataReader Reader = await Command.ExecuteReaderAsync();
+
+                    while (Reader.Read())
                     {
-                        Name = Helpers.Extensions.ReaderHelper(Reader, "Name", _myDictionary),
-                        Storage = Helpers.Extensions.ReaderHelper(Reader, "Storage", _myDictionary),
-                        BarCode = Helpers.Extensions.ReaderHelper(Reader, "BarCode", _myDictionary),
-                        Price = Helpers.Extensions.ReaderHelper(Reader, "Price", _myDictionary),
-                        Gender = Helpers.Extensions.ReaderHelper(Reader, "SubCategory", _myDictionary),
-                        Collection = Helpers.Extensions.ReaderHelper(Reader, "Category", _myDictionary),
-                        Quantity = Helpers.Extensions.ReaderHelper(Reader, "Quantity", _myDictionary)
-                    }) ;
+
+                        mapColumnViewModels.Add(new MapColumnViewModel
+                        {
+                            Name = Reader[viewModel.Name].ToString(),
+                            SubCategory = Reader[viewModel.SubCategory].ToString(),
+                            Category = Reader[viewModel.Category].ToString(),
+                            Storage = Reader[viewModel.Storage].ToString(),
+                            BarCode = Reader[viewModel.BarCode].ToString(),
+                            Price = Reader[viewModel.Price].ToString(),
+                            Discount = Helpers.Extensions.DisplayDiscountInPercentage(Reader[viewModel.Discount].ToString()),
+                            NewPrice = Reader[viewModel.NewPrice].ToString(),
+                            Order = Reader[viewModel.Order].ToString()
+                        });
+                    }
+
+                    Reader.Close();
+                    _oleDbConnection.Close();
+
+                    return await Task.FromResult(mapColumnViewModels);
+                }
+                catch (Exception)
+                {
+                    throw;
                 }
 
-                Reader.Close();
-                _oleDbConnection.Close();
-
-                return mapColumnViewModels;
             }
-            catch (Exception)
+            else
             {
+                return null;
+            }
+        }
+        
+        
+        
+        public async Task<ObservableCollection<ArticleQtycViewModel>> ReadFromExcel(ConcurrentDictionary<string, string> _myDictionary, ArticleQtycViewModel viewModel)
+        {
+            bool success = _myDictionary.TryGetValue(Translations.CurrentExcelFile, out string value);
+            bool sheet = _myDictionary.TryGetValue(Translations.CurrentExcelSheet, out string sheetValue);
 
-                throw;
+            if (success)
+            {
+                try
+                {
+                    string _connection =
+           @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + value + ";" +
+           @"Extended Properties='Excel 8.0;HDR=Yes;'";
+
+                    _oleDbConnection = new OleDbConnection(_connection);
+
+                    await _oleDbConnection.OpenAsync();
+
+                    Command = new OleDbCommand();
+                    Command.Connection = _oleDbConnection;
+                    Command.CommandText = "select * from [" + sheetValue + "]";
+
+                    System.Data.Common.DbDataReader Reader = await Command.ExecuteReaderAsync();
+
+                    while (Reader.Read())
+                    {
+
+                        _articleQtycViewModels.Add(new ArticleQtycViewModel
+                        {
+                            Name = Reader[viewModel.Name].ToString(),
+                            SubCategory = Reader[viewModel.SubCategory].ToString(),
+                            Category = Reader[viewModel.Category].ToString(),
+                            Storage = Reader[viewModel.Storage].ToString(),
+                            BarCode = Reader[viewModel.BarCode].ToString(),
+                            Price = Reader[viewModel.Price].ToString(),
+                            Quantity = Reader[viewModel.Quantity].ToString()
+
+                        });
+                    }
+
+                    Reader.Close();
+                    _oleDbConnection.Close();
+
+                    return await Task.FromResult(_articleQtycViewModels);
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+
+            }
+            else
+            {
+                return null;
             }
         }
 
 
     }
+
 }
+

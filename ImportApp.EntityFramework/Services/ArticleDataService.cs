@@ -189,5 +189,18 @@ namespace ImportApp.EntityFramework.Services
                 return Task.FromResult(subcategory.Id);
             }
         }
+
+        public Task<Guid> GetArticleByName(string name)
+        {
+            using (ImportAppDbContext context = factory.CreateDbContext())
+            {
+                var _article = context.Articles.FirstOrDefault(x => x.Name == name);
+
+                if (_article != null &&_article.Deleted == false)
+                    return Task.FromResult(_article.Id);
+
+                return null;
+            }
+        }
     }
 }

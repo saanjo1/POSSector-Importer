@@ -14,13 +14,10 @@
     </UserControl.Resources>
 
     <Grid>
-        <modalcontrol:Modal Panel.ZIndex="1" Background="Transparent" IsOpen="{Binding IsMapped}" Grid.RowSpan="3">
-                <ContentControl Content="{Binding MColumnModel}" Background="{StaticResource panelActiveColor}"/>
+        <modalcontrol:Modal Panel.ZIndex="21" Background="Transparent" IsOpen="{Binding IsMapped}" Grid.RowSpan="3">
+                <ContentControl Content="{Binding ArticleQ}" Background="{StaticResource panelActiveColor}"/>
         </modalcontrol:Modal>
 
-        <modalcontrol:Modal Margin="0" Grid.Row="0" VerticalAlignment="Center" Panel.ZIndex="1" Background="Transparent" IsOpen="{Binding IsOpen}" Grid.RowSpan="3">
-            <ContentControl VerticalAlignment="Top"  Content="{Binding MDataModel}"/>
-        </modalcontrol:Modal>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
@@ -33,22 +30,26 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Grid.Row="0" Margin="10,10,0,10" Width="300">
-                <Button ToolTip="Upload Excel file" Style="{StaticResource controlButton}" Width="80" Height="80" Grid.Row="1" Grid.Column="0" Command="{Binding OpenDialogCommand}" Margin="5">
-                    <StackPanel>
-                        <fa:IconImage Style="{StaticResource controlButtonIcon}" Icon="Upload" Width="30" Height="30"/>
+
+                <Button Style="{StaticResource saveModalButton}" Command="{Binding MapDataCommand}" Height="50" Width="150" Margin="10">
+                    <StackPanel Orientation="Horizontal">
+                        <fa:IconImage Style="{StaticResource controlButtonIcon}" Icon="Database" Width="30" Height="30"/>
+                        <TextBlock TextAlignment="Center" FontSize="12" HorizontalAlignment="Center" Margin="10 5 5 5" VerticalAlignment="Stretch" FontWeight="ExtraLight" >Map data</TextBlock>
                     </StackPanel>
+                    
                 </Button>
 
-                <Button ToolTip="Map columns" Style="{StaticResource controlButton}"  Width="80" Height="80" Grid.Row="1" Grid.Column="1" Command="{Binding MapDataCommand}" Margin="5">
-                    <StackPanel>
-                        <fa:IconImage Style="{StaticResource controlButtonIcon}" Icon="Columns"  Width="30" Height="30"/>
+                <Button Style="{StaticResource saveModalButton}" Command="{Binding OptionsCommand}" Height="50" Width="150" >
+                    <StackPanel Orientation="Horizontal">
+                        <fa:IconImage Style="{StaticResource controlButtonIcon}" Icon="Gear" Width="30" Height="30"/>
+                        <TextBlock TextAlignment="Center" FontSize="12" HorizontalAlignment="Center" Margin="10 5 5 5" VerticalAlignment="Stretch" FontWeight="ExtraLight">Options</TextBlock>
                     </StackPanel>
                 </Button>
 
             </StackPanel>
 
             <TextBlock Grid.Row="0" Margin="0 0 20 0" HorizontalAlignment="Right" Width="180" VerticalAlignment="Center" Foreground="#B0B9C6" IsHitTestVisible="False"
-                           Panel.ZIndex="1" Text="Search ..."
+                           Panel.ZIndex="1" Text="Search by barcode ..."
                            Visibility="{Binding ElementName=textBoxFilter, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}" Height="16" />
 
             <TextBox Width="200" Grid.Row="0" HorizontalAlignment="Right" Margin="15" Name="textBoxFilter" Style="{StaticResource filterTextBox}" Text="{Binding TextToFilter, UpdateSourceTrigger=PropertyChanged}" Height="32"/>
@@ -102,7 +103,6 @@
             <StackPanel Orientation="Horizontal">
                 <fa:IconImage Style="{StaticResource controlButtonIcon}" Icon="FileImport" Width="30" Height="30"/>
                 <TextBlock TextAlignment="Center" Padding="10 0 0 0" Margin="6 6 0 0" FontSize="15">Import articles</TextBlock>
-
             </StackPanel>
         </Button>
     </Grid>

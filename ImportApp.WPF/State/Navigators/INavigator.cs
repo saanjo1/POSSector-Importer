@@ -14,7 +14,8 @@ namespace ImportApp.WPF.State.Navigators
         Home,
         Articles,
         ImportArticles,
-        Settings
+        Settings,
+        Discounts
     }
 
 

@@ -29,6 +29,10 @@
                 <views:StoreView/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewmodels:DiscountViewModel}">
+                <views:DiscountView/>
+            </DataTemplate>
+
             <DataTemplate DataType="{x:Type viewmodels:ImportDataViewModel}">
                 <views:ImportDataView/>
             </DataTemplate>
@@ -57,12 +61,20 @@
                 <controls:CreateNewCategory/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewmodels:CreateNewSubcategoryViewModel}">
+                <controls:CreateNewSubCategory/>
+            </DataTemplate>
+
             <DataTemplate DataType="{x:Type viewmodels:MultipleColumnNameSmallViewModel}">
                 <controls:MultipleColumnName/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewmodels:PremapExcelColumnsViewModel}">
                 <controls:PremapColumnNames/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodels:ArticleQtycViewModel}">
+                <controls:ArticlesQtycView/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewmodels:MainViewModel}">

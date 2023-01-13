@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 
 namespace ImportApp.Domain.Services
 {
-    public interface IStoreDataService : IDataGService<Storage>
+    public interface ISubcategoryDataService : IDataGService<SubCategory>
     {
+        Task<List<string>> GetNamesOfSubCategories();
+        Task<Guid> GetSubCategoryByName(string name);
     }
 }

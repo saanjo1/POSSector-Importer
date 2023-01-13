@@ -52,32 +52,53 @@ namespace ImportApp.WPF.Helpers
         {
             for (int i = 0; i < columnNamesList.Count(); i++)
             {
-                if (columnNamesList[i].Contains("SKU"))
-                    mColumnModel.Name = columnNamesList[i];
+                //if (columnNamesList[i].Contains("SKU"))
+                //    articleQ.Name = columnNamesList[i];
 
-                if (columnNamesList[i].Contains("BARCODE"))
-                    mColumnModel.BarCode = columnNamesList[i];
+                //if (columnNamesList[i].Contains("BARCODE"))
+                //    articleQ.BarCode = columnNamesList[i];
 
-                if (columnNamesList[i].Contains("PRICE"))
-                    mColumnModel.Price = columnNamesList[i];
+                //if (columnNamesList[i].Contains("PRICE"))
+                //    articleQ.Price = columnNamesList[i];
 
-                if (columnNamesList[i].Contains("STORAGE"))
-                    mColumnModel.Storage = columnNamesList[i];
+                //if (columnNamesList[i].Contains("STORAGE"))
+                //    articleQ.Storage = columnNamesList[i];
 
-                if (columnNamesList[i].Contains("SEASON"))
-                    mColumnModel.Collection = columnNamesList[i];
+                //if (columnNamesList[i].Contains("SEASON"))
+                //    articleQ.Collection = columnNamesList[i];
 
-                if (columnNamesList[i].Contains("GENDER"))
-                    mColumnModel.Gender = columnNamesList[i];
+                //if (columnNamesList[i].Contains("GENDER"))
+                //    articleQ.Gender = columnNamesList[i];
                 
-                if (columnNamesList[i].Contains("QTYC"))
-                    mColumnModel.Quantity = columnNamesList[i];
+                //if (columnNamesList[i].Contains("QTYC"))
+                //    articleQ.Quantity = columnNamesList[i];
             }
 
             return mColumnModel;  
         }
 
-     
+
+        public static string DisplayDiscountInPercentage(string discount)
+        {
+            bool success = double.TryParse(discount, out double result);
+            string finalResult;
+
+            if (success) 
+            {
+                var percentage = result * (-100);
+                finalResult = percentage.ToString() + "%";    
+            }
+            else
+            {
+                finalResult = "NO DISCOUNT";
+            }
+
+
+            return finalResult;
+        }
+
+
+
         public static string ReaderHelper(DbDataReader reader, string flag, ConcurrentDictionary<string, string> _myDictionary)
         {
             string value;

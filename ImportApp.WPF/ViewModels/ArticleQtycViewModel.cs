@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ImportApp.Domain.Services;
-using ImportApp.EntityFramework.Services;
 using ImportApp.WPF.Resources;
 using System;
 using System.Collections.Concurrent;
@@ -10,26 +9,23 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
 using ToastNotifications;
 using ToastNotifications.Messages;
 
 namespace ImportApp.WPF.ViewModels
 {
-    [ObservableObject]
-    public partial class MapColumnViewModel : BaseViewModel
+    public partial class ArticleQtycViewModel : ObservableObject
     {
         private Notifier _notifier;
         public IExcelDataService? _excelDataService;
 
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(SubmitCommand))]
-        private bool isrbOption2Checked;
+        private bool isOption1Checked;
 
         [ObservableProperty]
-        private bool isrbOption1Checked;
+        [NotifyCanExecuteChangedFor(nameof(SubmitCommand))]
+        private bool isOption2Checked;
 
 
         [ObservableProperty]
@@ -51,13 +47,8 @@ namespace ImportApp.WPF.ViewModels
         private string? price;
 
         [ObservableProperty]
-        private string? discount;
+        private string? quantity;
 
-        [ObservableProperty]
-        private string? newPrice;
-
-        [ObservableProperty]
-        private string? order;
 
 
         [ObservableProperty]
@@ -69,19 +60,19 @@ namespace ImportApp.WPF.ViewModels
 
         [ObservableProperty]
         List<string> columnNames;
-        
-        private DiscountViewModel _discountViewModel;
 
-        public MapColumnViewModel(DiscountViewModel discountViewModel, IExcelDataService? excelDataService, ConcurrentDictionary<string, string> myDictionary, Notifier notifier)
+        private ImportDataViewModel _importDataViewModel;
+
+        public ArticleQtycViewModel(ImportDataViewModel importDataViewModel, IExcelDataService? excelDataService, ConcurrentDictionary<string, string> myDictionary, Notifier notifier)
         {
-            _discountViewModel = discountViewModel;
+            _importDataViewModel = importDataViewModel;
             _excelDataService = excelDataService;
             _myDictionary = myDictionary;
             LoadColumnNames();
             _notifier = notifier;
         }
 
-        public MapColumnViewModel()
+        public ArticleQtycViewModel()
         {
 
         }
@@ -89,8 +80,8 @@ namespace ImportApp.WPF.ViewModels
         [RelayCommand]
         public void CloseModal()
         {
-            _discountViewModel.Close();        
-        
+            _importDataViewModel.Close();
+
         }
 
         [RelayCommand]
@@ -98,10 +89,10 @@ namespace ImportApp.WPF.ViewModels
         {
             try
             {
-                ObservableCollection<MapColumnViewModel>? excelDataList;
+                ObservableCollection<ArticleQtycViewModel>? excelDataList;
                 excelDataList = _excelDataService.ReadFromExcel(_myDictionary, this).Result;
                 _notifier.ShowInformation(excelDataList.Count() + " articles pulled. ");
-                _discountViewModel.LoadData(excelDataList);
+                _importDataViewModel.LoadData(excelDataList);
             }
             catch (Exception)
             {
@@ -115,7 +106,7 @@ namespace ImportApp.WPF.ViewModels
             ColumnNames = _excelDataService.ListColumnNames(_myDictionary[Translations.CurrentExcelSheet]).Result;
         }
 
-      
+
 
     }
 }

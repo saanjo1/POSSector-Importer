@@ -129,8 +129,41 @@
   <data name="CreatedStorage" xml:space="preserve">
     <value>Storage successfully created.</value>
   </data>
+  <data name="CreatedSubCategory" xml:space="preserve">
+    <value>SubCategory created successfully.</value>
+  </data>
+  <data name="CurrentExcelFile" xml:space="preserve">
+    <value>CurrentExcelFile</value>
+  </data>
+  <data name="CurrentExcelSheet" xml:space="preserve">
+    <value>CurrentExcelSheet</value>
+  </data>
+  <data name="DuplicateArticle" xml:space="preserve">
+    <value>Article with same name already exist.</value>
+  </data>
+  <data name="DuplicateCategory" xml:space="preserve">
+    <value>Category with same name already exist.</value>
+  </data>
+  <data name="DuplicateDiscount" xml:space="preserve">
+    <value>Discount with same name already exist.</value>
+  </data>
+  <data name="DuplicateStorage" xml:space="preserve">
+    <value>Storage with same name already exist.</value>
+  </data>
+  <data name="DuplicateSubcategory" xml:space="preserve">
+    <value>Subcategory with same name already exist.</value>
+  </data>
+  <data name="EmptyGuid" xml:space="preserve">
+    <value>00000000-0000-0000-0000-000000000000</value>
+  </data>
   <data name="ErrorMessage" xml:space="preserve">
     <value>An error occured. Try again.</value>
+  </data>
+  <data name="NoCategories" xml:space="preserve">
+    <value>Create button disabled. No categories in DB.</value>
+  </data>
+  <data name="NoStorages" xml:space="preserve">
+    <value>Create button disabled. No storages was found in DB.</value>
   </data>
   <data name="NoSubcategories" xml:space="preserve">
     <value>Create button disabled. No SubCategories in DB.</value>
@@ -140,5 +173,26 @@
   </data>
   <data name="OpenDialogTitle" xml:space="preserve">
     <value>Browse Excel file</value>
+  </data>
+  <data name="SelectedExcelFile" xml:space="preserve">
+    <value>Excel file is successfully selected.</value>
+  </data>
+  <data name="SelectSheetError" xml:space="preserve">
+    <value>You can't select sheet without selecting file first.</value>
+  </data>
+  <data name="SettingsError" xml:space="preserve">
+    <value>First, you have to set files at Settings page.</value>
+  </data>
+  <data name="SheetSelectedSuccessfully" xml:space="preserve">
+    <value>Excel sheet selected successfully.</value>
+  </data>
+  <data name="SuccessImport" xml:space="preserve">
+    <value>Import successfully executed. </value>
+  </data>
+  <data name="UpdatedExcelFile" xml:space="preserve">
+    <value>Excel file successfully updated.</value>
+  </data>
+  <data name="UpdatedSameFile" xml:space="preserve">
+    <value>You just selected same file as current.</value>
   </data>
 </root>

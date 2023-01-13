@@ -20,20 +20,32 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <DockPanel>
-            <Label Grid.Row="0" Grid.Column="0" Content="Add new discount" Style="{StaticResource controlLabel}"></Label>
-            <Button Grid.Column="1" Style="{StaticResource ImportButton}" Content="Click" Command="{Binding CreateRuleCommand}" Margin="40 0 0 0" Padding="25 10 25 10"/>
-        </DockPanel>
-
-        <DockPanel Grid.Row="1">
-            <Label Grid.Row="1" Grid.Column="0" Content="Manage column names" Style="{StaticResource controlLabel}"></Label>
-            <Button Grid.Column="1" Style="{StaticResource ImportButton}" Content="Click" Command="{Binding CreateMapRuleCommand}" Padding="25 10 25 10"/>
-        </DockPanel>
-
-        <modalcontrol:Modal Panel.ZIndex="1" Background="Transparent" IsOpen="{Binding IsEnableToMap}" Grid.ColumnSpan="3" Grid.RowSpan="3" Margin="30">
-            <ContentControl Content="{Binding PreMapRuleViewModel}" Background="{StaticResource panelActiveColor}"/>
+        <modalcontrol:Modal Grid.Row="4" VerticalAlignment="Center" Panel.ZIndex="21" Background="Transparent" IsOpen="{Binding IsOpen}" Grid.RowSpan="3" Grid.ColumnSpan="5">
+            <ContentControl VerticalAlignment="Top"  Content="{Binding SheetDataModel}"/>
         </modalcontrol:Modal>
 
+        <Label Grid.ColumnSpan="5" Grid.Row="0" HorizontalAlignment="Left" FontSize="18" FontWeight="SemiBold" Foreground="White" Content="Excel settings:"/>
+
+
+        <DockPanel Grid.Row="2" Margin="0 30 0 0">
+            <Label Grid.Row="2" Grid.Column="0" Content="Upload Excel file           " Style="{StaticResource controlLabel}"></Label>
+            <Button Grid.Column="1" Style="{StaticResource ImportButton}" Content="Click" Command="{Binding UploadExcelFileCommand}" Padding="25 10 25 10"/>
+        </DockPanel>
+
+        <DockPanel Grid.Row="3">
+            <Label Grid.Row="3" Grid.Column="0" Content="Select sheet from file:   " Style="{StaticResource controlLabel}"></Label>
+            <Button Grid.Column="1" Style="{StaticResource ImportButton}" Content="Click" Command="{Binding SelectSheetCommand}" Padding="25 10 25 10"/>
+        </DockPanel>
+
+
+        <Label Grid.ColumnSpan="5" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" FontSize="18" FontWeight="SemiBold" Foreground="White" Content="Database settings:"/>
+
+
+       <DockPanel Grid.Row="3" Grid.Column="2">
+            <Label Grid.Row="3" Grid.Column="0" Content="Your database: " Style="{StaticResource controlLabel}"></Label>
+            <TextBox Width="200" Height="30" FontSize="18" Text="{Binding DBConnection, Mode=TwoWay}"/>
+            <Button Grid.Column="1" Style="{StaticResource ImportButton}" Content="Save" Command="{Binding SelectSheetCommand}" Padding="25 10 25 10"/>
+        </DockPanel>
 
     </Grid>
 </UserControl>

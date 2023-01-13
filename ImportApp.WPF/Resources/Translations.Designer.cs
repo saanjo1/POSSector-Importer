@@ -97,11 +97,110 @@ namespace ImportApp.WPF.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SubCategory created successfully..
+        /// </summary>
+        internal static string CreatedSubCategory {
+            get {
+                return ResourceManager.GetString("CreatedSubCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CurrentExcelFile.
+        /// </summary>
+        internal static string CurrentExcelFile {
+            get {
+                return ResourceManager.GetString("CurrentExcelFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CurrentExcelSheet.
+        /// </summary>
+        internal static string CurrentExcelSheet {
+            get {
+                return ResourceManager.GetString("CurrentExcelSheet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Article with same name already exist..
+        /// </summary>
+        internal static string DuplicateArticle {
+            get {
+                return ResourceManager.GetString("DuplicateArticle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Category with same name already exist..
+        /// </summary>
+        internal static string DuplicateCategory {
+            get {
+                return ResourceManager.GetString("DuplicateCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Discount with same name already exist..
+        /// </summary>
+        internal static string DuplicateDiscount {
+            get {
+                return ResourceManager.GetString("DuplicateDiscount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Storage with same name already exist..
+        /// </summary>
+        internal static string DuplicateStorage {
+            get {
+                return ResourceManager.GetString("DuplicateStorage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Subcategory with same name already exist..
+        /// </summary>
+        internal static string DuplicateSubcategory {
+            get {
+                return ResourceManager.GetString("DuplicateSubcategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 00000000-0000-0000-0000-000000000000.
+        /// </summary>
+        internal static string EmptyGuid {
+            get {
+                return ResourceManager.GetString("EmptyGuid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An error occured. Try again..
         /// </summary>
         internal static string ErrorMessage {
             get {
                 return ResourceManager.GetString("ErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create button disabled. No categories in DB..
+        /// </summary>
+        internal static string NoCategories {
+            get {
+                return ResourceManager.GetString("NoCategories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create button disabled. No storages was found in DB..
+        /// </summary>
+        internal static string NoStorages {
+            get {
+                return ResourceManager.GetString("NoStorages", resourceCulture);
             }
         }
         
@@ -129,6 +228,69 @@ namespace ImportApp.WPF.Resources {
         internal static string OpenDialogTitle {
             get {
                 return ResourceManager.GetString("OpenDialogTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Excel file is successfully selected..
+        /// </summary>
+        internal static string SelectedExcelFile {
+            get {
+                return ResourceManager.GetString("SelectedExcelFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can&apos;t select sheet without selecting file first..
+        /// </summary>
+        internal static string SelectSheetError {
+            get {
+                return ResourceManager.GetString("SelectSheetError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to First, you have to set files at Settings page..
+        /// </summary>
+        internal static string SettingsError {
+            get {
+                return ResourceManager.GetString("SettingsError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Excel sheet selected successfully..
+        /// </summary>
+        internal static string SheetSelectedSuccessfully {
+            get {
+                return ResourceManager.GetString("SheetSelectedSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import successfully executed. .
+        /// </summary>
+        internal static string SuccessImport {
+            get {
+                return ResourceManager.GetString("SuccessImport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Excel file successfully updated..
+        /// </summary>
+        internal static string UpdatedExcelFile {
+            get {
+                return ResourceManager.GetString("UpdatedExcelFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You just selected same file as current..
+        /// </summary>
+        internal static string UpdatedSameFile {
+            get {
+                return ResourceManager.GetString("UpdatedSameFile", resourceCulture);
             }
         }
     }

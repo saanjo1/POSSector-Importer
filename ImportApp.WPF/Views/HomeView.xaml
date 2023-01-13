@@ -29,11 +29,11 @@
             <ContentControl VerticalAlignment="Top"  Content="{Binding AddArticleModel}"/>
         </modalcontrol:Modal>
 
-        <modalcontrol:Modal Panel.ZIndex="1" Background="Transparent" IsOpen="{Binding IsDiscountOpen}" Grid.ColumnSpan="3" Grid.RowSpan="3" Margin="30">
+        <modalcontrol:Modal Panel.ZIndex="1" Background="Transparent" IsOpen="{Binding IsDiscountOpen}" Grid.ColumnSpan="6" Grid.RowSpan="3" Margin="10 70 0 0">
             <ContentControl Content="{Binding AddRuleViewModel}" Background="{StaticResource panelActiveColor}"/>
         </modalcontrol:Modal>
 
-        <modalcontrol:Modal Panel.ZIndex="1" Background="Transparent" IsOpen="{Binding IsStoreOpen}" Grid.ColumnSpan="3" Grid.RowSpan="3" Margin="30">
+        <modalcontrol:Modal Panel.ZIndex="1" Background="Transparent" IsOpen="{Binding IsStoreOpen}" Grid.ColumnSpan="5" Grid.RowSpan="3" Margin="10 100 0 0">
             <ContentControl Content="{Binding AddStoreViewModel}" Background="{StaticResource panelActiveColor}"/>
         </modalcontrol:Modal>
         
@@ -41,7 +41,12 @@
             <ContentControl Content="{Binding AddCategoryViewModel}" Background="{StaticResource panelActiveColor}"/>
         </modalcontrol:Modal>
 
-        <Label Grid.ColumnSpan="5" Grid.Row="0" Margin="30 0 0 0" FontSize="38" Foreground="White" Content="Welcome, User 1!"/>
+        <modalcontrol:Modal Panel.ZIndex="1" Background="Transparent" IsOpen="{Binding IsSubCategoryOpen}" Grid.ColumnSpan="5" Grid.RowSpan="3" Margin="0 90 15 0">
+            <ContentControl Content="{Binding AddSubCategoryViewModel}" Background="{StaticResource panelActiveColor}"/>
+        </modalcontrol:Modal>
+
+        <Label Grid.ColumnSpan="5" Grid.Row="0" HorizontalAlignment="Center" FontSize="38" Foreground="White" Content="Welcome!"/>
+        <Label Grid.ColumnSpan="5" Grid.Row="1" HorizontalAlignment="Center" FontSize="38" Foreground="White" Content="Please check your Settings first, before any action!"/>
 
         <materialDesign:Card x:Name="card"
                              Padding="10"
@@ -50,7 +55,7 @@
                              Style="{StaticResource card}"
                              Background="{StaticResource panelColor}"
                              Foreground="White"
-                             Margin="0 80 0 0"
+                             Margin="0 140 0 0"
                              BorderThickness="10"
                              BorderBrush="White"
                              HorizontalAlignment="Center"
@@ -85,7 +90,7 @@
                         </StackPanel>
                     </Button>
 
-                    <Button Command="{Binding AddArticleCommand}" Grid.Row="0" Style="{StaticResource controlButton}" Margin="10" Width="130" Height="100">
+                    <Button Command="{Binding AddSubCategoryCommand}" Grid.Row="0" Style="{StaticResource controlButton}" Margin="10" Width="130" Height="100">
                         <StackPanel Orientation="Vertical">
                             <fa:IconImage Icon="RectangleList" Width="40" Foreground="{StaticResource color10}" />
                             <Label Content="Create SubCategory" Foreground="White"  HorizontalAlignment="Center" Margin="0 20 0 0" FontSize="14"/>
@@ -103,7 +108,7 @@
                     <Button Command="{Binding AddStoreCommand}"  Grid.Row="0" Style="{StaticResource controlButton}" Margin="10" Width="130" Height="100">
                         <StackPanel Orientation="Vertical">
                             <fa:IconImage Icon="Store" Width="40" Foreground="{StaticResource color3}"  />
-                            <Label Content="Create store" Foreground="White" HorizontalAlignment="Center" Margin="0 20 0 0" FontSize="14"/>
+                            <Label Content="Create storage" Foreground="White" HorizontalAlignment="Center" Margin="0 20 0 0" FontSize="14"/>
                         </StackPanel>
                     </Button>
                 </StackPanel>

@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="ImportApp.WPF.Controls.MapExcelColumns"
+﻿<UserControl x:Class="ImportApp.WPF.Controls.ArticlesQtycView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -61,10 +61,10 @@
                 <Label FontSize="18" FontWeight="SemiBold" Content="Categorization" Grid.ColumnSpan="2" Grid.Row="0" Margin="30,30,30,30"></Label>
 
                 <StackPanel  x:Name="stckPanel1"  Orientation="Vertical" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,-70,-69,93" Grid.RowSpan="6" >
-                    <RadioButton GroupName="Options" IsChecked="{Binding IsrbOption1Checked}" Grid.Row="1" Content="Choose existing data from database" Grid.ColumnSpan="3" Margin="30,-20,30,30"/>
+                    <RadioButton GroupName="Options1" IsChecked="{Binding IsOption1Checked}" Grid.Row="1" Content="Choose existing data from database" Grid.ColumnSpan="3" Margin="30,-20,30,30"/>
                     <StackPanel Orientation="Horizontal" Width="400" Grid.ColumnSpan="5" Grid.RowSpan="7" HorizontalAlignment="Left" Margin="80 -20 0 0">
                         <Label Content="SubCategory " Margin="0 7 0 0"/>
-                        <ComboBox Style="{StaticResource comboBoxTrigger}" x:Name="cmbBox1" Margin="20 2 0 0" IsEnabled="{Binding IsrbOption1Checked}" Width="220" Grid.ColumnSpan="4"/>
+                        <ComboBox Style="{StaticResource comboBoxTriggerQ}" x:Name="cmbBox1" Margin="20 2 0 0" IsEnabled="{Binding IsOption1Checked}" Width="220" Grid.ColumnSpan="4"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Width="400" Grid.ColumnSpan="5" Grid.RowSpan="5" HorizontalAlignment="Left" Margin="80 10 0 0">
@@ -80,31 +80,30 @@
 
 
                 <StackPanel x:Name="stckPanel2" Orientation="Vertical" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="5" Margin="0,14,-69,71" Grid.RowSpan="5" >
-                    <RadioButton GroupName="Options" IsChecked="{Binding IsrbOption2Checked}" Grid.Row="3" Content="Select data from selected Excel file" Grid.ColumnSpan="3" Margin="30,-40,30,30"/>
+                    <RadioButton GroupName="Options1" IsChecked="{Binding IsOption2Checked}" Grid.Row="3" Content="Select data from selected Excel file" Grid.ColumnSpan="3" Margin="30,-40,30,30"/>
                     <StackPanel Orientation="Horizontal" Width="400" Grid.ColumnSpan="5" Grid.RowSpan="7" HorizontalAlignment="Left" Margin="80 -20 0 0">
                         <Label Content="SubCategory:  " Margin="0 7 0 0"/>
-                        <ComboBox Style="{StaticResource comboBoxTrigger}" x:Name="cmbBox2" Margin="20 2 0 0" ItemsSource="{Binding ColumnNames}" IsEnabled="{Binding IsrbOption2Checked}" Width="220" Grid.ColumnSpan="4"/>
+                        <ComboBox Style="{StaticResource comboBoxTriggerQ}" x:Name="cmbBox2" Margin="20 2 0 0" ItemsSource="{Binding ColumnNames}" IsEnabled="{Binding IsOption2Checked}" Width="220" Grid.ColumnSpan="4"/>
                         <fa:IconImage Icon="Gear" Margin="10" Width="20"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Width="400" Grid.ColumnSpan="5" Grid.RowSpan="5" HorizontalAlignment="Left" Margin="80 10 0 0">
                         <Label Content="Category:        " Margin="0 7 0 0"/>
-                        <ComboBox Style="{StaticResource comboBoxTrigger1}" Margin="20 2 0 0" Width="220" Grid.ColumnSpan="4" ItemsSource="{Binding ColumnNames}" IsEnabled="{Binding IsrbOption2Checked}"/>
+                        <ComboBox Style="{StaticResource comboBoxTriggerQ1}"  Margin="20 2 0 0" Width="220" Grid.ColumnSpan="4" ItemsSource="{Binding ColumnNames}" IsEnabled="{Binding IsOption2Checked}"/>
                         <fa:IconImage Icon="Gear" Margin="10"  Width="20"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Width="400" Grid.ColumnSpan="5" Grid.RowSpan="5" HorizontalAlignment="Left" Margin="80 10 0 0">
                         <Label Content="Storage:          " Margin="0 7 0 0"/>
-                        <ComboBox Style="{StaticResource comboBoxTrigger2}" Margin="20 2 0 0" ItemsSource="{Binding ColumnNames}" IsEnabled="{Binding IsrbOption2Checked}" Width="220" Grid.ColumnSpan="4"/>
+                        <ComboBox Style="{StaticResource comboBoxTriggerQ2}"  Margin="20 2 0 0" ItemsSource="{Binding ColumnNames}" IsEnabled="{Binding IsOption2Checked}" Width="220" Grid.ColumnSpan="4"/>
                         <fa:IconImage Icon="Gear" Margin="10"  Width="20"/>
                     </StackPanel>
                 </StackPanel>
 
 
-                <Label FontSize="18" FontWeight="SemiBold" Content="Other columns:" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="0" Margin="-40,30,30,30"></Label>
+                <Label FontSize="18" FontWeight="SemiBold" Content="Create new article" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="0" Margin="-40,30,30,30"></Label>
 
                 <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Margin="-130 0 0 0" Grid.RowSpan="10" >
-  
 
                     <StackPanel Orientation="Horizontal" Width="400" Grid.ColumnSpan="5" Grid.RowSpan="5" HorizontalAlignment="Left" Margin="80 10 0 0">
                         <Label Content="Name:              " Margin="0 7 0 0"/>
@@ -125,22 +124,12 @@
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Width="400" Grid.ColumnSpan="5" Grid.RowSpan="5" HorizontalAlignment="Left" Margin="80 10 0 0">
-                        <Label Content="Discount:          " Margin="0 7 0 0"/>
-                        <ComboBox ItemsSource="{Binding ColumnNames}" SelectedItem="{Binding Discount}"  Margin="20 2 0 0"  Width="220" Grid.ColumnSpan="4"/>
+                        <Label Content="Quantity:          " Margin="0 7 0 0"/>
+                        <ComboBox ItemsSource="{Binding ColumnNames}" SelectedItem="{Binding Quantity}"  Margin="20 2 0 0"  Width="220" Grid.ColumnSpan="4"/>
                         <fa:IconImage Icon="Gear" Margin="10" Width="20"/>
                     </StackPanel>
 
-                    <StackPanel Orientation="Horizontal" Width="400" Grid.ColumnSpan="5" Grid.RowSpan="5" HorizontalAlignment="Left" Margin="80 10 0 0">
-                        <Label Content="New price:        " Margin="0 7 0 0"/>
-                        <ComboBox ItemsSource="{Binding ColumnNames}" SelectedItem="{Binding NewPrice}" Margin="20 2 0 0" Width="220" Grid.ColumnSpan="4"/>
-                        <fa:IconImage Icon="Gear" Margin="10" Width="20"/>
-                    </StackPanel>
 
-                    <StackPanel Orientation="Horizontal" Width="400" Grid.ColumnSpan="5" Grid.RowSpan="5" HorizontalAlignment="Left" Margin="80 10 0 0">
-                        <Label Content="Order:              " Margin="0 7 0 0"/>
-                        <ComboBox ItemsSource="{Binding ColumnNames}" SelectedItem="{Binding Order}"  Margin="20 2 0 0" Width="220" Grid.ColumnSpan="4"/>
-                        <fa:IconImage Icon="Gear" Margin="10" Width="20"/>
-                    </StackPanel>
                 </StackPanel>
 
 
@@ -156,44 +145,3 @@
 
     </Grid>
 </UserControl>
-
-
-
-<!--<Grid VerticalAlignment="Center" HorizontalAlignment="Center" Height="350" Width="391">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" MinWidth="69"/>
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                </Grid.RowDefinitions>
-                <Label Grid.Row="0" Margin="10 10 10 15" FontSize="18" FontWeight="Light" Grid.ColumnSpan="2" HorizontalAlignment="Center">Choose which columns you want to store:</Label>
-                <Label Grid.Row="1">Name:</Label>
-                <ComboBox ItemsSource="{Binding ColumnNamesList}" SelectedItem="{Binding Name}" Grid.Row="1" Grid.Column="1" Margin="0,5,57,5"/>
-                <Label Grid.Row="2">SubCategory:</Label>
-                <ComboBox ItemsSource="{Binding ColumnNamesList}" SelectedItem="{Binding Gender}" Grid.Row="2" Grid.Column="1" Margin="0,5,57,5"/>
-                <Label Grid.Row="3">Storage:</Label>
-                <ComboBox ItemsSource="{Binding ColumnNamesList}" SelectedItem="{Binding Storage}" Grid.Row="3" Grid.Column="1" Margin="0,5,57,5"/>
-                <Label Grid.Row="4">Barcode:</Label>
-                <ComboBox ItemsSource="{Binding ColumnNamesList}" SelectedItem="{Binding BarCode}" Grid.Row="4" Grid.Column="1" Margin="0,5,57,5"/>
-                <Label Grid.Row="5">Price:</Label>
-                <ComboBox ItemsSource="{Binding ColumnNamesList}" SelectedItem="{Binding Price}" Grid.Row="5" Grid.Column="1" Margin="0,5,57,5"/>
-                <Label Grid.Row="6">Order:</Label>
-                <ComboBox ItemsSource="{Binding ColumnNamesList}" SelectedItem="{Binding Order}" Grid.Row="6" Grid.Column="1" Margin="0,5,57,5"/>
-                <Label Grid.Row="7">Quantity:</Label>
-                <ComboBox ItemsSource="{Binding ColumnNamesList}" SelectedItem="{Binding Quantity}" Grid.Row="7" Grid.Column="1" Margin="0,5,57,5"/>
-                <Label Grid.Row="8">Category:</Label>
-                <ComboBox ItemsSource="{Binding ColumnNamesList}" SelectedItem="{Binding Collection}" Grid.Row="8" Grid.Column="1" Margin="0,5,57,5"/>
-                <Button Content="Save" Style="{StaticResource SaveButton}" Grid.Row="9" Command="{Binding SubmitCommand}" Width="100" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Margin="80,15,0,0" Grid.ColumnSpan="2">
-                </Button>
-                <Button Content="Cancel" Style="{StaticResource CancelButton}" Grid.Row="9" Grid.Column="1" Command="{Binding CancelCommand}" Width="100" Margin="120,15,0,0" HorizontalAlignment="Left"/>
-            </Grid>-->

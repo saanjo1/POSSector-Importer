@@ -19,5 +19,7 @@ namespace ImportApp.Domain.Services
         Task<ICollection<SubCategory>> GetAllSubcategories();
         Task<Guid> GetSubCategory(string name);
 
+        Task<Guid> GetArticleByName(string name);
+
     }
 }

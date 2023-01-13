@@ -14,8 +14,9 @@ using ToastNotifications.Messages;
 namespace ImportApp.WPF.ViewModels
 {
     [ObservableObject]
-    public partial class CreateCategoryViewModel
+    public partial class CreateNewStoreViewModel
     {
+
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(SaveCommand))]
         private string? name;
@@ -24,16 +25,15 @@ namespace ImportApp.WPF.ViewModels
         [ObservableProperty]
         private Guid id;
 
-
         private readonly HomeViewModel _homeViewModel;
         private Notifier _notifier;
-        private ICategoryDataService _categoryDataService;
+        private IStorageDataService _storeDataService;
 
-        public CreateCategoryViewModel(HomeViewModel homeViewModel, Notifier notifier, ICategoryDataService categoryDataService)
+        public CreateNewStoreViewModel(HomeViewModel homeViewModel, Notifier notifier, IStorageDataService storeDataService)
         {
             _homeViewModel = homeViewModel;
             _notifier = notifier;
-            _categoryDataService = categoryDataService;
+            _storeDataService = storeDataService;
             Id = Guid.NewGuid();
         }
 
@@ -41,21 +41,29 @@ namespace ImportApp.WPF.ViewModels
         [RelayCommand(CanExecute = nameof(CanSave))]
         public void Save()
         {
-            try
+            if(_storeDataService.GetStorageByName(Name) == null)
             {
-                Category newCategory = new Category()
+                try
                 {
-                    Id = Id,
-                    Name = Name,
-                    Deleted = false
-                };
-                _categoryDataService.Create(newCategory);
-                _notifier.ShowSuccess(Translations.CreatedCategory);
-                Cancel();
+                    Storage newStorage = new Storage()
+                    {
+                        Id = Id,
+                        Name = Name,
+                        Deleted = false
+                    };
+                    _storeDataService.Create(newStorage);
+                    _notifier.ShowSuccess(Translations.CreatedStorage);
+                    Cancel();
+                }
+                catch (Exception)
+                {
+                    _notifier.ShowError(Translations.ErrorMessage);
+                    Cancel();
+                }
             }
-            catch (Exception)
+            else
             {
-                _notifier.ShowError(Translations.ErrorMessage);
+                _notifier.ShowError(Translations.DuplicateStorage);
                 Cancel();
             }
         }
@@ -73,5 +81,6 @@ namespace ImportApp.WPF.ViewModels
                 return true;
             return false;
         }
+
     }
 }

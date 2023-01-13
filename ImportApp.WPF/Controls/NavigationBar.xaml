@@ -31,18 +31,18 @@
 
                 <StackPanel Orientation="Horizontal">
                     <fa:IconImage Icon="TableList" Style="{StaticResource radioButtonIcon}" Foreground="{StaticResource color6}"/>
-                    <TextBlock Text="Store" Style="{StaticResource radioButtonText}"/>
+                    <TextBlock Text="Storages" Style="{StaticResource radioButtonText}"/>
                 </StackPanel>
             </RadioButton>
 
             <RadioButton Style="{StaticResource radioButton1}"
                      Tag="{StaticResource color2}"
                      Command="{Binding EditCurrentViewModelCommand}" 
-                     CommandParameter="{x:Static nav:ViewType.Home}">
+                     CommandParameter="{x:Static nav:ViewType.Discounts}">
 
                 <StackPanel Orientation="Horizontal">
                     <fa:IconImage Icon="Percentage" Style="{StaticResource radioButtonIcon}"  Foreground="{StaticResource color4}"/>
-                    <TextBlock Text="Discount" Style="{StaticResource radioButtonText}"/>
+                    <TextBlock Text="Discounts" Style="{StaticResource radioButtonText}"/>
                 </StackPanel>
             </RadioButton>
 
@@ -53,7 +53,7 @@
 
                 <StackPanel Orientation="Horizontal">
                     <fa:IconImage Icon="FileExcel" Style="{StaticResource radioButtonIcon}"  Foreground="{StaticResource color9}"/>
-                    <TextBlock Text="Import" Style="{StaticResource radioButtonText}"/>
+                    <TextBlock Text="Import - Export" Style="{StaticResource radioButtonText}"/>
                 </StackPanel>
             </RadioButton>
 
@@ -71,16 +71,6 @@
 
             <Separator HorizontalAlignment="Center" Height="150" Width="150" Foreground="White" Margin="0 -20 0 10"/>
 
-            <RadioButton Style="{StaticResource radioButton1}"
-                     Tag="{StaticResource color2}"
-                     Command="{Binding EditCurrentViewModelCommand}" 
-                     CommandParameter="{x:Static nav:ViewType.Settings}">
-
-                <StackPanel Orientation="Horizontal">
-                    <fa:IconImage Icon="SignOut" Style="{StaticResource radioButtonIcon}" Foreground="{StaticResource color8}"/>
-                    <TextBlock Text="Log out" Style="{StaticResource radioButtonText}"/>
-                </StackPanel>
-            </RadioButton>
 
 
         </StackPanel>

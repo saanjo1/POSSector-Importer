@@ -23,13 +23,14 @@ namespace ImportApp.WPF.State.Navigators
 
         private IArticleDataService _articleService;
         private ICategoryDataService _categoryService;
-        private IStoreDataService _storeService;
+        private IStorageDataService _storeService;
         private IExcelDataService _excelDataService;
+        private ISubcategoryDataService _subCategoryDataService;
         private ConcurrentDictionary<string, string> _myDictionary;
         private IDiscountDataService _discountDataService;
         private Notifier _notifier;
 
-        public Navigator(IArticleDataService articleService, IExcelDataService excelDataService, ICategoryDataService categoryService, IDiscountDataService discountDataService, ConcurrentDictionary<string, string> myDictionary, Notifier notifier, IStoreDataService storeService)
+        public Navigator(IArticleDataService articleService, IExcelDataService excelDataService, ICategoryDataService categoryService, IDiscountDataService discountDataService, ConcurrentDictionary<string, string> myDictionary, Notifier notifier, IStorageDataService storeService, ISubcategoryDataService subCategoryDataService)
         {
             _articleService = articleService;
             _excelDataService = excelDataService;
@@ -38,6 +39,7 @@ namespace ImportApp.WPF.State.Navigators
             _discountDataService = discountDataService;
             _myDictionary = myDictionary;
             _notifier = notifier;
+            _subCategoryDataService = subCategoryDataService;
             DefaultLoad();
         }
 
@@ -50,9 +52,14 @@ namespace ImportApp.WPF.State.Navigators
                 switch (viewType)
                 {
                     case ViewType.Home:
-                        this.CurrentViewModel = new HomeViewModel(_articleService, _notifier, _discountDataService, _storeService, _categoryService);
+                        this.CurrentViewModel = new HomeViewModel(_articleService, _notifier, _discountDataService, _storeService, _categoryService, _subCategoryDataService);
                         Caption = "Dashboard";
                         Icon = IconChar.Home;
+                        break;
+                    case ViewType.Discounts:
+                        this.CurrentViewModel = new DiscountViewModel(_excelDataService, _notifier, _myDictionary,_articleService, _categoryService, _discountDataService);
+                        Caption = "Discounts";
+                        Icon = IconChar.Percentage;
                         break;
                     case ViewType.Articles:
                         this.CurrentViewModel = new StoreViewModel(_articleService, _notifier);
@@ -65,7 +72,7 @@ namespace ImportApp.WPF.State.Navigators
                         Icon = IconChar.FileExcel;
                         break;
                     case ViewType.Settings:
-                        this.CurrentViewModel = new SettingsViewModel(_discountDataService, _myDictionary, _notifier);
+                        this.CurrentViewModel = new SettingsViewModel(_discountDataService, _myDictionary, _notifier, _excelDataService);
                         Caption = "Settings";
                         Icon = IconChar.Gear;
                         break;
@@ -77,7 +84,7 @@ namespace ImportApp.WPF.State.Navigators
 
         public void DefaultLoad()
         {
-            this.CurrentViewModel = new HomeViewModel(_articleService, _notifier, _discountDataService, _storeService, _categoryService);
+            this.CurrentViewModel = new HomeViewModel(_articleService, _notifier, _discountDataService, _storeService, _categoryService, _subCategoryDataService);
             Caption = "Dashboard";
             Icon = IconChar.Home;
         }
