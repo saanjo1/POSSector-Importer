@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ImportApp.WPF.Views
+namespace ImportApp.WPF.Controls
 {
     /// <summary>
-    /// Interaction logic for ImportArticleView.xaml
+    /// Interaction logic for ImportArticlesModal.xaml
     /// </summary>
-    public partial class ImportDataView : UserControl
+    public partial class ImportArticlesModal : UserControl
     {
-        public ImportDataView()
+        public ImportArticlesModal()
         {
             InitializeComponent();
         }

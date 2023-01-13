@@ -48,7 +48,7 @@ namespace ImportApp.WPF.Helpers
             return decimalValue;
         }
 
-        public static MapColumnViewModel SelectedColumns(MapColumnViewModel mColumnModel, List<string> columnNamesList, ConcurrentDictionary<string, string> _myDictionary)
+        public static MapColumnForDiscountViewModel SelectedColumns(MapColumnForDiscountViewModel mColumnModel, List<string> columnNamesList, ConcurrentDictionary<string, string> _myDictionary)
         {
             for (int i = 0; i < columnNamesList.Count(); i++)
             {

@@ -22,7 +22,7 @@ namespace ImportApp.WPF.HostBuilders
                 services.AddSingleton<IDataGService<Article>, ArticleDataService>();
                 services.AddSingleton<IArticleDataService, ArticleDataService>();
 
-                services.AddSingleton<IExcelServiceProvider<MapColumnViewModel>, ExcelDataService>();
+                services.AddSingleton<IExcelServiceProvider<MapColumnForDiscountViewModel>, ExcelDataService>();
                 services.AddSingleton<IExcelDataService, ExcelDataService>();
 
                 services.AddSingleton<IDataGService<Rule>, DiscountDataService>();

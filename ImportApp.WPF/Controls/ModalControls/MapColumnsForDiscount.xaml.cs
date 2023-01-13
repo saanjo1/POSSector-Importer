@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace ImportApp.WPF.Controls
 {
     /// <summary>
-    /// Interaction logic for PremapColumnNames.xaml
+    /// Interaction logic for MapColumnsForDiscount.xaml
     /// </summary>
-    public partial class PremapColumnNames : UserControl
+    public partial class MapColumnsForDiscount : UserControl
     {
-        public PremapColumnNames()
+        public MapColumnsForDiscount()
         {
             InitializeComponent();
         }

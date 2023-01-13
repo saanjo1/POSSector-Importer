@@ -48,7 +48,7 @@ namespace ImportApp.WPF.ViewModels
 
 
         [ObservableProperty]
-        private ArticleQtycViewModel articleQ;
+        private ImportArticlesModalViewModel articleQ;
 
         [ObservableProperty]
         private ICollectionView articleCollection;
@@ -56,7 +56,7 @@ namespace ImportApp.WPF.ViewModels
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(ImportDataCommand))]
         [NotifyCanExecuteChangedFor(nameof(MapDataCommand))]
-        ObservableCollection<ArticleQtycViewModel>? articleList;
+        ObservableCollection<ImportArticlesModalViewModel>? articleList;
 
         private string textToFilter;
 
@@ -75,7 +75,7 @@ namespace ImportApp.WPF.ViewModels
         {
             if (!string.IsNullOrEmpty(TextToFilter))
             {
-                var filt = obj as ArticleQtycViewModel;
+                var filt = obj as ImportArticlesModalViewModel;
                 return filt != null && filt.BarCode.Contains(TextToFilter);
             }
             return true;
@@ -84,7 +84,7 @@ namespace ImportApp.WPF.ViewModels
 
 
         [RelayCommand]
-        public void LoadData(ObservableCollection<ArticleQtycViewModel>? vm)
+        public void LoadData(ObservableCollection<ImportArticlesModalViewModel>? vm)
         {
            if(vm != null)
             {
@@ -159,7 +159,7 @@ namespace ImportApp.WPF.ViewModels
         public void MapData()
         {
             this.IsMapped = true;
-            this.ArticleQ = new ArticleQtycViewModel(this, _excelDataService, _myDictionary, _notifier);
+            this.ArticleQ = new ImportArticlesModalViewModel(this, _excelDataService, _myDictionary, _notifier);
         }
 
         public void Close()

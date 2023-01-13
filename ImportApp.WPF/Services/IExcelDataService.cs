@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ImportApp.Domain.Services
 {
-    public interface IExcelDataService : IExcelServiceProvider<MapColumnViewModel>
+    public interface IExcelDataService : IExcelServiceProvider<MapColumnForDiscountViewModel>
     {
         
     }

@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace ImportApp.WPF.Controls
 {
     /// <summary>
-    /// Interaction logic for MultipleColumnName.xaml
+    /// Interaction logic for SelectExcelSheetModalView.xaml
     /// </summary>
-    public partial class MultipleColumnName : UserControl
+    public partial class SelectExcelSheetModalView : UserControl
     {
-        public MultipleColumnName()
+        public SelectExcelSheetModalView()
         {
             InitializeComponent();
         }

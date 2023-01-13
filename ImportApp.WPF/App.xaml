@@ -34,19 +34,19 @@
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewmodels:ImportDataViewModel}">
-                <views:ImportDataView/>
+                <views:ImportArticlesView/>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type viewmodels:MapDataViewModel}">
-                <controls:MapDataView/>
+            <DataTemplate DataType="{x:Type viewmodels:SelectExcelSheetModalViewModel}">
+                <controls:SelectExcelSheetModalView/>
             </DataTemplate>
             
             <DataTemplate DataType="{x:Type viewmodels:SettingsViewModel}">
                 <views:SettingsView/>
             </DataTemplate>
-            
-            <DataTemplate DataType="{x:Type viewmodels:MapColumnViewModel}">
-                <controls:MapExcelColumns/>
+
+            <DataTemplate DataType="{x:Type viewmodels:MapColumnForDiscountViewModel}">
+                <controls:MapColumnsForDiscount/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewmodels:CreateNewStoreViewModel}">
@@ -65,16 +65,8 @@
                 <controls:CreateNewSubCategory/>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type viewmodels:MultipleColumnNameSmallViewModel}">
-                <controls:MultipleColumnName/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type viewmodels:PremapExcelColumnsViewModel}">
-                <controls:PremapColumnNames/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type viewmodels:ArticleQtycViewModel}">
-                <controls:ArticlesQtycView/>
+            <DataTemplate DataType="{x:Type viewmodels:ImportArticlesModalViewModel}">
+                <controls:ImportArticlesModal/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewmodels:MainViewModel}">

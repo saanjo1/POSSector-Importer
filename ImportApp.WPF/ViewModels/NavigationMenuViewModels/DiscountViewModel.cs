@@ -45,10 +45,10 @@ namespace ImportApp.WPF.ViewModels
         private bool isOptions;
 
         [ObservableProperty]
-        private MapColumnViewModel mapDataModel;
+        private MapColumnForDiscountViewModel mapDataModel;
 
         [ObservableProperty]
-        ObservableCollection<MapColumnViewModel>? articleList;
+        ObservableCollection<MapColumnForDiscountViewModel>? articleList;
 
         [ObservableProperty]
         private ICollectionView articleCollection;
@@ -68,7 +68,7 @@ namespace ImportApp.WPF.ViewModels
         public void MapData()
         {
             this.IsMapped = true;
-            this.MapDataModel = new MapColumnViewModel(this, _excelDataService, _myDictionary, _notifier);
+            this.MapDataModel = new MapColumnForDiscountViewModel(this, _excelDataService, _myDictionary, _notifier);
         }
 
 
@@ -95,7 +95,7 @@ namespace ImportApp.WPF.ViewModels
         }
 
         [RelayCommand]
-        public void LoadData(ObservableCollection<MapColumnViewModel>? vm)
+        public void LoadData(ObservableCollection<MapColumnForDiscountViewModel>? vm)
         {
             if (vm != null)
             {

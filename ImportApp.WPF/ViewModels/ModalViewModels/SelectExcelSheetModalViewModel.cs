@@ -21,7 +21,7 @@ using ToastNotifications.Messages;
 namespace ImportApp.WPF.ViewModels
 {
     [ObservableObject]
-    public partial class MapDataViewModel : BaseViewModel
+    public partial class SelectExcelSheetModalViewModel : BaseViewModel
     {
         private Notifier _notifier;
 
@@ -34,30 +34,19 @@ namespace ImportApp.WPF.ViewModels
         private string selectedSheet;
 
         private IExcelDataService _excelDataService;
-        private readonly ImportDataViewModel _importArticleViewModel;
         private readonly SettingsViewModel _setingsViewModel;
         private ConcurrentDictionary<string, string> _myDictionary;
 
 
-        [ObservableProperty]
-        private MapColumnViewModel? mColumnModel;
+        [ObservableProperty]    
+        private MapColumnForDiscountViewModel? mColumnModel;
 
         [ObservableProperty]
         private bool isMapped;
 
-        //public MapDataViewModel(IExcelDataService excelDataService, ImportDataViewModel importArticleViewModel, MapColumnViewModel mapColumnViewModel, Notifier notifier, ConcurrentDictionary<string, string> myDictionary)
-        //{
-        //    _excelDataService = excelDataService;
-        //    articleQ = mapColumnViewModel;
-        //    _importArticleViewModel = importArticleViewModel;
-        //    CurrentSheets = _excelDataService.ListSheetsFromFile().Result;
-        //    SelectedSheet = CurrentSheets[0];
-        //    _notifier = notifier;
-        //    _myDictionary = myDictionary;
-        //}
 
 
-        public MapDataViewModel(IExcelDataService excelDataService, SettingsViewModel setingsViewModel, Notifier notifier, ConcurrentDictionary<string, string> myDictionary)
+        public SelectExcelSheetModalViewModel(IExcelDataService excelDataService, SettingsViewModel setingsViewModel, Notifier notifier, ConcurrentDictionary<string, string> myDictionary)
         {
             _excelDataService = excelDataService;
             _setingsViewModel = setingsViewModel;

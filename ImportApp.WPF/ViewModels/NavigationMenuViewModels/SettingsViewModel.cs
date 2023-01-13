@@ -32,32 +32,20 @@ namespace ImportApp.WPF.ViewModels
             _excelDataService = excelDataService;
         }
 
-        [ObservableProperty]
-        [NotifyCanExecuteChangedFor(nameof(CreateMapRuleCommand))]
-        private bool isEnableToMap; 
         
         [ObservableProperty]
-        [NotifyCanExecuteChangedFor(nameof(CreateMapRuleCommand))]
         [NotifyCanExecuteChangedFor(nameof(SelectSheetCommand))]
         [NotifyCanExecuteChangedFor(nameof(UploadExcelFileCommand))]
         private bool isOpen;
 
-        [ObservableProperty]
-        private PremapExcelColumnsViewModel preMapRuleViewModel;
 
         [ObservableProperty]
-        private MapDataViewModel sheetDataModel;
+        private SelectExcelSheetModalViewModel sheetDataModel;
 
 
         [ObservableProperty]
         private string dBConnection;
 
-        [RelayCommand(CanExecute = nameof(SheetCheck))]
-        public void CreateMapRule()
-        {
-            IsEnableToMap = true;
-            this.PreMapRuleViewModel = new PremapExcelColumnsViewModel(_myDictionary, this);
-        }
 
         public bool SheetCheck()
         {
@@ -112,7 +100,7 @@ namespace ImportApp.WPF.ViewModels
             try
             {
                 IsOpen = true;
-                this.SheetDataModel = new MapDataViewModel(_excelDataService, this, _notifier, _myDictionary);
+                this.SheetDataModel = new SelectExcelSheetModalViewModel(_excelDataService, this, _notifier, _myDictionary);
 
             }
             catch (System.Exception)
@@ -125,9 +113,6 @@ namespace ImportApp.WPF.ViewModels
         [RelayCommand]
         public void Cancel()
         {
-            if (IsEnableToMap)
-                IsEnableToMap = false;
-
             if (IsOpen)
                 IsOpen = false;
         }

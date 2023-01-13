@@ -19,7 +19,7 @@ using ToastNotifications.Messages;
 namespace ImportApp.WPF.ViewModels
 {
     [ObservableObject]
-    public partial class MapColumnViewModel : BaseViewModel
+    public partial class MapColumnForDiscountViewModel : BaseViewModel
     {
         private Notifier _notifier;
         public IExcelDataService? _excelDataService;
@@ -64,7 +64,7 @@ namespace ImportApp.WPF.ViewModels
         ConcurrentDictionary<string, string> _myDictionary;
 
         [ObservableProperty]
-        ObservableCollection<MapColumnViewModel>? articleList;
+        ObservableCollection<MapColumnForDiscountViewModel>? articleList;
 
 
         [ObservableProperty]
@@ -72,7 +72,7 @@ namespace ImportApp.WPF.ViewModels
         
         private DiscountViewModel _discountViewModel;
 
-        public MapColumnViewModel(DiscountViewModel discountViewModel, IExcelDataService? excelDataService, ConcurrentDictionary<string, string> myDictionary, Notifier notifier)
+        public MapColumnForDiscountViewModel(DiscountViewModel discountViewModel, IExcelDataService? excelDataService, ConcurrentDictionary<string, string> myDictionary, Notifier notifier)
         {
             _discountViewModel = discountViewModel;
             _excelDataService = excelDataService;
@@ -81,7 +81,7 @@ namespace ImportApp.WPF.ViewModels
             _notifier = notifier;
         }
 
-        public MapColumnViewModel()
+        public MapColumnForDiscountViewModel()
         {
 
         }
@@ -98,7 +98,7 @@ namespace ImportApp.WPF.ViewModels
         {
             try
             {
-                ObservableCollection<MapColumnViewModel>? excelDataList;
+                ObservableCollection<MapColumnForDiscountViewModel>? excelDataList;
                 excelDataList = _excelDataService.ReadFromExcel(_myDictionary, this).Result;
                 _notifier.ShowInformation(excelDataList.Count() + " articles pulled. ");
                 _discountViewModel.LoadData(excelDataList);

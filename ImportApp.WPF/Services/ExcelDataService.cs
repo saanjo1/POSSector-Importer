@@ -23,8 +23,8 @@ namespace ImportApp.WPF.Services
         public static OleDbConnection _oleDbConnection;
         public static OleDbCommand Command;
 
-        private static ObservableCollection<MapColumnViewModel> mapColumnViewModels = new ObservableCollection<MapColumnViewModel>();
-        private static ObservableCollection<ArticleQtycViewModel> _articleQtycViewModels = new ObservableCollection<ArticleQtycViewModel>();
+        private static ObservableCollection<MapColumnForDiscountViewModel> mapColumnViewModels = new ObservableCollection<MapColumnForDiscountViewModel>();
+        private static ObservableCollection<ImportArticlesModalViewModel> _articleQtycViewModels = new ObservableCollection<ImportArticlesModalViewModel>();
 
         public ExcelDataService()
         {
@@ -119,7 +119,7 @@ namespace ImportApp.WPF.Services
             return await Task.FromResult(lines);
         }
 
-        public async Task<ObservableCollection<MapColumnViewModel>> ReadFromExcel(ConcurrentDictionary<string, string> _myDictionary, MapColumnViewModel viewModel)
+        public async Task<ObservableCollection<MapColumnForDiscountViewModel>> ReadFromExcel(ConcurrentDictionary<string, string> _myDictionary, MapColumnForDiscountViewModel viewModel)
         {
             bool success = _myDictionary.TryGetValue(Translations.CurrentExcelFile, out string value);
             bool sheet = _myDictionary.TryGetValue(Translations.CurrentExcelSheet, out string sheetValue);
@@ -145,7 +145,7 @@ namespace ImportApp.WPF.Services
                     while (Reader.Read())
                     {
 
-                        mapColumnViewModels.Add(new MapColumnViewModel
+                        mapColumnViewModels.Add(new MapColumnForDiscountViewModel
                         {
                             Name = Reader[viewModel.Name].ToString(),
                             SubCategory = Reader[viewModel.SubCategory].ToString(),
@@ -178,7 +178,7 @@ namespace ImportApp.WPF.Services
         
         
         
-        public async Task<ObservableCollection<ArticleQtycViewModel>> ReadFromExcel(ConcurrentDictionary<string, string> _myDictionary, ArticleQtycViewModel viewModel)
+        public async Task<ObservableCollection<ImportArticlesModalViewModel>> ReadFromExcel(ConcurrentDictionary<string, string> _myDictionary, ImportArticlesModalViewModel viewModel)
         {
             bool success = _myDictionary.TryGetValue(Translations.CurrentExcelFile, out string value);
             bool sheet = _myDictionary.TryGetValue(Translations.CurrentExcelSheet, out string sheetValue);
@@ -204,7 +204,7 @@ namespace ImportApp.WPF.Services
                     while (Reader.Read())
                     {
 
-                        _articleQtycViewModels.Add(new ArticleQtycViewModel
+                        _articleQtycViewModels.Add(new ImportArticlesModalViewModel
                         {
                             Name = Reader[viewModel.Name].ToString(),
                             SubCategory = Reader[viewModel.SubCategory].ToString(),

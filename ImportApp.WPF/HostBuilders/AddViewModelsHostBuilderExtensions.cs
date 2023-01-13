@@ -16,8 +16,8 @@ namespace ImportApp.WPF.HostBuilders
             host.ConfigureServices(services =>
             {
                 services.AddTransient<StoreViewModel>();
-                services.AddTransient<MapColumnViewModel>();
-                services.AddTransient<MapDataViewModel>();
+                services.AddTransient<MapColumnForDiscountViewModel>();
+                services.AddTransient<SelectExcelSheetModalViewModel>();
                 services.AddTransient<MainViewModel>();
                 services.AddTransient<ImportDataViewModel>();
                 services.AddTransient<HomeViewModel>();
