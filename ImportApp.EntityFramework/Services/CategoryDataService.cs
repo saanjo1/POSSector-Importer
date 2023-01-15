@@ -101,11 +101,11 @@ namespace ImportApp.EntityFramework.Services
         }
 
 
-        Task<Guid> ICategoryDataService.ManageSubcategories(string subCtgry, string ctgry, string storageId)
+        Task<Guid> ICategoryDataService.ManageSubcategories(string ctgry, string storageId)
         {
             using (ImportAppDbContext context = _contextFactory.CreateDbContext())
             {
-                SubCategory subcategory = context.SubCategories.Where(x => x.Name == subCtgry).FirstOrDefault();
+                SubCategory subcategory = context.SubCategories.Where(x => x.Name == "DefaultSubCategory").FirstOrDefault();
                 Guid ctgryId = this.ManageCategories(ctgry, storageId).Result;
 
                 var category = context.Categories.Where(x => x.Id == ctgryId).FirstOrDefault();
@@ -115,7 +115,7 @@ namespace ImportApp.EntityFramework.Services
                     SubCategory subCategory = new SubCategory()
                     {
                         Id = Guid.NewGuid(),
-                        Name = subCtgry,
+                        Name = "DefaultSubCategory",
                         Deleted = false,
                         StorageId = category.StorageId,
                         CategoryId = ctgryId

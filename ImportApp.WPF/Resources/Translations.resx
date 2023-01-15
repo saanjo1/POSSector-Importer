@@ -138,6 +138,9 @@
   <data name="CurrentExcelSheet" xml:space="preserve">
     <value>CurrentExcelSheet</value>
   </data>
+  <data name="DefaultSubcategory" xml:space="preserve">
+    <value>DefaultSubcategory</value>
+  </data>
   <data name="DuplicateArticle" xml:space="preserve">
     <value>Article with same name already exist.</value>
   </data>

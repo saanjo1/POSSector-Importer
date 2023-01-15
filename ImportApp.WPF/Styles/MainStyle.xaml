@@ -774,28 +774,6 @@
     </Style>
 
 
-    <Style x:Key="comboBoxTrigger" TargetType="ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}">
-        <Style.Triggers>
-            <DataTrigger Binding="{Binding IsrbOption1Checked}" Value="True">
-                <Setter Property="ComboBox.SelectedItem" Value="{Binding SubCategory}"  />
-            </DataTrigger>
-            <DataTrigger Binding="{Binding IsrbOption2Checked}" Value="True">
-                <Setter Property="ComboBox.SelectedItem" Value="{Binding SubCategory}" />
-            </DataTrigger>
-        </Style.Triggers>
-    </Style>
-
-    <Style x:Key="comboBoxTriggerQ" TargetType="ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}">
-        <Style.Triggers>
-            <DataTrigger Binding="{Binding IsOption1Checked}" Value="True">
-                <Setter Property="ComboBox.SelectedItem" Value="{Binding SubCategory}"  />
-            </DataTrigger>
-            <DataTrigger Binding="{Binding IsOption2Checked}" Value="True">
-                <Setter Property="ComboBox.SelectedItem" Value="{Binding SubCategory}" />
-            </DataTrigger>
-        </Style.Triggers>
-    </Style>
-
     <Style x:Key="comboBoxTrigger1" TargetType="ComboBox" BasedOn="{StaticResource {x:Type ComboBox}}">
         <Style.Triggers>
             <DataTrigger Binding="{Binding IsrbOption1Checked}" Value="True">

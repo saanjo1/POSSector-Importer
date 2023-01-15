@@ -63,16 +63,11 @@
                 <StackPanel  x:Name="stckPanel1"  Orientation="Vertical" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,-70,-69,93" Grid.RowSpan="6" >
                     <RadioButton GroupName="Options" IsChecked="{Binding IsrbOption1Checked}" Grid.Row="1" Content="Choose existing data from database" Grid.ColumnSpan="3" Margin="30,-20,30,30"/>
                     <StackPanel Orientation="Horizontal" Width="400" Grid.ColumnSpan="5" Grid.RowSpan="7" HorizontalAlignment="Left" Margin="80 -20 0 0">
-                        <Label Content="SubCategory " Margin="0 7 0 0"/>
-                        <ComboBox Style="{StaticResource comboBoxTrigger}" x:Name="cmbBox1" Margin="20 2 0 0" IsEnabled="{Binding IsrbOption1Checked}" Width="220" Grid.ColumnSpan="4"/>
+                        <Label Content="Category      " Margin="0 7 0 0"/>
+                        <ComboBox Style="{StaticResource comboBoxTriggerQ1}" x:Name="cmbBox1" Margin="20 2 0 0" IsEnabled="{Binding IsrbOption1Checked}" Width="220" Grid.ColumnSpan="4"/>
                     </StackPanel>
 
-                    <StackPanel Orientation="Horizontal" Width="400" Grid.ColumnSpan="5" Grid.RowSpan="5" HorizontalAlignment="Left" Margin="80 10 0 0">
-                        <Label Content="Category:      "/>
-                        <TextBlock Background="{StaticResource BrushPrimary7}" Foreground="White" Margin="20 2 0 0" Width="220" Grid.ColumnSpan="4"/>
-                    </StackPanel>
-
-                    <StackPanel Orientation="Horizontal" Width="400" Grid.ColumnSpan="5" Grid.RowSpan="5" HorizontalAlignment="Left" Margin="80 10 0 0">
+                    <StackPanel Orientation="Horizontal" Width="400" Grid.ColumnSpan="5" Grid.RowSpan="5" HorizontalAlignment="Left" Margin="80 15 0 0">
                         <Label Content="Storage:        "/>
                         <TextBlock Background="{StaticResource BrushPrimary7}" Foreground="White" Margin="20 2 0 0" Width="220" Grid.ColumnSpan="4"/>
                     </StackPanel>
@@ -81,15 +76,10 @@
 
                 <StackPanel x:Name="stckPanel2" Orientation="Vertical" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="5" Margin="0,14,-69,71" Grid.RowSpan="5" >
                     <RadioButton GroupName="Options" IsChecked="{Binding IsrbOption2Checked}" Grid.Row="3" Content="Select data from selected Excel file" Grid.ColumnSpan="3" Margin="30,-40,30,30"/>
-                    <StackPanel Orientation="Horizontal" Width="400" Grid.ColumnSpan="5" Grid.RowSpan="7" HorizontalAlignment="Left" Margin="80 -20 0 0">
-                        <Label Content="SubCategory:  " Margin="0 7 0 0"/>
-                        <ComboBox Style="{StaticResource comboBoxTrigger}" x:Name="cmbBox2" Margin="20 2 0 0" ItemsSource="{Binding ColumnNames}" IsEnabled="{Binding IsrbOption2Checked}" Width="220" Grid.ColumnSpan="4"/>
-                        <fa:IconImage Icon="Gear" Margin="10" Width="20"/>
-                    </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Width="400" Grid.ColumnSpan="5" Grid.RowSpan="5" HorizontalAlignment="Left" Margin="80 10 0 0">
                         <Label Content="Category:        " Margin="0 7 0 0"/>
-                        <ComboBox Style="{StaticResource comboBoxTrigger1}" Margin="20 2 0 0" Width="220" Grid.ColumnSpan="4" ItemsSource="{Binding ColumnNames}" IsEnabled="{Binding IsrbOption2Checked}"/>
+                        <ComboBox Style="{StaticResource comboBoxTrigger1}" Margin="20 2 0 0" Width="220" Grid.ColumnSpan="4" ItemsSource="{Binding ColumnNames}" SelectedItem="{Binding SelectedItems.Category}" IsEnabled="{Binding IsrbOption2Checked}"/>
                         <fa:IconImage Icon="Gear" Margin="10"  Width="20"/>
                     </StackPanel>
 
@@ -135,16 +125,7 @@
                         <ComboBox ItemsSource="{Binding ColumnNames}" SelectedItem="{Binding NewPrice}" Margin="20 2 0 0" Width="220" Grid.ColumnSpan="4"/>
                         <fa:IconImage Icon="Gear" Margin="10" Width="20"/>
                     </StackPanel>
-
-                    <StackPanel Orientation="Horizontal" Width="400" Grid.ColumnSpan="5" Grid.RowSpan="5" HorizontalAlignment="Left" Margin="80 10 0 0">
-                        <Label Content="Order:              " Margin="0 7 0 0"/>
-                        <ComboBox ItemsSource="{Binding ColumnNames}" SelectedItem="{Binding Order}"  Margin="20 2 0 0" Width="220" Grid.ColumnSpan="4"/>
-                        <fa:IconImage Icon="Gear" Margin="10" Width="20"/>
-                    </StackPanel>
                 </StackPanel>
-
-
-
 
                 <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1" Margin="60 0 0 0" Grid.RowSpan="5">
                     <Button Content="Save" Style="{StaticResource saveModalButton}" Margin="0 0 30 0" Command="{Binding SubmitCommand}" Width="100" />

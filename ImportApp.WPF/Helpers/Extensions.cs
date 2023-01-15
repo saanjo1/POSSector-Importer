@@ -52,26 +52,26 @@ namespace ImportApp.WPF.Helpers
         {
             for (int i = 0; i < columnNamesList.Count(); i++)
             {
-                //if (columnNamesList[i].Contains("SKU"))
-                //    articleQ.Name = columnNamesList[i];
+                if (columnNamesList[i].Contains("Name"))
+                    mColumnModel.Name = columnNamesList[i];
 
-                //if (columnNamesList[i].Contains("BARCODE"))
-                //    articleQ.BarCode = columnNamesList[i];
+                if (columnNamesList[i].Contains("Barcode"))
+                    mColumnModel.BarCode = columnNamesList[i];
 
-                //if (columnNamesList[i].Contains("PRICE"))
-                //    articleQ.Price = columnNamesList[i];
+                if (columnNamesList[i].Contains("Full price €"))
+                    mColumnModel.Price = columnNamesList[i];
 
-                //if (columnNamesList[i].Contains("STORAGE"))
-                //    articleQ.Storage = columnNamesList[i];
+                if (columnNamesList[i].Contains("Department"))
+                    mColumnModel.Storage = columnNamesList[i];
 
-                //if (columnNamesList[i].Contains("SEASON"))
-                //    articleQ.Collection = columnNamesList[i];
+                if (columnNamesList[i].Contains("Category"))
+                    mColumnModel.Category = columnNamesList[i];
 
-                //if (columnNamesList[i].Contains("GENDER"))
-                //    articleQ.Gender = columnNamesList[i];
-                
-                //if (columnNamesList[i].Contains("QTYC"))
-                //    articleQ.Quantity = columnNamesList[i];
+                if (columnNamesList[i].Contains("Discount"))
+                    mColumnModel.Discount = columnNamesList[i];
+
+                if (columnNamesList[i].Contains("Discounted price"))
+                    mColumnModel.NewPrice = columnNamesList[i];
             }
 
             return mColumnModel;  

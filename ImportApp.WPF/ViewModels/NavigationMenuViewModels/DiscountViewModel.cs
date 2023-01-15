@@ -149,7 +149,7 @@ namespace ImportApp.WPF.ViewModels
                         ArticleNumber = articleList.Count + 1,
                         Price = Helpers.Extensions.GetDecimal(articleList[i].Price),
                         BarCode = articleList[i].BarCode,
-                        SubCategoryId = _categoryDataService.ManageSubcategories(articleList[i]?.SubCategory, articleList[i]?.Category, articleList[i]?.Storage).Result,
+                        SubCategoryId = _categoryDataService.ManageSubcategories(articleList[i]?.Category, articleList[i]?.Storage).Result,
                         Deleted = false,
                         Order = 1,
                     };

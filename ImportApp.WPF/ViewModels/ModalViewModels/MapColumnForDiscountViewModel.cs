@@ -36,9 +36,6 @@ namespace ImportApp.WPF.ViewModels
         private string? name;
 
         [ObservableProperty]
-        private string? subCategory;
-
-        [ObservableProperty]
         private string? category;
 
         [ObservableProperty]
@@ -57,8 +54,7 @@ namespace ImportApp.WPF.ViewModels
         private string? newPrice;
 
         [ObservableProperty]
-        private string? order;
-
+        MapColumnForDiscountViewModel selectedItems;
 
         [ObservableProperty]
         ConcurrentDictionary<string, string> _myDictionary;
@@ -79,6 +75,7 @@ namespace ImportApp.WPF.ViewModels
             _myDictionary = myDictionary;
             LoadColumnNames();
             _notifier = notifier;
+            SelectedItems = Helpers.Extensions.SelectedColumns(this, ColumnNames, myDictionary);
         }
 
         public MapColumnForDiscountViewModel()

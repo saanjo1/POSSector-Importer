@@ -148,14 +148,12 @@ namespace ImportApp.WPF.Services
                         mapColumnViewModels.Add(new MapColumnForDiscountViewModel
                         {
                             Name = Reader[viewModel.Name].ToString(),
-                            SubCategory = Reader[viewModel.SubCategory].ToString(),
                             Category = Reader[viewModel.Category].ToString(),
                             Storage = Reader[viewModel.Storage].ToString(),
                             BarCode = Reader[viewModel.BarCode].ToString(),
                             Price = Reader[viewModel.Price].ToString(),
                             Discount = Helpers.Extensions.DisplayDiscountInPercentage(Reader[viewModel.Discount].ToString()),
                             NewPrice = Reader[viewModel.NewPrice].ToString(),
-                            Order = Reader[viewModel.Order].ToString()
                         });
                     }
 

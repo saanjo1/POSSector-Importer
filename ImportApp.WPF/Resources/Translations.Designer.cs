@@ -124,6 +124,15 @@ namespace ImportApp.WPF.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to DefaultSubcategory.
+        /// </summary>
+        internal static string DefaultSubcategory {
+            get {
+                return ResourceManager.GetString("DefaultSubcategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Article with same name already exist..
         /// </summary>
         internal static string DuplicateArticle {

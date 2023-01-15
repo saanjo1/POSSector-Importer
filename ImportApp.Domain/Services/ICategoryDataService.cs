@@ -10,7 +10,7 @@ namespace ImportApp.Domain.Services
     public interface ICategoryDataService : IDataGService<Category>
     {
         Task<Category> Compare(string value);
-        Task<Guid> ManageSubcategories(string value1, string value2, string storageId);
+        Task<Guid> ManageSubcategories(string value2, string storageId);
         Task<List<string>> GetNamesOfCategories();
         Task<Guid> GetCategoryByName(string name);
     }
