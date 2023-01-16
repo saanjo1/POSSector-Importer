@@ -121,6 +121,10 @@ namespace ImportApp.WPF.Services
 
         public async Task<ObservableCollection<MapColumnForDiscountViewModel>> ReadFromExcel(ConcurrentDictionary<string, string> _myDictionary, MapColumnForDiscountViewModel viewModel)
         {
+            if (mapColumnViewModels.Count > 0)
+                mapColumnViewModels.Clear();
+
+
             bool success = _myDictionary.TryGetValue(Translations.CurrentExcelFile, out string value);
             bool sheet = _myDictionary.TryGetValue(Translations.CurrentExcelSheet, out string sheetValue);
 
@@ -149,12 +153,12 @@ namespace ImportApp.WPF.Services
                         {
                             Name = Reader[viewModel.Name].ToString(),
                             Category = Reader[viewModel.Category].ToString(),
-                            Storage = Reader[viewModel.Storage].ToString(),
                             BarCode = Reader[viewModel.BarCode].ToString(),
                             Price = Reader[viewModel.Price].ToString(),
                             Discount = Helpers.Extensions.DisplayDiscountInPercentage(Reader[viewModel.Discount].ToString()),
                             NewPrice = Reader[viewModel.NewPrice].ToString(),
-                        });
+                            Storage = Translations.Articles
+                        }) ;
                     }
 
                     Reader.Close();

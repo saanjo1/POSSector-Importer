@@ -22,7 +22,7 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <modalcontrol:Modal Panel.ZIndex="20" Background="Transparent" IsOpen="{Binding IsMapped}" Grid.RowSpan="3">
+        <modalcontrol:Modal Panel.ZIndex="20" Height="460" Background="Transparent" IsOpen="{Binding IsMapped}" Grid.RowSpan="3">
             <ContentControl Content="{Binding MapDataModel}" Background="{StaticResource panelActiveColor}"/>
         </modalcontrol:Modal>
 
@@ -52,27 +52,14 @@
         <TextBlock Grid.Row="1" FontSize="19" Text="{Binding Count}" Foreground="{StaticResource titleColor1}" Margin="10 25 0 0"/>
         <TextBlock Grid.Row="1" FontSize="19" Text="article(s) in list" Foreground="{StaticResource titleColor1}" Margin="70 25 0 0"/>
 
-        <DataGrid Grid.ColumnSpan="3" Margin="0 30 0 0" Grid.Row="2" Name="membersDataGrid" ItemsSource="{Binding ArticleCollection}" RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" Style="{DynamicResource DataGridStyle1}" Height="400" CanUserDeleteRows="True" IsReadOnly="False">
-        <DataGrid.Columns>
-            <DataGridTemplateColumn Header="SubCategory" IsReadOnly="True" Width="140">
-                <DataGridTemplateColumn.CellTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <Border Width="25" Height="25" CornerRadius="50" Margin="0 0 10 0">
-                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White"/>
-                            </Border>
-                                <TextBlock Text="{Binding SubCategory}" VerticalAlignment="Center" Margin="-30"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </DataGridTemplateColumn.CellTemplate>
-            </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Category" Binding="{Binding Category}" Width="130"/>
-                <DataGridTextColumn Header="Storage" Binding="{Binding Storage}" Width="130"/>
-                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="150"/>
+        <DataGrid Grid.ColumnSpan="3" Margin="0 30 0 0" Grid.Row="2" Name="membersDataGrid" ItemsSource="{Binding ArticleCollection}" RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" Style="{DynamicResource DataGridStyle1}" Height="380" CanUserDeleteRows="True" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Category" Binding="{Binding Category}" Width="200"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="300"/>
                 <DataGridTextColumn Header="Barcode" Binding="{Binding BarCode}" Width="auto"/>
-                <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="100"/>
-                <DataGridTextColumn Header="Discount" Binding="{Binding Discount}" Width="100"/>
-                <DataGridTextColumn Header="New price" Binding="{Binding NewPrice}" Width="100"/>
+                <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="auto"/>
+                <DataGridTextColumn Header="Discount" Binding="{Binding Discount}" Width="auto"/>
+                <DataGridTextColumn Header="New price" Binding="{Binding NewPrice}" Width="130"/>
             <DataGridTemplateColumn Header="Operations" Width="auto">
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>

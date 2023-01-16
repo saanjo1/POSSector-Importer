@@ -61,17 +61,17 @@ namespace ImportApp.WPF.Helpers
                 if (columnNamesList[i].Contains("Full price €"))
                     mColumnModel.Price = columnNamesList[i];
 
-                if (columnNamesList[i].Contains("Department"))
-                    mColumnModel.Storage = columnNamesList[i];
-
                 if (columnNamesList[i].Contains("Category"))
                     mColumnModel.Category = columnNamesList[i];
 
-                if (columnNamesList[i].Contains("Discount"))
+                if (columnNamesList[i].Equals("Discount"))
                     mColumnModel.Discount = columnNamesList[i];
 
                 if (columnNamesList[i].Contains("Discounted price"))
                     mColumnModel.NewPrice = columnNamesList[i];
+
+                mColumnModel.Storage = "Articles";
+
             }
 
             return mColumnModel;  

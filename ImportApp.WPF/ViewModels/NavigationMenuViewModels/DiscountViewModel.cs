@@ -32,6 +32,30 @@ namespace ImportApp.WPF.ViewModels
         [NotifyCanExecuteChangedFor(nameof(ClearListCommand))]
         private int count;
 
+        private string textToFilter;
+
+        public string TextToFilter
+        {
+            get { return textToFilter; }
+            set
+            {
+                textToFilter = value;
+                OnPropertyChanged(nameof(TextToFilter));
+                ArticleCollection.Filter = FilterFunction;
+            }
+        }
+
+        private bool FilterFunction(object obj)
+        {
+            if (!string.IsNullOrEmpty(TextToFilter))
+            {
+                var filt = obj as MapColumnForDiscountViewModel;
+                return filt != null && (filt.BarCode.Contains(TextToFilter));
+            }
+            return true;
+        }
+
+
 
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(MapDataCommand))]
@@ -97,6 +121,7 @@ namespace ImportApp.WPF.ViewModels
         [RelayCommand]
         public void LoadData(ObservableCollection<MapColumnForDiscountViewModel>? vm)
         {
+            
             if (vm != null)
             {
                 articleList = vm;

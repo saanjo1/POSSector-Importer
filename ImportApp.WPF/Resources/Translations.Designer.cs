@@ -61,6 +61,15 @@ namespace ImportApp.WPF.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Articles.
+        /// </summary>
+        internal static string Articles {
+            get {
+                return ResourceManager.GetString("Articles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Article successfully created..
         /// </summary>
         internal static string CreatedArticle {
