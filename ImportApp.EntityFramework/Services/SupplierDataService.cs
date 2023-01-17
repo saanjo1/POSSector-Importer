@@ -1,7 +1,6 @@
 ﻿using ImportApp.Domain.Models;
 using ImportApp.Domain.Services;
 using ImportApp.EntityFramework.DBContext;
-using Microsoft.EntityFrameworkCore.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,16 +9,16 @@ using System.Threading.Tasks;
 
 namespace ImportApp.EntityFramework.Services
 {
-    public class StorageDataService : IStorageDataService
+    public class SupplierDataService : ISupplierDataService
     {
         public static ImportAppDbContextFactory factory;
 
-        public StorageDataService(ImportAppDbContextFactory _factory)
+        public SupplierDataService(ImportAppDbContextFactory _factory)
         {
             factory = _factory;
         }
 
-        public Task<bool> Create(Storage entity)
+        public Task<bool> Create(Supplier entity)
         {
             using (ImportAppDbContext context = factory.CreateDbContext())
             {
@@ -36,7 +35,7 @@ namespace ImportApp.EntityFramework.Services
             }
         }
 
-        public Task<ICollection<Storage>> Delete(Guid id)
+        public Task<ICollection<Supplier>> Delete(Guid id)
         {
             using (ImportAppDbContext context = factory.CreateDbContext())
             {
@@ -44,81 +43,86 @@ namespace ImportApp.EntityFramework.Services
                 entity.Deleted = true;
 
                 context.SaveChanges();
-                ICollection<Storage> entities = context.Storages.ToList();
+                ICollection<Supplier> entities = context.Suppliers.ToList();
                 return Task.FromResult(entities);
             }
         }
 
-        public Task<Storage> Get(string id)
+        public Task<Supplier> Get(string id)
         {
             using (ImportAppDbContext context = factory.CreateDbContext())
             {
-                Storage? entity = context.Storages.FirstOrDefault(x => x.Id.ToString() == id);
+                Supplier? entity = context.Suppliers.FirstOrDefault(x => x.Id.ToString() == id);
                 return Task.FromResult(entity);
             }
         }
 
-        public Task<ICollection<Storage>> GetAll()
+        public Task<ICollection<Supplier>> GetAll()
         {
             using (ImportAppDbContext context = factory.CreateDbContext())
             {
-                ICollection<Storage> entities = context.Storages.ToList();
+                ICollection<Supplier> entities = context.Suppliers.ToList();
                 return Task.FromResult(entities);
             }
         }
 
-        public Task<List<string>> GetNamesOfStorages()
-        {
-            ICollection<Storage> storageCollection = GetAll().Result;
-            List<string> storages = new List<string>();
-
-            if(storageCollection.Count > 0)
-            {
-                foreach(Storage item in storageCollection)
-                {
-                    storages.Add(item.Name);
-                }
-            }
-
-            return Task.FromResult(storages);
-        }
-
-        public Task<Guid> GetStorageByName(string name)
-        {
-            using (ImportAppDbContext context = factory.CreateDbContext())
-            {
-                Storage _storage = context.Storages.FirstOrDefault(x => x.Name == name);
-
-                if (_storage != null && _storage.Deleted == false)
-                    return Task.FromResult(_storage.Id);
-                else
-                {
-                    Domain.Models.Storage newStorage = new Domain.Models.Storage()
-                    {
-                        Id = Guid.NewGuid(),
-                        Deleted = false,
-                        Name = name
-                    };
-
-                    context.Storages.Add(newStorage);
-                    context.SaveChanges();
-
-                    return Task.FromResult(newStorage.Id);
-
-                }
-            }
-        }
-
-        public Task<Storage> Update(Guid id, Storage entity)
+        public Task<Supplier> Update(Guid id, Supplier entity)
         {
             using (ImportAppDbContext context = factory.CreateDbContext())
             {
                 entity.Id = id;
-                context.Storages.Update(entity);
+                context.Suppliers.Update(entity);
                 context.SaveChanges();
 
                 return Task.FromResult(entity);
             }
+        }
+
+
+        public Task<Guid> GetSupplierByName(string name)
+        {
+            using (ImportAppDbContext context = factory.CreateDbContext())
+            {
+                Supplier _supplier = context.Suppliers.FirstOrDefault(x => x.Name == name);
+
+                if (_supplier != null && _supplier.IsDeleted == false)
+                    return Task.FromResult(_supplier.Id);
+                else
+                {
+                    Supplier supplier = new Supplier
+                    {
+                        Id = Guid.NewGuid(),
+                        Name = name,
+                        IsDeleted = false
+                    };
+
+                    context.Suppliers.Add(supplier);
+                    context.SaveChanges();
+
+                    return Task.FromResult(supplier.Id);
+                }
+
+               
+            }
+        }
+
+
+
+        public Task<List<string>> GetListOfSuppliers()
+        {
+            List<string> _suppliersList = new List<string>();
+
+            using (ImportAppDbContext context = factory.CreateDbContext())
+            {
+                ICollection<Supplier> suppliers = GetAll().Result;
+
+                foreach (var item in suppliers)
+                {
+                    _suppliersList.Add(item.Name);
+                }
+            }
+
+            return Task.FromResult(_suppliersList);
         }
     }
 }

@@ -18,6 +18,7 @@ namespace ImportApp.WPF.ViewModels
     {
         private Notifier _notifier;
         public IExcelDataService? _excelDataService;
+        public ISupplierDataService? _supplierDataService;
 
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(SubmitCommand))]
@@ -31,11 +32,12 @@ namespace ImportApp.WPF.ViewModels
         [ObservableProperty]
         private string? name;
 
-        [ObservableProperty]
-        private string? subCategory;
 
         [ObservableProperty]
         private string? category;
+
+        [ObservableProperty]
+        private string? supplier;
 
         [ObservableProperty]
         private string? storage;
@@ -49,6 +51,8 @@ namespace ImportApp.WPF.ViewModels
         [ObservableProperty]
         private string? quantity;
 
+        [ObservableProperty]
+        private string? pricePerUnit;
 
 
         [ObservableProperty]
@@ -61,15 +65,21 @@ namespace ImportApp.WPF.ViewModels
         [ObservableProperty]
         List<string> columnNames;
 
+
+        [ObservableProperty]
+        List<string> suppliersList;
+
+
         private ImportDataViewModel _importDataViewModel;
 
-        public ImportArticlesModalViewModel(ImportDataViewModel importDataViewModel, IExcelDataService? excelDataService, ConcurrentDictionary<string, string> myDictionary, Notifier notifier)
+        public ImportArticlesModalViewModel(ImportDataViewModel importDataViewModel, IExcelDataService? excelDataService, ConcurrentDictionary<string, string> myDictionary, Notifier notifier, ISupplierDataService? supplierDataService)
         {
             _importDataViewModel = importDataViewModel;
             _excelDataService = excelDataService;
             _myDictionary = myDictionary;
-            LoadColumnNames();
             _notifier = notifier;
+            _supplierDataService = supplierDataService;
+            LoadColumnNames();
         }
 
         public ImportArticlesModalViewModel()
@@ -104,8 +114,11 @@ namespace ImportApp.WPF.ViewModels
         public void LoadColumnNames()
         {
             ColumnNames = _excelDataService.ListColumnNames(_myDictionary[Translations.CurrentExcelSheet]).Result;
-        }
+            SuppliersList = _supplierDataService.GetListOfSuppliers().Result;
 
+            if (SuppliersList != null)
+                Supplier = SuppliersList[0];
+        }
 
 
     }

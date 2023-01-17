@@ -139,6 +139,7 @@ namespace ImportApp.WPF.ViewModels
         {
             int importCounter = 0;
             int updateCounter = 0;
+            int counter = _articleDataService.GetLastArticleNumber().Result;
 
             if (ArticleList.Count > 0 || ArticleList != null)
             {
@@ -171,12 +172,12 @@ namespace ImportApp.WPF.ViewModels
                     {
                         Id = Guid.NewGuid(),
                         Name = articleList[i].Name,
-                        ArticleNumber = articleList.Count + 1,
+                        ArticleNumber = counter++,
                         Price = Helpers.Extensions.GetDecimal(articleList[i].Price),
                         BarCode = articleList[i].BarCode,
                         SubCategoryId = _categoryDataService.ManageSubcategories(articleList[i]?.Category, articleList[i]?.Storage).Result,
                         Deleted = false,
-                        Order = 1,
+                        Order = counter++,
                     };
 
                     string? value = articleList[i].BarCode;

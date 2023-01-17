@@ -209,14 +209,14 @@ namespace ImportApp.WPF.Services
                         _articleQtycViewModels.Add(new ImportArticlesModalViewModel
                         {
                             Name = Reader[viewModel.Name].ToString(),
-                            SubCategory = Reader[viewModel.SubCategory].ToString(),
                             Category = Reader[viewModel.Category].ToString(),
                             Storage = Reader[viewModel.Storage].ToString(),
                             BarCode = Reader[viewModel.BarCode].ToString(),
                             Price = Reader[viewModel.Price].ToString(),
-                            Quantity = Reader[viewModel.Quantity].ToString()
+                            Quantity = Reader[viewModel.Quantity].ToString(),
+                            PricePerUnit = Reader[viewModel.PricePerUnit].ToString()
 
-                        });
+                        }) ;
                     }
 
                     Reader.Close();

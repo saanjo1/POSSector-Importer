@@ -194,12 +194,55 @@ namespace ImportApp.EntityFramework.Services
         {
             using (ImportAppDbContext context = factory.CreateDbContext())
             {
-                var _article = context.Articles.FirstOrDefault(x => x.Name == name);
+                Article? _article = context.Articles.FirstOrDefault(x => x.Name == name);
 
-                if (_article != null &&_article.Deleted == false)
+                if (_article != null && _article.Deleted == false)
                     return Task.FromResult(_article.Id);
+                else
+                    return Task.FromResult(Guid.Empty);
+            }
+        }
 
-                return null;
+        public Task<Guid> GetUnitByName(string name)
+        {
+            using(ImportAppDbContext context = factory.CreateDbContext())
+            {
+                var unit = context.MeasureUnits.FirstOrDefault(x => x.Name == name);
+                if(unit != null)
+                    return Task.FromResult(unit.Id);
+                else
+                {
+                    MeasureUnit newUnit = new MeasureUnit()
+                    {
+                        Id = Guid.NewGuid(),
+                        Name = name
+                    };
+
+                    return Task.FromResult(newUnit.Id);
+                }
+            }
+        }
+
+        public Task<Guid> GetGoodId(string name)
+        {
+            using(ImportAppDbContext context = factory.CreateDbContext())
+            {
+                Article article = context.Articles.FirstOrDefault(x => x.Name == name);
+
+                if(article != null)
+                {
+                    ArticleGood good = context.ArticleGoods.FirstOrDefault(x => x.ArticleId == article.Id);
+                    Guid goodId = good.Id;
+
+                    if (good != null)
+                        return Task.FromResult(goodId);
+                    else 
+                        return Task.FromResult(Guid.Empty);
+                }
+                else
+                {
+                    return Task.FromResult(Guid.Empty);
+                }
             }
         }
     }

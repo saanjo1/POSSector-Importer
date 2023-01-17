@@ -202,6 +202,87 @@ namespace ImportApp.EntityFramework.Services
                 return null;
             }
         }
+
+        public Task<bool> CreateGood(Good good)
+        {
+            using (ImportAppDbContext context = _contextFactory.CreateDbContext())
+            {
+                try
+                {
+                    context.Add(good);
+                    context.SaveChanges();
+                    return Task.FromResult(true);
+                }
+                catch (Exception)
+                {
+                    return Task.FromResult(false);
+                }
+            }
+        }
+
+        public Task<bool> CreateArticleGood(ArticleGood good)
+        {
+            using (ImportAppDbContext context = _contextFactory.CreateDbContext())
+            {
+                try
+                {
+                    context.Add(good);
+                    context.SaveChanges();
+                    return Task.FromResult(true);
+                }
+                catch (Exception)
+                {
+                    return Task.FromResult(false);
+                }
+            }
+        }
+
+        public Task<bool> CreateInventoryItem(InventoryItemBasis good)
+        {
+            using (ImportAppDbContext context = _contextFactory.CreateDbContext())
+            {
+                try
+                {
+                    context.Add(good);
+                    context.SaveChanges();
+                    return Task.FromResult(true);
+                }
+                catch (Exception)
+                {
+                    return Task.FromResult(false);
+                }
+            }
+        }
+
+        public Task<bool> CreateInventoryDocument(InventoryDocument good)
+        {
+            using (ImportAppDbContext context = _contextFactory.CreateDbContext())
+            {
+                try
+                {
+                    context.Add(good);
+                    context.SaveChanges();
+                    return Task.FromResult(true);
+                }
+                catch (Exception)
+                {
+                    return Task.FromResult(false);
+                }
+            }
+        }
+
+        public Task<Guid> GetGoodByName(string good)
+        {
+            using (ImportAppDbContext context = _contextFactory.CreateDbContext())
+            {
+                Good _good = context.Goods.FirstOrDefault(x => x.Name == good);
+
+                if (_good != null)
+                    return Task.FromResult(_good.Id);
+                else
+                    return Task.FromResult(Guid.Empty);
+            }
+        }
     }
 
 }

@@ -110,7 +110,7 @@ namespace ImportApp.WPF.ViewModels
         [RelayCommand(CanExecute = nameof(CanSave))]
         private void Save()
         {
-            if (articleDataService.GetArticleByName(Name) == null)
+            if (articleDataService.GetArticleByName(Name).Result == Guid.Empty)
             {
                 try
                 {

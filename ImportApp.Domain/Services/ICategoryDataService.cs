@@ -13,5 +13,14 @@ namespace ImportApp.Domain.Services
         Task<Guid> ManageSubcategories(string value2, string storageId);
         Task<List<string>> GetNamesOfCategories();
         Task<Guid> GetCategoryByName(string name);
+
+
+        Task<bool> CreateGood(Good good);
+        Task<bool> CreateArticleGood(ArticleGood good);
+        Task<Guid> GetGoodByName(string good);
+        Task<bool> CreateInventoryItem(InventoryItemBasis good);
+        Task<bool> CreateInventoryDocument(InventoryDocument good);
+
+
     }
 }

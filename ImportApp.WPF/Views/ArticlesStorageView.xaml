@@ -31,11 +31,10 @@
         <TextBox Grid.Column="1" Name="textBoxFilter" Style="{StaticResource filterTextBox}" Text="{Binding TextToFilter, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Width="350" />
 
         <TextBlock FontSize="16" Text="{Binding Count}" Foreground="{StaticResource titleColor1}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-        <TextBlock FontSize="16" Text=" article(s) found" Foreground="{StaticResource titleColor1}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="27 0 0 0"/>
+        <TextBlock FontSize="16" Text="  article(s) found" Foreground="{StaticResource titleColor1}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="27 0 0 0"/>
 
         <DataGrid Grid.ColumnSpan="3" Grid.Row="1" Name="membersDataGrid" ItemsSource="{Binding ArticleCollection}" RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" Style="{DynamicResource DataGridStyle1}" Height="400" CanUserDeleteRows="True" IsReadOnly="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="#" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding Order}"/>
                 <DataGridTemplateColumn Header="Name" IsReadOnly="True" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -48,9 +47,8 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Article number" Binding="{Binding Id}" Width="*"/>
-                <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="*"/>
-                <DataGridTextColumn Header="Barcode" Binding="{Binding BarCode}" Width="*"/>
+                <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" Width="*"/>
+                <DataGridTextColumn Header="Total price" Binding="{Binding Price}" Width="*"/>
                 <DataGridTemplateColumn Header="Operations" Width="auto">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

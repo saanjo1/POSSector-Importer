@@ -28,9 +28,10 @@ namespace ImportApp.WPF.State.Navigators
         private ISubcategoryDataService _subCategoryDataService;
         private ConcurrentDictionary<string, string> _myDictionary;
         private IDiscountDataService _discountDataService;
+        private ISupplierDataService _supplierDataService;
         private Notifier _notifier;
 
-        public Navigator(IArticleDataService articleService, IExcelDataService excelDataService, ICategoryDataService categoryService, IDiscountDataService discountDataService, ConcurrentDictionary<string, string> myDictionary, Notifier notifier, IStorageDataService storeService, ISubcategoryDataService subCategoryDataService)
+        public Navigator(IArticleDataService articleService, IExcelDataService excelDataService, ICategoryDataService categoryService, IDiscountDataService discountDataService, ConcurrentDictionary<string, string> myDictionary, Notifier notifier, IStorageDataService storeService, ISubcategoryDataService subCategoryDataService, ISupplierDataService supplierDataService)
         {
             _articleService = articleService;
             _excelDataService = excelDataService;
@@ -41,6 +42,7 @@ namespace ImportApp.WPF.State.Navigators
             _notifier = notifier;
             _subCategoryDataService = subCategoryDataService;
             DefaultLoad();
+            _supplierDataService = supplierDataService;
         }
 
         [RelayCommand]
@@ -67,7 +69,7 @@ namespace ImportApp.WPF.State.Navigators
                         Icon = IconChar.TableList;
                         break;
                     case ViewType.ImportArticles:
-                        this.CurrentViewModel = new ImportDataViewModel(_excelDataService, _categoryService, _articleService, _notifier, _myDictionary);
+                        this.CurrentViewModel = new ImportDataViewModel(_excelDataService, _categoryService, _articleService, _notifier, _myDictionary, _storeService, _supplierDataService);
                         Caption = "Import";
                         Icon = IconChar.FileExcel;
                         break;

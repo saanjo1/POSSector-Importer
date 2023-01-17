@@ -14,7 +14,7 @@
     </UserControl.Resources>
 
     <Grid>
-        <modalcontrol:Modal Panel.ZIndex="21" Background="Transparent" IsOpen="{Binding IsMapped}" Grid.RowSpan="3">
+        <modalcontrol:Modal Panel.ZIndex="21" Background="Transparent" IsOpen="{Binding IsMapped}" Height="500" Grid.RowSpan="3">
                 <ContentControl Content="{Binding ArticleQ}" Background="{StaticResource panelActiveColor}"/>
         </modalcontrol:Modal>
 
@@ -72,9 +72,10 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn Header="Price" Binding="{Binding Price}" IsReadOnly="True" Width="*"/>
                     <DataGridTextColumn Header="Barcode" Binding="{Binding BarCode}" IsReadOnly="True" Width="*"/>
+                    <DataGridTextColumn Header="Storage" Binding="{Binding Storage}" IsReadOnly="True" Width="*"/>
                     <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" IsReadOnly="True" Width="*"/>
+                    <DataGridTextColumn Header="Total price" Binding="{Binding Price}" IsReadOnly="True" Width="*"/>
                     <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="auto">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>

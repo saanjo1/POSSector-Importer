@@ -40,11 +40,11 @@ namespace ImportApp.WPF.ViewModels
         });
 
 
-        public MainViewModel(IArticleDataService articleService, ICategoryDataService categoryService, IExcelDataService excelDataService, IDiscountDataService discountDataService, IStorageDataService storeDataService, ISubcategoryDataService subcategoryDataService)
+        public MainViewModel(IArticleDataService articleService, ICategoryDataService categoryService, IExcelDataService excelDataService, IDiscountDataService discountDataService, IStorageDataService storeDataService, ISubcategoryDataService subcategoryDataService, ISupplierDataService supplierDataService)
         {
             myDictionary = new ConcurrentDictionary<string, string>();
             LoadDictionary();
-            Navigator = new Navigator(articleService, excelDataService, categoryService, discountDataService, myDictionary, notifier, storeDataService, subcategoryDataService);
+            Navigator = new Navigator(articleService, excelDataService, categoryService, discountDataService, myDictionary, notifier, storeDataService, subcategoryDataService, supplierDataService);
 
         }
 
