@@ -78,6 +78,34 @@ namespace ImportApp.WPF.Helpers
         }
 
 
+        public static ImportArticlesModalViewModel SelectedColumns(ImportArticlesModalViewModel mColumnModel, List<string> columnNamesList, ConcurrentDictionary<string, string> _myDictionary)
+        {
+            for (int i = 0; i < columnNamesList.Count(); i++)
+            {
+                if (columnNamesList[i].Contains("BARCODE"))
+                    mColumnModel.BarCode = columnNamesList[i];
+
+                if (columnNamesList[i].Contains("SO_PRICE"))
+                    mColumnModel.Price = columnNamesList[i];
+
+                if (columnNamesList[i].Contains("GENDER"))
+                    mColumnModel.Category = columnNamesList[i];
+
+                if (columnNamesList[i].Equals("PRICEUNIT"))
+                    mColumnModel.PricePerUnit = columnNamesList[i];
+
+                if (columnNamesList[i].Contains("QTYC"))
+                    mColumnModel.Quantity = columnNamesList[i];
+
+                if (columnNamesList[i].Contains("STORAGE"))
+                    mColumnModel.Storage = columnNamesList[i];
+            }
+
+            return mColumnModel;
+        }
+
+
+
         public static string DisplayDiscountInPercentage(string discount)
         {
             bool success = double.TryParse(discount, out double result);
@@ -117,6 +145,10 @@ namespace ImportApp.WPF.Helpers
 
             return outputvalue;
         }
-                
+
+
+
+        
+
     }
 }

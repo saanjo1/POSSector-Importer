@@ -11,6 +11,7 @@ using ToastNotifications.Messages;
 using System.Collections.Concurrent;
 using ImportApp.WPF.Resources;
 using Microsoft.Identity.Client.Extensions.Msal;
+using System.Collections.Generic;
 
 namespace ImportApp.WPF.ViewModels
 {
@@ -100,24 +101,30 @@ namespace ImportApp.WPF.ViewModels
 
         }
 
-        
+
 
         [RelayCommand(CanExecute = nameof(CanImport))]
         public void ImportData()
         {
+            Guid _supplierId = _supplierDataService.GetSupplierByName("YAMMAMAY").Result;
 
-            Guid storageId = _storageService.GetStorageByName(articleList[0].Storage).Result;
-            Guid _supplierId = _supplierDataService.GetSupplierByName(articleList[0].Supplier).Result;
-            int counter = _articleService.GetLastArticleNumber().Result;
+            List<string> _storages = new List<string>();
+            List<InventoryDocument> documents = new List<InventoryDocument>();
 
-            try
+            for (int i = 0; i < articleList.Count; i++)
+            {
+                if (!_storages.Contains(articleList[i].Storage))
+                    _storages.Add(articleList[i].Storage);
+            }
+
+            foreach (var item in _storages)
             {
                 InventoryDocument inventoryDocument = new InventoryDocument
                 {
                     Created = DateTime.Now,
-                    Order = 1,
+                    Order = _categoryService.GetInventoryCounter().Result,
                     Id = Guid.NewGuid(),
-                    StorageId = storageId,
+                    StorageId = _storageService.GetStorageByName(item).Result,
                     SupplierId = _supplierId,
                     Type = 1,
                     IsActivated = false,
@@ -125,21 +132,27 @@ namespace ImportApp.WPF.ViewModels
                 };
 
                 _categoryService.CreateInventoryDocument(inventoryDocument);
+                documents.Add(inventoryDocument);
+            }
 
+            int counter = _articleService.GetLastArticleNumber().Result;
 
+            try
+            {
                 if (ArticleList.Count > 0 || ArticleList != null)
                 {
 
                     for (int i = 0; i < articleList.Count; i++)
                     {
-                        Guid _goodId = _articleService.GetGoodId(articleList[i].Name + " " + articleList[i].BarCode).Result;
+                        InventoryDocument inventoryDocument = GetCreatedInventoryDocument(articleList[i].Storage, documents);
+                        Guid _goodId = _articleService.GetGoodId(articleList[i].Name).Result;
 
                         if (_goodId == Guid.Empty)
                         {
                             Good newGood = new Good
                             {
                                 Id = Guid.NewGuid(),
-                                Name = articleList[i].Name + " " + articleList[i].BarCode,
+                                Name = articleList[i].Name,
                                 UnitId = _articleService.GetUnitByName("kom").Result,
                                 LatestPrice = Helpers.Extensions.GetDecimal(articleList[i].PricePerUnit),
                                 Volumen = 1,
@@ -163,21 +176,21 @@ namespace ImportApp.WPF.ViewModels
                             IsDeleted = false,
                             Discriminator = "InventoryDocumentItem",
                             InventoryDocumentId = inventoryDocument.Id,
-                            StorageId = storageId,
+                            StorageId = inventoryDocument.StorageId,
                             GoodId = _goodId,
                             CurrentQuantity = Helpers.Extensions.GetDecimal(articleList[i].Quantity)
                         };
 
                         _categoryService.CreateInventoryItem(inventoryItemBasis);
 
-                        Guid? ArticleGuid = _articleService.GetArticleByName(articleList[i].Name + " " + articleList[i].BarCode).Result;
+                        Guid? ArticleGuid = _articleService.GetArticleByName(articleList[i].Name).Result;
 
                         if (ArticleGuid == Guid.Empty)
                         {
                             Article newArticle = new Article
                             {
                                 Id = Guid.NewGuid(),
-                                Name = articleList[i].Name + " " + articleList[i].BarCode,
+                                Name = articleList[i].Name,
                                 ArticleNumber = _articleService.GetLastArticleNumber().Result,
                                 Order = 1,
                                 SubCategoryId = _categoryService.ManageSubcategories(articleList[i].Category, articleList[i].Storage).Result,
@@ -227,6 +240,19 @@ namespace ImportApp.WPF.ViewModels
 
                 throw;
             }
+        }
+
+        private InventoryDocument GetCreatedInventoryDocument(string? storage, List<InventoryDocument> documents)
+        {
+            Guid _storageId = _storageService.GetStorageByName(storage).Result;
+
+            foreach (var item in documents)
+            {
+                if (item.StorageId == _storageId)
+                    return item;
+            }
+
+            return null;
         }
 
         [RelayCommand(CanExecute = nameof(CanMap))]

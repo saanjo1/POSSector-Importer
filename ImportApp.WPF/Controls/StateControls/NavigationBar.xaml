@@ -23,7 +23,6 @@
                     <TextBlock Text="Dashboard" Style="{StaticResource radioButtonText}"/>
                 </StackPanel>
             </RadioButton>
-
             <RadioButton Style="{StaticResource radioButton1}"
                      Tag="{StaticResource color2}"
                      Command="{Binding EditCurrentViewModelCommand}" 
@@ -53,7 +52,7 @@
 
                 <StackPanel Orientation="Horizontal">
                     <fa:IconImage Icon="FileExcel" Style="{StaticResource radioButtonIcon}"  Foreground="{StaticResource color9}"/>
-                    <TextBlock Text="Import - Export" Style="{StaticResource radioButtonText}"/>
+                    <TextBlock Text="Articles" Style="{StaticResource radioButtonText}"/>
                 </StackPanel>
             </RadioButton>
 

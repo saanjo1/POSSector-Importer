@@ -232,7 +232,7 @@ namespace ImportApp.EntityFramework.Services
                 if(article != null)
                 {
                     ArticleGood good = context.ArticleGoods.FirstOrDefault(x => x.ArticleId == article.Id);
-                    Guid goodId = good.Id;
+                    Guid goodId = (Guid)good.GoodId;
 
                     if (good != null)
                         return Task.FromResult(goodId);

@@ -22,5 +22,13 @@ namespace ImportApp.Domain.Services
         Task<bool> CreateInventoryDocument(InventoryDocument good);
 
 
+        Task<int> GetInventoryCounter();
+
+
+
+
+
+
+
     }
 }

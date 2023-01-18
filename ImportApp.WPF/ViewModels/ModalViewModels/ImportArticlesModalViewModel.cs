@@ -61,6 +61,8 @@ namespace ImportApp.WPF.ViewModels
         [ObservableProperty]
         ObservableCollection<MapColumnForDiscountViewModel>? articleList;
 
+        [ObservableProperty]
+        ImportArticlesModalViewModel selectedItems;
 
         [ObservableProperty]
         List<string> columnNames;
@@ -80,6 +82,7 @@ namespace ImportApp.WPF.ViewModels
             _notifier = notifier;
             _supplierDataService = supplierDataService;
             LoadColumnNames();
+            SelectedItems = Helpers.Extensions.SelectedColumns(this, ColumnNames, myDictionary);
         }
 
         public ImportArticlesModalViewModel()
@@ -116,8 +119,25 @@ namespace ImportApp.WPF.ViewModels
             ColumnNames = _excelDataService.ListColumnNames(_myDictionary[Translations.CurrentExcelSheet]).Result;
             SuppliersList = _supplierDataService.GetListOfSuppliers().Result;
 
-            if (SuppliersList != null)
+            var ySupp = SuppliersList.FirstOrDefault(s => s == "YAMMAMAY");
+
+            if (ySupp != null)
                 Supplier = SuppliersList[0];
+            else
+            {
+                Domain.Models.Supplier supp = new Domain.Models.Supplier()
+                {
+                    Id = Guid.NewGuid(),
+                    Name = "YAMMAMAY",
+                    IsDeleted = false
+                };
+
+                _supplierDataService.Create(supp);
+                SuppliersList.Add(supp.Name);
+                Supplier = SuppliersList[0];
+            }
+
+            Name = "BARCODE+ID+NAME+COLOR+SIZE";
         }
 
 

@@ -105,7 +105,7 @@ namespace ImportApp.EntityFramework.Services
         {
             using (ImportAppDbContext context = _contextFactory.CreateDbContext())
             {
-                SubCategory subcategory = context.SubCategories.Where(x => x.Name == "DefaultSubCategory").FirstOrDefault();
+                SubCategory subcategory = context.SubCategories.Where(x => x.Name == ctgry).FirstOrDefault();
                 Guid ctgryId = this.ManageCategories(ctgry, storageId).Result;
 
                 var category = context.Categories.Where(x => x.Id == ctgryId).FirstOrDefault();
@@ -115,7 +115,7 @@ namespace ImportApp.EntityFramework.Services
                     SubCategory subCategory = new SubCategory()
                     {
                         Id = Guid.NewGuid(),
-                        Name = "DefaultSubCategory",
+                        Name = ctgry,
                         Deleted = false,
                         StorageId = category.StorageId,
                         CategoryId = ctgryId
@@ -209,7 +209,7 @@ namespace ImportApp.EntityFramework.Services
             {
                 try
                 {
-                    context.Add(good);
+                    context.Goods.Add(good);
                     context.SaveChanges();
                     return Task.FromResult(true);
                 }
@@ -226,7 +226,7 @@ namespace ImportApp.EntityFramework.Services
             {
                 try
                 {
-                    context.Add(good);
+                    context.ArticleGoods.Add(good);
                     context.SaveChanges();
                     return Task.FromResult(true);
                 }
@@ -243,7 +243,7 @@ namespace ImportApp.EntityFramework.Services
             {
                 try
                 {
-                    context.Add(good);
+                    context.InventoryItemBases.Add(good);
                     context.SaveChanges();
                     return Task.FromResult(true);
                 }
@@ -260,7 +260,7 @@ namespace ImportApp.EntityFramework.Services
             {
                 try
                 {
-                    context.Add(good);
+                    context.InventoryDocuments.Add(good);
                     context.SaveChanges();
                     return Task.FromResult(true);
                 }
@@ -281,6 +281,16 @@ namespace ImportApp.EntityFramework.Services
                     return Task.FromResult(_good.Id);
                 else
                     return Task.FromResult(Guid.Empty);
+            }
+        }
+
+        public Task<int> GetInventoryCounter()
+        {
+            using (ImportAppDbContext context = _contextFactory.CreateDbContext())
+            {
+                int counter = context.InventoryDocuments.Count();
+
+                return Task.FromResult(counter++);
             }
         }
     }
