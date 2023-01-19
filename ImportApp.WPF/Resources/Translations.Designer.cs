@@ -115,6 +115,15 @@ namespace ImportApp.WPF.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Supplier successfully created..
+        /// </summary>
+        internal static string CreatedSupplier {
+            get {
+                return ResourceManager.GetString("CreatedSupplier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to CurrentExcelFile.
         /// </summary>
         internal static string CurrentExcelFile {
@@ -169,6 +178,15 @@ namespace ImportApp.WPF.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Supplier with same name already exist..
+        /// </summary>
+        internal static string DuplicatedSupplier {
+            get {
+                return ResourceManager.GetString("DuplicatedSupplier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Storage with same name already exist..
         /// </summary>
         internal static string DuplicateStorage {
@@ -201,6 +219,15 @@ namespace ImportApp.WPF.Resources {
         internal static string ErrorMessage {
             get {
                 return ResourceManager.GetString("ErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Can not import an empty list of items..
+        /// </summary>
+        internal static string ImportException {
+            get {
+                return ResourceManager.GetString("ImportException", resourceCulture);
             }
         }
         

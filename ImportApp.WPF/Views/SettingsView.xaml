@@ -38,14 +38,14 @@
         </DockPanel>
 
 
-        <Label Grid.ColumnSpan="5" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" FontSize="18" FontWeight="SemiBold" Foreground="White" Content="Database settings:"/>
+        <!--<Label Grid.ColumnSpan="5" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" FontSize="18" FontWeight="SemiBold" Foreground="White" Content="Database settings:"/>-->
 
 
-       <DockPanel Grid.Row="3" Grid.Column="2">
+       <!--<DockPanel Grid.Row="3" Grid.Column="2">
             <Label Grid.Row="3" Grid.Column="0" Content="Your database: " Style="{StaticResource controlLabel}"></Label>
             <TextBox Width="200" Height="30" FontSize="18" Text="{Binding DBConnection, Mode=TwoWay}"/>
             <Button Grid.Column="1" Style="{StaticResource ImportButton}" Content="Save" Command="{Binding SelectSheetCommand}" Padding="25 10 25 10"/>
-        </DockPanel>
+        </DockPanel>-->
 
     </Grid>
 </UserControl>

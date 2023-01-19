@@ -23,6 +23,7 @@ namespace ImportApp.WPF.ViewModels
         private IStorageDataService _storeDataService;
         private ICategoryDataService _categoryDataService;
         private ISubcategoryDataService _subCategoryDataService;
+        private ISupplierDataService _supplierDataService;
         private Notifier _notifier;
 
 
@@ -61,11 +62,11 @@ namespace ImportApp.WPF.ViewModels
         private CreateCategoryViewModel addCategoryViewModel;
 
         [ObservableProperty]
-        private CreateNewSubcategoryViewModel addSubCategoryViewModel;
+        private CreateSupplierViewModel addSupplierViewModel;
 
 
 
-        public HomeViewModel(IArticleDataService articleService, Notifier notifier, IDiscountDataService discountDataService, IStorageDataService storeDataService, ICategoryDataService categoryDataService, ISubcategoryDataService subCategoryDataService)
+        public HomeViewModel(IArticleDataService articleService, Notifier notifier, IDiscountDataService discountDataService, IStorageDataService storeDataService, ICategoryDataService categoryDataService, ISubcategoryDataService subCategoryDataService, ISupplierDataService supplierDataService)
         {
             _articleService = articleService;
             _notifier = notifier;
@@ -73,6 +74,7 @@ namespace ImportApp.WPF.ViewModels
             _storeDataService = storeDataService;
             _categoryDataService = categoryDataService;
             _subCategoryDataService = subCategoryDataService;
+            _supplierDataService = supplierDataService;
         }
 
         [RelayCommand]
@@ -109,8 +111,7 @@ namespace ImportApp.WPF.ViewModels
         private void AddSubCategory()
         {
             IsSubCategoryOpen = true;
-            AddSubCategoryViewModel = new CreateNewSubcategoryViewModel(this, _notifier, _subCategoryDataService, _categoryDataService, _storeDataService);
-
+            AddSupplierViewModel = new CreateSupplierViewModel(this, _notifier, _supplierDataService);
         }
 
         [RelayCommand]

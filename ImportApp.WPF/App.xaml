@@ -61,7 +61,7 @@
                 <controls:CreateNewCategory/>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type viewmodels:CreateNewSubcategoryViewModel}">
+            <DataTemplate DataType="{x:Type viewmodels:CreateSupplierViewModel}">
                 <controls:CreateNewSubCategory/>
             </DataTemplate>
 

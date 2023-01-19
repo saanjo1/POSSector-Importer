@@ -23,7 +23,7 @@
                     <TextBlock Text="Dashboard" Style="{StaticResource radioButtonText}"/>
                 </StackPanel>
             </RadioButton>
-            <RadioButton Style="{StaticResource radioButton1}"
+            <!--<RadioButton Style="{StaticResource radioButton1}"
                      Tag="{StaticResource color2}"
                      Command="{Binding EditCurrentViewModelCommand}" 
                      CommandParameter="{x:Static nav:ViewType.Articles}">
@@ -32,7 +32,8 @@
                     <fa:IconImage Icon="TableList" Style="{StaticResource radioButtonIcon}" Foreground="{StaticResource color6}"/>
                     <TextBlock Text="Storages" Style="{StaticResource radioButtonText}"/>
                 </StackPanel>
-            </RadioButton>
+            </RadioButton>-->
+            
 
             <RadioButton Style="{StaticResource radioButton1}"
                      Tag="{StaticResource color2}"
@@ -51,7 +52,7 @@
                      CommandParameter="{x:Static nav:ViewType.ImportArticles}">
 
                 <StackPanel Orientation="Horizontal">
-                    <fa:IconImage Icon="FileExcel" Style="{StaticResource radioButtonIcon}"  Foreground="{StaticResource color9}"/>
+                    <fa:IconImage Icon="Upload" Style="{StaticResource radioButtonIcon}"  Foreground="{StaticResource color6}"/>
                     <TextBlock Text="Articles" Style="{StaticResource radioButtonText}"/>
                 </StackPanel>
             </RadioButton>

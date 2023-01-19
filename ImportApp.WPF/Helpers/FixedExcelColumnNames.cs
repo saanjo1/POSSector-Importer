@@ -59,7 +59,7 @@ namespace ImportApp.WPF.Helpers
         public FixedDiscountColumnNames()
         {
             Name = "NAME";
-            Category = "Category (EN)";
+            Category = "Department (EN)";
             BarCode = "Barcode";
             Discount = "Discount";
             FullPrice = "Full price €";

@@ -33,7 +33,7 @@
                              Visibility="Visible"
                              Grid.ColumnSpan="2">
             <StackPanel>
-                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Stretch" FontSize="20" Text="Create new subcategory"/>
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Stretch" FontSize="20" Text="Create new supplier"/>
             </StackPanel>
         </materialDesign:Card>
         <Border Margin="380 0 0 0" Grid.Column="1" VerticalAlignment="Top">
@@ -58,16 +58,16 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Label Grid.Row="0" FontWeight="Regular" Content="Unique ID:" FontSize="18" Style="{StaticResource controlLabel}" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Left"  Margin="20 0 0 0"/>
-            <TextBlock Foreground="Black" FontWeight="Regular" Grid.Row="0" Grid.Column="1"  Width="340" Height="30" VerticalAlignment="Center" Text="{Binding Id}"/>
+            <!--<Label Grid.Row="0" FontWeight="Regular" Content="Unique ID:" FontSize="18" Style="{StaticResource controlLabel}" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Left"  Margin="20 0 0 0"/>
+            <TextBlock Foreground="Black" FontWeight="Regular" Grid.Row="0" Grid.Column="1"  Width="340" Height="30" VerticalAlignment="Center" Text="{Binding Id}"/>-->
 
-            <Label  Grid.Row="1" FontWeight="Regular" Content="Storage:" FontSize="18" Style="{StaticResource controlLabel}" Foreground="Black" VerticalAlignment="Center"  HorizontalAlignment="Left" Margin="20,0,0,0" Height="41"/>
-            <ComboBox Grid.Row="1" Grid.Column="1"  Width="200" Height="30" VerticalAlignment="Center" ItemsSource="{Binding Storages}" SelectedValue="{Binding SelectedStorage}" />
+            <Label  Grid.Row="1" FontWeight="Regular" Content="SUPPLIER NAME:" FontSize="18" Style="{StaticResource controlLabel}" Foreground="Black" VerticalAlignment="Center"  HorizontalAlignment="Left" Margin="20,0,0,0" Height="41"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Width="340" Height="30" VerticalAlignment="Center" Text="{Binding Name}" />
 
-            <Label Grid.Row="2" FontWeight="Regular" Content="Category:" FontSize="18" Style="{StaticResource controlLabel}" Foreground="Black" VerticalAlignment="Center"  HorizontalAlignment="Left" Margin="20,0,0,0" Height="45"/>
-            <ComboBox Grid.Row="2" Grid.Column="1"  Width="200" Height="30" VerticalAlignment="Center" ItemsSource="{Binding Categories}" SelectedValue="{Binding SelectedCategory}" />
+            <Label Grid.Row="2" FontWeight="Regular" Content="ADDRESS:" FontSize="18" Style="{StaticResource controlLabel}" Foreground="Black" VerticalAlignment="Center"  HorizontalAlignment="Left" Margin="20,0,0,0" Height="45"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Width="340" Height="30" VerticalAlignment="Center" Text="{Binding Name}" />
 
-            <Label Grid.Row="3" FontWeight="Regular" Content="Name:" FontSize="18" Style="{StaticResource controlLabel}" Foreground="Black" VerticalAlignment="Center"  HorizontalAlignment="Left" Margin="20,0,0,0" Height="40"/>
+            <Label Grid.Row="3" FontWeight="Regular" Content="VAT NUMBER:" FontSize="18" Style="{StaticResource controlLabel}" Foreground="Black" VerticalAlignment="Center"  HorizontalAlignment="Left" Margin="20,0,0,0" Height="40"/>
             <TextBox Grid.Row="3" Grid.Column="1" Width="340" Height="30" VerticalAlignment="Center" Text="{Binding Name}" />
 
 

@@ -42,7 +42,7 @@
         </modalcontrol:Modal>
 
         <modalcontrol:Modal Panel.ZIndex="1" Background="Transparent" IsOpen="{Binding IsSubCategoryOpen}" Grid.ColumnSpan="5" Grid.RowSpan="3" Margin="0 90 15 0">
-            <ContentControl Content="{Binding AddSubCategoryViewModel}" Background="{StaticResource panelActiveColor}"/>
+            <ContentControl Content="{Binding AddSupplierViewModel}" Background="{StaticResource panelActiveColor}"/>
         </modalcontrol:Modal>
 
         <Label Grid.ColumnSpan="5" Grid.Row="0" HorizontalAlignment="Center" FontSize="38" Foreground="White" Content="Welcome!"/>
@@ -79,21 +79,21 @@
                     <Button Command="{Binding AddArticleCommand}" Grid.Row="0" Style="{StaticResource controlButton}" Margin="10" Width="130" Height="100">
                         <StackPanel Orientation="Vertical">
                             <fa:IconImage Icon="Barcode" Width="40" Foreground="{StaticResource color4}" />
-                            <Label Content="Create article" Foreground="White"  HorizontalAlignment="Center" Margin="0 20 0 0" FontSize="14"/>
+                            <Label Content="CREATE ARTICLE" Foreground="White"  HorizontalAlignment="Center" Margin="0 20 0 0" FontSize="14"/>
                         </StackPanel>
                     </Button>
 
                     <Button Command="{Binding AddCategoryCommand}" Grid.Row="0" Style="{StaticResource controlButton}" Margin="10" Width="130" Height="100">
                         <StackPanel Orientation="Vertical">
                             <fa:IconImage Icon="List12" Width="40" Foreground="{StaticResource color1}" />
-                            <Label Content="Create category" Foreground="White"  HorizontalAlignment="Center" Margin="0 20 0 0" FontSize="14"/>
+                            <Label Content="CREATE CATEGORY" Foreground="White"  HorizontalAlignment="Center" Margin="0 20 0 0" FontSize="14"/>
                         </StackPanel>
                     </Button>
 
                     <Button Command="{Binding AddSubCategoryCommand}" Grid.Row="0" Style="{StaticResource controlButton}" Margin="10" Width="130" Height="100">
                         <StackPanel Orientation="Vertical">
-                            <fa:IconImage Icon="RectangleList" Width="40" Foreground="{StaticResource color10}" />
-                            <Label Content="Create SubCategory" Foreground="White"  HorizontalAlignment="Center" Margin="0 20 0 0" FontSize="14"/>
+                            <fa:IconImage Icon="PlusCircle" Width="40" Foreground="{StaticResource color9}" />
+                            <Label Content="CREATE SUPPLIER" Foreground="White"  HorizontalAlignment="Center" Margin="0 20 0 0" FontSize="14"/>
                         </StackPanel>
                     </Button>
 
@@ -101,14 +101,14 @@
                     <Button Grid.Row="1" Command="{Binding AddRuleCommand}" Style="{StaticResource controlButton}" Margin="10" Width="130" Height="100">
                         <StackPanel Orientation="Vertical">
                             <fa:IconImage Icon="Percent" Width="37" Foreground="{StaticResource color6}" />
-                            <Label Content="Create discount" Foreground="White" HorizontalAlignment="Center" Margin="0 20 0 0" FontSize="14"/>
+                            <Label Content="CREATE DISCOUNT" Foreground="White" HorizontalAlignment="Center" Margin="0 20 0 0" FontSize="14"/>
                         </StackPanel>
                     </Button>
 
                     <Button Command="{Binding AddStoreCommand}"  Grid.Row="0" Style="{StaticResource controlButton}" Margin="10" Width="130" Height="100">
                         <StackPanel Orientation="Vertical">
                             <fa:IconImage Icon="Store" Width="40" Foreground="{StaticResource color3}"  />
-                            <Label Content="Create storage" Foreground="White" HorizontalAlignment="Center" Margin="0 20 0 0" FontSize="14"/>
+                            <Label Content="CREATE STORAGE" Foreground="White" HorizontalAlignment="Center" Margin="0 20 0 0" FontSize="14"/>
                         </StackPanel>
                     </Button>
                 </StackPanel>

@@ -8,7 +8,7 @@
              mc:Ignorable="d"
              FontSize="18"
              Width="750"
-             Height="500">
+             Height="450">
     <Grid Background="#EEEEEE">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="197*" />
@@ -55,22 +55,22 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             
-            <Label Grid.Row="0" FontWeight="Regular" Content="Unique ID:" FontSize="18" Style="{StaticResource controlLabel}" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Left"  Margin="20 0 0 0"/>
+            <!--<Label Grid.Row="0" FontWeight="Regular" Content="Unique ID:" FontSize="18" Style="{StaticResource controlLabel}" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Left"  Margin="20 0 0 0"/>
             <TextBlock Foreground="Black" FontWeight="Regular" Grid.Row="0" Grid.Column="1" Margin="0" Width="430" Height="30" VerticalAlignment="Center" Text="{Binding Id}"/>
 
             <Label Grid.Row="1" FontWeight="Regular" Content="Article number:" FontSize="18" Style="{StaticResource controlLabel}" Foreground="Black" VerticalAlignment="Center"  HorizontalAlignment="Left" Margin="20 0 0 0"/>
-            <TextBlock Foreground="Black" FontWeight="Regular" Grid.Row="1" Grid.Column="1"  Width="200" Height="30" VerticalAlignment="Center" Text="{Binding ArticleNumber}" />
+            <TextBlock Foreground="Black" FontWeight="Regular" Grid.Row="1" Grid.Column="1"  Width="200" Height="30" VerticalAlignment="Center" Text="{Binding ArticleNumber}" />-->
 
-            <Label  Grid.Row="2" FontWeight="Regular" Content="SubCategory:" FontSize="18" Style="{StaticResource controlLabel}" Foreground="Black" VerticalAlignment="Center"  HorizontalAlignment="Left" Margin="20 0 0 0"/>
+            <Label  Grid.Row="2" FontWeight="Regular" Content="CATEGORY NAME:" FontSize="18" Style="{StaticResource controlLabel}" Foreground="Black" VerticalAlignment="Center"  HorizontalAlignment="Left" Margin="20 0 0 0"/>
             <ComboBox Grid.Row="2" Grid.Column="1"  Width="200" Height="30" VerticalAlignment="Center" ItemsSource="{Binding SubCategory}" SelectedValue="{Binding SelectedSubCategory}" />
             
-            <Label Grid.Row="3" FontWeight="Regular" Content="Name:" FontSize="18" Style="{StaticResource controlLabel}" Foreground="Black" VerticalAlignment="Center"  HorizontalAlignment="Left" Margin="20 0 0 0"/>
+            <Label Grid.Row="3" FontWeight="Regular" Content="NAME:" FontSize="18" Style="{StaticResource controlLabel}" Foreground="Black" VerticalAlignment="Center"  HorizontalAlignment="Left" Margin="20 0 0 0"/>
             <TextBox Grid.Row="3" Grid.Column="1" Width="200" Height="30" VerticalAlignment="Center" Text="{Binding Name}" />
 
-            <Label Grid.Row="4" FontWeight="Regular" Content="Barcode:" FontSize="18" Style="{StaticResource controlLabel}" Foreground="Black" VerticalAlignment="Center"  HorizontalAlignment="Left" Margin="20 0 0 0"/>
+            <Label Grid.Row="4" FontWeight="Regular" Content="BARCODE:" FontSize="18" Style="{StaticResource controlLabel}" Foreground="Black" VerticalAlignment="Center"  HorizontalAlignment="Left" Margin="20 0 0 0"/>
             <TextBox Grid.Row="4" Grid.Column="1"  Width="200" Height="30" VerticalAlignment="Center" Text="{Binding Barcode}" />
 
-            <Label Grid.Row="5" FontWeight="Regular" Content="Price:" FontSize="18" Style="{StaticResource controlLabel}" Foreground="Black" VerticalAlignment="Center"  HorizontalAlignment="Left" Margin="20 0 0 0"/>
+            <Label Grid.Row="5" FontWeight="Regular" Content="PRICE:" FontSize="18" Style="{StaticResource controlLabel}" Foreground="Black" VerticalAlignment="Center"  HorizontalAlignment="Left" Margin="20 0 0 0"/>
             <TextBox Grid.Row="5" Grid.Column="1"  Width="200" Height="30" VerticalAlignment="Center" Text="{Binding Price}" />
 
 

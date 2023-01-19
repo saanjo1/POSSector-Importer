@@ -60,23 +60,23 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Label Grid.Row="0" FontWeight="Regular" Content="Unique ID:" FontSize="18" Style="{StaticResource controlLabel}" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Left"  Margin="20 0 0 0"/>
-            <TextBlock Foreground="Black" FontWeight="Regular" Grid.Row="0" Grid.Column="1" Margin="-100 0 0 0" Width="530" Height="30" VerticalAlignment="Center" Text="{Binding Id}"/>
+            <!--<Label Grid.Row="0" FontWeight="Regular" Content="Unique ID:" FontSize="18" Style="{StaticResource controlLabel}" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Left"  Margin="20 0 0 0"/>
+            <TextBlock Foreground="Black" FontWeight="Regular" Grid.Row="0" Grid.Column="1" Margin="-100 0 0 0" Width="530" Height="30" VerticalAlignment="Center" Text="{Binding Id}"/>-->
 
-            <Label FontWeight="Regular" Grid.Row="1" Content="Name: " FontSize="18" Style="{StaticResource controlLabel}" Foreground="Black" VerticalAlignment="Center"  HorizontalAlignment="Left" Margin="20 0 0 0"/>
-            <TextBox Grid.Row="1" Grid.Column="1"  Width="200" Height="30" VerticalAlignment="Center" Text="{Binding Name}" />
+            <Label FontWeight="Regular" Grid.Row="0" Content="DISCOUNT NAME: " FontSize="18" Style="{StaticResource controlLabel}" Foreground="Black" VerticalAlignment="Center"  HorizontalAlignment="Left" Margin="20 0 0 0"/>
+            <TextBox Grid.Row="0" Grid.Column="1"  Width="200" Height="30" VerticalAlignment="Center" Text="{Binding Name}" />
 
-            <Label FontWeight="Regular" Grid.Row="2" Content="Type: " FontSize="18" Style="{StaticResource controlLabel}" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Left"  Margin="20 0 0 0"/>
-            <TextBox Grid.Row="2" Grid.Column="1"  Width="200" Height="30" VerticalAlignment="Center" Text="{Binding Value}"/>
+            <Label FontWeight="Regular" Grid.Row="1" Content="TYPE: " FontSize="18" Style="{StaticResource controlLabel}" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Left"  Margin="20 0 0 0"/>
+            <TextBox Grid.Row="1" Grid.Column="1"  Width="200" Height="30" VerticalAlignment="Center" Text="{Binding Value}"/>
 
-            <Label FontWeight="Regular" Grid.Row="3" Content="Valid from:" FontSize="18" Style="{StaticResource controlLabel}" Foreground="Black" VerticalAlignment="Center"  HorizontalAlignment="Left"  Margin="20 0 0 0"/>
-            <DatePicker SelectedDate="{Binding ValidFrom}"  Grid.Row="3" Grid.Column="1"  Width="200" Height="30" VerticalAlignment="Center"/>
+            <Label FontWeight="Regular" Grid.Row="2" Content="VALID FROM:" FontSize="18" Style="{StaticResource controlLabel}" Foreground="Black" VerticalAlignment="Center"  HorizontalAlignment="Left"  Margin="20 0 0 0"/>
+            <DatePicker SelectedDate="{Binding ValidFrom}"  Grid.Row="2" Grid.Column="1"  Width="200" Height="30" VerticalAlignment="Center"/>
 
-            <Label FontWeight="Regular" Grid.Row="4" Content="Valid to: " FontSize="18" Style="{StaticResource controlLabel}" Foreground="Black" VerticalAlignment="Center"  HorizontalAlignment="Left"  Margin="20 0 0 0"/>
-            <DatePicker SelectedDate="{Binding ValidTo}" Grid.Row="4" Grid.Column="1"  Width="200" Height="30" VerticalAlignment="Center"/>
+            <Label FontWeight="Regular" Grid.Row="3" Content="VALID TO: " FontSize="18" Style="{StaticResource controlLabel}" Foreground="Black" VerticalAlignment="Center"  HorizontalAlignment="Left"  Margin="20 0 0 0"/>
+            <DatePicker SelectedDate="{Binding ValidTo}" Grid.Row="3" Grid.Column="1"  Width="200" Height="30" VerticalAlignment="Center"/>
 
-            <Label FontWeight="Regular" Grid.Row="5" Content="Active" FontSize="18" Style="{StaticResource controlLabel}" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Left"  Margin="20 0 0 0"/>
-            <CheckBox Grid.Row="5" Grid.Column="1" VerticalContentAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding Active}" />
+            <Label FontWeight="Regular" Grid.Row="4" Content="ACTIVE:" FontSize="18" Style="{StaticResource controlLabel}" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Left"  Margin="20 0 0 0"/>
+            <CheckBox Grid.Row="4" Grid.Column="1" VerticalContentAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding Active}" />
 
 
             <StackPanel Grid.Row="7" Orientation="Horizontal" HorizontalAlignment="Center" Grid.ColumnSpan="5">

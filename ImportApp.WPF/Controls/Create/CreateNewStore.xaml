@@ -58,12 +58,12 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Label Grid.Row="1" FontWeight="Regular" Content="Unique ID:" FontSize="18" Style="{StaticResource controlLabel}" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Left"  Margin="20 0 0 0"/>
-            <TextBlock Foreground="Black" FontWeight="Regular" Grid.Row="1" Grid.Column="1"  Width="340" Height="30" VerticalAlignment="Center" Text="{Binding Id}"/>
+            <!--<Label Grid.Row="1" FontWeight="Regular" Content="Unique ID:" FontSize="18" Style="{StaticResource controlLabel}" Foreground="Black" VerticalAlignment="Center" HorizontalAlignment="Left"  Margin="20 0 0 0"/>
+            <TextBlock Foreground="Black" FontWeight="Regular" Grid.Row="1" Grid.Column="1"  Width="340" Height="30" VerticalAlignment="Center" Text="{Binding Id}"/>-->
 
 
-            <Label Grid.Row="2" FontWeight="Regular" Content="Name:" FontSize="18" Style="{StaticResource controlLabel}" Foreground="Black" VerticalAlignment="Center"  HorizontalAlignment="Left" Margin="20 0 0 0"/>
-            <TextBox Grid.Row="2" Grid.Column="1" Width="300" Height="30" VerticalAlignment="Center" Text="{Binding Name}" />
+            <Label Grid.Row="1" FontWeight="Regular" Content="STORAGE NAME:" FontSize="18" Style="{StaticResource controlLabel}" Foreground="Black" VerticalAlignment="Center"  HorizontalAlignment="Left" Margin="20 0 0 0"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Width="300" Height="30" VerticalAlignment="Center" Text="{Binding Name}" />
 
 
             <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center" Grid.ColumnSpan="5">
