@@ -85,6 +85,29 @@ namespace ImportApp.WPF.ViewModels
             _articleDataService = articleDataService;
             _categoryDataService = categoryDataService;
             _discountDataService = discountDataService;
+
+            LoadFixedExcelColumns();
+        }
+
+        public void LoadFixedExcelColumns()
+        {
+            MapColumnForDiscountViewModel tempVm = new MapColumnForDiscountViewModel();
+
+            try
+            {
+                articleList = _excelDataService.ReadFromExcel(_myDictionary, tempVm).Result;
+                _notifier.ShowInformation(articleList.Count + " articles pulled. ");
+                LoadData(articleList);
+            }
+            catch (Exception)
+            {
+                if (articleList == null)
+                    _notifier.ShowError("Please check your ExcelFile & Sheet, and try again.");
+                else
+                    _notifier.ShowError(Translations.ErrorMessage);
+
+            }
+
         }
 
 

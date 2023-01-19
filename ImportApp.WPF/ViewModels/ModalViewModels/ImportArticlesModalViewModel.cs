@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using ImportApp.Domain.Services;
 using ImportApp.WPF.Resources;
+using Microsoft.IdentityModel.Protocols;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -140,6 +141,11 @@ namespace ImportApp.WPF.ViewModels
             Name = "BARCODE+ID+NAME+COLOR+SIZE";
         }
 
+
+        private static void LoadFixedExcelColumnNames()
+        {
+            
+        }
 
     }
 }

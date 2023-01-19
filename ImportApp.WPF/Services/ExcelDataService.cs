@@ -12,6 +12,7 @@ using ImportApp.WPF;
 using System.Collections.Concurrent;
 using ImportApp.WPF.Resources;
 using CommunityToolkit.Mvvm.Input;
+using ImportApp.WPF.Helpers;
 
 namespace ImportApp.WPF.Services
 {
@@ -95,7 +96,6 @@ namespace ImportApp.WPF.Services
 
             var Reader = await Command.ExecuteReaderAsync();
 
-
             while (Reader.Read())
             {
                 var fieldCount = Reader.FieldCount;
@@ -127,8 +127,10 @@ namespace ImportApp.WPF.Services
 
             bool success = _myDictionary.TryGetValue(Translations.CurrentExcelFile, out string value);
             bool sheet = _myDictionary.TryGetValue(Translations.CurrentExcelSheet, out string sheetValue);
+            FixedDiscountColumnNames templateViewModel = new FixedDiscountColumnNames();
 
-            if (success)
+
+            if (success && sheet)
             {
                 try
                 {
@@ -151,12 +153,12 @@ namespace ImportApp.WPF.Services
 
                         mapColumnViewModels.Add(new MapColumnForDiscountViewModel
                         {
-                            Name = Reader[viewModel.Name].ToString(),
-                            Category = Reader[viewModel.Category].ToString(),
-                            BarCode = Reader[viewModel.BarCode].ToString(),
-                            Price = Reader[viewModel.Price].ToString(),
-                            Discount = Helpers.Extensions.DisplayDiscountInPercentage(Reader[viewModel.Discount].ToString()),
-                            NewPrice = Reader[viewModel.NewPrice].ToString(),
+                            Name = Reader[templateViewModel.BarCode].ToString() + " " + Reader[templateViewModel.Item].ToString() + " " + Reader[templateViewModel.Description].ToString() + " " + Reader[templateViewModel.ColorDescription].ToString() + " " + Reader[templateViewModel.ItemSize].ToString(),
+                            Category = Reader[templateViewModel.Category].ToString(),
+                            BarCode = Reader[templateViewModel.BarCode].ToString(),
+                            Price = Reader[templateViewModel.FullPrice].ToString(),
+                            Discount = Helpers.Extensions.DisplayDiscountInPercentage(Reader[templateViewModel.Discount].ToString()),
+                            NewPrice = Reader[templateViewModel.DiscountedPrice].ToString(),
                             Storage = Translations.Articles
                         }) ;
                     }
@@ -176,16 +178,17 @@ namespace ImportApp.WPF.Services
             {
                 return null;
             }
-        }
+        }                
         
         
         
-        public async Task<ObservableCollection<ImportArticlesModalViewModel>> ReadFromExcel(ConcurrentDictionary<string, string> _myDictionary, ImportArticlesModalViewModel viewModel)
+        public async Task<ObservableCollection<ImportArticlesModalViewModel>> ReadFromExcel(ConcurrentDictionary<string, string> _myDictionary, ImportArticlesModalViewModel viewModel = null)
         {
             bool success = _myDictionary.TryGetValue(Translations.CurrentExcelFile, out string value);
             bool sheet = _myDictionary.TryGetValue(Translations.CurrentExcelSheet, out string sheetValue);
+            FixedExcelColumnNames templateViewModel = new FixedExcelColumnNames();
 
-            if (success)
+            if (success && sheet)
             {
                 try
                 {
@@ -208,13 +211,13 @@ namespace ImportApp.WPF.Services
 
                         _articleQtycViewModels.Add(new ImportArticlesModalViewModel
                         {
-                            Name = Reader[viewModel.BarCode].ToString() + " " + Reader["ITEM"].ToString() + " " + Reader["NAME"].ToString() + " " + Reader["COLOR_DESCRIPTION"].ToString() + " " +  Reader["ITEM_SIZE"].ToString(),
-                            Category = Reader[viewModel.Category].ToString(),
-                            Storage = Reader[viewModel.Storage].ToString(),
-                            BarCode = Reader[viewModel.BarCode].ToString(),
-                            Price = Reader[viewModel.Price].ToString(),
-                            Quantity = Reader[viewModel.Quantity].ToString(),
-                            PricePerUnit = Reader[viewModel.PricePerUnit].ToString()
+                            Name = Reader[templateViewModel.BarCode].ToString() + " " + Reader["ITEM"].ToString() + " " + Reader["NAME"].ToString() + " " + Reader["COLOR_DESCRIPTION"].ToString() + " " + Reader["ITEM_SIZE"].ToString(),
+                            Category = Reader[templateViewModel.Category].ToString(),
+                            Storage = Reader[templateViewModel.Storage].ToString(),
+                            BarCode = Reader[templateViewModel.BarCode].ToString(),
+                            Price = Reader[templateViewModel.Price].ToString(),
+                            Quantity = Reader[templateViewModel.Quantity].ToString(),
+                            PricePerUnit = Reader[templateViewModel.PricePerUnit].ToString()
                         }) ;
                     }
 
