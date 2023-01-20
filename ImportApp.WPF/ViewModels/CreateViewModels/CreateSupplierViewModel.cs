@@ -47,19 +47,15 @@ namespace ImportApp.WPF.ViewModels
         [RelayCommand(CanExecute = nameof(CanSave))]
         public void Save()
         {
-            if (_supplierDataService.GetSupplierByName(Name) == null)
+            Guid supplier = _supplierDataService.GetSupplierByName(Name).Result;
+
             {
                 try
                 {
-                    Supplier newSupplier = new Supplier()
-                    {
-                        Id = Id,
-                        Name = Name,
-                        IsDeleted = false,
-                        Address = Address,
-                        VatNumber = VatNumber
-                    };
-                    _supplierDataService.Create(newSupplier);
+                    Supplier newSupplier = _supplierDataService.Get(supplier.ToString()).Result;
+                    newSupplier.Address = Address;
+                    newSupplier.VatNumber = VatNumber;
+                    var success = _supplierDataService.Update(supplier, newSupplier).Result;
                     _notifier.ShowSuccess(Translations.CreatedSupplier);
                     Cancel();
                 }
@@ -68,12 +64,8 @@ namespace ImportApp.WPF.ViewModels
                     _notifier.ShowError(Translations.ErrorMessage);
                     Cancel();
                 }
-            }
-            else
-            {
-                _notifier.ShowError(Translations.DuplicatedSupplier);
-                Cancel();
-            }
+
+}
         }
 
 

@@ -3,7 +3,10 @@ using CommunityToolkit.Mvvm.Input;
 using FontAwesome.Sharp;
 using ImportApp.Domain.Services;
 using ImportApp.WPF.ViewModels;
+using Microsoft.Data.SqlClient.DataClassification;
+using System;
 using System.Collections.Concurrent;
+using System.Windows.Threading;
 using ToastNotifications;
 
 namespace ImportApp.WPF.State.Navigators
@@ -19,6 +22,11 @@ namespace ImportApp.WPF.State.Navigators
 
         [ObservableProperty]
         private IconChar icon;
+
+        private DispatcherTimer _timer;
+
+        public DateTime CurrentTime { get; set; }
+
 
 
         private IArticleDataService _articleService;
@@ -41,11 +49,22 @@ namespace ImportApp.WPF.State.Navigators
             _myDictionary = myDictionary;
             _notifier = notifier;
             _subCategoryDataService = subCategoryDataService;
-            DefaultLoad();
             _supplierDataService = supplierDataService;
+            DefaultLoad();
+
+            _timer = new DispatcherTimer();
+            _timer.Interval = TimeSpan.FromSeconds(1);
+            _timer.Tick += Timer_Tick;
+            _timer.Start();
         }
 
-        [RelayCommand]
+        private void Timer_Tick(object sender, object e)
+        {
+            CurrentTime = DateTime.Now;
+        }
+        
+
+                [RelayCommand]
         public void EditCurrentViewModel(object? parameter)
         {
             if (parameter is ViewType)
@@ -90,6 +109,8 @@ namespace ImportApp.WPF.State.Navigators
             Caption = "Dashboard";
             Icon = IconChar.Home;
         }
+
+
 
 
     }

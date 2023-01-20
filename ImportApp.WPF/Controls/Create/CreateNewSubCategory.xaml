@@ -65,10 +65,10 @@
             <TextBox Grid.Row="1" Grid.Column="1" Width="340" Height="30" VerticalAlignment="Center" Text="{Binding Name}" />
 
             <Label Grid.Row="2" FontWeight="Regular" Content="ADDRESS:" FontSize="18" Style="{StaticResource controlLabel}" Foreground="Black" VerticalAlignment="Center"  HorizontalAlignment="Left" Margin="20,0,0,0" Height="45"/>
-            <TextBox Grid.Row="2" Grid.Column="1" Width="340" Height="30" VerticalAlignment="Center" Text="{Binding Name}" />
+            <TextBox Grid.Row="2" Grid.Column="1" Width="340" Height="30" VerticalAlignment="Center" Text="{Binding Address}" />
 
             <Label Grid.Row="3" FontWeight="Regular" Content="VAT NUMBER:" FontSize="18" Style="{StaticResource controlLabel}" Foreground="Black" VerticalAlignment="Center"  HorizontalAlignment="Left" Margin="20,0,0,0" Height="40"/>
-            <TextBox Grid.Row="3" Grid.Column="1" Width="340" Height="30" VerticalAlignment="Center" Text="{Binding Name}" />
+            <TextBox Grid.Row="3" Grid.Column="1" Width="340" Height="30" VerticalAlignment="Center" Text="{Binding VatNumber}" />
 
 
             <StackPanel Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Center" Grid.ColumnSpan="5">

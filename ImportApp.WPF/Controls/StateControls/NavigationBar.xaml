@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ImportApp.WPF.Controls"
              xmlns:nav="clr-namespace:ImportApp.WPF.State.Navigators"
+             xmlns:sys="clr-namespace:System;assembly=System.Runtime"
           xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks" xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -71,8 +72,11 @@
 
             <Separator HorizontalAlignment="Center" Height="150" Width="150" Foreground="White" Margin="0 -20 0 10"/>
 
-
-
+            <StackPanel Orientation="Horizontal" Margin="15 100 0 0">
+                <fa:IconImage Icon="Calendar" Width="25" Height="25" Foreground="{StaticResource color8}"/>
+                <TextBlock Style="{StaticResource DateTimeTextBlock}" Text="{Binding Source={x:Static sys:DateTime.Now},
+                  StringFormat='{}{0:dddd, MMMM dd yyyy}'}"/>
+            </StackPanel>
         </StackPanel>
     </Border>
 </UserControl>

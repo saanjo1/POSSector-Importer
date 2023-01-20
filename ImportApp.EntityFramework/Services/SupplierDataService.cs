@@ -4,6 +4,7 @@ using ImportApp.EntityFramework.DBContext;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -93,7 +94,7 @@ namespace ImportApp.EntityFramework.Services
                     {
                         Id = Guid.NewGuid(),
                         Name = name,
-                        IsDeleted = false
+                        IsDeleted = false,
                     };
 
                     context.Suppliers.Add(supplier);
