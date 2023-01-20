@@ -144,6 +144,12 @@
   <data name="CurrentExcelSheet" xml:space="preserve">
     <value>CurrentExcelSheet</value>
   </data>
+  <data name="DatabasePath" xml:space="preserve">
+    <value>/ServerItem/Database</value>
+  </data>
+  <data name="DataSourcePath" xml:space="preserve">
+    <value>/ServerItem/DataSource</value>
+  </data>
   <data name="DefaultSubcategory" xml:space="preserve">
     <value>DefaultSubcategory</value>
   </data>
@@ -168,6 +174,9 @@
   <data name="EmptyGuid" xml:space="preserve">
     <value>00000000-0000-0000-0000-000000000000</value>
   </data>
+  <data name="Encrypt" xml:space="preserve">
+    <value>;Encrypt=False</value>
+  </data>
   <data name="ErrorMessage" xml:space="preserve">
     <value>An error occured. Try again.</value>
   </data>
@@ -189,11 +198,20 @@
   <data name="OpenDialogTitle" xml:space="preserve">
     <value>Browse Excel file</value>
   </data>
+  <data name="PortPath" xml:space="preserve">
+    <value>/ServerItem/Port</value>
+  </data>
+  <data name="POSFolderPath" xml:space="preserve">
+    <value>Local\POSSector\DatabaseSettings.xml</value>
+  </data>
   <data name="SelectedExcelFile" xml:space="preserve">
     <value>Excel file is successfully selected.</value>
   </data>
   <data name="SelectSheetError" xml:space="preserve">
     <value>You can't select sheet without selecting file first.</value>
+  </data>
+  <data name="ServerInstancePath" xml:space="preserve">
+    <value>/ServerItem/FullServerName</value>
   </data>
   <data name="SettingsError" xml:space="preserve">
     <value>First, you have to set files at Settings page.</value>

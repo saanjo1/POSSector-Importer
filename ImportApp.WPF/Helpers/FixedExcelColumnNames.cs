@@ -71,4 +71,15 @@ namespace ImportApp.WPF.Helpers
         }
 
     }
+
+
+    public class AppSettings
+    {
+        public ConnectionStrings ConnectionStrings { get; set; }
+    }
+
+    public class ConnectionStrings
+    {
+        public string sqlstring { get; set; }
+    }
 }

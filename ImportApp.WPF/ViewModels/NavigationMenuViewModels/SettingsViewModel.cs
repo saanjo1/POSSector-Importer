@@ -3,12 +3,16 @@ using CommunityToolkit.Mvvm.Input;
 using ImportApp.Domain.Services;
 using ImportApp.EntityFramework.Services;
 using ImportApp.WPF.Resources;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Data.Common;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using ToastNotifications;
 using ToastNotifications.Messages;
 
@@ -30,6 +34,8 @@ namespace ImportApp.WPF.ViewModels
             _myDictionary = myDictionary;
             _notifier = notifier;
             _excelDataService = excelDataService;
+
+            Path();
         }
 
         
@@ -45,6 +51,12 @@ namespace ImportApp.WPF.ViewModels
 
         [ObservableProperty]
         private string dBConnection;
+
+        [ObservableProperty]
+        private string serverInstance;
+
+        [ObservableProperty]
+        private string appPort;
 
 
         public bool SheetCheck()
@@ -108,6 +120,28 @@ namespace ImportApp.WPF.ViewModels
 
                 throw;
             }
+        }
+
+        [RelayCommand]
+        public void Path()
+        {
+            string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            int index = appDataPath.IndexOf("Roaming");
+            appDataPath = appDataPath.Substring(0, index) + Translations.POSFolderPath;
+
+            XmlDocument doc = new XmlDocument();
+            doc.Load(appDataPath);
+
+            XmlNode databaseNode = doc.SelectSingleNode(Translations.DatabasePath);
+            XmlNode serverInstanceNode = doc.SelectSingleNode(Translations.ServerInstancePath);
+            XmlNode portNode = doc.SelectSingleNode(Translations.PortPath);
+            DBConnection = databaseNode.InnerText;
+            ServerInstance = serverInstanceNode.InnerText;
+            AppPort = portNode.InnerText;
+
+
+
+            
         }
 
         [RelayCommand]

@@ -31,6 +31,7 @@
     <PackageReference Include="MaterialDesignThemes" Version="4.6.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
     <PackageReference Include="SimpleModal.WPF" Version="1.0.0" />
     <PackageReference Include="System.Collections.Concurrent" Version="4.3.0" />
     <PackageReference Include="System.Data.OleDb" Version="7.0.0" />

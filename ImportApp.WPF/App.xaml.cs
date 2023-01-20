@@ -10,6 +10,10 @@ using System.Windows;
 using System.IO;
 using Microsoft.Extensions.Configuration;
 using ImportApp.Domain.Models;
+using ImportApp.WPF.Resources;
+using System.Xml;
+using ImportApp.WPF.Helpers;
+using Newtonsoft.Json;
 
 namespace ImportApp.WPF
 {
@@ -24,6 +28,10 @@ namespace ImportApp.WPF
 
         public App()
         {
+
+            UpdateConnectionString();
+
+
             _host = Host.CreateDefaultBuilder()
                 .AddDbContext()
                 .AddViewModels()
@@ -56,6 +64,28 @@ namespace ImportApp.WPF
            await _host!.StopAsync();
             _host.Dispose();
             base.OnExit(e);
+        }
+
+
+        private void UpdateConnectionString()
+        {
+            string appDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            int index = appDataPath.IndexOf("Roaming");
+            appDataPath = appDataPath.Substring(0, index) + Translations.POSFolderPath;
+
+            XmlDocument doc = new XmlDocument();
+            doc.Load(appDataPath);
+
+            XmlNode dataSource = doc.SelectSingleNode(Translations.DataSourcePath);
+
+
+
+            string json = File.ReadAllText("appsettings.json");
+            AppSettings settings = JsonConvert.DeserializeObject<AppSettings>(json);
+            settings.ConnectionStrings.sqlstring = dataSource.InnerText + Translations.Encrypt;
+
+            json = JsonConvert.SerializeObject(settings);
+            File.WriteAllText("appsettings.json", json);
         }
     }
 }

@@ -142,6 +142,24 @@ namespace ImportApp.WPF.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to /ServerItem/Database.
+        /// </summary>
+        internal static string DatabasePath {
+            get {
+                return ResourceManager.GetString("DatabasePath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /ServerItem/DataSource.
+        /// </summary>
+        internal static string DataSourcePath {
+            get {
+                return ResourceManager.GetString("DataSourcePath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to DefaultSubcategory.
         /// </summary>
         internal static string DefaultSubcategory {
@@ -214,6 +232,15 @@ namespace ImportApp.WPF.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ;Encrypt=False.
+        /// </summary>
+        internal static string Encrypt {
+            get {
+                return ResourceManager.GetString("Encrypt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An error occured. Try again..
         /// </summary>
         internal static string ErrorMessage {
@@ -277,6 +304,24 @@ namespace ImportApp.WPF.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to /ServerItem/Port.
+        /// </summary>
+        internal static string PortPath {
+            get {
+                return ResourceManager.GetString("PortPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Local\POSSector\DatabaseSettings.xml.
+        /// </summary>
+        internal static string POSFolderPath {
+            get {
+                return ResourceManager.GetString("POSFolderPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Excel file is successfully selected..
         /// </summary>
         internal static string SelectedExcelFile {
@@ -291,6 +336,15 @@ namespace ImportApp.WPF.Resources {
         internal static string SelectSheetError {
             get {
                 return ResourceManager.GetString("SelectSheetError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /ServerItem/FullServerName.
+        /// </summary>
+        internal static string ServerInstancePath {
+            get {
+                return ResourceManager.GetString("ServerInstancePath", resourceCulture);
             }
         }
         
