@@ -29,6 +29,10 @@
                 <views:StoreView/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewmodels:EditStorageViewModel}">
+                <controls:EditStorageControl/>
+            </DataTemplate>
+
             <DataTemplate DataType="{x:Type viewmodels:DiscountViewModel}">
                 <views:DiscountView/>
             </DataTemplate>

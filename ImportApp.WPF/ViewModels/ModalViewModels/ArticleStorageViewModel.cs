@@ -2,14 +2,20 @@
 using CommunityToolkit.Mvvm.Input;
 using ImportApp.Domain.Models;
 using ImportApp.Domain.Services;
+using ImportApp.WPF.Helpers;
+using Microsoft.Identity.Client.Extensions.Msal;
+using ModalControl;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Data;
 using ToastNotifications;
 using ToastNotifications.Messages;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace ImportApp.WPF.ViewModels
 {
@@ -18,6 +24,8 @@ namespace ImportApp.WPF.ViewModels
     public partial class ArticleStorageViewModel : BaseViewModel
     {
         private IArticleDataService _articleService;
+        private IStorageDataService _storageService;
+        private ICategoryDataService _categoryDataService;
         private Notifier _notifier;
 
         [ObservableProperty]
@@ -26,6 +34,12 @@ namespace ImportApp.WPF.ViewModels
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(DeleteArticleCommand))]
         private int count;
+
+        [ObservableProperty]
+        private bool isEditOpen;
+
+        [ObservableProperty]
+        private EditStorageViewModel editArticleViewModel;
 
         private string textToFilter;
 
@@ -44,141 +58,39 @@ namespace ImportApp.WPF.ViewModels
         {
             if (!string.IsNullOrEmpty(TextToFilter))
             {
-                var filt = obj as Article;
-                return filt != null && (filt.Name.Contains(TextToFilter) || filt.BarCode.Contains(TextToFilter) || filt.Price.ToString() == TextToFilter || filt.ArticleNumber.ToString() == TextToFilter);
+                var filt = obj as GoodsArticlesViewModel;
+                return filt != null && (filt.Name.Contains(TextToFilter));
             }
             return true;
         }
 
 
 
-        public ArticleStorageViewModel(IArticleDataService articleService, string _storageName, Notifier notifier)
+        public ArticleStorageViewModel(IArticleDataService articleService, string _storageName, Notifier notifier, IStorageDataService storageService, ICategoryDataService categoryDataService)
         {
             _notifier = notifier;
             _articleService = articleService;
             storageName = _storageName;
+            _storageService = storageService;
             LoadData();
+            _categoryDataService = categoryDataService;
         }
 
 
         [ObservableProperty]
-        private ICollection<Article> articleList;
+        private ICollection<GoodsArticlesViewModel> articleList;
 
         [ObservableProperty]
-        private ObservableCollection<Article> articlesCollection = new ObservableCollection<Article>();
+        private ObservableCollection<GoodsArticlesViewModel> articlesCollection = new ObservableCollection<GoodsArticlesViewModel>();
 
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(DeleteArticleCommand))]
         private ICollectionView articleCollection;
 
-        private int currentPage = 1;
-        public int CurrentPage
-        {
-            get { return currentPage; }
-            set
-            {
-                currentPage = value;
-                OnPropertyChanged(nameof(CurrentPage));
-                UpdateEnableState();
-            }
-        }
-
-        private int selectedRecord = 15;
-        public int SelectedRecord
-        {
-            get { return selectedRecord; }
-            set
-            {
-                selectedRecord = value;
-                OnPropertyChanged(nameof(SelectedRecord));
-                UpdateRecordCount();
-            }
-        }
-
-        private void UpdateRecordCount()
-        {
-            NumberOfPages = (int)Math.Ceiling((double)articleList.Count / SelectedRecord);
-            NumberOfPages = NumberOfPages == 0 ? 1 : NumberOfPages;
-            UpdateCollection(articleList.Take(SelectedRecord));
-            CurrentPage = 1;
-        }
-
-        [ObservableProperty]
-        private int numberOfPages = 15;
-
-        [ObservableProperty]
-        private bool isFirstEnabled;
-
-        [ObservableProperty]
-        private bool isPreviousEnabled;
-
-        [ObservableProperty]
-        private bool isNextEnabled;
-
-        [ObservableProperty]
-        private bool isLastEnabled;
-
-
-        public static int RecordStartForm = 0;
-        [RelayCommand]
-        private void PreviousPage(object obj)
-        {
-            CurrentPage--;
-            RecordStartForm = articleList.Count - SelectedRecord * (NumberOfPages - (CurrentPage - 1));
-
-            var recordsToShow = articleList.Skip(RecordStartForm).Take(SelectedRecord);
-
-            UpdateCollection(recordsToShow);
-            UpdateEnableState();
-        }
+    
 
         [RelayCommand]
-        private void LastPage(object obj)
-        {
-            var recordsToSkip = SelectedRecord * (NumberOfPages - 1);
-            UpdateCollection(articleList.Skip(recordsToSkip));
-            CurrentPage = NumberOfPages;
-            UpdateEnableState();
-        }
-
-
-        [RelayCommand]
-        private void FirstPage(object obj)
-        {
-            UpdateCollection(articleList.Take(SelectedRecord));
-            CurrentPage = 1;
-            UpdateEnableState();
-        }
-
-        [RelayCommand]
-        private void NextPage(object obj)
-        {
-            RecordStartForm = CurrentPage * SelectedRecord;
-            var recordsToShow = articleList.Skip(RecordStartForm).Take(SelectedRecord);
-            UpdateCollection(recordsToShow);
-            CurrentPage++;
-            UpdateEnableState();
-        }
-
-        private void UpdateEnableState()
-        {
-            IsFirstEnabled = CurrentPage > 1;
-            IsPreviousEnabled = CurrentPage > 1;
-            IsNextEnabled = CurrentPage < NumberOfPages;
-            IsLastEnabled = CurrentPage < NumberOfPages;
-        }
-
-        private void UpdateCollection(IEnumerable<Article> recordsToShow)
-        {
-            ArticlesCollection.Clear();
-            foreach (var item in recordsToShow)
-            {
-                ArticlesCollection.Add(item);
-            }
-        }
-
-        [RelayCommand]
-        private void DeleteArticle(Article parameter)
+        private void DeleteArticle(GoodsArticlesViewModel parameter)
         {
             try
             {
@@ -194,20 +106,60 @@ namespace ImportApp.WPF.ViewModels
         }
 
         [RelayCommand]
+        public void EditArticle(GoodsArticlesViewModel parameter)
+        {
+            IsEditOpen = true;
+            this.EditArticleViewModel = new EditStorageViewModel(parameter, _notifier, _categoryDataService, _storageService, this);
+        }
+
+        [RelayCommand]
         public void LoadData()
         {
             if(StorageName == "Articles")
             {
-                ArticleList = _articleService.GetArticles().Result;
+                ArticleList = StorageQuantityCounter("Articles").Result;
             }
             else
             {
-                ArticleList = _articleService.GetEconomato().Result;
+                ArticleList = StorageQuantityCounter("Economato").Result;
             }
-            ArticleCollection = CollectionViewSource.GetDefaultView(ArticlesCollection);
-            UpdateCollection(articlesCollection.Take(SelectedRecord));
-            UpdateRecordCount();
+            ArticleCollection = CollectionViewSource.GetDefaultView(ArticleList);
             Count = ArticleList.Count;
+        }
+
+        [RelayCommand]
+        public void Cancel()
+        {
+            if(IsEditOpen)
+               IsEditOpen = false;
+        }
+
+
+        public Task<ICollection<GoodsArticlesViewModel>> StorageQuantityCounter(string storageName)
+        {
+            List<Good> goods = _articleService.GetGoods().Result;
+            Guid storage = _storageService.GetStorageByName(storageName).Result;
+            ICollection<GoodsArticlesViewModel> tempList = new List<GoodsArticlesViewModel>();
+            foreach(var item in goods)
+            {
+                decimal quantity = _articleService.GroupGoodsById(item.Id, storage).Result;
+                if (quantity > 0 && quantity != null)
+                {
+                    tempList.Add(new GoodsArticlesViewModel
+                    {
+                        Id = Guid.NewGuid(),
+                        Name = item.Name,
+                        GoodId = _articleService.GetGoodId(item.Name).Result,
+                        Quantity = quantity,
+                        Storage = storage,
+                        Price = Math.Round((item.LatestPrice * quantity), 2),
+                        LatestPrice = item.LatestPrice
+                    });
+
+                }
+            }
+
+            return Task.FromResult(tempList);
         }
 
 

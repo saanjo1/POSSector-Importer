@@ -23,9 +23,6 @@ namespace ImportApp.WPF.State.Navigators
         [ObservableProperty]
         private IconChar icon;
 
-        private DispatcherTimer _timer;
-
-        public DateTime CurrentTime { get; set; }
 
 
 
@@ -52,17 +49,9 @@ namespace ImportApp.WPF.State.Navigators
             _supplierDataService = supplierDataService;
             DefaultLoad();
 
-            _timer = new DispatcherTimer();
-            _timer.Interval = TimeSpan.FromSeconds(1);
-            _timer.Tick += Timer_Tick;
-            _timer.Start();
+          
         }
 
-        private void Timer_Tick(object sender, object e)
-        {
-            CurrentTime = DateTime.Now;
-        }
-        
 
                 [RelayCommand]
         public void EditCurrentViewModel(object? parameter)
@@ -83,7 +72,7 @@ namespace ImportApp.WPF.State.Navigators
                         Icon = IconChar.Percentage;
                         break;
                     case ViewType.Articles:
-                        this.CurrentViewModel = new StoreViewModel(_articleService, _notifier);
+                        this.CurrentViewModel = new StoreViewModel(_articleService, _notifier, _storeService, _categoryService);
                         Caption = "Store";
                         Icon = IconChar.TableList;
                         break;

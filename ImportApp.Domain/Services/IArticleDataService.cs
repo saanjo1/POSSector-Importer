@@ -1,4 +1,5 @@
 ﻿using ImportApp.Domain.Models;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,9 @@ namespace ImportApp.Domain.Services
 
         Task<Guid> GetUnitByName(string name);
         Task<Guid> GetGoodId(string name);
+        Task<List<Good>> GetGoods();
+        Task<decimal> GroupGoodsById(Guid goodId, Guid storageId);
+
 
         Task<ICollection<SubCategory>> GetAllSubcategories();
         Task<Guid> GetSubCategory(string name);

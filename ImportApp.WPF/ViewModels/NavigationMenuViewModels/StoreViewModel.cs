@@ -19,17 +19,16 @@ namespace ImportApp.WPF.ViewModels
     [ObservableObject]
     public partial class StoreViewModel : BaseViewModel
     {
-        private IArticleDataService _articleService;
+        private IArticleDataService _articleService; 
         private Notifier _notifier;
 
         public IStore Store { get; set; }
 
 
-        public StoreViewModel(IArticleDataService articleService, Notifier notifier)
+        public StoreViewModel(IArticleDataService articleService, Notifier notifier, IStorageDataService storageDataService, ICategoryDataService categoryDataService)
         {
-            _articleService = articleService;
             _notifier = notifier;
-            Store = new Store(_articleService, _notifier);
+            Store = new Store(articleService, _notifier, storageDataService, categoryDataService);
         }
 
 

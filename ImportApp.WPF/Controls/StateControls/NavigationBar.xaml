@@ -24,16 +24,16 @@
                     <TextBlock Text="Dashboard" Style="{StaticResource radioButtonText}"/>
                 </StackPanel>
             </RadioButton>
-            <!--<RadioButton Style="{StaticResource radioButton1}"
+            <RadioButton Style="{StaticResource radioButton1}"
                      Tag="{StaticResource color2}"
                      Command="{Binding EditCurrentViewModelCommand}" 
                      CommandParameter="{x:Static nav:ViewType.Articles}">
 
                 <StackPanel Orientation="Horizontal">
-                    <fa:IconImage Icon="TableList" Style="{StaticResource radioButtonIcon}" Foreground="{StaticResource color6}"/>
+                    <fa:IconImage Icon="TableList" Style="{StaticResource radioButtonIcon}" Foreground="{StaticResource color3}"/>
                     <TextBlock Text="Storages" Style="{StaticResource radioButtonText}"/>
                 </StackPanel>
-            </RadioButton>-->
+            </RadioButton>
             
 
             <RadioButton Style="{StaticResource radioButton1}"
@@ -74,8 +74,8 @@
 
             <StackPanel Orientation="Horizontal" Margin="15 100 0 0">
                 <fa:IconImage Icon="Calendar" Width="25" Height="25" Foreground="{StaticResource color8}"/>
-                <TextBlock Style="{StaticResource DateTimeTextBlock}" Text="{Binding Source={x:Static sys:DateTime.Now},
-                  StringFormat='{}{0:dddd, MMMM dd yyyy}'}"/>
+                <TextBlock Margin="8 0 0 0" Style="{StaticResource DateTimeTextBlock}" Text="{Binding Source={x:Static sys:DateTime.Now},
+                  StringFormat='{}{0:dddd, MMM dd yyyy}'}"/>
             </StackPanel>
         </StackPanel>
     </Border>

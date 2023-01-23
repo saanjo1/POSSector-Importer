@@ -305,7 +305,7 @@ namespace ImportApp.WPF.ViewModels
                         newRule = new Rule()
                         {
                             Id = Guid.NewGuid(),
-                            Name = articleList[i].Discount + " - " + DateTime.Now,
+                            Name = articleList[i].Discount,
                             ValidFrom = DateTime.Now,
                             ValidTo = DateTime.Today.AddDays(1),
                             Type = "HappyHour",

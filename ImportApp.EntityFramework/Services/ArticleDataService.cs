@@ -1,9 +1,12 @@
 ﻿using ImportApp.Domain.Models;
 using ImportApp.Domain.Services;
 using ImportApp.EntityFramework.DBContext;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 using System.Diagnostics.Metrics;
 using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 
 namespace ImportApp.EntityFramework.Services
 {
@@ -51,7 +54,7 @@ namespace ImportApp.EntityFramework.Services
                 {
                     var articleGood = context.ArticleGoods.Where(x => x.Id == article.Id).FirstOrDefault();
 
-                    if(articleGood == null)
+                    if (articleGood == null)
                     {
                         context.ArticleGoods.Add(article);
                     }
@@ -115,7 +118,7 @@ namespace ImportApp.EntityFramework.Services
 
                     Storage? storage = context.Storages.Where(x => x.Id == subCategory.StorageId).FirstOrDefault();
 
-                    if(storage?.Name == "Articles" && item.Deleted == false)
+                    if (storage?.Name == "Articles" && item.Deleted == false)
                     {
                         entities.Add(item);
                     }
@@ -173,7 +176,7 @@ namespace ImportApp.EntityFramework.Services
 
         public Task<ICollection<SubCategory>> GetAllSubcategories()
         {
-            using(ImportAppDbContext context = factory.CreateDbContext())
+            using (ImportAppDbContext context = factory.CreateDbContext())
             {
                 ICollection<SubCategory> entities = context.SubCategories.ToList();
                 return Task.FromResult(entities);
@@ -182,9 +185,9 @@ namespace ImportApp.EntityFramework.Services
 
         public Task<Guid> GetSubCategory(string name)
         {
-            using(ImportAppDbContext context = factory.CreateDbContext())
+            using (ImportAppDbContext context = factory.CreateDbContext())
             {
-                SubCategory? subcategory = context.SubCategories.FirstOrDefault(x=> x.Name == name);
+                SubCategory? subcategory = context.SubCategories.FirstOrDefault(x => x.Name == name);
 
                 return Task.FromResult(subcategory.Id);
             }
@@ -205,10 +208,10 @@ namespace ImportApp.EntityFramework.Services
 
         public Task<Guid> GetUnitByName(string name)
         {
-            using(ImportAppDbContext context = factory.CreateDbContext())
+            using (ImportAppDbContext context = factory.CreateDbContext())
             {
                 var unit = context.MeasureUnits.FirstOrDefault(x => x.Name == name);
-                if(unit != null)
+                if (unit != null)
                     return Task.FromResult(unit.Id);
                 else
                 {
@@ -225,18 +228,18 @@ namespace ImportApp.EntityFramework.Services
 
         public Task<Guid> GetGoodId(string name)
         {
-            using(ImportAppDbContext context = factory.CreateDbContext())
+            using (ImportAppDbContext context = factory.CreateDbContext())
             {
                 Article article = context.Articles.FirstOrDefault(x => x.Name == name);
 
-                if(article != null)
+                if (article != null)
                 {
                     ArticleGood good = context.ArticleGoods.FirstOrDefault(x => x.ArticleId == article.Id);
                     Guid goodId = (Guid)good.GoodId;
 
                     if (good != null)
                         return Task.FromResult(goodId);
-                    else 
+                    else
                         return Task.FromResult(Guid.Empty);
                 }
                 else
@@ -244,6 +247,48 @@ namespace ImportApp.EntityFramework.Services
                     return Task.FromResult(Guid.Empty);
                 }
             }
+        }
+
+
+
+
+        public Task<decimal> GroupGoodsById(Guid goodId, Guid storageId)
+        {
+            decimal sumQuantities = 0;
+
+            using (ImportAppDbContext context = factory.CreateDbContext())
+            {
+                    sumQuantities = context.InventoryItemBases.
+                       Where(x => x.GoodId == goodId && x.StorageId == storageId).Sum(x => x.Quantity);
+
+
+
+                var listofdocs = context.InventoryDocuments.ToList();
+
+                foreach(var item in listofdocs)
+                {
+                    InventoryItemBasis? id = context.InventoryItemBases.Where(x => x.GoodId == goodId && x.StorageId == storageId && x.InventoryDocumentId == item.Id).FirstOrDefault();
+
+                    if(id != null && item.Type == 2 && item.IsActivated == false)
+                    {
+                        //return Task.FromResult(default(decimal));
+                    }
+                }
+
+            }
+
+            return Task.FromResult(sumQuantities);
+        }
+
+        public Task<List<Good>> GetGoods()
+        {
+            List<Good> goods;
+            using (ImportAppDbContext context = factory.CreateDbContext())
+            {
+                goods = context.Goods.ToList();
+            }
+
+            return Task.FromResult(goods);
         }
     }
 }
