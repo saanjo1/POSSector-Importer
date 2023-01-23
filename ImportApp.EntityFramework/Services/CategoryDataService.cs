@@ -166,15 +166,15 @@ namespace ImportApp.EntityFramework.Services
         {
             using (ImportAppDbContext _context = _contextFactory.CreateDbContext())
             {
-               
+
                 var storage = _context.Storages.FirstOrDefault(x => x.Name == storageName);
 
-                if(storage == null)
-                { 
+                if (storage == null)
+                {
                     Storage newStorage = new Storage
                     {
                         Id = Guid.NewGuid(),
-                        Name = storageName, 
+                        Name = storageName,
                         Deleted = false,
                     };
 
@@ -196,7 +196,7 @@ namespace ImportApp.EntityFramework.Services
             {
                 var _category = context.Categories.FirstOrDefault(x => x.Name == name);
 
-                if(_category != null &&_category.Deleted == false)
+                if (_category != null && _category.Deleted == false)
                     return Task.FromResult(_category.Id);
 
                 return null;

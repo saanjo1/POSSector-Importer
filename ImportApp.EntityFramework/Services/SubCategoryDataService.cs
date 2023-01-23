@@ -1,12 +1,6 @@
 ﻿using ImportApp.Domain.Models;
 using ImportApp.Domain.Services;
 using ImportApp.EntityFramework.DBContext;
-using Microsoft.EntityFrameworkCore.Internal;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ImportApp.EntityFramework.Services
 {

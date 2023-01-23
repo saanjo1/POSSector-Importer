@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ImportApp.WPF.Helpers
+﻿namespace ImportApp.WPF.Helpers
 {
     public class FixedExcelColumnNames
     {

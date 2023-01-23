@@ -3,11 +3,8 @@ using CommunityToolkit.Mvvm.Input;
 using ImportApp.Domain.Models;
 using ImportApp.Domain.Services;
 using ImportApp.WPF.Resources;
-using Microsoft.EntityFrameworkCore.Diagnostics;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using ToastNotifications;
 using ToastNotifications.Messages;
@@ -70,7 +67,7 @@ namespace ImportApp.WPF.ViewModels
                 ArticleNumber = articleDataService.GetLastArticleNumber().Result;
                 Order = 1;
                 SubCategory = GetSubcategories().Result;
-                if(SubCategory.Count > 0)
+                if (SubCategory.Count > 0)
                 {
                     SelectedSubCategory = SubCategory[0];
                 }
@@ -79,7 +76,7 @@ namespace ImportApp.WPF.ViewModels
                     _notifier.ShowWarning(Translations.NoSubcategories);
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 _notifier.ShowError(Translations.ErrorMessage);
             }
@@ -97,7 +94,7 @@ namespace ImportApp.WPF.ViewModels
             var subcategories = articleDataService.GetAllSubcategories().Result;
             List<string> result = new List<string>();
 
-            foreach(var item in subcategories)
+            foreach (var item in subcategories)
             {
                 result.Add(item.Name);
             }

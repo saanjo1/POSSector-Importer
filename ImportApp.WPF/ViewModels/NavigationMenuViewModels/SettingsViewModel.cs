@@ -1,17 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ImportApp.Domain.Services;
-using ImportApp.EntityFramework.Services;
 using ImportApp.WPF.Resources;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Data.Common;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 using ToastNotifications;
 using ToastNotifications.Messages;
@@ -38,7 +30,7 @@ namespace ImportApp.WPF.ViewModels
             Path();
         }
 
-        
+
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(SelectSheetCommand))]
         [NotifyCanExecuteChangedFor(nameof(UploadExcelFileCommand))]
@@ -76,7 +68,7 @@ namespace ImportApp.WPF.ViewModels
             {
                 if (excelFile != null)
                 {
-                    if(_myDictionary.TryGetValue(Translations.CurrentExcelFile, out string value) == false)
+                    if (_myDictionary.TryGetValue(Translations.CurrentExcelFile, out string value) == false)
                     {
                         bool success = _myDictionary.TryAdd(Translations.CurrentExcelFile, excelFile);
 
@@ -141,7 +133,7 @@ namespace ImportApp.WPF.ViewModels
 
 
 
-            
+
         }
 
         [RelayCommand]

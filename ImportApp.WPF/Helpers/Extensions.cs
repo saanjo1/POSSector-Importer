@@ -1,17 +1,11 @@
-﻿using ImportApp.Domain.Models;
-using ImportApp.WPF.Resources;
+﻿using ImportApp.WPF.Resources;
 using ImportApp.WPF.ViewModels;
-using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Win32;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Data.Common;
-using System.Diagnostics;
 using System.Linq;
-using System.Printing;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ImportApp.WPF.Helpers
 {
@@ -74,7 +68,7 @@ namespace ImportApp.WPF.Helpers
 
             }
 
-            return mColumnModel;  
+            return mColumnModel;
         }
 
 
@@ -111,10 +105,10 @@ namespace ImportApp.WPF.Helpers
             bool success = double.TryParse(discount, out double result);
             string finalResult;
 
-            if (success) 
+            if (success)
             {
                 var percentage = result * (-100);
-                finalResult = percentage.ToString() + "%";    
+                finalResult = percentage.ToString() + "%";
             }
             else
             {
@@ -137,10 +131,10 @@ namespace ImportApp.WPF.Helpers
             {
                 string[] substrings = value.Split(';').Select(s => s.Trim()).ToArray();
 
-                    foreach (string substring in substrings)
-                    {
-                        outputvalue += reader[substring] + " ";
-                    }
+                foreach (string substring in substrings)
+                {
+                    outputvalue += reader[substring] + " ";
+                }
             }
 
             return outputvalue;
@@ -148,7 +142,7 @@ namespace ImportApp.WPF.Helpers
 
 
 
-        
+
 
     }
 }

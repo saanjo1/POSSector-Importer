@@ -1,19 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using FontAwesome.Sharp;
-using ImportApp.Domain.Models;
 using ImportApp.Domain.Services;
-using ImportApp.EntityFramework.Services;
-using ImportApp.WPF.State.Navigators;
 using ImportApp.WPF.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using ToastNotifications;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace ImportApp.WPF.State.Store
 {
@@ -38,7 +27,7 @@ namespace ImportApp.WPF.State.Store
         [RelayCommand]
         public void EditCurrentDataGrid(object? parameter)
         {
-            if(parameter is StoreType)
+            if (parameter is StoreType)
             {
                 StoreType storeType = (StoreType)parameter;
                 switch (storeType)

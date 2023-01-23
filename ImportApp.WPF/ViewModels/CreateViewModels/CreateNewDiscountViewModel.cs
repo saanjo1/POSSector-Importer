@@ -78,7 +78,7 @@ namespace ImportApp.WPF.ViewModels
                 };
                 _discountDataService.Create(newRule);
                 _notifier.ShowSuccess(Translations.CreatedDiscount);
-                Cancel();   
+                Cancel();
             }
             catch (Exception)
             {

@@ -1,12 +1,6 @@
 ﻿using ImportApp.Domain.Models;
 using ImportApp.Domain.Services;
 using ImportApp.EntityFramework.DBContext;
-using Microsoft.EntityFrameworkCore.Internal;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ImportApp.EntityFramework.Services
 {
@@ -72,9 +66,9 @@ namespace ImportApp.EntityFramework.Services
             ICollection<Storage> storageCollection = GetAll().Result;
             List<string> storages = new List<string>();
 
-            if(storageCollection.Count > 0)
+            if (storageCollection.Count > 0)
             {
-                foreach(Storage item in storageCollection)
+                foreach (Storage item in storageCollection)
                 {
                     storages.Add(item.Name);
                 }

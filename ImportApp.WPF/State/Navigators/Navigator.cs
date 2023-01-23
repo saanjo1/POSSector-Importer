@@ -3,10 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using FontAwesome.Sharp;
 using ImportApp.Domain.Services;
 using ImportApp.WPF.ViewModels;
-using Microsoft.Data.SqlClient.DataClassification;
-using System;
 using System.Collections.Concurrent;
-using System.Windows.Threading;
 using ToastNotifications;
 
 namespace ImportApp.WPF.State.Navigators
@@ -49,11 +46,11 @@ namespace ImportApp.WPF.State.Navigators
             _supplierDataService = supplierDataService;
             DefaultLoad();
 
-          
+
         }
 
 
-                [RelayCommand]
+        [RelayCommand]
         public void EditCurrentViewModel(object? parameter)
         {
             if (parameter is ViewType)
@@ -67,7 +64,7 @@ namespace ImportApp.WPF.State.Navigators
                         Icon = IconChar.Home;
                         break;
                     case ViewType.Discounts:
-                        this.CurrentViewModel = new DiscountViewModel(_excelDataService, _notifier, _myDictionary,_articleService, _categoryService, _discountDataService);
+                        this.CurrentViewModel = new DiscountViewModel(_excelDataService, _notifier, _myDictionary, _articleService, _categoryService, _discountDataService);
                         Caption = "Discounts";
                         Icon = IconChar.Percentage;
                         break;

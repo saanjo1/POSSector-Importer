@@ -1,25 +1,24 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using ImportApp.Domain.Services;
-using ToastNotifications;
-using System.Collections.Concurrent;
-using ImportApp.WPF.Resources;
-using ToastNotifications.Messages;
-using System.Collections.ObjectModel;
-using System.Windows.Data;
-using System.ComponentModel;
 using ImportApp.Domain.Models;
+using ImportApp.Domain.Services;
+using ImportApp.WPF.Resources;
 using System;
-using System.Diagnostics.Metrics;
-using System.Linq;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
+using System.Windows.Data;
+using ToastNotifications;
+using ToastNotifications.Messages;
 
 namespace ImportApp.WPF.ViewModels
 {
     [ObservableObject]
     public partial class DiscountViewModel : BaseViewModel
     {
-      
+
         [ObservableProperty]
         private string excelFile;
 
@@ -208,7 +207,7 @@ namespace ImportApp.WPF.ViewModels
             try
             {
                 articleList = _excelDataService.ReadFromExcel(_myDictionary, tempVm).Result;
-                if(articleList != null)
+                if (articleList != null)
                 {
                     _notifier.ShowInformation(articleList.Count + " articles pulled. ");
                     LoadData(articleList);
@@ -270,7 +269,7 @@ namespace ImportApp.WPF.ViewModels
         [RelayCommand]
         public void LoadData(ObservableCollection<MapColumnForDiscountViewModel>? vm)
         {
-            
+
             if (vm != null)
             {
                 articleList = vm;
@@ -299,8 +298,8 @@ namespace ImportApp.WPF.ViewModels
 
                 for (int i = 0; i < articleList.Count; i++)
                 {
-                   Guid discId = _discountDataService.GetDiscountByName(articleList[i].Discount).Result;
-                   if(discId == Guid.Empty)
+                    Guid discId = _discountDataService.GetDiscountByName(articleList[i].Discount).Result;
+                    if (discId == Guid.Empty)
                     {
                         newRule = new Rule()
                         {
@@ -315,7 +314,7 @@ namespace ImportApp.WPF.ViewModels
 
                         _discountDataService.Create(newRule);
                     }
-                   else
+                    else
                     {
                         newRule = _discountDataService.Get(discId.ToString()).Result;
                     }
@@ -353,7 +352,7 @@ namespace ImportApp.WPF.ViewModels
                     }
                     else
                     {
-                        _articleDataService.Update(temp.Id, newArticle); 
+                        _articleDataService.Update(temp.Id, newArticle);
                         updateCounter++;
 
 
@@ -370,8 +369,8 @@ namespace ImportApp.WPF.ViewModels
                 }
 
                 _notifier.ShowSuccess(Translations.SuccessImport);
-                _notifier.ShowInformation(updateCounter + " items updated." );
-                _notifier.ShowInformation(importCounter + " items imported." );
+                _notifier.ShowInformation(updateCounter + " items updated.");
+                _notifier.ShowInformation(importCounter + " items imported.");
                 ClearAllData();
             }
             else
@@ -396,8 +395,8 @@ namespace ImportApp.WPF.ViewModels
 
             if (articleList != null)
                 return false;
-           
-                return true;
+
+            return true;
         }
 
 
@@ -407,7 +406,7 @@ namespace ImportApp.WPF.ViewModels
                 return true;
             return false;
         }
-        
+
         public bool CanClickOptions()
         {
             if (_myDictionary.TryGetValue(Translations.CurrentExcelSheet, out string value) == false)

@@ -1,19 +1,15 @@
-﻿using ImportApp.Domain.Services;
-using ImportApp.EntityFramework.DBContext;
-using ImportApp.EntityFramework.Services;
-using ImportApp.WPF.ViewModels;
+﻿using ImportApp.EntityFramework.DBContext;
+using ImportApp.WPF.Helpers;
+using ImportApp.WPF.HostBuilders;
+using ImportApp.WPF.Resources;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using ImportApp.WPF.HostBuilders;
-using System;
-using System.Windows;
-using System.IO;
-using Microsoft.Extensions.Configuration;
-using ImportApp.Domain.Models;
-using ImportApp.WPF.Resources;
-using System.Xml;
-using ImportApp.WPF.Helpers;
 using Newtonsoft.Json;
+using System;
+using System.IO;
+using System.Windows;
+using System.Xml;
 
 namespace ImportApp.WPF
 {
@@ -47,7 +43,7 @@ namespace ImportApp.WPF
 
             var contextFactory = _host.Services.GetRequiredService<ImportAppDbContextFactory>();
 
-            using(ImportAppDbContext context = contextFactory.CreateDbContext())
+            using (ImportAppDbContext context = contextFactory.CreateDbContext())
             {
                 context.Database.EnsureCreated();
             }
@@ -61,7 +57,7 @@ namespace ImportApp.WPF
 
         protected override async void OnExit(ExitEventArgs e)
         {
-           await _host!.StopAsync();
+            await _host!.StopAsync();
             _host.Dispose();
             base.OnExit(e);
         }

@@ -1,18 +1,12 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ImportApp.Domain.Services;
-using ImportApp.EntityFramework.Services;
 using ImportApp.WPF.Resources;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
 using ToastNotifications;
 using ToastNotifications.Messages;
 
@@ -65,7 +59,7 @@ namespace ImportApp.WPF.ViewModels
 
         [ObservableProperty]
         List<string> columnNames;
-        
+
         private DiscountViewModel _discountViewModel;
 
         public MapColumnForDiscountViewModel(DiscountViewModel discountViewModel, IExcelDataService? excelDataService, ConcurrentDictionary<string, string> myDictionary, Notifier notifier)
@@ -86,8 +80,8 @@ namespace ImportApp.WPF.ViewModels
         [RelayCommand]
         public void CloseModal()
         {
-            _discountViewModel.Close();        
-        
+            _discountViewModel.Close();
+
         }
 
         [RelayCommand]
@@ -112,7 +106,7 @@ namespace ImportApp.WPF.ViewModels
             ColumnNames = _excelDataService.ListColumnNames(_myDictionary[Translations.CurrentExcelSheet]).Result;
         }
 
-      
+
 
     }
 }

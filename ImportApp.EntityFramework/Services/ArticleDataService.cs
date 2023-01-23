@@ -1,12 +1,6 @@
 ﻿using ImportApp.Domain.Models;
 using ImportApp.Domain.Services;
 using ImportApp.EntityFramework.DBContext;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
-using System.Diagnostics.Metrics;
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography.X509Certificates;
 
 namespace ImportApp.EntityFramework.Services
 {
@@ -258,18 +252,18 @@ namespace ImportApp.EntityFramework.Services
 
             using (ImportAppDbContext context = factory.CreateDbContext())
             {
-                    sumQuantities = context.InventoryItemBases.
-                       Where(x => x.GoodId == goodId && x.StorageId == storageId).Sum(x => x.Quantity);
+                sumQuantities = context.InventoryItemBases.
+                   Where(x => x.GoodId == goodId && x.StorageId == storageId).Sum(x => x.Quantity);
 
 
 
                 var listofdocs = context.InventoryDocuments.ToList();
 
-                foreach(var item in listofdocs)
+                foreach (var item in listofdocs)
                 {
                     InventoryItemBasis? id = context.InventoryItemBases.Where(x => x.GoodId == goodId && x.StorageId == storageId && x.InventoryDocumentId == item.Id).FirstOrDefault();
 
-                    if(id != null && item.Type == 2 && item.IsActivated == false)
+                    if (id != null && item.Type == 2 && item.IsActivated == false)
                     {
                         //return Task.FromResult(default(decimal));
                     }

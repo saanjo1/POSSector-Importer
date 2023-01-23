@@ -2,20 +2,14 @@
 using CommunityToolkit.Mvvm.Input;
 using ImportApp.Domain.Models;
 using ImportApp.Domain.Services;
-using ImportApp.WPF.Helpers;
-using Microsoft.Identity.Client.Extensions.Msal;
-using ModalControl;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using ToastNotifications;
 using ToastNotifications.Messages;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace ImportApp.WPF.ViewModels
 {
@@ -87,7 +81,7 @@ namespace ImportApp.WPF.ViewModels
         [NotifyCanExecuteChangedFor(nameof(DeleteArticleCommand))]
         private ICollectionView articleCollection;
 
-    
+
 
         [RelayCommand]
         private void DeleteArticle(GoodsArticlesViewModel parameter)
@@ -115,7 +109,7 @@ namespace ImportApp.WPF.ViewModels
         [RelayCommand]
         public void LoadData()
         {
-            if(StorageName == "Articles")
+            if (StorageName == "Articles")
             {
                 ArticleList = StorageQuantityCounter("Articles").Result;
             }
@@ -130,8 +124,8 @@ namespace ImportApp.WPF.ViewModels
         [RelayCommand]
         public void Cancel()
         {
-            if(IsEditOpen)
-               IsEditOpen = false;
+            if (IsEditOpen)
+                IsEditOpen = false;
         }
 
 
@@ -140,7 +134,7 @@ namespace ImportApp.WPF.ViewModels
             List<Good> goods = _articleService.GetGoods().Result;
             Guid storage = _storageService.GetStorageByName(storageName).Result;
             ICollection<GoodsArticlesViewModel> tempList = new List<GoodsArticlesViewModel>();
-            foreach(var item in goods)
+            foreach (var item in goods)
             {
                 decimal quantity = _articleService.GroupGoodsById(item.Id, storage).Result;
                 if (quantity > 0 && quantity != null)

@@ -1,25 +1,24 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Windows.Data;
 using ImportApp.Domain.Models;
 using ImportApp.Domain.Services;
+using ImportApp.WPF.Resources;
+using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
+using System.Windows.Data;
 using ToastNotifications;
 using ToastNotifications.Messages;
-using System.Collections.Concurrent;
-using ImportApp.WPF.Resources;
-using Microsoft.Identity.Client.Extensions.Msal;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace ImportApp.WPF.ViewModels
 {
     [ObservableObject]
     public partial class ImportDataViewModel : BaseViewModel
     {
-       
+
         private IExcelDataService _excelDataService;
         private Notifier _notifier;
         private ConcurrentDictionary<string, string> _myDictionary;
@@ -192,7 +191,7 @@ namespace ImportApp.WPF.ViewModels
         [RelayCommand]
         public void LoadData(ObservableCollection<ImportArticlesModalViewModel>? vm = null)
         {
-           if(vm != null)
+            if (vm != null)
             {
                 articleList = vm;
                 ArticleCollection = CollectionViewSource.GetDefaultView(vm);
@@ -228,8 +227,8 @@ namespace ImportApp.WPF.ViewModels
         }
         [RelayCommand]
         public void ClearAllData()
-        { 
-            if(articleList != null)
+        {
+            if (articleList != null)
             {
                 articleList.Clear();
                 ArticleCollection = null;
@@ -244,7 +243,7 @@ namespace ImportApp.WPF.ViewModels
         public void ImportData()
         {
 
-            if(articleList != null)
+            if (articleList != null)
             {
                 Guid _supplierId = _supplierDataService.GetSupplierByName("YAMMAMAY").Result;
 
@@ -372,7 +371,7 @@ namespace ImportApp.WPF.ViewModels
                         }
                     }
 
-                    if(articleList.Count > 0)
+                    if (articleList.Count > 0)
                     {
                         _notifier.ShowSuccess("Storage successfully updated");
                     }
@@ -434,14 +433,14 @@ namespace ImportApp.WPF.ViewModels
 
         public void Close()
         {
-            if(articleQ != null)
+            if (articleQ != null)
             {
                 articleQ = null;
                 //IsMapped = false;
             }
         }
 
-    
+
 
 
         //private bool CanMap()

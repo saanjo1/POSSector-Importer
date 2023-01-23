@@ -1,18 +1,16 @@
 ﻿using ImportApp.Domain.Services;
+using ImportApp.WPF.Helpers;
+using ImportApp.WPF.Resources;
+using ImportApp.WPF.ViewModels;
 using Microsoft.Win32;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.OleDb;
 using System.IO;
 using System.Threading.Tasks;
-using ImportApp.WPF.ViewModels;
-using System.Collections.ObjectModel;
-using ImportApp.WPF;
-using System.Collections.Concurrent;
-using ImportApp.WPF.Resources;
-using CommunityToolkit.Mvvm.Input;
-using ImportApp.WPF.Helpers;
 
 namespace ImportApp.WPF.Services
 {
@@ -160,7 +158,7 @@ namespace ImportApp.WPF.Services
                             Discount = Helpers.Extensions.DisplayDiscountInPercentage(Reader[templateViewModel.Discount].ToString()),
                             NewPrice = Reader[templateViewModel.DiscountedPrice].ToString(),
                             Storage = Translations.Articles
-                        }) ;
+                        });
                     }
 
                     Reader.Close();
@@ -178,10 +176,10 @@ namespace ImportApp.WPF.Services
             {
                 return null;
             }
-        }                
-        
-        
-        
+        }
+
+
+
         public async Task<ObservableCollection<ImportArticlesModalViewModel>> ReadFromExcel(ConcurrentDictionary<string, string> _myDictionary, ImportArticlesModalViewModel viewModel = null)
         {
             bool success = _myDictionary.TryGetValue(Translations.CurrentExcelFile, out string value);
@@ -218,7 +216,7 @@ namespace ImportApp.WPF.Services
                             Price = Reader[templateViewModel.Price].ToString(),
                             Quantity = Reader[templateViewModel.Quantity].ToString(),
                             PricePerUnit = Reader[templateViewModel.PricePerUnit].ToString()
-                        }) ;
+                        });
                     }
 
                     Reader.Close();

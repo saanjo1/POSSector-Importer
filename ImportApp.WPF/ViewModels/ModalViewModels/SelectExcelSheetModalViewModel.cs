@@ -1,20 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using ImportApp.Domain.Models;
 using ImportApp.Domain.Services;
-using ImportApp.EntityFramework.Services;
 using ImportApp.WPF.Resources;
-using ModalControl;
-using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Data;
-using System.Data.OleDb;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ToastNotifications;
 using ToastNotifications.Messages;
 
@@ -38,7 +27,7 @@ namespace ImportApp.WPF.ViewModels
         private ConcurrentDictionary<string, string> _myDictionary;
 
 
-        [ObservableProperty]    
+        [ObservableProperty]
         private MapColumnForDiscountViewModel? mColumnModel;
 
         [ObservableProperty]

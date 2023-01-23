@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace ImportApp.Domain.Models;
+﻿namespace ImportApp.Domain.Models;
 
 public partial class Novi : BaseModel
 {

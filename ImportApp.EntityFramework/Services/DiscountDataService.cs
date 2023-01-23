@@ -1,11 +1,6 @@
 ﻿using ImportApp.Domain.Models;
 using ImportApp.Domain.Services;
 using ImportApp.EntityFramework.DBContext;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ImportApp.EntityFramework.Services
 {
@@ -14,9 +9,9 @@ namespace ImportApp.EntityFramework.Services
 
         public static ImportAppDbContextFactory factory;
 
-        public DiscountDataService(ImportAppDbContextFactory _factory) 
+        public DiscountDataService(ImportAppDbContextFactory _factory)
         {
-           factory = _factory;
+            factory = _factory;
         }
 
 

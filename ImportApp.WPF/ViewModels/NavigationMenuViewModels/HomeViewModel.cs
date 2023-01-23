@@ -1,15 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ImportApp.Domain.Services;
-using LiveCharts;
-using LiveCharts.Defaults;
-using LiveCharts.Wpf;
-using MaterialDesignThemes.Wpf;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ToastNotifications;
 
 namespace ImportApp.WPF.ViewModels
@@ -51,13 +42,13 @@ namespace ImportApp.WPF.ViewModels
 
         [ObservableProperty]
         private CreateNewArticleViewModel addArticleModel;
-        
+
         [ObservableProperty]
         private CreateNewDiscountViewModel addRuleViewModel;
 
         [ObservableProperty]
         private CreateNewStoreViewModel addStoreViewModel;
-        
+
         [ObservableProperty]
         private CreateCategoryViewModel addCategoryViewModel;
 

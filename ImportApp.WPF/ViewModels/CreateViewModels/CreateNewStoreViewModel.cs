@@ -4,10 +4,6 @@ using ImportApp.Domain.Models;
 using ImportApp.Domain.Services;
 using ImportApp.WPF.Resources;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ToastNotifications;
 using ToastNotifications.Messages;
 
@@ -41,7 +37,7 @@ namespace ImportApp.WPF.ViewModels
         [RelayCommand(CanExecute = nameof(CanSave))]
         public void Save()
         {
-            if(_storeDataService.GetStorageByName(Name) == null)
+            if (_storeDataService.GetStorageByName(Name) == null)
             {
                 try
                 {
