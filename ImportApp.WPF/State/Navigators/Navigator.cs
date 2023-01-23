@@ -45,8 +45,6 @@ namespace ImportApp.WPF.State.Navigators
             _subCategoryDataService = subCategoryDataService;
             _supplierDataService = supplierDataService;
             DefaultLoad();
-
-
         }
 
 
@@ -82,6 +80,11 @@ namespace ImportApp.WPF.State.Navigators
                         this.CurrentViewModel = new SettingsViewModel(_discountDataService, _myDictionary, _notifier, _excelDataService);
                         Caption = "Settings";
                         Icon = IconChar.Gear;
+                        break;
+                    case ViewType.Log:
+                        this.CurrentViewModel = new LoginViewModel();
+                        Caption = "Login";
+                        Icon = IconChar.SignIn;
                         break;
                     default:
                         break;

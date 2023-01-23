@@ -8,7 +8,8 @@ namespace ImportApp.WPF.State.Navigators
         Articles,
         ImportArticles,
         Settings,
-        Discounts
+        Discounts,
+        Log
     }
 
 

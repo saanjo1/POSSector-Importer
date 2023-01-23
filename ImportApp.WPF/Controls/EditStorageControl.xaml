@@ -15,8 +15,9 @@
 
     <Grid Background="#ebebeb">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="197*" />
-            <ColumnDefinition Width="295*" />
+            <ColumnDefinition Width="129*" />
+            <ColumnDefinition Width="91*"/>
+            <ColumnDefinition Width="330*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="42" />
@@ -28,42 +29,41 @@
         <materialDesign:Card x:Name="cardHeader"
                              Grid.Row="0"
                              Padding="10"
-                             Margin="0"
-                             Background="{StaticResource BrushPrimary7}"
+                             Background="{StaticResource BrushPrimary2}"
                              Foreground="White"
                              Visibility="Visible"
-                             Grid.ColumnSpan="2">
+                             Grid.ColumnSpan="3">
             <StackPanel>
-                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Stretch" FontSize="20" Text="Choose excel sheet"/>
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Stretch" FontSize="20" Text="Edit article"/>
             </StackPanel>
         </materialDesign:Card>
-        <Border Margin="272 0 0 0" Grid.Column="1" VerticalAlignment="Top">
+        <Border Margin="272,0,0,0" Grid.Column="2" VerticalAlignment="Center">
             <StackPanel>
                 <Button Height="47" Background="{StaticResource BrushPrimary5}" Style="{StaticResource CloseButton}" Command="{Binding CancelCommand}">
                     <TextBlock Text="close" Foreground="White" FontWeight="Light" FontSize="18"/>
                 </Button>
             </StackPanel>
         </Border>
-        <StackPanel Margin="0 40" Grid.Row="1" Grid.RowSpan="7" Grid.ColumnSpan="4" VerticalAlignment="Top" HorizontalAlignment="Center" Width="440">
+        <StackPanel Margin="55,40,0,0" Grid.Row="1" Grid.RowSpan="3" Grid.ColumnSpan="3" VerticalAlignment="Top" HorizontalAlignment="Left" Width="440">
 
             <StackPanel Grid.RowSpan="5"  Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="2" Margin="0 0 30 50" Width="500" Grid.ColumnSpan="7">
-                <Label Content="Item name:" Padding="5" Margin="70 0 0 0" Grid.ColumnSpan="5" />
+                <Label Content="Item name:" Padding="5" Margin="50 0 0 0" Grid.ColumnSpan="5" />
                 <TextBox IsReadOnly="True" FontSize="16" Foreground="Black" Background="{StaticResource titleColor1}"  FontWeight="SemiBold"  Text="{Binding Name, Mode=TwoWay}"  Width="282" Height="25"/>
             </StackPanel>
-            
+
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="3" Margin="0 0 35 0">
                 <Label Content="Current quantity:" Padding="5" Margin="0 0 20 0" Width="222" />
-                <TextBox IsReadOnly="True"  FontSize="20" Foreground="Black" Background="{StaticResource titleColor1}"  FontWeight="SemiBold" Margin="35 0 0 0" Text="{Binding CurrentQuantity, Mode=TwoWay}" x:Name="strgTextBlock" Width="70" Height="25"/>
+                <TextBox IsReadOnly="True"  FontSize="20" Foreground="Black" Background="{StaticResource titleColor1}"  FontWeight="SemiBold" Margin="35 0 0 0" Text="{Binding CurrentQuantity, Mode=TwoWay}" x:Name="strgTextBlock" Width="100" Height="25"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="4" Margin="0 0 35 0">
                 <Label Content="New quantity:     " Padding="5" Margin="0 0 20 0" Width="222" />
-                <TextBox  FontSize="20" Foreground="Black" Background="{StaticResource titleColor1}"  FontWeight="SemiBold" Margin="35 0 0 0" Text="{Binding Quantity, Mode=TwoWay}" Width="70" Height="25"/>
+                <TextBox  FontSize="20" Foreground="Black" Background="{StaticResource titleColor1}" FontWeight="SemiBold" Margin="35 0 0 0" Text="{Binding Quantity, Mode=TwoWay}" Width="100" Height="25"/>
             </StackPanel>
 
 
-            <StackPanel Grid.Row="5" Margin="0 23"  Orientation="Horizontal" HorizontalAlignment="Center" Grid.ColumnSpan="5">
-                <Button BorderThickness="2" Content="Next" Padding="10" Width="80" Style="{StaticResource saveModalButton}" Margin="0 0 20 0" Command="{Binding SaveCommand}"/>
+            <StackPanel Grid.Row="5" Margin="0 33"  Orientation="Horizontal" HorizontalAlignment="Center" Grid.ColumnSpan="5">
+                <Button BorderThickness="2" Content="Save" Padding="10" Width="80" Style="{StaticResource saveModalButton}" Margin="0 0 20 0" Command="{Binding SaveCommand}"/>
                 <Button BorderBrush="Black" Content="Cancel" Style="{StaticResource CancelButton}" Command="{Binding CancelCommand}" Width="80"/>
             </StackPanel>
         </StackPanel>

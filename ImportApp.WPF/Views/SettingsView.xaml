@@ -6,7 +6,85 @@
              xmlns:local="clr-namespace:ImportApp.WPF.Views" xmlns:modalcontrol="clr-namespace:ModalControl;assembly=ModalControl"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <modalcontrol:Modal Grid.Row="4" Margin="0 0 0 0" VerticalAlignment="Center" Panel.ZIndex="21" Background="Transparent" IsOpen="{Binding IsOpen}" Grid.RowSpan="5" Grid.ColumnSpan="5">
+            <ContentControl VerticalAlignment="Top"  Content="{Binding SheetDataModel}"/>
+        </modalcontrol:Modal>
+
+        <Border Grid.Column="0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <Label HorizontalAlignment="Left" FontSize="18" FontWeight="SemiBold" Foreground="White" Content="Excel settings:" Margin="0 0 0 20"/>
+
+
+                <DockPanel Grid.Row="1">
+                    <Label Content="Upload Excel file" Style="{StaticResource controlLabel}" Margin="0 0 50 0"></Label>
+                    <Button Style="{StaticResource ImportButton}" Content="Click" Command="{Binding UploadExcelFileCommand}" Padding="25 10 25 10"/>
+                </DockPanel>
+
+                <DockPanel Grid.Row="2">
+                    <Label  Content="Select sheet from file" Style="{StaticResource controlLabel}" Margin="0 0 19 0"></Label>
+                    <Button Style="{StaticResource ImportButton}" Content="Click" Command="{Binding SelectSheetCommand}" Padding="25 10 25 10"/>
+                </DockPanel>
+
+                <DockPanel Grid.Row="3">
+                    <Label Content="Set column names for discounts" Style="{StaticResource controlLabel}" Margin="0 0 -65 0"></Label>
+                    <Button Style="{StaticResource ImportButton}" Content="Click" Command="{Binding SelectSheetCommand}" Padding="25 10 25 10"/>
+                </DockPanel>
+                <DockPanel Grid.Row="4">
+                    <Label Content="Set column names for articles    " Style="{StaticResource controlLabel}" Margin="0 0 -65 0"></Label>
+                    <Button Style="{StaticResource ImportButton}" Content="Click" Command="{Binding SelectSheetCommand}" Padding="25 10 25 10"/>
+                </DockPanel>
+
+            </Grid>
+        </Border>
+
+        <Border Grid.Column="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Label HorizontalAlignment="Left" FontSize="18" FontWeight="SemiBold" Foreground="White" Content="Database settings:" Margin="0 0 0 20"/>
+
+
+                <DockPanel Grid.Row="1">
+                    <Label Content="Server instance:  " Style="{StaticResource controlLabel}"></Label>
+                    <TextBox IsReadOnly="True" Width="300" Height="30" FontSize="18" Text="{Binding ServerInstance, Mode=TwoWay}"/>
+                </DockPanel>
+
+                <DockPanel Grid.Row="2">
+                    <Label Content="Your database:   " Style="{StaticResource controlLabel}"></Label>
+                    <TextBox IsReadOnly="True" Width="300" Height="30" FontSize="18" Text="{Binding DBConnection, Mode=TwoWay}"/>
+                </DockPanel>
+
+                <DockPanel Grid.Row="3">
+                    <Label Grid.Column="0" Content="Your port:          " Style="{StaticResource controlLabel}"></Label>
+                    <TextBox IsReadOnly="True" Width="300" Height="30" FontSize="18" Text="{Binding AppPort, Mode=TwoWay}"/>
+                </DockPanel>
+
+            </Grid>
+        </Border>
+
+    </Grid>
+    
+    
+    <!--<Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
@@ -39,8 +117,13 @@
             <Button Grid.Column="1" Style="{StaticResource ImportButton}" Content="Click" Command="{Binding SelectSheetCommand}" Padding="25 10 25 10"/>
         </DockPanel>
 
+        <DockPanel Grid.Row="4">
+            <Label Grid.Row="4" Grid.Column="0" Content="Select sheet from file:   " Style="{StaticResource controlLabel}"></Label>
+            <Button Grid.Column="1" Style="{StaticResource ImportButton}" Content="Click" Command="{Binding SelectSheetCommand}" Padding="25 10 25 10"/>
+        </DockPanel>
 
-        
+
+
 
         <Label Grid.ColumnSpan="5" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" FontSize="18" FontWeight="SemiBold" Foreground="White" Content="Database settings:"/>
 
@@ -60,5 +143,5 @@
             <TextBox IsReadOnly="True" Width="300" Height="30" FontSize="18" Text="{Binding AppPort, Mode=TwoWay}"/>
         </DockPanel>
 
-    </Grid>
+    </Grid>-->
 </UserControl>

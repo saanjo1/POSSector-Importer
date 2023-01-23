@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using ImportApp.Domain.Models;
 using ImportApp.Domain.Services;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -26,14 +27,17 @@ namespace ImportApp.WPF.ViewModels
         private string storageName;
 
         [ObservableProperty]
-        [NotifyCanExecuteChangedFor(nameof(DeleteArticleCommand))]
         private int count;
 
         [ObservableProperty]
         private bool isEditOpen;
 
         [ObservableProperty]
+        private bool isDeleteOpen;
+
+        [ObservableProperty]
         private EditStorageViewModel editArticleViewModel;
+
 
         private string textToFilter;
 
@@ -78,26 +82,10 @@ namespace ImportApp.WPF.ViewModels
         private ObservableCollection<GoodsArticlesViewModel> articlesCollection = new ObservableCollection<GoodsArticlesViewModel>();
 
         [ObservableProperty]
-        [NotifyCanExecuteChangedFor(nameof(DeleteArticleCommand))]
         private ICollectionView articleCollection;
 
 
 
-        [RelayCommand]
-        private void DeleteArticle(GoodsArticlesViewModel parameter)
-        {
-            try
-            {
-                var deletedArticle = _articleService.Delete(parameter.Id);
-                _notifier.ShowSuccess("Article successfully deleted.");
-                LoadData();
-            }
-            catch (Exception)
-            {
-                _notifier.ShowError("An error occurred while deleting article.");
-                throw;
-            }
-        }
 
         [RelayCommand]
         public void EditArticle(GoodsArticlesViewModel parameter)
@@ -126,6 +114,8 @@ namespace ImportApp.WPF.ViewModels
         {
             if (IsEditOpen)
                 IsEditOpen = false;
+            if (IsDeleteOpen)
+                IsDeleteOpen = false;
         }
 
 

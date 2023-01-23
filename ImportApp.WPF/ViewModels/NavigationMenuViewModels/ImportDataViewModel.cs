@@ -324,40 +324,26 @@ namespace ImportApp.WPF.ViewModels
 
                             Guid? ArticleGuid = _articleService.GetArticleByName(articleList[i].Name).Result;
 
+                            Article newArticle = new Article
+                            {
+                                Id = Guid.NewGuid(),
+                                Name = articleList[i].Name,
+                                ArticleNumber = _articleService.GetLastArticleNumber().Result,
+                                Order = 1,
+                                SubCategoryId = _categoryService.ManageSubcategories(articleList[i].Category, articleList[i].Storage).Result,
+                                BarCode = articleList[i].BarCode,
+                                Price = Helpers.Extensions.GetDecimal(articleList[i].Price)
+                            };
+
                             if (ArticleGuid == Guid.Empty)
                             {
-                                Article newArticle = new Article
-                                {
-                                    Id = Guid.NewGuid(),
-                                    Name = articleList[i].Name,
-                                    ArticleNumber = _articleService.GetLastArticleNumber().Result,
-                                    Order = 1,
-                                    SubCategoryId = _categoryService.ManageSubcategories(articleList[i].Category, articleList[i].Storage).Result,
-                                    BarCode = articleList[i].BarCode,
-                                    Price = Helpers.Extensions.GetDecimal(articleList[i].Price)
-                                };
-
+                              
                                 _articleService.Create(newArticle);
 
                                 ArticleGood newArticleGood = new ArticleGood
                                 {
                                     Id = Guid.NewGuid(),
                                     ArticleId = newArticle.Id,
-                                    GoodId = _goodId,
-                                    Quantity = 1,
-                                    ValidFrom = DateTime.Today,
-                                    ValidUntil = DateTime.Today.AddDays(5)
-                                };
-
-                                _categoryService.CreateArticleGood(newArticleGood);
-
-                            }
-                            else
-                            {
-                                ArticleGood newArticleGood = new ArticleGood
-                                {
-                                    Id = Guid.NewGuid(),
-                                    ArticleId = ArticleGuid,
                                     GoodId = _goodId,
                                     Quantity = 1,
                                     ValidFrom = DateTime.Today,

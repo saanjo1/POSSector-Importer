@@ -255,19 +255,8 @@ namespace ImportApp.EntityFramework.Services
                 sumQuantities = context.InventoryItemBases.
                    Where(x => x.GoodId == goodId && x.StorageId == storageId).Sum(x => x.Quantity);
 
+              InventoryItemBasis? id = context.InventoryItemBases.Where(x => x.GoodId == goodId && x.StorageId == storageId).FirstOrDefault();
 
-
-                var listofdocs = context.InventoryDocuments.ToList();
-
-                foreach (var item in listofdocs)
-                {
-                    InventoryItemBasis? id = context.InventoryItemBases.Where(x => x.GoodId == goodId && x.StorageId == storageId && x.InventoryDocumentId == item.Id).FirstOrDefault();
-
-                    if (id != null && item.Type == 2 && item.IsActivated == false)
-                    {
-                        //return Task.FromResult(default(decimal));
-                    }
-                }
 
             }
 
