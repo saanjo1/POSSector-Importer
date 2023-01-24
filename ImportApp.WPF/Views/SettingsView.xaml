@@ -17,6 +17,14 @@
             <ContentControl VerticalAlignment="Top"  Content="{Binding SheetDataModel}"/>
         </modalcontrol:Modal>
 
+        <modalcontrol:Modal Grid.Row="4" Margin="0 0 0 0" VerticalAlignment="Center" Panel.ZIndex="21" Background="Transparent" IsOpen="{Binding IsEditOpen}" Grid.RowSpan="5" Grid.ColumnSpan="5">
+            <ContentControl VerticalAlignment="Top"  Content="{Binding SetColumnsVM}"/>
+        </modalcontrol:Modal>
+
+        <modalcontrol:Modal Grid.Row="4" Margin="0 0 0 0" VerticalAlignment="Center" Panel.ZIndex="21" Background="Transparent" IsOpen="{Binding IsDiscountOpen}" Grid.RowSpan="5" Grid.ColumnSpan="5">
+            <ContentControl VerticalAlignment="Top"  Content="{Binding SetDiscountsVM}"/>
+        </modalcontrol:Modal>
+
         <Border Grid.Column="0">
             <Grid>
                 <Grid.RowDefinitions>
@@ -42,11 +50,11 @@
 
                 <DockPanel Grid.Row="3">
                     <Label Content="Set column names for discounts" Style="{StaticResource controlLabel}" Margin="0 0 -65 0"></Label>
-                    <Button Style="{StaticResource ImportButton}" Content="Click" Command="{Binding SelectSheetCommand}" Padding="25 10 25 10"/>
+                    <Button Style="{StaticResource ImportButton}" Content="Click" Command="{Binding SetDiscountsColumnsCommand}" Padding="25 10 25 10"/>
                 </DockPanel>
                 <DockPanel Grid.Row="4">
                     <Label Content="Set column names for articles    " Style="{StaticResource controlLabel}" Margin="0 0 -65 0"></Label>
-                    <Button Style="{StaticResource ImportButton}" Content="Click" Command="{Binding SelectSheetCommand}" Padding="25 10 25 10"/>
+                    <Button Style="{StaticResource ImportButton}" Content="Click" Command="{Binding SetArticlesColumnsCommand}" Padding="25 10 25 10"/>
                 </DockPanel>
 
             </Grid>

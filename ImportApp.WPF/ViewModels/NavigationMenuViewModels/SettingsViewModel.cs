@@ -2,8 +2,10 @@
 using CommunityToolkit.Mvvm.Input;
 using ImportApp.Domain.Services;
 using ImportApp.WPF.Resources;
+using ImportApp.WPF.ViewModels;
 using System;
 using System.Collections.Concurrent;
+using System.IO;
 using System.Xml;
 using ToastNotifications;
 using ToastNotifications.Messages;
@@ -38,7 +40,21 @@ namespace ImportApp.WPF.ViewModels
 
 
         [ObservableProperty]
+        private bool isEditOpen;
+
+        [ObservableProperty]
+        private bool isDiscountOpen;
+
+
+        [ObservableProperty]
         private SelectExcelSheetModalViewModel sheetDataModel;
+
+
+        [ObservableProperty]
+        private SetArticlesColumnsViewModel setColumnsVM;
+
+        [ObservableProperty]
+        private SetDiscountsColumnsViewModel setDiscountsVM;
 
 
         [ObservableProperty]
@@ -98,6 +114,23 @@ namespace ImportApp.WPF.ViewModels
         }
 
 
+        [RelayCommand]
+        public void SetArticlesColumns()
+        {
+            this.IsEditOpen = true;
+            this.SetColumnsVM = new SetArticlesColumnsViewModel(this, _notifier);
+
+        }
+
+
+        [RelayCommand]
+        public void SetDiscountsColumns()
+        {
+            this.IsDiscountOpen = true;
+            this.SetDiscountsVM = new SetDiscountsColumnsViewModel(this, _notifier);
+
+        }
+
         [RelayCommand(CanExecute = nameof(SheetCheck))]
         public void SelectSheet()
         {
@@ -130,10 +163,6 @@ namespace ImportApp.WPF.ViewModels
             DBConnection = databaseNode.InnerText;
             ServerInstance = serverInstanceNode.InnerText;
             AppPort = portNode.InnerText;
-
-
-
-
         }
 
         [RelayCommand]
@@ -141,6 +170,10 @@ namespace ImportApp.WPF.ViewModels
         {
             if (IsOpen)
                 IsOpen = false;
+            if (IsEditOpen)
+                IsEditOpen = false;
+            if (IsDiscountOpen)
+                IsDiscountOpen = false;
         }
 
     }

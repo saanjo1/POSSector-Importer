@@ -33,6 +33,14 @@
                 <views:StoreView/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewmodels:SetArticlesColumnsViewModel}">
+                <controls:SetArticlesColumns/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodels:SetDiscountsColumnsViewModel}">
+                <controls:SetDiscountsColumns/>
+            </DataTemplate>
+
             <DataTemplate DataType="{x:Type viewmodels:EditStorageViewModel}">
                 <controls:EditStorageControl/>
             </DataTemplate>

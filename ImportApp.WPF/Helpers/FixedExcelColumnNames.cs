@@ -1,4 +1,9 @@
-﻿namespace ImportApp.WPF.Helpers
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.IO;
+
+namespace ImportApp.WPF.Helpers
 {
     public class FixedExcelColumnNames
     {
@@ -18,16 +23,19 @@
 
         public FixedExcelColumnNames()
         {
-            Name = "NAME";
-            Category = "GENDER";
-            Storage = "STORAGE";
-            BarCode = "BARCODE";
-            Price = "SO_PRICE";
-            Quantity = "QTYC";
-            PricePerUnit = "PRICEUNIT";
-            ItemSize = "ITEM_SIZE";
-            Item = "ITEM";
-            ColorDescription = "COLOR_DESCRIPTION";
+            var json = File.ReadAllText("appconfigsettings.json");
+            var settings = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, string>>>(json);
+
+            Name = settings["Articles"]["Name"];
+            Category = settings["Articles"]["Category"];
+            Storage = settings["Articles"]["Storage"];
+            BarCode = settings["Articles"]["BarCode"];
+            Price = settings["Articles"]["Price"];
+            Quantity = settings["Articles"]["Quantity"];
+            PricePerUnit = settings["Articles"]["PricePerUnit"];
+            ItemSize = settings["Articles"]["ItemSize"];
+            Item = settings["Articles"]["Item"];
+            ColorDescription = settings["Articles"]["ColorDescription"];
         }
 
     }
@@ -52,16 +60,18 @@
 
         public FixedDiscountColumnNames()
         {
-            Name = "NAME";
-            Category = "Department (EN)";
-            BarCode = "Barcode";
-            Discount = "Discount";
-            FullPrice = "Full price €";
-            DiscountedPrice = "Discounted price €";
-            Description = "Description (EN)";
-            ItemSize = "Size";
-            Item = "Product";
-            ColorDescription = "Color_Description (EN)";
+            var json = File.ReadAllText("appconfigsettings.json");
+            var settings = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, string>>>(json);
+
+            Name = settings["Discounts"]["Name"];
+            Category = settings["Discounts"]["Category"];
+            BarCode = settings["Discounts"]["BarCode"];
+            FullPrice = settings["Discounts"]["FullPrice"];
+            Description = settings["Discounts"]["Description"];
+            Discount = settings["Discounts"]["Discount"];
+            ItemSize = settings["Discounts"]["ItemSize"];
+            Item = settings["Discounts"]["Item"];
+            DiscountedPrice = settings["Discounts"]["DiscountedPrice"];
         }
 
     }
