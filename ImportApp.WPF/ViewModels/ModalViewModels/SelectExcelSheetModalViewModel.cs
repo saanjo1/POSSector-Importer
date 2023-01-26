@@ -62,6 +62,7 @@ namespace ImportApp.WPF.ViewModels
         [RelayCommand]
         public void Cancel()
         {
+            SelectedSheet = null;
             _setingsViewModel.Cancel();
         }
 
@@ -89,6 +90,7 @@ namespace ImportApp.WPF.ViewModels
                     else
                         _notifier.ShowError(Translations.ErrorMessage);
                 }
+
             }
             else
             {

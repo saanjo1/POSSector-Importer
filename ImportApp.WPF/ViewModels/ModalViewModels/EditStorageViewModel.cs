@@ -3,6 +3,8 @@ using CommunityToolkit.Mvvm.Input;
 using ImportApp.Domain.Models;
 using ImportApp.Domain.Services;
 using System;
+using System.Collections.Generic;
+using System.Windows.Documents;
 using ToastNotifications;
 using ToastNotifications.Messages;
 
@@ -17,8 +19,9 @@ public partial class EditStorageViewModel
     private ICategoryDataService _categoryDataService;
     private IStorageDataService _storageDataService;
     private ArticleStorageViewModel viewModel;
+    private InventoryDocument inventoryDocument;
 
-    public EditStorageViewModel(GoodsArticlesViewModel goodsArticlesViewModel, Notifier notifier, ICategoryDataService categoryDataService, IStorageDataService storageDataService, ArticleStorageViewModel vm)
+    public EditStorageViewModel(GoodsArticlesViewModel goodsArticlesViewModel, Notifier notifier, ICategoryDataService categoryDataService, IStorageDataService storageDataService, ArticleStorageViewModel vm, InventoryDocument inventoryDocument)
     {
         GoodsArticlesViewModel = goodsArticlesViewModel;
         viewModel = vm;
@@ -31,6 +34,7 @@ public partial class EditStorageViewModel
         _notifier = notifier;
         _categoryDataService = categoryDataService;
         _storageDataService = storageDataService;
+        this.inventoryDocument = inventoryDocument;
     }
 
 
@@ -54,6 +58,7 @@ public partial class EditStorageViewModel
 
 
 
+
     [RelayCommand]
     public void Save()
     {
@@ -64,20 +69,7 @@ public partial class EditStorageViewModel
         }
         else
         {
-            InventoryDocument inventoryDocument = new InventoryDocument
-            {
-                Created = DateTime.Now,
-                Order = _categoryDataService.GetInventoryCounter().Result,
-                Id = Guid.NewGuid(),
-                StorageId = (Guid?)storage,
-                SupplierId = null,
-                Type = 2,
-                IsActivated = true,
-                IsDeleted = false
-            };
-
-            _categoryDataService.CreateInventoryDocument(inventoryDocument);
-
+           
             InventoryItemBasis newInventoryItem = new InventoryItemBasis()
             {
                 Id = Guid.NewGuid(),
@@ -95,10 +87,13 @@ public partial class EditStorageViewModel
             };
 
             _categoryDataService.CreateInventoryItem(newInventoryItem);
-            _notifier.ShowSuccess("You just updated your storage!");
+
+
+            _notifier.ShowSuccess("Quantity updated!");
             viewModel.Cancel();
             viewModel.LoadData();
 
+            viewModel.ListOfItems.Add(newInventoryItem);
         }
 
     }

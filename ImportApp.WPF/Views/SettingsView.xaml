@@ -3,9 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:ImportApp.WPF.Views" xmlns:modalcontrol="clr-namespace:ModalControl;assembly=ModalControl"
+             xmlns:local="clr-namespace:ImportApp.WPF.Views" xmlns:modalcontrol="clr-namespace:ModalControl;assembly=ModalControl" xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+    </UserControl.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -33,28 +37,33 @@
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
 
                 <Label HorizontalAlignment="Left" FontSize="18" FontWeight="SemiBold" Foreground="White" Content="Excel settings:" Margin="0 0 0 20"/>
 
 
                 <DockPanel Grid.Row="1">
-                    <Label Content="Upload Excel file" Style="{StaticResource controlLabel}" Margin="0 0 50 0"></Label>
-                    <Button Style="{StaticResource ImportButton}" Content="Click" Command="{Binding UploadExcelFileCommand}" Padding="25 10 25 10"/>
+                    <Label Content="Upload Excel file" Style="{StaticResource controlLabel}" Margin="0 0 180 0"></Label>
+                    <Button Style="{StaticResource clickButton}" Content="Click" Command="{Binding UploadExcelFileCommand}" Padding="25 10 25 10" Width="80" Height="35"/>
+                    <fa:IconImage Icon="Check" Foreground="Green" Height="20" Width="20" Margin="0 0 80 0" Visibility="{Binding SelectFileSuccess, Converter={StaticResource BoolToVis}}"/>
                 </DockPanel>
 
                 <DockPanel Grid.Row="2">
-                    <Label  Content="Select sheet from file" Style="{StaticResource controlLabel}" Margin="0 0 19 0"></Label>
-                    <Button Style="{StaticResource ImportButton}" Content="Click" Command="{Binding SelectSheetCommand}" Padding="25 10 25 10"/>
+                    <Label  Content="Select sheet from file" Style="{StaticResource controlLabel}" Margin="0 0 147 0"></Label>
+                    <Button Style="{StaticResource clickButton}" x:Name="btnSheet" Content="Click" Command="{Binding SelectSheetCommand}" Padding="25 10 25 10" Width="80" Height="35"/>
+                    <fa:IconImage Icon="Check" Foreground="Green" Height="20" Width="20" Margin="0 0 80 0" Visibility="{Binding SelectSheetSuccess, Converter={StaticResource BoolToVis}}"/>
                 </DockPanel>
 
-                <DockPanel Grid.Row="3">
-                    <Label Content="Set column names for discounts" Style="{StaticResource controlLabel}" Margin="0 0 -65 0"></Label>
-                    <Button Style="{StaticResource ImportButton}" Content="Click" Command="{Binding SetDiscountsColumnsCommand}" Padding="25 10 25 10"/>
-                </DockPanel>
+                <Label HorizontalAlignment="Left" FontSize="18" Grid.Row="3" FontWeight="SemiBold" Foreground="White" Content="Column settings:" Margin="0 20 0 20"/>
+
                 <DockPanel Grid.Row="4">
+                    <Label Content="Set column names for discounts" Style="{StaticResource controlLabel}" Margin="0 0 -65 0"></Label>
+                    <Button Style="{StaticResource clickButton}" Content="Click" Command="{Binding SetDiscountsColumnsCommand}" Padding="25 10 25 10" Width="80" Height="35"/>
+                </DockPanel>
+                <DockPanel Grid.Row="5">
                     <Label Content="Set column names for articles    " Style="{StaticResource controlLabel}" Margin="0 0 -65 0"></Label>
-                    <Button Style="{StaticResource ImportButton}" Content="Click" Command="{Binding SetArticlesColumnsCommand}" Padding="25 10 25 10"/>
+                    <Button Style="{StaticResource clickButton}" Content="Click" Command="{Binding SetArticlesColumnsCommand}" Padding="25 10 25 10" Width="80" Height="35"/>
                 </DockPanel>
 
             </Grid>

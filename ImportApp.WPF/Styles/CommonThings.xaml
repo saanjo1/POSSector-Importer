@@ -12,6 +12,8 @@
     <Color x:Key="colorModalButton">#2991d0</Color>
     <Color x:Key="ColorPrimary10">#C30606</Color>
     <Color x:Key="ColorPrimary5">#063970</Color>
+    <Color x:Key="ColorPrimary15">#9A6B04</Color>
+    <Color x:Key="ColorPrimary16">#C58805</Color>
                     
     <!--Brushes-->
     <SolidColorBrush x:Key="BrushPrimary1" Color="{StaticResource ColorPrimary1}"/>
@@ -22,6 +24,8 @@
     <SolidColorBrush x:Key="BrushPrimary6" Color="{StaticResource colorModalButton}"/>
     <SolidColorBrush x:Key="BrushPrimary7" Color="{StaticResource colorModalTitle}"/>
     <SolidColorBrush x:Key="BrushPrimary8" Color="{StaticResource ColorPrimary5}"/>
+    <SolidColorBrush x:Key="BrushPrimary9" Color="{StaticResource ColorPrimary15}"/>
+    <SolidColorBrush x:Key="BrushPrimary10" Color="{StaticResource ColorPrimary16}"/>
 
 
     <!--Background Colors-->

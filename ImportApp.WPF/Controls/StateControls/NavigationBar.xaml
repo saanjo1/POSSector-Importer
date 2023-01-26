@@ -75,7 +75,7 @@
             <Separator HorizontalAlignment="Center" Height="150" Width="150" Foreground="White" Margin="0 -20 0 10"/>
 
 
-            <RadioButton Style="{StaticResource radioButton1}"
+            <!--<RadioButton Style="{StaticResource radioButton1}"
                      Tag="{StaticResource color2}"
                      Command="{Binding EditCurrentViewModelCommand}" 
                      CommandParameter="{x:Static nav:ViewType.Log}">
@@ -84,7 +84,7 @@
                     <fa:IconImage Icon="SignIn" Style="{StaticResource radioButtonIcon}" Foreground="{StaticResource color8}"/>
                     <TextBlock Text="Log in" Style="{StaticResource radioButtonText}"/>
                 </StackPanel>
-            </RadioButton>
+            </RadioButton>-->
 
             <StackPanel Orientation="Horizontal" Margin="25 50 0 0">
                 <fa:IconImage Icon="Calendar" Width="25" Height="25" Foreground="{StaticResource color8}"/>

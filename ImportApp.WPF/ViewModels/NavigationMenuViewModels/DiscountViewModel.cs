@@ -34,6 +34,7 @@ namespace ImportApp.WPF.ViewModels
 
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(ClearAllDataCommand))]
+        [NotifyCanExecuteChangedFor(nameof(LoadFixedExcelColumnsCommand))]
         private int count;
 
         private string textToFilter;
@@ -63,17 +64,18 @@ namespace ImportApp.WPF.ViewModels
 
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(MapDataCommand))]
-        [NotifyCanExecuteChangedFor(nameof(OptionsCommand))]
         private bool isMapped;
 
 
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(MapDataCommand))]
-        [NotifyCanExecuteChangedFor(nameof(OptionsCommand))]
         private bool isOptions;
 
         [ObservableProperty]
         private MapColumnForDiscountViewModel mapDataModel;
+
+        [ObservableProperty]
+        private DiscountOptionsViewModel discountOptionsModel;
 
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(ClearAllDataCommand))]
@@ -237,11 +239,11 @@ namespace ImportApp.WPF.ViewModels
         }
 
 
-
         [RelayCommand(CanExecute = nameof(CanClickOptions))]
         public void Options()
         {
             this.IsOptions = true;
+            this.DiscountOptionsModel = new DiscountOptionsViewModel(this, _notifier);
         }
 
         [RelayCommand]
@@ -249,6 +251,9 @@ namespace ImportApp.WPF.ViewModels
         {
             if (IsMapped)
                 IsMapped = false;
+
+            if (IsOptions)
+                IsOptions = false;
         }
 
 
@@ -269,7 +274,6 @@ namespace ImportApp.WPF.ViewModels
         [RelayCommand]
         public void LoadData(ObservableCollection<MapColumnForDiscountViewModel>? vm)
         {
-
             if (vm != null)
             {
                 articleList = vm;
@@ -288,98 +292,119 @@ namespace ImportApp.WPF.ViewModels
         [RelayCommand]
         public void ImportItems()
         {
-            int importCounter = 0;
-            int updateCounter = 0;
-            int counter = _articleDataService.GetLastArticleNumber().Result;
-
-            if (ArticleList != null)
+            if (DiscountOptionsModel == null)
             {
-                Rule newRule;
-
-                for (int i = 0; i < articleList.Count; i++)
-                {
-                    Guid discId = _discountDataService.GetDiscountByName(articleList[i].Discount).Result;
-                    if (discId == Guid.Empty)
-                    {
-                        newRule = new Rule()
-                        {
-                            Id = Guid.NewGuid(),
-                            Name = articleList[i].Discount,
-                            ValidFrom = DateTime.Now,
-                            ValidTo = DateTime.Today.AddDays(1),
-                            Type = "HappyHour",
-                            Active = true,
-                            IsExecuted = false
-                        };
-
-                        _discountDataService.Create(newRule);
-                    }
-                    else
-                    {
-                        newRule = _discountDataService.Get(discId.ToString()).Result;
-                    }
-
-                    Article newArticle = new Article()
-                    {
-                        Id = Guid.NewGuid(),
-                        Name = articleList[i].Name,
-                        ArticleNumber = counter++,
-                        Price = Helpers.Extensions.GetDecimal(articleList[i].Price),
-                        BarCode = articleList[i].BarCode,
-                        SubCategoryId = _categoryDataService.ManageSubcategories(articleList[i]?.Category, articleList[i]?.Storage).Result,
-                        Deleted = false,
-                        Order = counter++,
-                    };
-
-                    string? value = articleList[i].BarCode;
-                    Article temp = _articleDataService.Compare(value).Result;
-
-                    if (temp == null)
-                    {
-                        _articleDataService.Create(newArticle);
-                        importCounter++;
-
-                        RuleItem newRuleItem = new RuleItem()
-                        {
-                            Id = Guid.NewGuid(),
-                            ArticleId = newArticle.Id,
-                            RuleId = newRule.Id,
-                            NewPrice = Helpers.Extensions.GetDecimal(articleList[i].NewPrice)
-                        };
-
-                        _discountDataService.CreateDiscountItem(newRuleItem);
-
-                    }
-                    else
-                    {
-                        _articleDataService.Update(temp.Id, newArticle);
-                        updateCounter++;
-
-
-                        RuleItem newRuleItem = new RuleItem()
-                        {
-                            Id = Guid.NewGuid(),
-                            ArticleId = temp.Id,
-                            RuleId = newRule.Id,
-                            NewPrice = Helpers.Extensions.GetDecimal(articleList[i].NewPrice)
-                        };
-
-                        _discountDataService.CreateDiscountItem(newRuleItem);
-                    }
-                }
-
-                _notifier.ShowSuccess(Translations.SuccessImport);
-                _notifier.ShowInformation(updateCounter + " items updated.");
-                _notifier.ShowInformation(importCounter + " items imported.");
-                ClearAllData();
+                _notifier.ShowWarning("Oops! You need to provide discount options. ");
             }
             else
             {
-                _notifier.ShowError(Translations.ErrorMessage);
+                int importCounter = 0;
+                int updateCounter = 0;
+                int counter = _articleDataService.GetLastArticleNumber().Result;
 
+                if (ArticleList != null)
+                {
+                    Rule newRule;
+
+                    for (int i = 0; i < articleList.Count; i++)
+                    {
+                        Rule disc = _discountDataService.GetDiscountByName(articleList[i].Discount).Result;
+                        if (disc != null && disc.Name == articleList[i].Discount && CheckDates(disc))
+                        {
+                            newRule = _discountDataService.Get(disc.Id.ToString()).Result;
+                        }
+                        else
+                        {
+                            newRule = new Rule()
+                            {
+                                Id = Guid.NewGuid(),
+                                Name = articleList[i].Discount,
+                                ValidFrom = DiscountOptionsModel.ValidFrom,
+                                ValidTo = DiscountOptionsModel.ValidTo,
+                                Type = "Period",
+                                Active = DiscountOptionsModel.ActivateDiscount,
+                                IsExecuted = false
+                            };
+
+                            _discountDataService.Create(newRule);
+                        }
+
+                        Article newArticle = new Article()
+                        {
+                            Id = Guid.NewGuid(),
+                            Name = articleList[i].Name,
+                            ArticleNumber = counter++,
+                            Price = Helpers.Extensions.GetDecimal(articleList[i].Price),
+                            BarCode = articleList[i].BarCode,
+                            SubCategoryId = _categoryDataService.ManageSubcategories(articleList[i]?.Category, articleList[i]?.Storage).Result,
+                            Deleted = false,
+                            Order = counter++,
+                        };
+
+                        string? value = articleList[i].BarCode;
+                        Article temp = _articleDataService.Compare(value).Result;
+
+                        if (temp == null)
+                        {
+                            _articleDataService.Create(newArticle);
+                            importCounter++;
+
+                            RuleItem newRuleItem = new RuleItem()
+                            {
+                                Id = Guid.NewGuid(),
+                                ArticleId = newArticle.Id,
+                                RuleId = newRule.Id,
+                                NewPrice = Helpers.Extensions.GetDecimal(articleList[i].NewPrice)
+                            };
+
+                            _discountDataService.CreateDiscountItem(newRuleItem);
+
+                        }
+                        else
+                        {
+                            _articleDataService.Update(temp.Id, newArticle);
+                            updateCounter++;
+
+
+                            RuleItem newRuleItem = new RuleItem()
+                            {
+                                Id = Guid.NewGuid(),
+                                ArticleId = temp.Id,
+                                RuleId = newRule.Id,
+                                NewPrice = Helpers.Extensions.GetDecimal(articleList[i].NewPrice)
+                            };
+
+                            _discountDataService.CreateDiscountItem(newRuleItem);
+                        }
+                    }
+
+                    _notifier.ShowSuccess(Translations.SuccessImport);
+                    ClearAllData();
+                }
+                else
+                {
+                    _notifier.ShowError(Translations.ErrorMessage);
+
+                }
             }
         }
 
+        private bool CheckDates(Rule disc)
+        {
+            TimeSpan diff = (disc.ValidFrom - DiscountOptionsModel.ValidFrom).Duration();
+            TimeSpan diff1 = (disc.ValidTo - DiscountOptionsModel.ValidTo).Duration();
+
+            double threshold = 5; // 5ms
+
+
+            if (diff.TotalMilliseconds < threshold)
+            {
+                // Dates are the same
+                return true;
+            }
+
+            return false;
+        }
 
         public bool CanClick()
         {
@@ -414,12 +439,11 @@ namespace ImportApp.WPF.ViewModels
                 _notifier.ShowWarning(Translations.SettingsError);
                 return false;
             }
-            if (IsMapped)
-                return false;
+
             if (IsOptions)
                 return false;
 
-            if (articleList == null)
+            if (Count < 0)
                 return false;
 
 

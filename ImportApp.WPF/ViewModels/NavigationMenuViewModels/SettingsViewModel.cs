@@ -29,6 +29,7 @@ namespace ImportApp.WPF.ViewModels
             _notifier = notifier;
             _excelDataService = excelDataService;
 
+
             Path();
         }
 
@@ -56,6 +57,16 @@ namespace ImportApp.WPF.ViewModels
         [ObservableProperty]
         private SetDiscountsColumnsViewModel setDiscountsVM;
 
+        [ObservableProperty]
+        private bool selectSheetSuccess;
+
+        [ObservableProperty]
+        private bool selectFileSuccess;
+
+        [ObservableProperty]
+        [NotifyCanExecuteChangedFor(nameof(SelectSheetCommand))]
+        [NotifyCanExecuteChangedFor(nameof(UploadExcelFileCommand))]
+        private string excelFile;
 
         [ObservableProperty]
         private string dBConnection;
@@ -78,11 +89,11 @@ namespace ImportApp.WPF.ViewModels
         [RelayCommand(CanExecute = nameof(SheetCheck))]
         public void UploadExcelFile()
         {
-            string excelFile = _excelDataService.OpenDialog().Result;
+             ExcelFile = _excelDataService.OpenDialog().Result;
 
             try
             {
-                if (excelFile != null)
+                if (ExcelFile != null)
                 {
                     if (_myDictionary.TryGetValue(Translations.CurrentExcelFile, out string value) == false)
                     {
@@ -105,10 +116,14 @@ namespace ImportApp.WPF.ViewModels
                             _notifier.ShowInformation(Translations.UpdatedExcelFile);
                     }
                 }
+
+                if (ExcelFile != null)
+                    SelectFileSuccess = true;
             }
             catch (System.Exception)
             {
                 _notifier.ShowError(Translations.ErrorMessage);
+                SelectFileSuccess = false;
 
             }
         }
@@ -138,11 +153,14 @@ namespace ImportApp.WPF.ViewModels
             {
                 IsOpen = true;
                 this.SheetDataModel = new SelectExcelSheetModalViewModel(_excelDataService, this, _notifier, _myDictionary);
+                if (SheetDataModel != null && SheetDataModel.SelectedSheet != null)
+                    SelectSheetSuccess = true;
+
 
             }
             catch (System.Exception)
             {
-
+                SelectSheetSuccess = false;
                 throw;
             }
         }

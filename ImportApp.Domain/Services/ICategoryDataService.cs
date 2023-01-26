@@ -16,6 +16,9 @@ namespace ImportApp.Domain.Services
         Task<bool> CreateInventoryItem(InventoryItemBasis good);
         Task<bool> CreateInventoryDocument(InventoryDocument good);
 
+        Task<bool> DeleteInventoryDocument(Guid good);
+
+        Task<bool> DeleteInventoryItem(Guid good);
 
         Task<int> GetInventoryCounter();
 

@@ -74,7 +74,7 @@
 
     <Style x:Key="SaveButton" TargetType="Button">
         <Setter Property="Foreground" Value="White"/>
-        <Setter Property="Background" Value="{StaticResource panelActiveColor}"/>
+        <Setter Property="Background" Value="{StaticResource BrushPrimary7}"/>
         <Setter Property="Padding" Value="10 10"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
@@ -97,14 +97,14 @@
                 <Trigger.EnterActions>
                     <BeginStoryboard>
                         <Storyboard>
-                            <ColorAnimation Storyboard.TargetProperty="Background.(SolidColorBrush.Color)" To="{StaticResource winBorderColor1}" Duration="0:0:0.1"/>
+                            <ColorAnimation Storyboard.TargetProperty="Background.(SolidColorBrush.Color)" To="{StaticResource colorModalButton}" Duration="0:0:0.1"/>
                         </Storyboard>
                     </BeginStoryboard>
                 </Trigger.EnterActions>
                 <Trigger.ExitActions>
                     <BeginStoryboard>
                         <Storyboard>
-                            <ColorAnimation Storyboard.TargetProperty="Background.(SolidColorBrush.Color)" To="{StaticResource secondaryBackColor2}" Duration="0:0:0.1"/>
+                            <ColorAnimation Storyboard.TargetProperty="Background.(SolidColorBrush.Color)" To="{StaticResource colorModalTitle}" Duration="0:0:0.1"/>
                         </Storyboard>
                     </BeginStoryboard>
                 </Trigger.ExitActions>
@@ -119,6 +119,15 @@
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="Padding" Value="0"/>
         <Setter Property="Background" Value="{StaticResource BrushPrimary2}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+            <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" Padding="5" BorderThickness="1" CornerRadius="10">
+                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+        </Setter.Value>
+        </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Trigger.EnterActions>
@@ -142,6 +151,19 @@
         </Style.Triggers>
     </Style>
 
+
+    <Style x:Key="clickButton" TargetType="Button" BasedOn="{StaticResource ImportButton}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" Padding="5" BorderThickness="1" CornerRadius="3">
+                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="controlLabel" TargetType="Label">
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="Padding" Value="10"/>
@@ -159,8 +181,6 @@
     </Style>
 
     <Style x:Key="clearDict" TargetType="Button">
-        <Setter Property="Height" Value="30"/>
-        <Setter Property="Width" Value="130"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Background" Value="DarkRed"/>
@@ -169,7 +189,7 @@
                 <ControlTemplate TargetType="Button">
                     <Border Background="{TemplateBinding Background}" 
                                     Padding="{TemplateBinding Padding}"
-                                CornerRadius="3">
+                                CornerRadius="10">
                         <ContentPresenter/>
                     </Border>
                 </ControlTemplate>
@@ -198,6 +218,38 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+
+
+
+    <Style x:Key="optionsBtn" TargetType="Button" BasedOn="{StaticResource clearDict}">
+        <Setter Property="Background" Value="{StaticResource BrushPrimary9}"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetProperty="Background.(SolidColorBrush.Color)" To="{StaticResource ColorPrimary16}" Duration="0:0:0.01"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <ColorAnimation Storyboard.TargetProperty="Background.(SolidColorBrush.Color)" To="{StaticResource ColorPrimary15}" Duration="0:0:0.01"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="0.7"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
+
+
+
 
     <Style x:Key="plusButton" TargetType="Button">
         <Setter Property="Foreground" Value="White"/>
@@ -270,6 +322,15 @@
 
     <Style x:Key="saveModalButton" TargetType="Button" BasedOn="{StaticResource SaveButton}">
         <Setter Property="Background" Value="{StaticResource BrushPrimary7}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" Padding="5" BorderThickness="1" CornerRadius="10">
+                        <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
 
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
@@ -311,6 +372,10 @@
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="{StaticResource BrushPrimary1}"/>
             </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Opacity" Value="0.7"/>
+                    <Setter Property="Background" Value="Gray"/>
+                </Trigger>
         </Style.Triggers>
     </Style>
 
@@ -326,6 +391,8 @@
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="Width" Value="12" />
         <Setter Property="Height" Value="12" />
+
+        
     </Style>
 
 
@@ -367,17 +434,6 @@
                 <Setter Property="BorderBrush" Value="{StaticResource color5}" />
             </Trigger>
         </Style.Triggers>
-    </Style>
-
-
-
-
-    <Style x:Key="importButton" TargetType="Button">
-        <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="Height" Value="60"/>
-        <Setter Property="Width" Value="60"/>
-        <Setter Property="Cursor" Value="Hand"/>
-
     </Style>
 
 
@@ -578,6 +634,11 @@
         </Setter>
     </Style>
 
+    <Style x:Key="dataGridColumnforEdit1" TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource DataGridColumnHeaderStyle1}">
+        <Setter Property="Foreground" Value="Black" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+    
     <Style x:Key="searchTextbox" TargetType="TextBox">
         <Setter Property="Background" Value="#ffffff" />
         <Setter Property="Foreground" Value="#B0B9C6" />

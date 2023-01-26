@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using ImportApp.Domain.Models;
 using ImportApp.Domain.Services;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.Identity.Client.Extensions.Msal;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -33,10 +34,14 @@ namespace ImportApp.WPF.ViewModels
         private bool isEditOpen;
 
         [ObservableProperty]
-        private bool isDeleteOpen;
+        private bool isEnabled;
 
         [ObservableProperty]
         private EditStorageViewModel editArticleViewModel;
+
+        [ObservableProperty]
+        private List<InventoryItemBasis> listOfItems = new List<InventoryItemBasis>();
+
 
 
         private string textToFilter;
@@ -72,6 +77,7 @@ namespace ImportApp.WPF.ViewModels
             _storageService = storageService;
             LoadData();
             _categoryDataService = categoryDataService;
+            IsEnabled = false;
         }
 
 
@@ -79,19 +85,36 @@ namespace ImportApp.WPF.ViewModels
         private ICollection<GoodsArticlesViewModel> articleList;
 
         [ObservableProperty]
-        private ObservableCollection<GoodsArticlesViewModel> articlesCollection = new ObservableCollection<GoodsArticlesViewModel>();
-
-        [ObservableProperty]
         private ICollectionView articleCollection;
 
+        private InventoryDocument inventoryDocument;
 
+
+       [RelayCommand]
+        public void MultipleEdit()
+        {
+            IsEnabled = true;
+            inventoryDocument = new InventoryDocument
+            {
+                Created = DateTime.Now,
+                Order = _categoryDataService.GetInventoryCounter().Result,
+                Id = Guid.NewGuid(),
+                StorageId = _storageService.GetStorageByName(StorageName).Result,
+                SupplierId = null,
+                Type = 2,
+                IsActivated = true,
+                IsDeleted = false
+            };
+            _categoryDataService.CreateInventoryDocument(inventoryDocument);
+
+        }
 
 
         [RelayCommand]
         public void EditArticle(GoodsArticlesViewModel parameter)
         {
             IsEditOpen = true;
-            this.EditArticleViewModel = new EditStorageViewModel(parameter, _notifier, _categoryDataService, _storageService, this);
+            this.EditArticleViewModel = new EditStorageViewModel(parameter, _notifier, _categoryDataService, _storageService, this, inventoryDocument);
         }
 
         [RelayCommand]
@@ -114,9 +137,66 @@ namespace ImportApp.WPF.ViewModels
         {
             if (IsEditOpen)
                 IsEditOpen = false;
-            if (IsDeleteOpen)
-                IsDeleteOpen = false;
         }
+
+
+        [RelayCommand]
+        public void SaveChanges()
+        {
+
+            int counter = 0;
+            if(ListOfItems.Count > 0)
+            {
+                foreach (var item in ListOfItems)
+                {
+                    counter++;
+                }
+            }
+
+            _notifier.ShowSuccess(counter + " corrections successfully saved.");
+            ListOfItems.Clear();
+            LoadData();
+            IsEnabled = false;
+
+        }
+
+        [RelayCommand]
+        public void DiscardChanges()
+        {
+
+            try
+            {
+                if (ListOfItems.Count == 0 && inventoryDocument != null)
+                {
+                    _categoryDataService.DeleteInventoryDocument(inventoryDocument.Id);
+                }
+                else if (ListOfItems.Count == 1)
+                {
+                    var inventoryItemId = ListOfItems[0].Id;
+
+                    _categoryDataService.DeleteInventoryItem((Guid)inventoryItemId);
+                }
+                else if (ListOfItems.Count > 1)
+                {
+                    var inventoryItemId = ListOfItems[0].Id;
+
+                    foreach (var item in ListOfItems)
+                    {
+                        _categoryDataService.DeleteInventoryItem(item.Id);
+
+                    }
+                }
+
+                _notifier.ShowSuccess("Successfully deleted!");
+            }
+            catch (Exception)
+            {
+                _notifier.ShowError("An error occurred. Please try again.");
+                throw;
+            }
+
+        }
+
 
 
         public Task<ICollection<GoodsArticlesViewModel>> StorageQuantityCounter(string storageName)

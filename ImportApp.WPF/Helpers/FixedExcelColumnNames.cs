@@ -19,8 +19,6 @@ namespace ImportApp.WPF.Helpers
         public string ItemSize { get; set; }
 
 
-
-
         public FixedExcelColumnNames()
         {
             var json = File.ReadAllText("appconfigsettings.json");
@@ -72,6 +70,8 @@ namespace ImportApp.WPF.Helpers
             ItemSize = settings["Discounts"]["ItemSize"];
             Item = settings["Discounts"]["Item"];
             DiscountedPrice = settings["Discounts"]["DiscountedPrice"];
+            ColorDescription = settings["Discounts"]["ColorDescription"];
+
         }
 
     }

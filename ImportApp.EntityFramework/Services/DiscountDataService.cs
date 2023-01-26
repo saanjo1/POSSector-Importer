@@ -63,17 +63,12 @@ namespace ImportApp.EntityFramework.Services
             }
         }
 
-        public Task<Guid> GetDiscountByName(string name)
+        public Task<Rule> GetDiscountByName(string name)
         {
             using (ImportAppDbContext context = factory.CreateDbContext())
             {
                 Rule _discount = context.Rules.FirstOrDefault(x => x.Name == name);
-
-                if (_discount != null)
-                    return Task.FromResult(_discount.Id);
-
-
-                return Task.FromResult(Guid.Empty);
+                return Task.FromResult(_discount);
             }
         }
 

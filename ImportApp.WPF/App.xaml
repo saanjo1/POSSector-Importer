@@ -37,6 +37,10 @@
                 <controls:SetArticlesColumns/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewmodels:DiscountOptionsViewModel}">
+                <controls:DiscountOptionsView/>
+            </DataTemplate>
+
             <DataTemplate DataType="{x:Type viewmodels:SetDiscountsColumnsViewModel}">
                 <controls:SetDiscountsColumns/>
             </DataTemplate>

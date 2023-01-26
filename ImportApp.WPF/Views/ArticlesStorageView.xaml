@@ -16,7 +16,7 @@
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="390"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -58,7 +58,7 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Button Style="{StaticResource gridEditButton}" Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=DataContext.EditArticleCommand}" CommandParameter="{Binding}">
+                                <Button Style="{StaticResource gridEditButton}" IsEnabled="{Binding ElementName=membersDataGrid, Path=DataContext.IsEnabled}" Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=DataContext.EditArticleCommand}" CommandParameter="{Binding}">
                                     <fa:IconImage Icon="Pencil" Style="{StaticResource gridButtonIcon}"/>
                                 </Button>
                             </StackPanel>
@@ -68,29 +68,28 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <!--<StackPanel Margin="500 20 0 0" Grid.Row="2" Orientation="Horizontal" Grid.ColumnSpan="5">
+        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.RowSpan="3" HorizontalAlignment="Left" Margin="0 30" Grid.ColumnSpan="5">
+            <Button x:Name="correctBtn" Style="{StaticResource optionsBtn}" Foreground="White" Command="{Binding MultipleEditCommand}" Height="50" Width="250" Margin="0 0 300 0">
+                <StackPanel Orientation="Horizontal">
+                    <fa:IconImage Style="{StaticResource controlButtonIcon}" Margin="10 0 0 0" Icon="FileEdit" Width="30" Height="30"/>
+                    <TextBlock TextAlignment="Center" FontSize="20" HorizontalAlignment="Center" Margin="12 8 5 5" VerticalAlignment="Stretch" FontWeight="ExtraLight" >Store correction</TextBlock>
+                </StackPanel>
+            </Button>
 
-            <TextBlock Text="Records per page" Foreground="{StaticResource titleColor1}"  VerticalAlignment="Center" Margin="5"/>
-            <ComboBox  Margin="5"  Width="100" SelectedItem="{Binding SelectedRecord,UpdateSourceTrigger=PropertyChanged}">
-                <sys:Int32>15</sys:Int32>
-                <sys:Int32>20</sys:Int32>
-                <sys:Int32>25</sys:Int32>
-            </ComboBox>
+            <Button Style="{StaticResource ImportButton}" Foreground="White" Command="{Binding SaveChangesCommand}" Visibility="{Binding ElementName=correctBtn, Path=DataContext.IsEnabled, Converter={StaticResource BoolToVis}}" Height="50" Width="200" Margin="10 0">
+                <StackPanel Orientation="Horizontal">
+                    <fa:IconImage Style="{StaticResource controlButtonIcon}" Margin="10 0 0 0" Icon="Save" Width="30" Height="30"/>
+                    <TextBlock TextAlignment="Center" FontSize="20" HorizontalAlignment="Center" Margin="12 0 5 0" VerticalAlignment="Stretch" FontWeight="ExtraLight" >Save changes</TextBlock>
+                </StackPanel>
+            </Button>
 
-            <Button Content="&lt;&lt;" Style="{StaticResource pagingButton}" Width="40" IsEnabled="{Binding IsFirstEnabled}"  ToolTip="First page" Margin="5" Command="{Binding FirstPageCommand}" />
-            <Button Content="&lt;" Style="{StaticResource pagingButton}" Width="40" IsEnabled="{Binding IsPreviousEnabled}" Margin="5" ToolTip="Previous page" Command="{Binding PreviousPageCommand}" />
+            <Button Style="{StaticResource clearDict}" Foreground="White" Command="{Binding DiscardChangesCommand}" Visibility="{Binding ElementName=correctBtn, Path=DataContext.IsEnabled, Converter={StaticResource BoolToVis}}" Height="50" Width="200">
+                <StackPanel Orientation="Horizontal">
+                    <fa:IconImage Style="{StaticResource controlButtonIcon}" Margin="10 0 0 0" Icon="CircleXmark" Width="30" Height="30"/>
+                    <TextBlock TextAlignment="Center" FontSize="20" HorizontalAlignment="Center" Margin="12 8 5 5" VerticalAlignment="Stretch" FontWeight="ExtraLight" >Discard changes</TextBlock>
+                </StackPanel>
+            </Button>
+        </StackPanel>
 
-            <TextBlock VerticalAlignment="Center" Foreground="White">
-                <TextBlock.Text>
-                    <MultiBinding StringFormat="{} {0} of {1}">
-                        <Binding Path="CurrentPage"/>
-                        <Binding Path="NumberOfPages"/>
-                    </MultiBinding>
-                </TextBlock.Text>
-            </TextBlock>
-
-            <Button Content=">" Style="{StaticResource pagingButton}" Width="40" IsEnabled="{Binding IsNextEnabled}" ToolTip="Next page" Margin="5" Command="{Binding NextPageCommand}"/>
-            <Button Content=">>" Style="{StaticResource pagingButton}" Width="40" IsEnabled="{Binding IsLastEnabled}" ToolTip="Last page" Margin="5" Command="{Binding LastPageCommand}" />
-        </StackPanel>-->
     </Grid>
 </UserControl>

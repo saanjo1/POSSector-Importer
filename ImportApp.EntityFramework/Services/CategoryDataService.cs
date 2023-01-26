@@ -293,6 +293,37 @@ namespace ImportApp.EntityFramework.Services
                 return Task.FromResult(counter++);
             }
         }
+
+        public Task<bool> DeleteInventoryDocument(Guid docId)
+        {
+
+            using (ImportAppDbContext context = _contextFactory.CreateDbContext())
+            {
+                var doc = context.InventoryDocuments.FirstOrDefault(x => x.Id == docId);
+                if (doc != null)
+                {
+                    context.InventoryDocuments.Remove(doc);
+                    return Task.FromResult(true);
+                }
+
+                return Task.FromResult(false);
+            }
+        }
+
+        public async Task<bool> DeleteInventoryItem(Guid docId)
+        {
+            using (ImportAppDbContext context = _contextFactory.CreateDbContext())
+            {
+                var doc = context.InventoryItemBases.FirstOrDefault(x => x.Id == docId);
+                if (doc != null)
+                {
+                    context.InventoryItemBases.Remove(doc);
+                    return await Task.FromResult(true);
+                }
+
+                return await Task.FromResult(false);
+            }
+        }
     }
 
 }
