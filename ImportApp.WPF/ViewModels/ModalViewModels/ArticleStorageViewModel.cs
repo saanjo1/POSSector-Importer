@@ -215,7 +215,7 @@ namespace ImportApp.WPF.ViewModels
             foreach (var item in goods)
             {
                 decimal quantity = _articleService.GroupGoodsById(item.Id, storage).Result;
-                if (quantity > 0 && quantity != null)
+                if (quantity > 0)
                 {
                     tempList.Add(new GoodsArticlesViewModel
                     {

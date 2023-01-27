@@ -264,6 +264,7 @@ namespace ImportApp.WPF.ViewModels
             {
                 articleList.Clear();
                 ArticleCollection = null;
+                Count = 0;
             }
             else
             {
@@ -300,91 +301,93 @@ namespace ImportApp.WPF.ViewModels
             {
                 int importCounter = 0;
                 int updateCounter = 0;
+                int notImported = 0;
                 int counter = _articleDataService.GetLastArticleNumber().Result;
 
                 if (ArticleList != null)
                 {
                     Rule newRule;
 
-                    for (int i = 0; i < articleList.Count; i++)
+                    try
                     {
-                        Rule disc = _discountDataService.GetDiscountByName(articleList[i].Discount).Result;
-                        if (disc != null && disc.Name == articleList[i].Discount && CheckDates(disc))
+                        for (int i = 0; i < articleList.Count; i++)
                         {
-                            newRule = _discountDataService.Get(disc.Id.ToString()).Result;
-                        }
-                        else
-                        {
-                            newRule = new Rule()
+                            var articleID = _articleDataService.Compare(articleList[i].BarCode).Result;
+                            if (articleID != null)
                             {
-                                Id = Guid.NewGuid(),
-                                Name = articleList[i].Discount,
-                                ValidFrom = DiscountOptionsModel.ValidFrom,
-                                ValidTo = DiscountOptionsModel.ValidTo,
-                                Type = "Period",
-                                Active = DiscountOptionsModel.ActivateDiscount,
-                                IsExecuted = false
-                            };
 
-                            _discountDataService.Create(newRule);
-                        }
+                                Rule disc = _discountDataService.GetDiscountByName(articleList[i].Discount).Result;
+                                if (disc != null && disc.Name == articleList[i].Discount && CheckDates(disc))
+                                {
+                                    newRule = _discountDataService.Get(disc.Id.ToString()).Result;
+                                }
+                                else
+                                {
+                                    newRule = new Rule()
+                                    {
+                                        Id = Guid.NewGuid(),
+                                        Name = articleList[i].Discount,
+                                        ValidFrom = DiscountOptionsModel.ValidFrom,
+                                        ValidTo = DiscountOptionsModel.ValidTo,
+                                        Type = "Period",
+                                        Active = DiscountOptionsModel.ActivateDiscount,
+                                        IsExecuted = false
+                                    };
 
-                        Article newArticle = new Article()
-                        {
-                            Id = Guid.NewGuid(),
-                            Name = articleList[i].Name,
-                            ArticleNumber = counter++,
-                            Price = Helpers.Extensions.GetDecimal(articleList[i].Price),
-                            BarCode = articleList[i].BarCode,
-                            SubCategoryId = _categoryDataService.ManageSubcategories(articleList[i]?.Category, articleList[i]?.Storage).Result,
-                            Deleted = false,
-                            Order = counter++,
-                        };
+                                    _discountDataService.Create(newRule);
+                                }
 
-                        string? value = articleList[i].BarCode;
-                        Article temp = _articleDataService.Compare(value).Result;
+                                Article newArticle = new Article()
+                                {
+                                    Id = Guid.NewGuid(),
+                                    Name = articleList[i].Name,
+                                    ArticleNumber = counter++,
+                                    Price = Helpers.Extensions.GetDecimal(articleList[i].Price),
+                                    BarCode = articleList[i].BarCode,
+                                    SubCategoryId = _categoryDataService.ManageSubcategories(articleList[i]?.Category, articleList[i]?.Storage).Result,
+                                    Deleted = false,
+                                    Order = counter++,
+                                };
 
-                        if (temp == null)
-                        {
-                            _articleDataService.Create(newArticle);
-                            importCounter++;
+                                _articleDataService.Update(articleID.Id, newArticle);
+                                updateCounter++;
 
-                            RuleItem newRuleItem = new RuleItem()
+
+                                RuleItem newRuleItem = new RuleItem()
+                                {
+                                    Id = Guid.NewGuid(),
+                                    ArticleId = articleID.Id,
+                                    RuleId = newRule.Id,
+                                    NewPrice = Helpers.Extensions.GetDecimal(articleList[i].NewPrice)
+                                };
+
+                                _discountDataService.CreateDiscountItem(newRuleItem);
+                                importCounter++;
+                            }
+                            else
                             {
-                                Id = Guid.NewGuid(),
-                                ArticleId = newArticle.Id,
-                                RuleId = newRule.Id,
-                                NewPrice = Helpers.Extensions.GetDecimal(articleList[i].NewPrice)
-                            };
-
-                            _discountDataService.CreateDiscountItem(newRuleItem);
-
+                                notImported++;
+                            }
                         }
-                        else
+
+                        if (importCounter > 0)
                         {
-                            _articleDataService.Update(temp.Id, newArticle);
-                            updateCounter++;
-
-
-                            RuleItem newRuleItem = new RuleItem()
-                            {
-                                Id = Guid.NewGuid(),
-                                ArticleId = temp.Id,
-                                RuleId = newRule.Id,
-                                NewPrice = Helpers.Extensions.GetDecimal(articleList[i].NewPrice)
-                            };
-
-                            _discountDataService.CreateDiscountItem(newRuleItem);
+                            _notifier.ShowSuccess("Discounts for " + importCounter + " articles successfully added.");
                         }
+                        else if (notImported > 0)
+                        {
+                            _notifier.ShowWarning("Discounts for " + notImported + " items can not be added. Discounts for non existing article is not possible.");
+
+                        }
+
+                        ClearAllData();
                     }
+                    catch (Exception)
+                    {
 
-                    _notifier.ShowSuccess(Translations.SuccessImport);
-                    ClearAllData();
-                }
-                else
-                {
-                    _notifier.ShowError(Translations.ErrorMessage);
-
+                        _notifier.ShowError("Something went wrong. Please try again.");
+                        ClearAllData();
+                    }
                 }
             }
         }
