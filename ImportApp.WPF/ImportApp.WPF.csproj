@@ -41,12 +41,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Controls\Create\CreateNewSubCategory.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Controls\Create\CreateNewCategory.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="Resources\Translations.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

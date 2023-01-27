@@ -69,32 +69,12 @@
                 <controls:MapColumnsForDiscount/>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type viewmodels:CreateNewStoreViewModel}">
-                <controls:CreateNewStore/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type viewmodels:CreateNewDiscountViewModel}">
-                <controls:CreateNewDiscount/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type viewmodels:CreateCategoryViewModel}">
-                <controls:CreateNewCategory/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type viewmodels:CreateSupplierViewModel}">
-                <controls:CreateNewSubCategory/>
-            </DataTemplate>
-
             <DataTemplate DataType="{x:Type viewmodels:ImportArticlesModalViewModel}">
                 <controls:ImportArticlesModal/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewmodels:MainViewModel}">
                 <local:MainWindow/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type viewmodels:CreateNewArticleViewModel}">
-                <controls:CreateNewArticleControl/>
             </DataTemplate>
 
         </ResourceDictionary>

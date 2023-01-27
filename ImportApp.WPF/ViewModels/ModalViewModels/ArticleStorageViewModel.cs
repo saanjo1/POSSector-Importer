@@ -164,42 +164,50 @@ namespace ImportApp.WPF.ViewModels
         public void DiscardChanges()
         {
 
-            try
+            if(inventoryDocument == null)
             {
-                if (ListOfItems.Count == 0 && inventoryDocument != null)
-                {
-                    _categoryDataService.DeleteInventoryDocument(inventoryDocument.Id);
-                }
-                else if (ListOfItems.Count == 1)
-                {
-                    var inventoryItemId = ListOfItems[0].Id;
+                _notifier.ShowInformation("Nothing to discard.");
 
-                    _categoryDataService.DeleteInventoryItem((Guid)inventoryItemId);
-                }
-                else if (ListOfItems.Count > 1)
+            }
+            else
+            {
+                try
                 {
-                    var inventoryItemId = ListOfItems[0].Id;
-
-                    foreach (var item in ListOfItems)
+                    if (ListOfItems.Count == 1)
                     {
-                        _categoryDataService.DeleteInventoryItem(item.Id);
+                        var inventoryItemId = ListOfItems[0].Id;
+
+                        _categoryDataService.DeleteInventoryItem((Guid)inventoryItemId);
 
                     }
-                }
+                    else if (ListOfItems.Count > 1)
+                    {
+                        var inventoryItemId = ListOfItems[0].Id;
 
-                _notifier.ShowSuccess("Successfully deleted!");
+                        foreach (var item in ListOfItems)
+                        {
+                            _categoryDataService.DeleteInventoryItem(item.Id);
+
+                        }
+                    }
+
+                    _categoryDataService.DeleteInventoryDocument(inventoryDocument.Id);
+                    IsEnabled = false;
+                    _notifier.ShowSuccess("Successfully deleted!");
+                }
+                catch (Exception)
+                {
+                    _notifier.ShowError("An error occurred. Please try again.");
+                    throw;
+                }
             }
-            catch (Exception)
-            {
-                _notifier.ShowError("An error occurred. Please try again.");
-                throw;
-            }
+            
 
         }
 
 
 
-        public Task<ICollection<GoodsArticlesViewModel>> StorageQuantityCounter(string storageName)
+        public async Task<ICollection<GoodsArticlesViewModel>> StorageQuantityCounter(string storageName)
         {
             List<Good> goods = _articleService.GetGoods().Result;
             Guid storage = _storageService.GetStorageByName(storageName).Result;
@@ -223,7 +231,7 @@ namespace ImportApp.WPF.ViewModels
                 }
             }
 
-            return Task.FromResult(tempList);
+            return await Task.FromResult(tempList);
         }
 
 

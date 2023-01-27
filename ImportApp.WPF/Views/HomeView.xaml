@@ -13,117 +13,103 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <modalcontrol:Modal Margin="0" VerticalAlignment="Center" Panel.ZIndex="1" Background="Transparent" IsOpen="{Binding IsOpen}" Grid.RowSpan="3" Grid.ColumnSpan="5">
-            <ContentControl VerticalAlignment="Top"  Content="{Binding AddArticleModel}"/>
-        </modalcontrol:Modal>
-
-        <modalcontrol:Modal Panel.ZIndex="1" Background="Transparent" IsOpen="{Binding IsDiscountOpen}" Grid.ColumnSpan="6" Grid.RowSpan="3" Margin="10 70 0 0">
-            <ContentControl Content="{Binding AddRuleViewModel}" Background="{StaticResource panelActiveColor}"/>
-        </modalcontrol:Modal>
-
-        <modalcontrol:Modal Panel.ZIndex="1" Background="Transparent" IsOpen="{Binding IsStoreOpen}" Grid.ColumnSpan="5" Grid.RowSpan="3" Margin="10 100 0 0">
-            <ContentControl Content="{Binding AddStoreViewModel}" Background="{StaticResource panelActiveColor}"/>
-        </modalcontrol:Modal>
-        
-        <modalcontrol:Modal Panel.ZIndex="1" Background="Transparent" IsOpen="{Binding IsCategoryOpen}" Grid.ColumnSpan="5" Grid.RowSpan="3" Margin="0 90 15 0">
-            <ContentControl Content="{Binding AddCategoryViewModel}" Background="{StaticResource panelActiveColor}"/>
-        </modalcontrol:Modal>
-
-        <modalcontrol:Modal Panel.ZIndex="1" Background="Transparent" IsOpen="{Binding IsSubCategoryOpen}" Grid.ColumnSpan="5" Grid.RowSpan="3" Margin="0 90 15 0">
-            <ContentControl Content="{Binding AddSupplierViewModel}" Background="{StaticResource panelActiveColor}"/>
-        </modalcontrol:Modal>
-
-        <Label Grid.ColumnSpan="5" Grid.Row="0" HorizontalAlignment="Center" FontSize="38" Foreground="White" Content="Welcome!"/>
-        <Label Grid.ColumnSpan="5" Grid.Row="1" HorizontalAlignment="Center" FontSize="38" Foreground="White" Content="Please check your Settings first, before any action!"/>
-
-        <materialDesign:Card x:Name="card"
-                             Padding="10"
-                             Height="300"
-                             Width="760"
-                             Style="{StaticResource card}"
-                             Background="{StaticResource panelColor}"
-                             Foreground="White"
-                             Margin="0 140 0 0"
-                             BorderThickness="10"
-                             BorderBrush="White"
-                             HorizontalAlignment="Center"
-                             Visibility="Visible"
-                             Grid.Row="1"
-                             Grid.ColumnSpan="4" Grid.RowSpan="3">
-
-            <StackPanel>
-                <Label Grid.ColumnSpan="5" FontSize="20" HorizontalAlignment="Center" Foreground="White" Content="QUICK ACTIONS"/>
-                <ProgressBar Margin="0 25 0 0" Height="4" Width="173" Background="White" RenderTransformOrigin="0.5,0.5">
-                    <ProgressBar.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform ScaleY="-1"/>
-                            <SkewTransform/>
-                            <RotateTransform/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </ProgressBar.RenderTransform>
-                </ProgressBar>
-                <StackPanel Orientation="Horizontal" Margin="0 35 0 0" HorizontalAlignment="Center">
-                    <Button Command="{Binding AddArticleCommand}" Grid.Row="0" Style="{StaticResource controlButton}" Margin="10" Width="130" Height="100">
-                        <StackPanel Orientation="Vertical">
-                            <fa:IconImage Icon="Barcode" Width="40" Foreground="{StaticResource color4}" />
-                            <Label Content="CREATE ARTICLE" Foreground="White"  HorizontalAlignment="Center" Margin="0 20 0 0" FontSize="14"/>
-                        </StackPanel>
-                    </Button>
-
-                    <Button Command="{Binding AddCategoryCommand}" Grid.Row="0" Style="{StaticResource controlButton}" Margin="10" Width="130" Height="100">
-                        <StackPanel Orientation="Vertical">
-                            <fa:IconImage Icon="List12" Width="40" Foreground="{StaticResource color1}" />
-                            <Label Content="CREATE CATEGORY" Foreground="White"  HorizontalAlignment="Center" Margin="0 20 0 0" FontSize="14"/>
-                        </StackPanel>
-                    </Button>
-
-                    <Button Command="{Binding AddSubCategoryCommand}" Grid.Row="0" Style="{StaticResource controlButton}" Margin="10" Width="130" Height="100">
-                        <StackPanel Orientation="Vertical">
-                            <fa:IconImage Icon="PlusCircle" Width="40" Foreground="{StaticResource color9}" />
-                            <Label Content="CREATE SUPPLIER" Foreground="White"  HorizontalAlignment="Center" Margin="0 20 0 0" FontSize="14"/>
-                        </StackPanel>
-                    </Button>
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="2"
+                    HorizontalAlignment="Center"
+                      Orientation="Horizontal" Margin="0 0 90 20"
+                      >
 
 
-                    <Button Grid.Row="1" Command="{Binding AddRuleCommand}" Style="{StaticResource controlButton}" Margin="10" Width="130" Height="100">
-                        <StackPanel Orientation="Vertical">
-                            <fa:IconImage Icon="Percent" Width="37" Foreground="{StaticResource color6}" />
-                            <Label Content="CREATE DISCOUNT" Foreground="White" HorizontalAlignment="Center" Margin="0 20 0 0" FontSize="14"/>
-                        </StackPanel>
-                    </Button>
+            <Ellipse Height="40" Width="40">
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="/Images/p2.jpg"/>
+                </Ellipse.Fill>
+            </Ellipse>
 
-                    <Button Command="{Binding AddStoreCommand}"  Grid.Row="0" Style="{StaticResource controlButton}" Margin="10" Width="130" Height="100">
-                        <StackPanel Orientation="Vertical">
-                            <fa:IconImage Icon="Store" Width="40" Foreground="{StaticResource color3}"  />
-                            <Label Content="CREATE STORAGE" Foreground="White" HorizontalAlignment="Center" Margin="0 20 0 0" FontSize="14"/>
-                        </StackPanel>
-                    </Button>
-                </StackPanel>
-                <ProgressBar Margin="0 25 0 0" Height="4" Width="173" Background="White" RenderTransformOrigin="0.5,0.5">
-                    <ProgressBar.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform ScaleY="-1"/>
-                            <SkewTransform/>
-                            <RotateTransform/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </ProgressBar.RenderTransform>
-                </ProgressBar>
+            <StackPanel Orientation="Vertical" Margin="5">
+                <TextBlock Text="Welcome to POS Sector"
+                               Foreground="{StaticResource titleColor2}"
+                               FontSize="20"
+                               FontFamily="Montserrat"
+                               FontWeight="Medium"
+                               VerticalAlignment="Center"
+                               Margin="10, 20, 0, 0"/>
+
+                <TextBlock Text="version 1.0"
+                               Foreground="{StaticResource titleColor3}"
+                               FontSize="12"
+                               HorizontalAlignment="Center"
+                               FontFamily="Montserrat"
+                               FontWeight="Medium"
+                               VerticalAlignment="Center"
+                               Margin="10, 0, 0, 0"/>
             </StackPanel>
-        </materialDesign:Card>
+
+            </StackPanel>
+
+        <Border Grid.Row="1" Grid.Column="0" BorderBrush="White" BorderThickness="1"  Background="{StaticResource BrushPrimary8}" Height="200" Width="400" Grid.RowSpan="2" Grid.ColumnSpan="3" CornerRadius="10" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50 0">
+            <StackPanel>
+                <StackPanel Orientation="Vertical" Margin="20">
+                    <StackPanel Orientation="Horizontal" Margin="0 20">
+                        <fa:IconImage Icon="Store" Foreground="{StaticResource color3}" Height="20" Width="20"></fa:IconImage>
+                        <Label Content="  Storages" FontSize="16" FontWeight="Regular" Foreground="White"/>
+                    </StackPanel>
+                    <TextBlock Text="You can organize your storage anytime you" FontSize="18" Foreground="White"/>
+                    <TextBlock Text="want. Store correction button can help you " FontSize="18" Foreground="White"/>
+                    <TextBlock Text="to correct quantities of articles. " FontSize="18" Foreground="White"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Row="1" Grid.Column="1"  BorderBrush="White" BorderThickness="1"  Background="{StaticResource BrushPrimary8}" Height="200" Width="400" Grid.RowSpan="2" Grid.ColumnSpan="3" CornerRadius="10" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50 0" >
+            <StackPanel>
+                <StackPanel Orientation="Vertical" Margin="20">
+                    <StackPanel Orientation="Horizontal" Margin="0 20">
+                        <fa:IconImage Icon="Percent" Foreground="{StaticResource color4}" Height="20" Width="20"></fa:IconImage>
+                        <Label Content="  Discounts" FontSize="16" FontWeight="Regular" Foreground="White"/>
+                    </StackPanel>
+                    <TextBlock Text="Inserting an Excel table with specific discounts" FontSize="18" Foreground="White"/>
+                    <TextBlock Text="and activating them has never been easier. " FontSize="18" Foreground="White"/>
+                    <TextBlock Text="Find it on Discounts page. " FontSize="18" Foreground="White"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Row="2" Grid.Column="0" BorderBrush="White" BorderThickness="1"   Background="{StaticResource BrushPrimary8}" Height="200" Width="400" Grid.RowSpan="2" Grid.ColumnSpan="3" CornerRadius="10" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50 5">
+            <StackPanel>
+                <StackPanel Orientation="Vertical" Margin="20">
+                    <StackPanel Orientation="Horizontal" Margin="0 20">
+                        <fa:IconImage Icon="Upload" Foreground="{StaticResource color6}" Height="20" Width="20"></fa:IconImage>
+                        <Label Content="  Import articles" FontSize="16" FontWeight="Regular" Foreground="White"/>
+                    </StackPanel>
+                    <TextBlock Text="Lists with several hundred items are properly " FontSize="18" Foreground="White"/>
+                    <TextBlock Text="imported into the storage in just a" FontSize="18" Foreground="White"/>
+                    <TextBlock Text="few seconds.. " FontSize="18" Foreground="White"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Row="2" Grid.Column="1" BorderBrush="White" BorderThickness="1" Background="{StaticResource BrushPrimary8}" Height="200" Width="400" Grid.RowSpan="2" Grid.ColumnSpan="3" CornerRadius="10" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50 5">
+            <StackPanel>
+                <StackPanel Orientation="Vertical" Margin="20">
+                    <StackPanel Orientation="Horizontal" Margin="0 20">
+                        <fa:IconImage Icon="Gear" Foreground="{StaticResource color10}" Height="20" Width="20"></fa:IconImage>
+                        <Label Content="  Settings" FontSize="16" FontWeight="Regular" Foreground="White"/>
+                    </StackPanel>
+                    <TextBlock Text="Settings are the most important part of the " FontSize="18" Foreground="White"/>
+                    <TextBlock Text="application. Before each action, check the" FontSize="18" Foreground="White"/>
+                    <TextBlock Text="settings and adjust them to the desired ones." FontSize="18" Foreground="White"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
 
     </Grid>
 </UserControl>

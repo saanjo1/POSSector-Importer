@@ -22,6 +22,8 @@ namespace ImportApp.WPF.State.Store
             _notifier = notifier;
             _storageDataService = storageDataService;
             _categoryDataService = categoryDataService;
+
+            this.CurrentDataGrid = new ArticleStorageViewModel(_articleService, "Articles", _notifier, _storageDataService, _categoryDataService);
         }
 
         [RelayCommand]

@@ -220,7 +220,7 @@ namespace ImportApp.EntityFramework.Services
             }
         }
 
-        public Task<Guid> GetGoodId(string name)
+        public async Task<Guid> GetGoodId(string name)
         {
             using (ImportAppDbContext context = factory.CreateDbContext())
             {
@@ -232,13 +232,13 @@ namespace ImportApp.EntityFramework.Services
                     Guid goodId = (Guid)good.GoodId;
 
                     if (good != null)
-                        return Task.FromResult(goodId);
+                        return await Task.FromResult(goodId);
                     else
-                        return Task.FromResult(Guid.Empty);
+                        return await Task.FromResult(Guid.Empty);
                 }
                 else
                 {
-                    return Task.FromResult(Guid.Empty);
+                    return await Task.FromResult(Guid.Empty);
                 }
             }
         }
@@ -246,7 +246,7 @@ namespace ImportApp.EntityFramework.Services
 
 
 
-        public Task<decimal> GroupGoodsById(Guid goodId, Guid storageId)
+        public async Task<decimal> GroupGoodsById(Guid goodId, Guid storageId)
         {
             decimal sumQuantities = 0;
 
@@ -260,10 +260,10 @@ namespace ImportApp.EntityFramework.Services
 
             }
 
-            return Task.FromResult(sumQuantities);
+            return await Task.FromResult(sumQuantities);
         }
 
-        public Task<List<Good>> GetGoods()
+        public async Task<List<Good>> GetGoods()
         {
             List<Good> goods;
             using (ImportAppDbContext context = factory.CreateDbContext())
@@ -271,7 +271,7 @@ namespace ImportApp.EntityFramework.Services
                 goods = context.Goods.ToList();
             }
 
-            return Task.FromResult(goods);
+            return await Task.FromResult(goods);
         }
     }
 }

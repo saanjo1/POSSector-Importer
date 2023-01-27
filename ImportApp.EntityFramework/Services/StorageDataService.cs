@@ -77,14 +77,14 @@ namespace ImportApp.EntityFramework.Services
             return Task.FromResult(storages);
         }
 
-        public Task<Guid> GetStorageByName(string name)
+        public async Task<Guid> GetStorageByName(string name)
         {
             using (ImportAppDbContext context = factory.CreateDbContext())
             {
                 Storage _storage = context.Storages.FirstOrDefault(x => x.Name == name);
 
                 if (_storage != null && _storage.Deleted == false)
-                    return Task.FromResult(_storage.Id);
+                    return await Task.FromResult(_storage.Id);
                 else
                 {
                     Domain.Models.Storage newStorage = new Domain.Models.Storage()
@@ -97,7 +97,7 @@ namespace ImportApp.EntityFramework.Services
                     context.Storages.Add(newStorage);
                     context.SaveChanges();
 
-                    return Task.FromResult(newStorage.Id);
+                    return await Task.FromResult(newStorage.Id);
 
                 }
             }

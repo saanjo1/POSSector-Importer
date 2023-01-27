@@ -60,7 +60,7 @@
                         </Ellipse>
 
                         <StackPanel Orientation="Vertical" Margin="5">
-                            <TextBlock Text="Yammamay"
+                            <TextBlock Text="POS Sector"
                                Foreground="{StaticResource titleColor2}"
                                FontSize="20"
                                FontFamily="Montserrat"
