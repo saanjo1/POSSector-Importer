@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImportApp.EntityFramework",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImportApp.WPF", "ImportApp.WPF\ImportApp.WPF.csproj", "{BB242225-4D9E-42D1-9C7E-352171B35CDF}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "ImportApp.Deployment", "ImportApp.Deployment\ImportApp.Deployment.vdproj", "{3003F387-8288-4B32-A1F8-EF6DBAD54830}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,8 @@ Global
 		{BB242225-4D9E-42D1-9C7E-352171B35CDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB242225-4D9E-42D1-9C7E-352171B35CDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB242225-4D9E-42D1-9C7E-352171B35CDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3003F387-8288-4B32-A1F8-EF6DBAD54830}.Debug|Any CPU.ActiveCfg = Debug
+		{3003F387-8288-4B32-A1F8-EF6DBAD54830}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
