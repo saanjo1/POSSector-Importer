@@ -160,13 +160,10 @@
                                    VerticalAlignment="Center"/>
 
                     </StackPanel>
-         
-                    
-
                 </Grid>
             </Border>
 
-            <ContentControl Content="{Binding Navigator.CurrentViewModel}" Grid.Row="2" Grid.Column="2" Margin="30 100"/>
+            <ContentControl Content="{Binding Navigator.CurrentViewModel}" Grid.Row="2" Grid.Column="2" Margin="40 30"/>
         </Grid>
     </Border>
 </Window>

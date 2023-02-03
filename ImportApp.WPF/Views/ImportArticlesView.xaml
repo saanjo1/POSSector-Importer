@@ -10,31 +10,36 @@
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
     </UserControl.Resources>
-    <Grid Margin="10">
+    <Grid Margin="10 70">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="700"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
         <modalcontrol:Modal Panel.ZIndex="21" Background="Transparent" IsOpen="{Binding IsMapped}" Height="500" Grid.RowSpan="3">
             <ContentControl Content="{Binding ArticleQ}" Background="{StaticResource panelActiveColor}"/>
         </modalcontrol:Modal>
 
 
-        <TextBlock Grid.Row="0" HorizontalAlignment="Right" Width="180" VerticalAlignment="Center" Foreground="#B0B9C6" IsHitTestVisible="False"
+        <TextBlock Grid.ColumnSpan="2" Grid.Row="0" HorizontalAlignment="Right" Width="180" VerticalAlignment="Center" Foreground="#B0B9C6" IsHitTestVisible="False"
                            Panel.ZIndex="1"
                            Visibility="{Binding ElementName=textBoxFilter, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}" Text="Search by barcode" Height="16"  />
 
-        <TextBox Width="200" Grid.Row="0" HorizontalAlignment="Right"  Name="textBoxFilter" Style="{StaticResource filterTextBox}" Text="{Binding TextToFilter, UpdateSourceTrigger=PropertyChanged}" Height="32"/>
+        <TextBox Grid.ColumnSpan="2" Width="200" Grid.Row="0" HorizontalAlignment="Right"  Name="textBoxFilter" Style="{StaticResource filterTextBox}" Text="{Binding TextToFilter, UpdateSourceTrigger=PropertyChanged}" Height="32"/>
 
-        <TextBlock FontSize="16" Text="{Binding Count}" Foreground="{StaticResource titleColor1}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20 0 0 0"/>
-        <TextBlock FontSize="16" Text="         articles included" Foreground="{StaticResource titleColor1}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20 0 0 0"/>
+        <TextBlock Grid.ColumnSpan="2" FontSize="16" Text="{Binding Count}" Foreground="{StaticResource titleColor1}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20 0 0 0"/>
+        <TextBlock Grid.ColumnSpan="2" FontSize="16" Text="         articles included" Foreground="{StaticResource titleColor1}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20 0 0 0"/>
 
-        <TextBlock Grid.Row="1" FontSize="24" Style="{StaticResource textBlockStyle}" Text="Provide records to import." Visibility="{Binding Items.IsEmpty, Converter={StaticResource BoolToVis}, ElementName=ImportGrid}"/>
+        <TextBlock Grid.ColumnSpan="2" Grid.Row="1" FontSize="24" Style="{StaticResource textBlockStyle}" Text="Provide records to import." Visibility="{Binding Items.IsEmpty, Converter={StaticResource BoolToVis}, ElementName=ImportGrid}"/>
 
-        <DataGrid Grid.Row="1" Name="ImportGrid" ItemsSource="{Binding ArticleCollection, Mode=TwoWay}" RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" Style="{DynamicResource DataGridStyle1}" Height="390">
+        <DataGrid Grid.ColumnSpan="2" Grid.Row="1" Name="ImportGrid" ItemsSource="{Binding ArticleCollection, Mode=TwoWay}" RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" Style="{DynamicResource DataGridStyle1}">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="Name" IsReadOnly="false" Width="500">
                     <DataGridTemplateColumn.CellTemplate>
@@ -48,9 +53,9 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Barcode" Binding="{Binding BarCode}" IsReadOnly="false" Width="*"/>
+                <DataGridTextColumn Header="Barcode" Binding="{Binding BarCode}" IsReadOnly="false" Width="150"/>
                 <DataGridTextColumn Header="Storage" Binding="{Binding Storage}" IsReadOnly="false" Width="*"/>
-                <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" IsReadOnly="false" Width="*"/>
+                <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" IsReadOnly="false" Width="80"/>
                 <DataGridTextColumn Header="Total price" Binding="{Binding Price}" IsReadOnly="false" Width="*"/>
                 <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="auto">
                     <DataGridTemplateColumn.CellTemplate>
@@ -66,7 +71,7 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 20">
+        <StackPanel Grid.ColumnSpan="2" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 20">
             <TextBlock Text="Records per page" Foreground="{StaticResource titleColor1}"  VerticalAlignment="Center" Margin="5"/>
             <ComboBox  Margin="5"  Width="100" SelectedItem="{Binding SelectedRecord,UpdateSourceTrigger=PropertyChanged}">
                 <sys:Int32>15</sys:Int32>
@@ -89,8 +94,8 @@
             <Button Content=">>" Style="{StaticResource pagingButton}" Width="40" IsEnabled="{Binding IsLastEnabled}" ToolTip="Last page" Margin="5" Command="{Binding LastPageCommand}" />
         </StackPanel>
 
-        <StackPanel Grid.Row="3" Orientation="Horizontal" Width="1000" HorizontalAlignment="Left" Margin="0 0 0 -20">
-            <Button Style="{StaticResource saveModalButton}" Command="{Binding LoadFixedExcelColumnsCommand}" Height="50" Width="150">
+        <StackPanel Grid.Row="3" Orientation="Horizontal" Width="auto" HorizontalAlignment="Left">
+            <Button Style="{StaticResource saveModalButton}" Command="{Binding LoadFixedExcelColumnsCommand}" Height="50" Width="150" Margin="5">
                 <StackPanel Orientation="Horizontal">
                     <fa:IconImage Style="{StaticResource controlButtonIcon}" Icon="Database" Width="30" Height="30"/>
                     <TextBlock TextAlignment="Center" FontSize="20" HorizontalAlignment="Center" Margin="10 0 5 5" VerticalAlignment="Stretch" FontWeight="ExtraLight" >Load data</TextBlock>
@@ -103,15 +108,15 @@
                     <TextBlock TextAlignment="Center" FontSize="20" HorizontalAlignment="Center" Margin="12 8 5 5" VerticalAlignment="Stretch" FontWeight="ExtraLight" >Clear</TextBlock>
                 </StackPanel>
             </Button>
+        </StackPanel>
 
-            <Button Style="{StaticResource ImportButton}" Foreground="White" Command="{Binding ImportDataCommand}"  Height="50" Width="150" Margin="500 0 0 0">
+        <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
+            <Button Style="{StaticResource ImportButton}" Foreground="White" Command="{Binding ImportDataCommand}"  Height="50" Width="150" Margin="20 0 0 0">
                 <StackPanel Orientation="Horizontal">
                     <fa:IconImage Style="{StaticResource controlButtonIcon}" Icon="Upload" Width="30" Height="30" Margin="-20 0 0 0"/>
                     <TextBlock TextAlignment="Center" FontSize="20" HorizontalAlignment="Center" Margin="12 3 5 5" VerticalAlignment="Stretch" FontWeight="ExtraLight" >Import</TextBlock>
                 </StackPanel>
             </Button>
-
-
         </StackPanel>
 
     </Grid>

@@ -284,6 +284,19 @@ namespace ImportApp.EntityFramework.Services
             }
         }
 
+        public Task<Good> UpdateGood(Guid id, Good entity)
+        {
+            using (ImportAppDbContext context = _contextFactory.CreateDbContext())
+            {
+                entity.Id = id;
+                context.Goods.Update(entity);
+                context.SaveChanges();
+
+                return Task.FromResult(entity);
+            }
+        }
+
+
         public Task<int> GetInventoryCounter()
         {
             using (ImportAppDbContext context = _contextFactory.CreateDbContext())
@@ -318,6 +331,21 @@ namespace ImportApp.EntityFramework.Services
                 if (doc != null)
                 {
                     context.InventoryItemBases.Remove(doc);
+                    return await Task.FromResult(true);
+                }
+
+                return await Task.FromResult(false);
+            }
+        }
+
+
+        public async Task<bool> CheckArticleGoods(Guid docId)
+        {
+            using (ImportAppDbContext context = _contextFactory.CreateDbContext())
+            {
+                var doc = context.ArticleGoods.FirstOrDefault(x => x.ArticleId == docId);
+                if (doc != null)
+                {
                     return await Task.FromResult(true);
                 }
 

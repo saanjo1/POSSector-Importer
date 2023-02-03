@@ -5,7 +5,7 @@ namespace ImportApp.Domain.Services
     public interface IArticleDataService : IDataGService<Article>
     {
 
-        Task<Article> Compare(string value);
+        Task<Guid> Compare(string value);
         Task<int> GetLastArticleNumber();
         Task<ICollection<Article>> GetArticles();
         Task<ICollection<Article>> GetEconomato();

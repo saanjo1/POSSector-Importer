@@ -278,28 +278,32 @@ namespace ImportApp.WPF.ViewModels
                 try
                 {
 
-                    if (ArticleList.Count > 0 || ArticleList != null)
+                    if (ArticleList.Count > 0)
                     {
 
                         for (int i = 0; i < articleList.Count; i++)
                         {
                             InventoryDocument inventoryDocument = GetCreatedInventoryDocument(articleList[i].Storage, documents);
-                            Guid _goodId = _articleService.GetGoodId(articleList[i].Name).Result;
+                            Guid _goodId = _articleService.GetGoodId(articleList[i].BarCode).Result;
 
+                            Good newGood = new Good
+                            {
+                                Id = Guid.NewGuid(),
+                                Name = articleList[i].Name,
+                                UnitId = _articleService.GetUnitByName("kom").Result,
+                                LatestPrice = Helpers.Extensions.GetDecimal(articleList[i].PricePerUnit),
+                                Volumen = 1,
+                                Refuse = 0
+                            };
                             if (_goodId == Guid.Empty)
                             {
-                                Good newGood = new Good
-                                {
-                                    Id = Guid.NewGuid(),
-                                    Name = articleList[i].Name,
-                                    UnitId = _articleService.GetUnitByName("kom").Result,
-                                    LatestPrice = Helpers.Extensions.GetDecimal(articleList[i].PricePerUnit),
-                                    Volumen = 1,
-                                    Refuse = 0
-                                };
-
                                 _categoryService.CreateGood(newGood);
 
+                                _goodId = newGood.Id;
+                            }
+                            else
+                            {
+                                _categoryService.UpdateGood(_goodId, newGood);
                                 _goodId = newGood.Id;
                             }
 
@@ -322,7 +326,7 @@ namespace ImportApp.WPF.ViewModels
 
                             _categoryService.CreateInventoryItem(inventoryItemBasis);
 
-                            Guid? ArticleGuid = _articleService.GetArticleByName(articleList[i].Name).Result;
+                            Guid ArticleGuid = _articleService.Compare(articleList[i].BarCode).Result;
 
                             Article newArticle = new Article
                             {
@@ -347,11 +351,32 @@ namespace ImportApp.WPF.ViewModels
                                     GoodId = _goodId,
                                     Quantity = 1,
                                     ValidFrom = DateTime.Today,
-                                    ValidUntil = DateTime.Today.AddDays(5)
+                                    ValidUntil = DateTime.Today.AddYears(2)
                                 };
 
                                 _categoryService.CreateArticleGood(newArticleGood);
 
+                            }
+                            else
+                            {
+                                _articleService.Update((Guid)ArticleGuid, newArticle);
+
+                                bool checkForNormative = _categoryService.CheckArticleGoods(ArticleGuid).Result;
+
+                                if (!checkForNormative)
+                                {
+                                    ArticleGood newArticleGood = new ArticleGood
+                                    {
+                                        Id = Guid.NewGuid(),
+                                        ArticleId = newArticle.Id,
+                                        GoodId = _goodId,
+                                        Quantity = 1,
+                                        ValidFrom = DateTime.Today,
+                                        ValidUntil = DateTime.Today.AddYears(2)
+                                    };
+
+                                    _categoryService.CreateArticleGood(newArticleGood);
+                                }
                             }
 
                         }
@@ -425,21 +450,6 @@ namespace ImportApp.WPF.ViewModels
                 //IsMapped = false;
             }
         }
-
-
-
-
-        //private bool CanMap()
-        //{
-        //    if (_myDictionary.TryGetValue(Translations.CurrentExcelSheet, out string value) == false)
-        //    {
-        //        _notifier.ShowWarning(Translations.SettingsError);
-        //        return false;
-        //    }
-        //    return true;
-        //}
-
-
 
     }
 }

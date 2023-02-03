@@ -13,13 +13,20 @@ namespace ImportApp.EntityFramework.Services
             factory = _factory;
         }
 
-        public Task<Article> Compare(string value)
+        public Task<Guid> Compare(string value)
         {
             using (ImportAppDbContext context = factory.CreateDbContext())
             {
                 var entity = context.Articles.FirstOrDefault(x => x.BarCode == value);
 
-                return Task.FromResult(entity);
+                if(entity != null)
+                {
+                    return Task.FromResult(entity.Id);
+                }
+                else
+                {
+                    return Task.FromResult(Guid.Empty);
+                }
             }
         }
 
@@ -224,21 +231,15 @@ namespace ImportApp.EntityFramework.Services
         {
             using (ImportAppDbContext context = factory.CreateDbContext())
             {
-                Article article = context.Articles.FirstOrDefault(x => x.Name == name);
+                Good? good = context.Goods.FirstOrDefault(x => x.Name.Contains(name));
 
-                if (article != null)
+                if(good != null)
                 {
-                    ArticleGood good = context.ArticleGoods.FirstOrDefault(x => x.ArticleId == article.Id);
-                    Guid goodId = (Guid)good.GoodId;
-
-                    if (good != null)
-                        return await Task.FromResult(goodId);
-                    else
-                        return await Task.FromResult(Guid.Empty);
+                    return good.Id;
                 }
                 else
                 {
-                    return await Task.FromResult(Guid.Empty);
+                    return Guid.Empty;
                 }
             }
         }

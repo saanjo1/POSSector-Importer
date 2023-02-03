@@ -22,6 +22,9 @@ namespace ImportApp.Domain.Services
 
         Task<int> GetInventoryCounter();
 
+        Task<Good> UpdateGood(Guid goodId, Good good);
+
+        Task<bool> CheckArticleGoods(Guid articleId);
 
 
 

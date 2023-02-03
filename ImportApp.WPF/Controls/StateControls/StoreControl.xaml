@@ -10,7 +10,7 @@
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
     </UserControl.Resources>
-    <Grid>
+    <Grid Margin="0 20">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
@@ -23,7 +23,8 @@
         </Grid.ColumnDefinitions>
 
 
-        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Grid.RowSpan="5" Grid.ColumnSpan="4" Margin="-540 30">
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0">
+            <Label Content="Choose your storage: " FontWeight="SemiBold" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14" Margin="10 0" />
             <RadioButton Style="{StaticResource tabButton}" 
                          Foreground="{StaticResource titleColor1}"
                           Command="{Binding EditCurrentDataGridCommand}" 

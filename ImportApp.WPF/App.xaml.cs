@@ -25,7 +25,7 @@ namespace ImportApp.WPF
         public App()
         {
 
-            UpdateConnectionString();
+            //UpdateConnectionString();
 
 
             _host = Host.CreateDefaultBuilder()

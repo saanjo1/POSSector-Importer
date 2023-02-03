@@ -22,18 +22,18 @@
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
 
         <modalcontrol:Modal Panel.ZIndex="21" Background="Transparent" IsOpen="{Binding IsEditOpen}" Margin="50 0 0 0" Height="500" Grid.RowSpan="3" Grid.ColumnSpan="5">
             <ContentControl Content="{Binding EditArticleViewModel}" Background="{StaticResource panelActiveColor}"/>
         </modalcontrol:Modal>
 
-        <TextBlock Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Foreground="#B0B9C6" IsHitTestVisible="False"
+        <TextBlock Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#B0B9C6" IsHitTestVisible="False"
                            Panel.ZIndex="1" Text="Search in Articles ..."
-                           Visibility="{Binding ElementName=textBoxFilter, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}" Width="320" />
+                           Visibility="{Binding ElementName=textBoxFilter, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}" Width="220" Padding="10" />
 
-        <TextBox Grid.Column="1" Name="textBoxFilter" Style="{StaticResource filterTextBox}" Text="{Binding TextToFilter, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Width="350" />
+        <TextBox Grid.Column="1" Name="textBoxFilter" Style="{StaticResource filterTextBox}" Text="{Binding TextToFilter, UpdateSourceTrigger=PropertyChanged}" Width="250" HorizontalAlignment="Left"/>
 
         <TextBlock FontSize="16" Text="{Binding Count}" Foreground="{StaticResource titleColor1}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
         <TextBlock FontSize="16" Text="  article(s) found" Foreground="{StaticResource titleColor1}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="27 0 0 0"/>

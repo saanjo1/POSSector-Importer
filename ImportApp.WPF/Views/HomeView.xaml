@@ -10,7 +10,7 @@
              FontWeight="ExtraLight"
              FontFamily="Lucidatypewriter"
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+    <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
@@ -55,7 +55,7 @@
 
             </StackPanel>
 
-        <Border Grid.Row="1" Grid.Column="0" BorderBrush="White" BorderThickness="1"  Background="{StaticResource BrushPrimary8}" Height="200" Width="400" Grid.RowSpan="2" Grid.ColumnSpan="3" CornerRadius="10" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50 0">
+        <Border Grid.Row="1" Grid.Column="0" BorderBrush="White" BorderThickness="1"  Background="{StaticResource BrushPrimary8}" Height="200" Width="400" CornerRadius="10">
             <StackPanel>
                 <StackPanel Orientation="Vertical" Margin="20">
                     <StackPanel Orientation="Horizontal" Margin="0 20">
@@ -69,7 +69,7 @@
             </StackPanel>
         </Border>
 
-        <Border Grid.Row="1" Grid.Column="1"  BorderBrush="White" BorderThickness="1"  Background="{StaticResource BrushPrimary8}" Height="200" Width="400" Grid.RowSpan="2" Grid.ColumnSpan="3" CornerRadius="10" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50 0" >
+        <Border Grid.Row="1" Grid.Column="1"  BorderBrush="White" BorderThickness="1"  Background="{StaticResource BrushPrimary8}" Height="200" Width="400" CornerRadius="10">
             <StackPanel>
                 <StackPanel Orientation="Vertical" Margin="20">
                     <StackPanel Orientation="Horizontal" Margin="0 20">
@@ -83,7 +83,7 @@
             </StackPanel>
         </Border>
 
-        <Border Grid.Row="2" Grid.Column="0" BorderBrush="White" BorderThickness="1"   Background="{StaticResource BrushPrimary8}" Height="200" Width="400" Grid.RowSpan="2" Grid.ColumnSpan="3" CornerRadius="10" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50 5">
+        <Border Grid.Row="2" Grid.Column="0" BorderBrush="White" BorderThickness="1"   Background="{StaticResource BrushPrimary8}" Height="200" Width="400" CornerRadius="10">
             <StackPanel>
                 <StackPanel Orientation="Vertical" Margin="20">
                     <StackPanel Orientation="Horizontal" Margin="0 20">
@@ -97,7 +97,7 @@
             </StackPanel>
         </Border>
 
-        <Border Grid.Row="2" Grid.Column="1" BorderBrush="White" BorderThickness="1" Background="{StaticResource BrushPrimary8}" Height="200" Width="400" Grid.RowSpan="2" Grid.ColumnSpan="3" CornerRadius="10" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50 5">
+        <Border Grid.Row="2" Grid.Column="1" BorderBrush="White" BorderThickness="1" Background="{StaticResource BrushPrimary8}" Height="200" Width="400" CornerRadius="10">
             <StackPanel>
                 <StackPanel Orientation="Vertical" Margin="20">
                     <StackPanel Orientation="Horizontal" Margin="0 20">

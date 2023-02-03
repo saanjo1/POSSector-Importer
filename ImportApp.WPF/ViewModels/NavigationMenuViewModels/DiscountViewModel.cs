@@ -313,8 +313,9 @@ namespace ImportApp.WPF.ViewModels
                         for (int i = 0; i < articleList.Count; i++)
                         {
                             var articleID = _articleDataService.Compare(articleList[i].BarCode).Result;
-                            if (articleID != null)
+                            if (articleID != Guid.Empty)
                             {
+                                var article = _articleDataService.Get(articleID.ToString()).Result;
 
                                 Rule disc = _discountDataService.GetDiscountByName(articleList[i].Discount).Result;
                                 if (disc != null && disc.Name == articleList[i].Discount && CheckDates(disc))
@@ -349,14 +350,14 @@ namespace ImportApp.WPF.ViewModels
                                     Order = counter++,
                                 };
 
-                                _articleDataService.Update(articleID.Id, newArticle);
+                                _articleDataService.Update(article.Id, newArticle);
                                 updateCounter++;
 
 
                                 RuleItem newRuleItem = new RuleItem()
                                 {
                                     Id = Guid.NewGuid(),
-                                    ArticleId = articleID.Id,
+                                    ArticleId = article.Id,
                                     RuleId = newRule.Id,
                                     NewPrice = Helpers.Extensions.GetDecimal(articleList[i].NewPrice)
                                 };
