@@ -315,7 +315,7 @@ namespace ImportApp.WPF.ViewModels
                             var articleID = _articleDataService.Compare(articleList[i].BarCode).Result;
                             if (articleID != Guid.Empty)
                             {
-                                var article = _articleDataService.Get(articleID.ToString()).Result;
+                                Article article = _articleDataService.Get(articleID.ToString()).Result;
 
                                 Rule disc = _discountDataService.GetDiscountByName(articleList[i].Discount).Result;
                                 if (disc != null && disc.Name == articleList[i].Discount && CheckDates(disc))

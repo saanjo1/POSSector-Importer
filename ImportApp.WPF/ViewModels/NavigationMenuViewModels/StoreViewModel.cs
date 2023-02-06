@@ -20,7 +20,5 @@ namespace ImportApp.WPF.ViewModels
             Store = new Store(articleService, _notifier, storageDataService, categoryDataService);
         }
 
-
-
     }
 }

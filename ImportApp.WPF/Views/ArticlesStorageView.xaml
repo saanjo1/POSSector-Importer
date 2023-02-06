@@ -12,33 +12,32 @@
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
     </UserControl.Resources>
 
-
-    <Grid Margin="10">
+    <Grid Margin="10 40">
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="390"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="700"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <modalcontrol:Modal Panel.ZIndex="21" Background="Transparent" IsOpen="{Binding IsEditOpen}" Margin="50 0 0 0" Height="500" Grid.RowSpan="3" Grid.ColumnSpan="5">
             <ContentControl Content="{Binding EditArticleViewModel}" Background="{StaticResource panelActiveColor}"/>
         </modalcontrol:Modal>
 
-        <TextBlock Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#B0B9C6" IsHitTestVisible="False"
+        <TextBlock Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#B0B9C6" IsHitTestVisible="False"
                            Panel.ZIndex="1" Text="Search in Articles ..."
                            Visibility="{Binding ElementName=textBoxFilter, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}" Width="220" Padding="10" />
 
-        <TextBox Grid.Column="1" Name="textBoxFilter" Style="{StaticResource filterTextBox}" Text="{Binding TextToFilter, UpdateSourceTrigger=PropertyChanged}" Width="250" HorizontalAlignment="Left"/>
+        <TextBox Grid.Column="1" HorizontalAlignment="Right" Name="textBoxFilter" Style="{StaticResource filterTextBox}" Text="{Binding TextToFilter, UpdateSourceTrigger=PropertyChanged}" Width="250"/>
 
         <TextBlock FontSize="16" Text="{Binding Count}" Foreground="{StaticResource titleColor1}" VerticalAlignment="Center" HorizontalAlignment="Left"/>
         <TextBlock FontSize="16" Text="  article(s) found" Foreground="{StaticResource titleColor1}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="27 0 0 0"/>
 
-        <DataGrid Grid.ColumnSpan="3" Grid.Row="1" Name="membersDataGrid" ItemsSource="{Binding ArticleCollection}" RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" Style="{DynamicResource DataGridStyle1}" Height="400" CanUserDeleteRows="True" IsReadOnly="False">
+        <DataGrid Grid.ColumnSpan="5" Grid.Row="1" Name="membersDataGrid" ItemsSource="{Binding ArticleCollection}" RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" Style="{DynamicResource DataGridStyle1}" CanUserDeleteRows="True" IsReadOnly="False">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="Name" IsReadOnly="True" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
@@ -68,14 +67,16 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.RowSpan="3" HorizontalAlignment="Left" Margin="0 30" Grid.ColumnSpan="5">
-            <Button x:Name="correctBtn" Style="{StaticResource optionsBtn}" Foreground="White" Command="{Binding MultipleEditCommand}" Height="50" Width="250" Margin="0 0 300 0">
+        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.RowSpan="3" HorizontalAlignment="Left" Margin="0 30" >
+            <Button x:Name="correctBtn" Style="{StaticResource optionsBtn}" Foreground="White" Command="{Binding MultipleEditCommand}" Height="50" Width="250">
                 <StackPanel Orientation="Horizontal">
                     <fa:IconImage Style="{StaticResource controlButtonIcon}" Margin="10 0 0 0" Icon="FileEdit" Width="30" Height="30"/>
                     <TextBlock TextAlignment="Center" FontSize="20" HorizontalAlignment="Center" Margin="12 8 5 5" VerticalAlignment="Stretch" FontWeight="ExtraLight" >Store correction</TextBlock>
                 </StackPanel>
             </Button>
+        </StackPanel>
 
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="2" Grid.Column="1">
             <Button Style="{StaticResource ImportButton}" Foreground="White" Command="{Binding SaveChangesCommand}" Visibility="{Binding ElementName=correctBtn, Path=DataContext.IsEnabled, Converter={StaticResource BoolToVis}}" Height="50" Width="200" Margin="10 0">
                 <StackPanel Orientation="Horizontal">
                     <fa:IconImage Style="{StaticResource controlButtonIcon}" Margin="10 0 0 0" Icon="Save" Width="30" Height="30"/>

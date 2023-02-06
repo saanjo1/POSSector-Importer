@@ -29,6 +29,9 @@ namespace ImportApp.WPF.ViewModels
         [ObservableProperty]
         private int count;
 
+        [ObservableProperty]
+        private bool isLoading;
+
         private IArticleDataService _articleService;
         private ICategoryDataService _categoryService;
         private IStorageDataService _storageService;
@@ -242,7 +245,6 @@ namespace ImportApp.WPF.ViewModels
         [RelayCommand]
         public void ImportData()
         {
-
             if (articleList != null)
             {
                 Guid _supplierId = _supplierDataService.GetSupplierByName("YAMMAMAY").Result;
@@ -391,6 +393,7 @@ namespace ImportApp.WPF.ViewModels
 
                     articleList.Clear();
                     ArticleCollection = null;
+                    IsLoading = false;
                 }
                 catch (Exception)
                 {
@@ -401,6 +404,7 @@ namespace ImportApp.WPF.ViewModels
             }
             else
             {
+                IsLoading = false;
                 _notifier.ShowError("Can not import an empty list.");
             }
         }

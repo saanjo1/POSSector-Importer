@@ -93,7 +93,7 @@ namespace ImportApp.EntityFramework.Services
         {
             using (ImportAppDbContext context = factory.CreateDbContext())
             {
-                Article? entity = context.Articles.FirstOrDefault(x => x.BarCode == id);
+                Article? entity = context.Articles.FirstOrDefault(x => x.Id.ToString() == id);
                 return Task.FromResult(entity);
             }
         }
