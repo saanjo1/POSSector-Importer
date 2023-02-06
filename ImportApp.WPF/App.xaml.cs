@@ -45,7 +45,7 @@ namespace ImportApp.WPF
 
             using (ImportAppDbContext context = contextFactory.CreateDbContext())
             {
-                context.Database.EnsureCreated();
+                await context.Database.EnsureCreatedAsync();
             }
 
             Window window = _host.Services.GetRequiredService<MainWindow>();

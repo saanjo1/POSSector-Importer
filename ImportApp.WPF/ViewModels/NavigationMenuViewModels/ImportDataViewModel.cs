@@ -9,7 +9,10 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Windows.Data;
+using System.Windows.Threading;
 using ToastNotifications;
 using ToastNotifications.Messages;
 
@@ -243,130 +246,114 @@ namespace ImportApp.WPF.ViewModels
         }
 
         [RelayCommand]
-        public void ImportData()
+        public async void ImportData()
         {
-            if (articleList != null)
+            IsLoading = true;
+
+
+            await Task.Run(() =>
             {
-                Guid _supplierId = _supplierDataService.GetSupplierByName("YAMMAMAY").Result;
-
-                List<string> _storages = new List<string>();
-                List<InventoryDocument> documents = new List<InventoryDocument>();
-
-                for (int i = 0; i < articleList.Count; i++)
+                if (articleList != null)
                 {
-                    if (!_storages.Contains(articleList[i].Storage))
-                        _storages.Add(articleList[i].Storage);
-                }
+                    Guid _supplierId = _supplierDataService.GetSupplierByName("YAMMAMAY").Result;
 
-                foreach (var item in _storages)
-                {
-                    InventoryDocument inventoryDocument = new InventoryDocument
+                    List<string> _storages = new List<string>();
+                    List<InventoryDocument> documents = new List<InventoryDocument>();
+
+                    for (int i = 0; i < articleList.Count; i++)
                     {
-                        Created = DateTime.Now,
-                        Order = _categoryService.GetInventoryCounter().Result,
-                        Id = Guid.NewGuid(),
-                        StorageId = _storageService.GetStorageByName(item).Result,
-                        SupplierId = _supplierId,
-                        Type = 1,
-                        IsActivated = false,
-                        IsDeleted = false
-                    };
+                        if (!_storages.Contains(articleList[i].Storage))
+                            _storages.Add(articleList[i].Storage);
+                    }
 
-                    _categoryService.CreateInventoryDocument(inventoryDocument);
-                    documents.Add(inventoryDocument);
-                }
-
-                int counter = _articleService.GetLastArticleNumber().Result;
-                try
-                {
-
-                    if (ArticleList.Count > 0)
+                    foreach (var item in _storages)
                     {
-
-                        for (int i = 0; i < articleList.Count; i++)
+                        InventoryDocument inventoryDocument = new InventoryDocument
                         {
-                            InventoryDocument inventoryDocument = GetCreatedInventoryDocument(articleList[i].Storage, documents);
-                            Guid _goodId = _articleService.GetGoodId(articleList[i].BarCode).Result;
+                            Created = DateTime.Now,
+                            Order = _categoryService.GetInventoryCounter().Result,
+                            Id = Guid.NewGuid(),
+                            StorageId = _storageService.GetStorageByName(item).Result,
+                            SupplierId = _supplierId,
+                            Type = 1,
+                            IsActivated = false,
+                            IsDeleted = false
+                        };
 
-                            Good newGood = new Good
+                        _categoryService.CreateInventoryDocument(inventoryDocument);
+                        documents.Add(inventoryDocument);
+                    }
+
+                    int counter = _articleService.GetLastArticleNumber().Result;
+                    try
+                    {
+
+                        if (ArticleList.Count > 0)
+                        {
+
+                            for (int i = 0; i < articleList.Count; i++)
                             {
-                                Id = Guid.NewGuid(),
-                                Name = articleList[i].Name,
-                                UnitId = _articleService.GetUnitByName("kom").Result,
-                                LatestPrice = Helpers.Extensions.GetDecimal(articleList[i].PricePerUnit),
-                                Volumen = 1,
-                                Refuse = 0
-                            };
-                            if (_goodId == Guid.Empty)
-                            {
-                                _categoryService.CreateGood(newGood);
+                                InventoryDocument inventoryDocument = GetCreatedInventoryDocument(articleList[i].Storage, documents);
+                                Guid _goodId = _articleService.GetGoodId(articleList[i].BarCode).Result;
 
-                                _goodId = newGood.Id;
-                            }
-                            else
-                            {
-                                _categoryService.UpdateGood(_goodId, newGood);
-                                _goodId = newGood.Id;
-                            }
-
-
-                            InventoryItemBasis inventoryItemBasis = new InventoryItemBasis
-                            {
-                                Id = Guid.NewGuid(),
-                                Created = DateTime.Now,
-                                Price = Helpers.Extensions.GetDecimal(articleList[i].PricePerUnit),
-                                Quantity = Helpers.Extensions.GetDecimal(articleList[i].Quantity),
-                                Total = Helpers.Extensions.GetDecimal(articleList[i].PricePerUnit) * Helpers.Extensions.GetDecimal(articleList[i].Quantity),
-                                Tax = 0,
-                                IsDeleted = false,
-                                Discriminator = "InventoryDocumentItem",
-                                InventoryDocumentId = inventoryDocument.Id,
-                                StorageId = inventoryDocument.StorageId,
-                                GoodId = _goodId,
-                                CurrentQuantity = Helpers.Extensions.GetDecimal(articleList[i].Quantity)
-                            };
-
-                            _categoryService.CreateInventoryItem(inventoryItemBasis);
-
-                            Guid ArticleGuid = _articleService.Compare(articleList[i].BarCode).Result;
-
-                            Article newArticle = new Article
-                            {
-                                Id = Guid.NewGuid(),
-                                Name = articleList[i].Name,
-                                ArticleNumber = _articleService.GetLastArticleNumber().Result,
-                                Order = 1,
-                                SubCategoryId = _categoryService.ManageSubcategories(articleList[i].Category, articleList[i].Storage).Result,
-                                BarCode = articleList[i].BarCode,
-                                Price = Helpers.Extensions.GetDecimal(articleList[i].Price)
-                            };
-
-                            if (ArticleGuid == Guid.Empty)
-                            {
-                              
-                                _articleService.Create(newArticle);
-
-                                ArticleGood newArticleGood = new ArticleGood
+                                Good newGood = new Good
                                 {
                                     Id = Guid.NewGuid(),
-                                    ArticleId = newArticle.Id,
+                                    Name = articleList[i].Name,
+                                    UnitId = _articleService.GetUnitByName("kom").Result,
+                                    LatestPrice = Helpers.Extensions.GetDecimal(articleList[i].PricePerUnit),
+                                    Volumen = 1,
+                                    Refuse = 0
+                                };
+                                if (_goodId == Guid.Empty)
+                                {
+                                    _categoryService.CreateGood(newGood);
+
+                                    _goodId = newGood.Id;
+                                }
+                                else
+                                {
+                                    _categoryService.UpdateGood(_goodId, newGood);
+                                    _goodId = newGood.Id;
+                                }
+
+
+                                InventoryItemBasis inventoryItemBasis = new InventoryItemBasis
+                                {
+                                    Id = Guid.NewGuid(),
+                                    Created = DateTime.Now,
+                                    Price = Helpers.Extensions.GetDecimal(articleList[i].PricePerUnit),
+                                    Quantity = Helpers.Extensions.GetDecimal(articleList[i].Quantity),
+                                    Total = Helpers.Extensions.GetDecimal(articleList[i].PricePerUnit) * Helpers.Extensions.GetDecimal(articleList[i].Quantity),
+                                    Tax = 0,
+                                    IsDeleted = false,
+                                    Discriminator = "InventoryDocumentItem",
+                                    InventoryDocumentId = inventoryDocument.Id,
+                                    StorageId = inventoryDocument.StorageId,
                                     GoodId = _goodId,
-                                    Quantity = 1,
-                                    ValidFrom = DateTime.Today,
-                                    ValidUntil = DateTime.Today.AddYears(2)
+                                    CurrentQuantity = Helpers.Extensions.GetDecimal(articleList[i].Quantity)
                                 };
 
-                                _categoryService.CreateArticleGood(newArticleGood);
+                                _categoryService.CreateInventoryItem(inventoryItemBasis);
 
-                            }
-                            else
-                            {
-                                _articleService.Update((Guid)ArticleGuid, newArticle);
+                                Guid ArticleGuid = _articleService.Compare(articleList[i].BarCode).Result;
 
-                                bool checkForNormative = _categoryService.CheckArticleGoods(ArticleGuid).Result;
-
-                                if (!checkForNormative)
+                                Article newArticle = new Article
                                 {
+                                    Id = Guid.NewGuid(),
+                                    Name = articleList[i].Name,
+                                    ArticleNumber = _articleService.GetLastArticleNumber().Result,
+                                    Order = 1,
+                                    SubCategoryId = _categoryService.ManageSubcategories(articleList[i].Category, articleList[i].Storage).Result,
+                                    BarCode = articleList[i].BarCode,
+                                    Price = Helpers.Extensions.GetDecimal(articleList[i].Price)
+                                };
+
+                                if (ArticleGuid == Guid.Empty)
+                                {
+
+                                    _articleService.Create(newArticle);
+
                                     ArticleGood newArticleGood = new ArticleGood
                                     {
                                         Id = Guid.NewGuid(),
@@ -378,35 +365,57 @@ namespace ImportApp.WPF.ViewModels
                                     };
 
                                     _categoryService.CreateArticleGood(newArticleGood);
+
                                 }
+                                else
+                                {
+                                    _articleService.Update((Guid)ArticleGuid, newArticle);
+
+                                    bool checkForNormative = _categoryService.CheckArticleGoods(ArticleGuid).Result;
+
+                                    if (!checkForNormative)
+                                    {
+                                        ArticleGood newArticleGood = new ArticleGood
+                                        {
+                                            Id = Guid.NewGuid(),
+                                            ArticleId = newArticle.Id,
+                                            GoodId = _goodId,
+                                            Quantity = 1,
+                                            ValidFrom = DateTime.Today,
+                                            ValidUntil = DateTime.Today.AddYears(2)
+                                        };
+
+                                        _categoryService.CreateArticleGood(newArticleGood);
+                                    }
+                                }
+
                             }
-
                         }
-                    }
 
-                    if (articleList.Count > 0)
+                        if (articleList.Count > 0)
+                        {
+                            _notifier.ShowSuccess("Storage successfully updated");
+                        }
+                        else
+                            _notifier.ShowWarning("Storage update works, but you need to provide records first.");
+
+                    }
+                    catch (Exception)
                     {
-                        _notifier.ShowSuccess("Storage successfully updated");
+                        _notifier.ShowError(Translations.ErrorMessage);
+
+                        throw;
                     }
-                    else
-                        _notifier.ShowWarning("Storage update works, but you need to provide records first.");
-
-                    articleList.Clear();
-                    ArticleCollection = null;
-                    IsLoading = false;
                 }
-                catch (Exception)
+                else
                 {
-                    _notifier.ShowError(Translations.ErrorMessage);
-
-                    throw;
+                    _notifier.ShowError("Can not import an empty list.");
                 }
-            }
-            else
-            {
-                IsLoading = false;
-                _notifier.ShowError("Can not import an empty list.");
-            }
+            });
+
+            articleList.Clear();
+            ArticleCollection = null;
+            IsLoading = false;
         }
 
         private InventoryDocument GetCreatedInventoryDocument(string? storage, List<InventoryDocument> documents)

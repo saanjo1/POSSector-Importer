@@ -13,19 +13,17 @@ namespace ImportApp.WPF.ViewModels
         private IDiscountDataService _discountDataService;
         private IStorageDataService _storeDataService;
         private ICategoryDataService _categoryDataService;
-        private ISubcategoryDataService _subCategoryDataService;
         private ISupplierDataService _supplierDataService;
         private Notifier _notifier;
 
 
-        public HomeViewModel(IArticleDataService articleService, Notifier notifier, IDiscountDataService discountDataService, IStorageDataService storeDataService, ICategoryDataService categoryDataService, ISubcategoryDataService subCategoryDataService, ISupplierDataService supplierDataService)
+        public HomeViewModel(IArticleDataService articleService, Notifier notifier, IDiscountDataService discountDataService, IStorageDataService storeDataService, ICategoryDataService categoryDataService, ISupplierDataService supplierDataService)
         {
             _articleService = articleService;
             _notifier = notifier;
             _discountDataService = discountDataService;
             _storeDataService = storeDataService;
             _categoryDataService = categoryDataService;
-            _subCategoryDataService = subCategoryDataService;
             _supplierDataService = supplierDataService;
         }
 

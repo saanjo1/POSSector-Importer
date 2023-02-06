@@ -27,13 +27,12 @@ namespace ImportApp.WPF.State.Navigators
         private ICategoryDataService _categoryService;
         private IStorageDataService _storeService;
         private IExcelDataService _excelDataService;
-        private ISubcategoryDataService _subCategoryDataService;
         private ConcurrentDictionary<string, string> _myDictionary;
         private IDiscountDataService _discountDataService;
         private ISupplierDataService _supplierDataService;
         private Notifier _notifier;
 
-        public Navigator(IArticleDataService articleService, IExcelDataService excelDataService, ICategoryDataService categoryService, IDiscountDataService discountDataService, ConcurrentDictionary<string, string> myDictionary, Notifier notifier, IStorageDataService storeService, ISubcategoryDataService subCategoryDataService, ISupplierDataService supplierDataService)
+        public Navigator(IArticleDataService articleService, IExcelDataService excelDataService, ICategoryDataService categoryService, IDiscountDataService discountDataService, ConcurrentDictionary<string, string> myDictionary, Notifier notifier, IStorageDataService storeService, ISupplierDataService supplierDataService)
         {
             _articleService = articleService;
             _excelDataService = excelDataService;
@@ -42,7 +41,6 @@ namespace ImportApp.WPF.State.Navigators
             _discountDataService = discountDataService;
             _myDictionary = myDictionary;
             _notifier = notifier;
-            _subCategoryDataService = subCategoryDataService;
             _supplierDataService = supplierDataService;
             DefaultLoad();
         }
@@ -57,7 +55,7 @@ namespace ImportApp.WPF.State.Navigators
                 switch (viewType)
                 {
                     case ViewType.Home:
-                        this.CurrentViewModel = new HomeViewModel(_articleService, _notifier, _discountDataService, _storeService, _categoryService, _subCategoryDataService, _supplierDataService);
+                        this.CurrentViewModel = new HomeViewModel(_articleService, _notifier, _discountDataService, _storeService, _categoryService, _supplierDataService);
                         Caption = "Dashboard";
                         Icon = IconChar.Home;
                         break;
@@ -94,7 +92,7 @@ namespace ImportApp.WPF.State.Navigators
 
         public void DefaultLoad()
         {
-            this.CurrentViewModel = new HomeViewModel(_articleService, _notifier, _discountDataService, _storeService, _categoryService, _subCategoryDataService, _supplierDataService);
+            this.CurrentViewModel = new HomeViewModel(_articleService, _notifier, _discountDataService, _storeService, _categoryService, _supplierDataService);
             Caption = "Dashboard";
             Icon = IconChar.Home;
         }
