@@ -15,7 +15,6 @@ using ToastNotifications.Messages;
 
 namespace ImportApp.WPF.ViewModels
 {
-
     [ObservableObject]
     public partial class ArticleStorageViewModel : BaseViewModel
     {
@@ -35,6 +34,9 @@ namespace ImportApp.WPF.ViewModels
 
         [ObservableProperty]
         private bool isEnabled;
+
+        [ObservableProperty]
+        private bool isLoading;
 
         [ObservableProperty]
         private EditStorageViewModel editArticleViewModel;
@@ -118,18 +120,25 @@ namespace ImportApp.WPF.ViewModels
         }
 
         [RelayCommand]
-        public void LoadData()
+        public async void LoadData()
         {
-            if (StorageName == "Articles")
+            IsLoading = true;
+
+            await Task.Run(() =>
             {
-                ArticleList = StorageQuantityCounter("Articles").Result;
-            }
-            else
-            {
-                ArticleList = StorageQuantityCounter("Economato").Result;
-            }
-            ArticleCollection = CollectionViewSource.GetDefaultView(ArticleList);
-            Count = ArticleList.Count;
+                if (StorageName == "Articles")
+                {
+                    ArticleList = StorageQuantityCounter("Articles").Result;
+                }
+                else
+                {
+                    ArticleList = StorageQuantityCounter("Economato").Result;
+                }
+                ArticleCollection = CollectionViewSource.GetDefaultView(ArticleList);
+                Count = ArticleList.Count;
+            });
+
+            IsLoading = false;
         }
 
         [RelayCommand]
