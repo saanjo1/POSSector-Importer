@@ -15,8 +15,8 @@ namespace ImportApp.WPF.HostBuilders
             {
                 Action<DbContextOptionsBuilder> configureDbContext = o => o.UseSqlServer(context.Configuration.GetConnectionString("sqlstring"));
 
-                services.AddDbContext<ImportAppDbContext>(configureDbContext);
-                services.AddSingleton<ImportAppDbContextFactory>(new ImportAppDbContextFactory(configureDbContext));
+                services.AddDbContext<ImporterDbContext>(configureDbContext);
+                services.AddSingleton<ImporterDbContextFactory>(new ImporterDbContextFactory(configureDbContext));
             });
 
             return hostBuilder;

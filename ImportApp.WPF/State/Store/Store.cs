@@ -12,11 +12,11 @@ namespace ImportApp.WPF.State.Store
         private BaseViewModel? currentDataGrid;
         private Notifier _notifier;
 
-        private IArticleDataService _articleService;
-        private IStorageDataService _storageDataService;
-        private ICategoryDataService _categoryDataService;
+        private IArticleService _articleService;
+        private IStorageService _storageDataService;
+        private ICategoryService _categoryDataService;
 
-        public Store(IArticleDataService articleService, Notifier notifier, IStorageDataService storageDataService, ICategoryDataService categoryDataService)
+        public Store(IArticleService articleService, Notifier notifier, IStorageService storageDataService, ICategoryService categoryDataService)
         {
             _articleService = articleService;
             _notifier = notifier;

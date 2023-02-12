@@ -41,9 +41,9 @@ namespace ImportApp.WPF
         {
             await _host!.StartAsync();
 
-            var contextFactory = _host.Services.GetRequiredService<ImportAppDbContextFactory>();
+            var contextFactory = _host.Services.GetRequiredService<ImporterDbContextFactory>();
 
-            using (ImportAppDbContext context = contextFactory.CreateDbContext())
+            using (ImporterDbContext context = contextFactory.CreateDbContext())
             {
                 await context.Database.EnsureCreatedAsync();
             }

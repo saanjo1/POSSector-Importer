@@ -1,6 +1,6 @@
 ﻿namespace ImportApp.Domain.Services
 {
-    public interface IDataGService<T>
+    public interface IGenericBaseInterface<T>
     {
         Task<ICollection<T>> GetAll();
 

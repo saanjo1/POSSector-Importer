@@ -16,13 +16,13 @@ namespace ImportApp.WPF.ViewModels
     public partial class SettingsViewModel : BaseViewModel
     {
 
-        private IDiscountDataService _discountDataService;
+        private IRuleService _discountDataService;
         private Notifier _notifier;
         private ConcurrentDictionary<string, string> _myDictionary;
         private IExcelDataService _excelDataService;
 
 
-        public SettingsViewModel(IDiscountDataService discountDataService, ConcurrentDictionary<string, string> myDictionary, Notifier notifier, IExcelDataService excelDataService)
+        public SettingsViewModel(IRuleService discountDataService, ConcurrentDictionary<string, string> myDictionary, Notifier notifier, IExcelDataService excelDataService)
         {
             _discountDataService = discountDataService;
             _myDictionary = myDictionary;

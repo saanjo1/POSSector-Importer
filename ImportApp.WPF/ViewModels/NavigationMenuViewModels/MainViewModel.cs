@@ -33,7 +33,7 @@ namespace ImportApp.WPF.ViewModels
         });
 
 
-        public MainViewModel(IArticleDataService articleService, ICategoryDataService categoryService, IExcelDataService excelDataService, IDiscountDataService discountDataService, IStorageDataService storeDataService, ISupplierDataService supplierDataService)
+        public MainViewModel(IArticleService articleService, ICategoryService categoryService, IExcelDataService excelDataService, IRuleService discountDataService, IStorageService storeDataService, ISupplierService supplierDataService)
         {
             myDictionary = new ConcurrentDictionary<string, string>();
             LoadDictionary();

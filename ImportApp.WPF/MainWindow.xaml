@@ -60,13 +60,14 @@
                         </Ellipse>
 
                         <StackPanel Orientation="Vertical" Margin="5">
-                            <TextBlock Text="POS Sector"
+                            <TextBlock Text="POS Sector Importer"
                                Foreground="{StaticResource titleColor2}"
-                               FontSize="20"
+                               FontSize="13"
                                FontFamily="Montserrat"
                                FontWeight="Medium"
                                VerticalAlignment="Center"
-                               Margin="10, 0, 0, 0"/>
+                               HorizontalAlignment="Center"
+                               Margin="10, 10, 0, 0"/>
 
                             <TextBlock Text="v1.0"
                                Foreground="{StaticResource titleColor3}"

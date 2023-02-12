@@ -16,12 +16,12 @@ public partial class EditStorageViewModel
 
     private GoodsArticlesViewModel GoodsArticlesViewModel;
     private Notifier _notifier;
-    private ICategoryDataService _categoryDataService;
-    private IStorageDataService _storageDataService;
+    private ICategoryService _categoryDataService;
+    private IStorageService _storageDataService;
     private ArticleStorageViewModel viewModel;
     private InventoryDocument inventoryDocument;
 
-    public EditStorageViewModel(GoodsArticlesViewModel goodsArticlesViewModel, Notifier notifier, ICategoryDataService categoryDataService, IStorageDataService storageDataService, ArticleStorageViewModel vm, InventoryDocument inventoryDocument)
+    public EditStorageViewModel(GoodsArticlesViewModel goodsArticlesViewModel, Notifier notifier, ICategoryService categoryDataService, IStorageService storageDataService, ArticleStorageViewModel vm, InventoryDocument inventoryDocument)
     {
         GoodsArticlesViewModel = goodsArticlesViewModel;
         viewModel = vm;

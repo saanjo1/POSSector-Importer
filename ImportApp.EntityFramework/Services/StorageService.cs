@@ -4,18 +4,18 @@ using ImportApp.EntityFramework.DBContext;
 
 namespace ImportApp.EntityFramework.Services
 {
-    public class StorageDataService : IStorageDataService
+    public class StorageService : IStorageService
     {
-        public static ImportAppDbContextFactory factory;
+        public static ImporterDbContextFactory factory;
 
-        public StorageDataService(ImportAppDbContextFactory _factory)
+        public StorageService(ImporterDbContextFactory _factory)
         {
             factory = _factory;
         }
 
         public Task<bool> Create(Storage entity)
         {
-            using (ImportAppDbContext context = factory.CreateDbContext())
+            using (ImporterDbContext context = factory.CreateDbContext())
             {
                 try
                 {
@@ -32,7 +32,7 @@ namespace ImportApp.EntityFramework.Services
 
         public Task<ICollection<Storage>> Delete(Guid id)
         {
-            using (ImportAppDbContext context = factory.CreateDbContext())
+            using (ImporterDbContext context = factory.CreateDbContext())
             {
                 Storage? entity = context.Storages.FirstOrDefault(x => x.Id == id);
                 entity.Deleted = true;
@@ -45,7 +45,7 @@ namespace ImportApp.EntityFramework.Services
 
         public Task<Storage> Get(string id)
         {
-            using (ImportAppDbContext context = factory.CreateDbContext())
+            using (ImporterDbContext context = factory.CreateDbContext())
             {
                 Storage? entity = context.Storages.FirstOrDefault(x => x.Id.ToString() == id);
                 return Task.FromResult(entity);
@@ -54,32 +54,16 @@ namespace ImportApp.EntityFramework.Services
 
         public Task<ICollection<Storage>> GetAll()
         {
-            using (ImportAppDbContext context = factory.CreateDbContext())
+            using (ImporterDbContext context = factory.CreateDbContext())
             {
                 ICollection<Storage> entities = context.Storages.ToList();
                 return Task.FromResult(entities);
             }
         }
 
-        public Task<List<string>> GetNamesOfStorages()
-        {
-            ICollection<Storage> storageCollection = GetAll().Result;
-            List<string> storages = new List<string>();
-
-            if (storageCollection.Count > 0)
-            {
-                foreach (Storage item in storageCollection)
-                {
-                    storages.Add(item.Name);
-                }
-            }
-
-            return Task.FromResult(storages);
-        }
-
         public async Task<Guid> GetStorageByName(string name)
         {
-            using (ImportAppDbContext context = factory.CreateDbContext())
+            using (ImporterDbContext context = factory.CreateDbContext())
             {
                 Storage _storage = context.Storages.FirstOrDefault(x => x.Name == name);
 
@@ -105,7 +89,7 @@ namespace ImportApp.EntityFramework.Services
 
         public Task<Storage> Update(Guid id, Storage entity)
         {
-            using (ImportAppDbContext context = factory.CreateDbContext())
+            using (ImporterDbContext context = factory.CreateDbContext())
             {
                 entity.Id = id;
                 context.Storages.Update(entity);

@@ -3,14 +3,13 @@
 namespace ImportApp.WPF.Controls
 {
     /// <summary>
-    /// Interaction logic for SelectExcelSheetModalView.xaml
+    /// Interaction logic for SetExcelSheetView.xaml
     /// </summary>
-    public partial class DiscountOptionsView : UserControl
+    public partial class SetExcelSheetView : UserControl
     {
-        public DiscountOptionsView()
+        public SetExcelSheetView()
         {
             InitializeComponent();
         }
-
     }
 }

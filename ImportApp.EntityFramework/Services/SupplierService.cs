@@ -4,18 +4,18 @@ using ImportApp.EntityFramework.DBContext;
 
 namespace ImportApp.EntityFramework.Services
 {
-    public class SupplierDataService : ISupplierDataService
+    public class SupplierService : ISupplierService
     {
-        public static ImportAppDbContextFactory factory;
+        public static ImporterDbContextFactory factory;
 
-        public SupplierDataService(ImportAppDbContextFactory _factory)
+        public SupplierService(ImporterDbContextFactory _factory)
         {
             factory = _factory;
         }
 
         public Task<bool> Create(Supplier entity)
         {
-            using (ImportAppDbContext context = factory.CreateDbContext())
+            using (ImporterDbContext context = factory.CreateDbContext())
             {
                 try
                 {
@@ -32,7 +32,7 @@ namespace ImportApp.EntityFramework.Services
 
         public Task<ICollection<Supplier>> Delete(Guid id)
         {
-            using (ImportAppDbContext context = factory.CreateDbContext())
+            using (ImporterDbContext context = factory.CreateDbContext())
             {
                 Storage? entity = context.Storages.FirstOrDefault(x => x.Id == id);
                 entity.Deleted = true;
@@ -45,7 +45,7 @@ namespace ImportApp.EntityFramework.Services
 
         public Task<Supplier> Get(string id)
         {
-            using (ImportAppDbContext context = factory.CreateDbContext())
+            using (ImporterDbContext context = factory.CreateDbContext())
             {
                 Supplier? entity = context.Suppliers.FirstOrDefault(x => x.Id.ToString() == id);
                 return Task.FromResult(entity);
@@ -54,7 +54,7 @@ namespace ImportApp.EntityFramework.Services
 
         public Task<ICollection<Supplier>> GetAll()
         {
-            using (ImportAppDbContext context = factory.CreateDbContext())
+            using (ImporterDbContext context = factory.CreateDbContext())
             {
                 ICollection<Supplier> entities = context.Suppliers.ToList();
                 return Task.FromResult(entities);
@@ -63,7 +63,7 @@ namespace ImportApp.EntityFramework.Services
 
         public Task<Supplier> Update(Guid id, Supplier entity)
         {
-            using (ImportAppDbContext context = factory.CreateDbContext())
+            using (ImporterDbContext context = factory.CreateDbContext())
             {
                 entity.Id = id;
                 context.Suppliers.Update(entity);
@@ -76,7 +76,7 @@ namespace ImportApp.EntityFramework.Services
 
         public Task<Guid> GetSupplierByName(string name)
         {
-            using (ImportAppDbContext context = factory.CreateDbContext())
+            using (ImporterDbContext context = factory.CreateDbContext())
             {
                 Supplier _supplier = context.Suppliers.FirstOrDefault(x => x.Name == name);
 
@@ -107,7 +107,7 @@ namespace ImportApp.EntityFramework.Services
         {
             List<string> _suppliersList = new List<string>();
 
-            using (ImportAppDbContext context = factory.CreateDbContext())
+            using (ImporterDbContext context = factory.CreateDbContext())
             {
                 ICollection<Supplier> suppliers = GetAll().Result;
 

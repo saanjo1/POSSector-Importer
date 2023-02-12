@@ -4,12 +4,12 @@ using ImportApp.EntityFramework.DBContext;
 
 namespace ImportApp.EntityFramework.Services
 {
-    public class DiscountDataService : IDiscountDataService
+    public class RuleService : IRuleService
     {
 
-        public static ImportAppDbContextFactory factory;
+        public static ImporterDbContextFactory factory;
 
-        public DiscountDataService(ImportAppDbContextFactory _factory)
+        public RuleService(ImporterDbContextFactory _factory)
         {
             factory = _factory;
         }
@@ -17,7 +17,7 @@ namespace ImportApp.EntityFramework.Services
 
         public Task<bool> Create(Rule entity)
         {
-            using (ImportAppDbContext context = factory.CreateDbContext())
+            using (ImporterDbContext context = factory.CreateDbContext())
             {
                 try
                 {
@@ -34,7 +34,7 @@ namespace ImportApp.EntityFramework.Services
 
         public Task<ICollection<Rule>> Delete(Guid id)
         {
-            using (ImportAppDbContext context = factory.CreateDbContext())
+            using (ImporterDbContext context = factory.CreateDbContext())
             {
                 Rule? entity = context.Rules.FirstOrDefault(x => x.Id == id);
                 entity.IsExecuted = true;
@@ -47,7 +47,7 @@ namespace ImportApp.EntityFramework.Services
 
         public Task<Rule> Get(string id)
         {
-            using (ImportAppDbContext context = factory.CreateDbContext())
+            using (ImporterDbContext context = factory.CreateDbContext())
             {
                 Rule? entity = context.Rules.FirstOrDefault(x => x.Id.ToString() == id);
                 return Task.FromResult(entity);
@@ -56,41 +56,25 @@ namespace ImportApp.EntityFramework.Services
 
         public Task<ICollection<Rule>> GetAll()
         {
-            using (ImportAppDbContext context = factory.CreateDbContext())
+            using (ImporterDbContext context = factory.CreateDbContext())
             {
                 ICollection<Rule> entities = context.Rules.ToList();
                 return Task.FromResult(entities);
             }
         }
 
-        public Task<Rule> GetDiscountByName(string name)
+        public Task<Rule> GetRuleByName(string name)
         {
-            using (ImportAppDbContext context = factory.CreateDbContext())
+            using (ImporterDbContext context = factory.CreateDbContext())
             {
                 Rule _discount = context.Rules.FirstOrDefault(x => x.Name == name);
                 return Task.FromResult(_discount);
             }
         }
 
-        public Task<List<string>> GetNamesOfDiscounst()
-        {
-            ICollection<Rule> discountCollection = GetAll().Result;
-            List<string> discounts = new List<string>();
-
-            if (discountCollection.Count > 0)
-            {
-                foreach (Rule item in discountCollection)
-                {
-                    discounts.Add(item.Name);
-                }
-            }
-
-            return Task.FromResult(discounts);
-        }
-
         public Task<Rule> Update(Guid id, Rule entity)
         {
-            using (ImportAppDbContext context = factory.CreateDbContext())
+            using (ImporterDbContext context = factory.CreateDbContext())
             {
                 entity.Id = id;
                 context.Rules.Update(entity);
@@ -101,9 +85,9 @@ namespace ImportApp.EntityFramework.Services
         }
 
 
-        public Task<bool> CreateDiscountItem(RuleItem entity)
+        public Task<bool> CreateRuleItem(RuleItem entity)
         {
-            using (ImportAppDbContext context = factory.CreateDbContext())
+            using (ImporterDbContext context = factory.CreateDbContext())
             {
                 try
                 {

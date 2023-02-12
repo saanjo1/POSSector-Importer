@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace ImportApp.WPF.Controls
 {
     /// <summary>
-    /// Interaction logic for SetDiscountsColumns.xaml
+    /// Interaction logic for ArticleColumnMapView.xaml
     /// </summary>
-    public partial class SetDiscountsColumns : UserControl
+    public partial class ArticleColumnMapView : UserControl
     {
-        public SetDiscountsColumns()
+        public ArticleColumnMapView()
         {
             InitializeComponent();
         }

@@ -23,9 +23,9 @@ namespace ImportApp.WPF.ViewModels
         private string excelFile;
 
         private readonly IExcelDataService _excelDataService;
-        private readonly IArticleDataService _articleDataService;
-        private readonly ICategoryDataService _categoryDataService;
-        private readonly IDiscountDataService _discountDataService;
+        private readonly IArticleService _articleDataService;
+        private readonly ICategoryService _categoryDataService;
+        private readonly IRuleService _discountDataService;
         private readonly Notifier _notifier;
         private readonly ConcurrentDictionary<string, string> _myDictionary;
 
@@ -190,7 +190,7 @@ namespace ImportApp.WPF.ViewModels
             }
         }
 
-        public DiscountViewModel(IExcelDataService excelDataService, Notifier notifier, ConcurrentDictionary<string, string> myDictionary, IArticleDataService articleDataService, ICategoryDataService categoryDataService, IDiscountDataService discountDataService)
+        public DiscountViewModel(IExcelDataService excelDataService, Notifier notifier, ConcurrentDictionary<string, string> myDictionary, IArticleService articleDataService, ICategoryService categoryDataService, IRuleService discountDataService)
         {
             _excelDataService = excelDataService;
             _notifier = notifier;
@@ -302,7 +302,7 @@ namespace ImportApp.WPF.ViewModels
                 int importCounter = 0;
                 int updateCounter = 0;
                 int notImported = 0;
-                int counter = _articleDataService.GetLastArticleNumber().Result;
+                int counter = _articleDataService.GetArticlesCount().Result;
 
                 if (ArticleList != null)
                 {
@@ -312,12 +312,12 @@ namespace ImportApp.WPF.ViewModels
                     {
                         for (int i = 0; i < articleList.Count; i++)
                         {
-                            var articleID = _articleDataService.Compare(articleList[i].BarCode).Result;
+                            var articleID = _articleDataService.CompareArticlesByBarcode(articleList[i].BarCode).Result;
                             if (articleID != Guid.Empty)
                             {
-                                Article article = _articleDataService.Get(articleID.ToString()).Result;
+                                var article = _articleDataService.Get(articleID.ToString()).Result;
 
-                                Rule disc = _discountDataService.GetDiscountByName(articleList[i].Discount).Result;
+                                Rule disc = _discountDataService.GetRuleByName(articleList[i].Discount).Result;
                                 if (disc != null && disc.Name == articleList[i].Discount && CheckDates(disc))
                                 {
                                     newRule = _discountDataService.Get(disc.Id.ToString()).Result;
@@ -362,7 +362,7 @@ namespace ImportApp.WPF.ViewModels
                                     NewPrice = Helpers.Extensions.GetDecimal(articleList[i].NewPrice)
                                 };
 
-                                _discountDataService.CreateDiscountItem(newRuleItem);
+                                _discountDataService.CreateRuleItem(newRuleItem);
                                 importCounter++;
                             }
                             else

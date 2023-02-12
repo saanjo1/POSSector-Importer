@@ -15,12 +15,13 @@ using ToastNotifications.Messages;
 
 namespace ImportApp.WPF.ViewModels
 {
+
     [ObservableObject]
     public partial class ArticleStorageViewModel : BaseViewModel
     {
-        private IArticleDataService _articleService;
-        private IStorageDataService _storageService;
-        private ICategoryDataService _categoryDataService;
+        private IArticleService _articleService;
+        private IStorageService _storageService;
+        private ICategoryService _categoryDataService;
         private Notifier _notifier;
 
         [ObservableProperty]
@@ -71,7 +72,7 @@ namespace ImportApp.WPF.ViewModels
 
 
 
-        public ArticleStorageViewModel(IArticleDataService articleService, string _storageName, Notifier notifier, IStorageDataService storageService, ICategoryDataService categoryDataService)
+        public ArticleStorageViewModel(IArticleService articleService, string _storageName, Notifier notifier, IStorageService storageService, ICategoryService categoryDataService)
         {
             _notifier = notifier;
             _articleService = articleService;

@@ -35,13 +35,13 @@ namespace ImportApp.WPF.ViewModels
         [ObservableProperty]
         private bool isLoading;
 
-        private IArticleDataService _articleService;
-        private ICategoryDataService _categoryService;
-        private IStorageDataService _storageService;
-        private ISupplierDataService _supplierDataService;
+        private IArticleService _articleService;
+        private ICategoryService _categoryService;
+        private IStorageService _storageService;
+        private ISupplierService _supplierDataService;
 
 
-        public ImportDataViewModel(IExcelDataService excelDataService, ICategoryDataService categoryService, IArticleDataService articleService, Notifier notifier, ConcurrentDictionary<string, string> myDictionary, IStorageDataService storageService, ISupplierDataService supplierDataService)
+        public ImportDataViewModel(IExcelDataService excelDataService, ICategoryService categoryService, IArticleService articleService, Notifier notifier, ConcurrentDictionary<string, string> myDictionary, IStorageService storageService, ISupplierService supplierDataService)
         {
             _excelDataService = excelDataService;
             _categoryService = categoryService;
@@ -284,7 +284,7 @@ namespace ImportApp.WPF.ViewModels
                         documents.Add(inventoryDocument);
                     }
 
-                    int counter = _articleService.GetLastArticleNumber().Result;
+                    int counter = _articleService.GetArticlesCount().Result;
                     try
                     {
 
@@ -336,13 +336,13 @@ namespace ImportApp.WPF.ViewModels
 
                                 _categoryService.CreateInventoryItem(inventoryItemBasis);
 
-                                Guid ArticleGuid = _articleService.Compare(articleList[i].BarCode).Result;
+                                Guid ArticleGuid = _articleService.CompareArticlesByBarcode(articleList[i].BarCode).Result;
 
                                 Article newArticle = new Article
                                 {
                                     Id = Guid.NewGuid(),
                                     Name = articleList[i].Name,
-                                    ArticleNumber = _articleService.GetLastArticleNumber().Result,
+                                    ArticleNumber = _articleService.GetArticlesCount().Result,
                                     Order = 1,
                                     SubCategoryId = _categoryService.ManageSubcategories(articleList[i].Category, articleList[i].Storage).Result,
                                     BarCode = articleList[i].BarCode,

@@ -14,11 +14,13 @@ namespace ImportApp.WPF.ViewModels
         public IStore Store { get; set; }
 
 
-        public StoreViewModel(IArticleDataService articleService, Notifier notifier, IStorageDataService storageDataService, ICategoryDataService categoryDataService)
+        public StoreViewModel(IArticleService articleService, Notifier notifier, IStorageService storageDataService, ICategoryService categoryDataService)
         {
             _notifier = notifier;
             Store = new Store(articleService, _notifier, storageDataService, categoryDataService);
         }
+
+
 
     }
 }

@@ -3,13 +3,14 @@
 namespace ImportApp.WPF.Controls
 {
     /// <summary>
-    /// Interaction logic for EditStorageControl.xaml
+    /// Interaction logic for RuleOptionsView.xaml
     /// </summary>
-    public partial class EditStorageControl : UserControl
+    public partial class RuleOptionsView : UserControl
     {
-        public EditStorageControl()
+        public RuleOptionsView()
         {
             InitializeComponent();
         }
+
     }
 }

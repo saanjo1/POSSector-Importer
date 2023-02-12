@@ -23,16 +23,16 @@ namespace ImportApp.WPF.State.Navigators
 
 
 
-        private IArticleDataService _articleService;
-        private ICategoryDataService _categoryService;
-        private IStorageDataService _storeService;
+        private IArticleService _articleService;
+        private ICategoryService _categoryService;
+        private IStorageService _storeService;
         private IExcelDataService _excelDataService;
         private ConcurrentDictionary<string, string> _myDictionary;
-        private IDiscountDataService _discountDataService;
-        private ISupplierDataService _supplierDataService;
+        private IRuleService _discountDataService;
+        private ISupplierService _supplierDataService;
         private Notifier _notifier;
 
-        public Navigator(IArticleDataService articleService, IExcelDataService excelDataService, ICategoryDataService categoryService, IDiscountDataService discountDataService, ConcurrentDictionary<string, string> myDictionary, Notifier notifier, IStorageDataService storeService, ISupplierDataService supplierDataService)
+        public Navigator(IArticleService articleService, IExcelDataService excelDataService, ICategoryService categoryService, IRuleService discountDataService, ConcurrentDictionary<string, string> myDictionary, Notifier notifier, IStorageService storeService, ISupplierService supplierDataService)
         {
             _articleService = articleService;
             _excelDataService = excelDataService;

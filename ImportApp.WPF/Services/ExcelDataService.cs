@@ -125,7 +125,7 @@ namespace ImportApp.WPF.Services
 
             bool success = _myDictionary.TryGetValue(Translations.CurrentExcelFile, out string value);
             bool sheet = _myDictionary.TryGetValue(Translations.CurrentExcelSheet, out string sheetValue);
-            FixedDiscountColumnNames templateViewModel = new FixedDiscountColumnNames();
+            FixedRuleColumns templateViewModel = new FixedRuleColumns();
 
 
             if (success && sheet)
@@ -184,7 +184,7 @@ namespace ImportApp.WPF.Services
         {
             bool success = _myDictionary.TryGetValue(Translations.CurrentExcelFile, out string value);
             bool sheet = _myDictionary.TryGetValue(Translations.CurrentExcelSheet, out string sheetValue);
-            FixedExcelColumnNames templateViewModel = new FixedExcelColumnNames();
+            FixedArticleColumns templateViewModel = new FixedArticleColumns();
 
             if (success && sheet)
             {

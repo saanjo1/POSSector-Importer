@@ -16,7 +16,7 @@ namespace ImportApp.WPF.ViewModels
     {
         private Notifier _notifier;
         public IExcelDataService? _excelDataService;
-        public ISupplierDataService? _supplierDataService;
+        public ISupplierService? _supplierDataService;
 
         [ObservableProperty]
         [NotifyCanExecuteChangedFor(nameof(SubmitCommand))]
@@ -72,7 +72,7 @@ namespace ImportApp.WPF.ViewModels
 
         private ImportDataViewModel _importDataViewModel;
 
-        public ImportArticlesModalViewModel(ImportDataViewModel importDataViewModel, IExcelDataService? excelDataService, ConcurrentDictionary<string, string> myDictionary, Notifier notifier, ISupplierDataService? supplierDataService)
+        public ImportArticlesModalViewModel(ImportDataViewModel importDataViewModel, IExcelDataService? excelDataService, ConcurrentDictionary<string, string> myDictionary, Notifier notifier, ISupplierService? supplierDataService)
         {
             _importDataViewModel = importDataViewModel;
             _excelDataService = excelDataService;
@@ -139,10 +139,6 @@ namespace ImportApp.WPF.ViewModels
         }
 
 
-        private static void LoadFixedExcelColumnNames()
-        {
-
-        }
 
     }
 }

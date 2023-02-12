@@ -34,19 +34,19 @@
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewmodels:SetArticlesColumnsViewModel}">
-                <controls:SetArticlesColumns/>
+                <controls:ArticleColumnMapView/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewmodels:DiscountOptionsViewModel}">
-                <controls:DiscountOptionsView/>
+                <controls:RuleOptionsView/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewmodels:SetDiscountsColumnsViewModel}">
-                <controls:SetDiscountsColumns/>
+                <controls:RuleColumnMapView/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewmodels:EditStorageViewModel}">
-                <controls:EditStorageControl/>
+                <controls:EditGoodsInStorage/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewmodels:DiscountViewModel}">
@@ -58,20 +58,13 @@
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewmodels:SelectExcelSheetModalViewModel}">
-                <controls:SelectExcelSheetModalView/>
+                <controls:SetExcelSheetView/>
             </DataTemplate>
-            
+
             <DataTemplate DataType="{x:Type viewmodels:SettingsViewModel}">
                 <views:SettingsView/>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type viewmodels:MapColumnForDiscountViewModel}">
-                <controls:MapColumnsForDiscount/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type viewmodels:ImportArticlesModalViewModel}">
-                <controls:ImportArticlesModal/>
-            </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewmodels:MainViewModel}">
                 <local:MainWindow/>

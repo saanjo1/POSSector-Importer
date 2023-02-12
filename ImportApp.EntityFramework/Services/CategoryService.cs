@@ -4,29 +4,18 @@ using ImportApp.EntityFramework.DBContext;
 
 namespace ImportApp.EntityFramework.Services
 {
-    public class CategoryDataService : ICategoryDataService
+    public class CategoryService : ICategoryService
     {
-        private readonly ImportAppDbContextFactory _contextFactory;
+        private readonly ImporterDbContextFactory _contextFactory;
 
-        public CategoryDataService(ImportAppDbContextFactory contextFactory)
+        public CategoryService(ImporterDbContextFactory contextFactory)
         {
             _contextFactory = contextFactory;
         }
 
-
-        public Task<Category> Compare(string value)
-        {
-            using (ImportAppDbContext context = _contextFactory.CreateDbContext())
-            {
-                var entity = context.Categories.FirstOrDefault(x => x.Id.ToString() == value);
-
-                return Task.FromResult(entity);
-            }
-        }
-
         public Task<bool> Create(Category entity)
         {
-            using (ImportAppDbContext context = _contextFactory.CreateDbContext())
+            using (ImporterDbContext context = _contextFactory.CreateDbContext())
             {
                 try
                 {
@@ -43,7 +32,7 @@ namespace ImportApp.EntityFramework.Services
 
         public Task<ICollection<Category>> Delete(Guid id)
         {
-            using (ImportAppDbContext context = _contextFactory.CreateDbContext())
+            using (ImporterDbContext context = _contextFactory.CreateDbContext())
             {
                 Category? entity = context.Categories.FirstOrDefault(x => x.Id == id);
                 entity.Deleted = true;
@@ -56,7 +45,7 @@ namespace ImportApp.EntityFramework.Services
 
         public Task<Category> Get(string id)
         {
-            using (ImportAppDbContext context = _contextFactory.CreateDbContext())
+            using (ImporterDbContext context = _contextFactory.CreateDbContext())
             {
                 Category? entity = context.Categories.FirstOrDefault(x => x.Id.ToString() == id);
                 return Task.FromResult(entity);
@@ -65,7 +54,7 @@ namespace ImportApp.EntityFramework.Services
 
         public Task<ICollection<Category>> GetAll()
         {
-            using (ImportAppDbContext context = _contextFactory.CreateDbContext())
+            using (ImporterDbContext context = _contextFactory.CreateDbContext())
             {
                 ICollection<Category> entities = context.Categories.ToList();
                 return Task.FromResult(entities);
@@ -74,7 +63,7 @@ namespace ImportApp.EntityFramework.Services
 
         public Task<Category> Update(Guid id, Category entity)
         {
-            using (ImportAppDbContext context = _contextFactory.CreateDbContext())
+            using (ImporterDbContext context = _contextFactory.CreateDbContext())
             {
                 entity.Id = id;
                 context.Categories.Update(entity);
@@ -101,9 +90,9 @@ namespace ImportApp.EntityFramework.Services
         }
 
 
-        Task<Guid> ICategoryDataService.ManageSubcategories(string ctgry, string storageId)
+        Task<Guid> ICategoryService.ManageSubcategories(string ctgry, string storageId)
         {
-            using (ImportAppDbContext context = _contextFactory.CreateDbContext())
+            using (ImporterDbContext context = _contextFactory.CreateDbContext())
             {
                 SubCategory subcategory = context.SubCategories.Where(x => x.Name == ctgry).FirstOrDefault();
                 Guid ctgryId = this.ManageCategories(ctgry, storageId).Result;
@@ -135,7 +124,7 @@ namespace ImportApp.EntityFramework.Services
 
         public Task<Guid> ManageCategories(string ctgry, string storageId)
         {
-            using (ImportAppDbContext context = _contextFactory.CreateDbContext())
+            using (ImporterDbContext context = _contextFactory.CreateDbContext())
             {
                 var category = context.Categories.Where(x => x.Name == ctgry).FirstOrDefault();
 
@@ -164,7 +153,7 @@ namespace ImportApp.EntityFramework.Services
 
         public Task<Guid> ManageStorages(string storageName)
         {
-            using (ImportAppDbContext _context = _contextFactory.CreateDbContext())
+            using (ImporterDbContext _context = _contextFactory.CreateDbContext())
             {
 
                 var storage = _context.Storages.FirstOrDefault(x => x.Name == storageName);
@@ -192,7 +181,7 @@ namespace ImportApp.EntityFramework.Services
 
         public Task<Guid> GetCategoryByName(string name)
         {
-            using (ImportAppDbContext context = _contextFactory.CreateDbContext())
+            using (ImporterDbContext context = _contextFactory.CreateDbContext())
             {
                 var _category = context.Categories.FirstOrDefault(x => x.Name == name);
 
@@ -205,7 +194,7 @@ namespace ImportApp.EntityFramework.Services
 
         public Task<bool> CreateGood(Good good)
         {
-            using (ImportAppDbContext context = _contextFactory.CreateDbContext())
+            using (ImporterDbContext context = _contextFactory.CreateDbContext())
             {
                 try
                 {
@@ -222,7 +211,7 @@ namespace ImportApp.EntityFramework.Services
 
         public Task<bool> CreateArticleGood(ArticleGood good)
         {
-            using (ImportAppDbContext context = _contextFactory.CreateDbContext())
+            using (ImporterDbContext context = _contextFactory.CreateDbContext())
             {
                 try
                 {
@@ -239,7 +228,7 @@ namespace ImportApp.EntityFramework.Services
 
         public Task<bool> CreateInventoryItem(InventoryItemBasis good)
         {
-            using (ImportAppDbContext context = _contextFactory.CreateDbContext())
+            using (ImporterDbContext context = _contextFactory.CreateDbContext())
             {
                 try
                 {
@@ -256,7 +245,7 @@ namespace ImportApp.EntityFramework.Services
 
         public Task<bool> CreateInventoryDocument(InventoryDocument good)
         {
-            using (ImportAppDbContext context = _contextFactory.CreateDbContext())
+            using (ImporterDbContext context = _contextFactory.CreateDbContext())
             {
                 try
                 {
@@ -273,7 +262,7 @@ namespace ImportApp.EntityFramework.Services
 
         public Task<Guid> GetGoodByName(string good)
         {
-            using (ImportAppDbContext context = _contextFactory.CreateDbContext())
+            using (ImporterDbContext context = _contextFactory.CreateDbContext())
             {
                 Good _good = context.Goods.FirstOrDefault(x => x.Name == good);
 
@@ -286,7 +275,7 @@ namespace ImportApp.EntityFramework.Services
 
         public Task<Good> UpdateGood(Guid id, Good entity)
         {
-            using (ImportAppDbContext context = _contextFactory.CreateDbContext())
+            using (ImporterDbContext context = _contextFactory.CreateDbContext())
             {
                 entity.Id = id;
                 context.Goods.Update(entity);
@@ -299,7 +288,7 @@ namespace ImportApp.EntityFramework.Services
 
         public Task<int> GetInventoryCounter()
         {
-            using (ImportAppDbContext context = _contextFactory.CreateDbContext())
+            using (ImporterDbContext context = _contextFactory.CreateDbContext())
             {
                 int counter = context.InventoryDocuments.Count();
 
@@ -310,7 +299,7 @@ namespace ImportApp.EntityFramework.Services
         public Task<bool> DeleteInventoryDocument(Guid docId)
         {
 
-            using (ImportAppDbContext context = _contextFactory.CreateDbContext())
+            using (ImporterDbContext context = _contextFactory.CreateDbContext())
             {
                 var doc = context.InventoryDocuments.FirstOrDefault(x => x.Id == docId);
                 if (doc != null)
@@ -325,7 +314,7 @@ namespace ImportApp.EntityFramework.Services
 
         public async Task<bool> DeleteInventoryItem(Guid docId)
         {
-            using (ImportAppDbContext context = _contextFactory.CreateDbContext())
+            using (ImporterDbContext context = _contextFactory.CreateDbContext())
             {
                 var doc = context.InventoryItemBases.FirstOrDefault(x => x.Id == docId);
                 if (doc != null)
@@ -341,7 +330,7 @@ namespace ImportApp.EntityFramework.Services
 
         public async Task<bool> CheckArticleGoods(Guid docId)
         {
-            using (ImportAppDbContext context = _contextFactory.CreateDbContext())
+            using (ImporterDbContext context = _contextFactory.CreateDbContext())
             {
                 var doc = context.ArticleGoods.FirstOrDefault(x => x.ArticleId == docId);
                 if (doc != null)

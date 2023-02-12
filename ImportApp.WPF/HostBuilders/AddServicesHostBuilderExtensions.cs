@@ -14,23 +14,23 @@ namespace ImportApp.WPF.HostBuilders
         {
             host.ConfigureServices(services =>
             {
-                services.AddSingleton<IDataGService<Article>, ArticleDataService>();
-                services.AddSingleton<IArticleDataService, ArticleDataService>();
+                services.AddSingleton<IGenericBaseInterface<Article>, ArticleService>();
+                services.AddSingleton<IArticleService, ArticleService>();
 
                 services.AddSingleton<IExcelServiceProvider<MapColumnForDiscountViewModel>, ExcelDataService>();
                 services.AddSingleton<IExcelDataService, ExcelDataService>();
 
-                services.AddSingleton<IDataGService<Rule>, DiscountDataService>();
-                services.AddSingleton<IDiscountDataService, DiscountDataService>();
+                services.AddSingleton<IGenericBaseInterface<Rule>, RuleService>();
+                services.AddSingleton<IRuleService, RuleService>();
 
-                services.AddSingleton<IDataGService<Category>, CategoryDataService>();
-                services.AddSingleton<ICategoryDataService, CategoryDataService>();
+                services.AddSingleton<IGenericBaseInterface<Category>, CategoryService>();
+                services.AddSingleton<ICategoryService, CategoryService>();
 
-                services.AddSingleton<IDataGService<Storage>, StorageDataService>();
-                services.AddSingleton<IStorageDataService, StorageDataService>();
+                services.AddSingleton<IGenericBaseInterface<Storage>, StorageService>();
+                services.AddSingleton<IStorageService, StorageService>();
 
-                services.AddSingleton<IDataGService<Supplier>, SupplierDataService>();
-                services.AddSingleton<ISupplierDataService, SupplierDataService>();
+                services.AddSingleton<IGenericBaseInterface<Supplier>, SupplierService>();
+                services.AddSingleton<ISupplierService, SupplierService>();
             });
 
             return host;

@@ -3,15 +3,13 @@
 namespace ImportApp.WPF.Controls
 {
     /// <summary>
-    /// Interaction logic for ImportArticlesModal.xaml
+    /// Interaction logic for EditGoodsInStorage.xaml
     /// </summary>
-    public partial class ImportArticlesModal : UserControl
+    public partial class EditGoodsInStorage : UserControl
     {
-        public ImportArticlesModal()
+        public EditGoodsInStorage()
         {
             InitializeComponent();
         }
-
-
     }
 }

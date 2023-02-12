@@ -3,13 +3,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ImportApp.EntityFramework.DBContext;
 
-public partial class ImportAppDbContext : DbContext
+public partial class ImporterDbContext : DbContext
 {
-    public ImportAppDbContext()
+    public ImporterDbContext()
     {
     }
 
-    public ImportAppDbContext(DbContextOptions options)
+    public ImporterDbContext(DbContextOptions options)
         : base(options)
     {
     }

@@ -9,15 +9,15 @@ namespace ImportApp.WPF.ViewModels
     public partial class HomeViewModel : BaseViewModel
     {
 
-        private IArticleDataService _articleService;
-        private IDiscountDataService _discountDataService;
-        private IStorageDataService _storeDataService;
-        private ICategoryDataService _categoryDataService;
-        private ISupplierDataService _supplierDataService;
+        private IArticleService _articleService;
+        private IRuleService _discountDataService;
+        private IStorageService _storeDataService;
+        private ICategoryService _categoryDataService;
+        private ISupplierService _supplierDataService;
         private Notifier _notifier;
 
 
-        public HomeViewModel(IArticleDataService articleService, Notifier notifier, IDiscountDataService discountDataService, IStorageDataService storeDataService, ICategoryDataService categoryDataService, ISupplierDataService supplierDataService)
+        public HomeViewModel(IArticleService articleService, Notifier notifier, IRuleService discountDataService, IStorageService storeDataService, ICategoryService categoryDataService, ISupplierService supplierDataService)
         {
             _articleService = articleService;
             _notifier = notifier;

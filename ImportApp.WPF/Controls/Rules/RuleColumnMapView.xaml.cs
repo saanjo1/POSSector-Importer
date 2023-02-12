@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace ImportApp.WPF.Controls
 {
     /// <summary>
-    /// Interaction logic for SetArticlesColumns.xaml
+    /// Interaction logic for RuleColumnMapView.xaml
     /// </summary>
-    public partial class SetArticlesColumns : UserControl
+    public partial class RuleColumnMapView : UserControl
     {
-        public SetArticlesColumns()
+        public RuleColumnMapView()
         {
             InitializeComponent();
         }
