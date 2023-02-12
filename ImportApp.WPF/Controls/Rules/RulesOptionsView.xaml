@@ -61,7 +61,7 @@
                 </StackPanel>
 
                 <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1" Margin="0,18,0,20" Grid.ColumnSpan="2">
-                    <xctk:DateTimePicker IsReadOnly="True" Value="{Binding ValidFrom, Mode=TwoWay}" Margin="0,0,0,17"/>
+                    <xctk:DateTimePicker Value="{Binding ValidFrom, Mode=TwoWay}" Margin="0,0,0,17"/>
                     <xctk:DateTimePicker Value="{Binding ValidTo, Mode=TwoWay}" Margin="0"/>
                     <CheckBox Margin="20" Width="25" Height="20" IsChecked="{Binding ActivateDiscount}"/>
                 </StackPanel>

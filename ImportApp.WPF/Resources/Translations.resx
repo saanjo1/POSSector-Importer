@@ -120,29 +120,14 @@
   <data name="Articles" xml:space="preserve">
     <value>Articles</value>
   </data>
-  <data name="CreatedArticle" xml:space="preserve">
-    <value>Article successfully created.</value>
-  </data>
-  <data name="CreatedCategory" xml:space="preserve">
-    <value>Category successfully created.</value>
-  </data>
-  <data name="CreatedDiscount" xml:space="preserve">
-    <value>Rule successfully created.</value>
-  </data>
-  <data name="CreatedStorage" xml:space="preserve">
-    <value>Storage successfully created.</value>
-  </data>
-  <data name="CreatedSubCategory" xml:space="preserve">
-    <value>SubCategory created successfully.</value>
-  </data>
-  <data name="CreatedSupplier" xml:space="preserve">
-    <value>Supplier successfully created.</value>
-  </data>
   <data name="CurrentExcelFile" xml:space="preserve">
     <value>CurrentExcelFile</value>
   </data>
   <data name="CurrentExcelSheet" xml:space="preserve">
     <value>CurrentExcelSheet</value>
+  </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>Dashboard</value>
   </data>
   <data name="DatabasePath" xml:space="preserve">
     <value>/ServerItem/Database</value>
@@ -152,6 +137,9 @@
   </data>
   <data name="DefaultSubcategory" xml:space="preserve">
     <value>DefaultSubcategory</value>
+  </data>
+  <data name="Discounts" xml:space="preserve">
+    <value>Discounts</value>
   </data>
   <data name="DuplicateArticle" xml:space="preserve">
     <value>Article with same name already exist.</value>
@@ -213,11 +201,17 @@
   <data name="ServerInstancePath" xml:space="preserve">
     <value>/ServerItem/FullServerName</value>
   </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
   <data name="SettingsError" xml:space="preserve">
     <value>First, you have to set files at Settings page.</value>
   </data>
   <data name="SheetSelectedSuccessfully" xml:space="preserve">
     <value>Excel sheet selected successfully.</value>
+  </data>
+  <data name="Storages" xml:space="preserve">
+    <value>Storages</value>
   </data>
   <data name="SuccessImport" xml:space="preserve">
     <value>Import successfully executed. </value>

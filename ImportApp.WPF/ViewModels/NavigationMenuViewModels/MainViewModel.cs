@@ -3,6 +3,7 @@ using ImportApp.Domain.Services;
 using ImportApp.WPF.State.Navigators;
 using System;
 using System.Collections.Concurrent;
+using System.ComponentModel;
 using System.Windows;
 using ToastNotifications;
 using ToastNotifications.Lifetime;
@@ -12,10 +13,10 @@ namespace ImportApp.WPF.ViewModels
 {
     public partial class MainViewModel : BaseViewModel
     {
-
         public INavigator Navigator { get; set; }
 
         public ConcurrentDictionary<string, string> myDictionary;
+
 
         Notifier notifier = new Notifier(cfg =>
         {

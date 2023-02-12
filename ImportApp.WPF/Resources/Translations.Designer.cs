@@ -70,60 +70,6 @@ namespace ImportApp.WPF.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Article successfully created..
-        /// </summary>
-        internal static string CreatedArticle {
-            get {
-                return ResourceManager.GetString("CreatedArticle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Category successfully created..
-        /// </summary>
-        internal static string CreatedCategory {
-            get {
-                return ResourceManager.GetString("CreatedCategory", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Rule successfully created..
-        /// </summary>
-        internal static string CreatedDiscount {
-            get {
-                return ResourceManager.GetString("CreatedDiscount", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Storage successfully created..
-        /// </summary>
-        internal static string CreatedStorage {
-            get {
-                return ResourceManager.GetString("CreatedStorage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to SubCategory created successfully..
-        /// </summary>
-        internal static string CreatedSubCategory {
-            get {
-                return ResourceManager.GetString("CreatedSubCategory", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Supplier successfully created..
-        /// </summary>
-        internal static string CreatedSupplier {
-            get {
-                return ResourceManager.GetString("CreatedSupplier", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to CurrentExcelFile.
         /// </summary>
         internal static string CurrentExcelFile {
@@ -138,6 +84,15 @@ namespace ImportApp.WPF.Resources {
         internal static string CurrentExcelSheet {
             get {
                 return ResourceManager.GetString("CurrentExcelSheet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dashboard.
+        /// </summary>
+        internal static string Dashboard {
+            get {
+                return ResourceManager.GetString("Dashboard", resourceCulture);
             }
         }
         
@@ -165,6 +120,15 @@ namespace ImportApp.WPF.Resources {
         internal static string DefaultSubcategory {
             get {
                 return ResourceManager.GetString("DefaultSubcategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Discounts.
+        /// </summary>
+        internal static string Discounts {
+            get {
+                return ResourceManager.GetString("Discounts", resourceCulture);
             }
         }
         
@@ -349,6 +313,15 @@ namespace ImportApp.WPF.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        internal static string Settings {
+            get {
+                return ResourceManager.GetString("Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to First, you have to set files at Settings page..
         /// </summary>
         internal static string SettingsError {
@@ -363,6 +336,15 @@ namespace ImportApp.WPF.Resources {
         internal static string SheetSelectedSuccessfully {
             get {
                 return ResourceManager.GetString("SheetSelectedSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Storages.
+        /// </summary>
+        internal static string Storages {
+            get {
+                return ResourceManager.GetString("Storages", resourceCulture);
             }
         }
         

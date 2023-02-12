@@ -5,6 +5,7 @@ using ImportApp.Domain.Services;
 using ImportApp.WPF.ViewModels;
 using System.Collections.Concurrent;
 using ToastNotifications;
+using ImportApp.WPF.Resources;
 
 namespace ImportApp.WPF.State.Navigators
 {
@@ -19,9 +20,6 @@ namespace ImportApp.WPF.State.Navigators
 
         [ObservableProperty]
         private IconChar icon;
-
-
-
 
         private IArticleService _articleService;
         private ICategoryService _categoryService;
@@ -56,27 +54,27 @@ namespace ImportApp.WPF.State.Navigators
                 {
                     case ViewType.Home:
                         this.CurrentViewModel = new HomeViewModel(_articleService, _notifier, _discountDataService, _storeService, _categoryService, _supplierDataService);
-                        Caption = "Dashboard";
+                        Caption = Translations.Dashboard;
                         Icon = IconChar.Home;
                         break;
                     case ViewType.Discounts:
                         this.CurrentViewModel = new DiscountViewModel(_excelDataService, _notifier, _myDictionary, _articleService, _categoryService, _discountDataService);
-                        Caption = "Discounts";
+                        Caption = Translations.Discounts;
                         Icon = IconChar.Percentage;
                         break;
                     case ViewType.Articles:
                         this.CurrentViewModel = new StoreViewModel(_articleService, _notifier, _storeService, _categoryService);
-                        Caption = "Store";
+                        Caption = Translations.Storages;
                         Icon = IconChar.TableList;
                         break;
                     case ViewType.ImportArticles:
                         this.CurrentViewModel = new ImportDataViewModel(_excelDataService, _categoryService, _articleService, _notifier, _myDictionary, _storeService, _supplierDataService);
-                        Caption = "Import";
+                        Caption = Translations.Articles;
                         Icon = IconChar.FileExcel;
                         break;
                     case ViewType.Settings:
                         this.CurrentViewModel = new SettingsViewModel(_discountDataService, _myDictionary, _notifier, _excelDataService);
-                        Caption = "Settings";
+                        Caption = Translations.Settings;
                         Icon = IconChar.Gear;
                         break;
                     case ViewType.Log:
