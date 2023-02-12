@@ -27,7 +27,7 @@
 
                 <controls:StoreControl DataContext="{Binding Store}" Grid.Row="0" Grid.RowSpan="3" Grid.ColumnSpan="4"/>
 
-                <ContentControl Content="{Binding Store.CurrentDataGrid}" Grid.Row="1" Grid.Column="0" Margin="10 40" Grid.RowSpan="5" Grid.ColumnSpan="5"/>
+                <ContentControl Content="{Binding Store.CurrentDataGrid}" Grid.Row="1" Grid.Column="0" Grid.RowSpan="5" Grid.ColumnSpan="5"/>
 
             </Grid>
         </Border>

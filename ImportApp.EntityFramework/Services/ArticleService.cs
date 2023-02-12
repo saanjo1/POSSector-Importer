@@ -1,6 +1,7 @@
 ﻿using ImportApp.Domain.Models;
 using ImportApp.Domain.Services;
 using ImportApp.EntityFramework.DBContext;
+using Microsoft.EntityFrameworkCore;
 
 namespace ImportApp.EntityFramework.Services
 {
@@ -13,101 +14,101 @@ namespace ImportApp.EntityFramework.Services
             factory = _factory;
         }
 
-        public Task<Guid> CompareArticlesByBarcode(string value)
+        public async Task<Guid> CompareArticlesByBarcode(string value)
         {
             using (ImporterDbContext context = factory.CreateDbContext())
             {
-                var entity = context.Articles.FirstOrDefault(x => x.BarCode == value);
+                var entity = await context.Articles.FirstOrDefaultAsync(x => x.BarCode == value);
 
                 if(entity != null)
                 {
-                    return Task.FromResult(entity.Id);
-                }
+                    return entity.Id;
+                }   
                 else
                 {
-                    return Task.FromResult(Guid.Empty);
+                    return Guid.Empty;
                 }
             }
         }
 
-        public Task<bool> Create(Article entity)
+        public async Task<bool> Create(Article entity)
         {
             using (ImporterDbContext context = factory.CreateDbContext())
             {
                 try
                 {
                     context.Add(entity);
-                    context.SaveChanges();
-                    return Task.FromResult(true);
+                    await context.SaveChangesAsync();
+                    return true;
                 }
                 catch (Exception)
                 {
-                    return Task.FromResult(false);
+                    return false;
                 }
             }
         }
 
-        public Task<ICollection<Article>> Delete(Guid id)
+        public async Task<ICollection<Article>> Delete(Guid id)
         {
             using (ImporterDbContext context = factory.CreateDbContext())
             {
-                Article? entity = context.Articles.FirstOrDefault(x => x.Id == id);
+                Article? entity = await context.Articles.FirstOrDefaultAsync(x => x.Id == id);
                 entity.Deleted = true;
 
-                context.SaveChanges();
+                context.SaveChangesAsync();
                 ICollection<Article> entities = context.Articles.ToList();
-                return Task.FromResult(entities);
+                return entities;
             }
         }
 
-        public Task<Article> Get(string id)
+        public async Task<Article> Get(string id)
         {
             using (ImporterDbContext context = factory.CreateDbContext())
             {
-                Article? entity = context.Articles.FirstOrDefault(x => x.Id.ToString() == id);
-                return Task.FromResult(entity);
+                Article? entity = await context.Articles.FirstOrDefaultAsync(x => x.Id.ToString() == id);
+                return entity;
             }
         }
 
-        public Task<ICollection<Article>> GetAll()
+        public async Task<ICollection<Article>> GetAll()
         {
             using (ImporterDbContext context = factory.CreateDbContext())
             {
-                ICollection<Article> entities = context.Articles.ToList();
-                return Task.FromResult(entities);
+                ICollection<Article> entities = await context.Articles.ToListAsync();
+                return await Task.FromResult(entities);
             }
         }
 
-        public Task<Article> Update(Guid id, Article entity)
+        public async Task<Article> Update(Guid id, Article entity)
         {
             using (ImporterDbContext context = factory.CreateDbContext())
             {
                 entity.Id = id;
                 context.Articles.Update(entity);
-                context.SaveChanges();
+                await context.SaveChangesAsync();
 
-                return Task.FromResult(entity);
+                return entity;
             }
         }
 
-        public Task<int> GetArticlesCount()
+        public async Task<int> GetArticlesCount()
         {
             using (ImporterDbContext context = factory.CreateDbContext())
             {
-                int counter = context.Articles.Count();
+                int counter = await context.Articles.CountAsync();
 
-                return Task.FromResult(++counter);
+                return await Task.FromResult(++counter);
             }
 
         }
 
-        public Task<Guid> GetUnitByName(string name)
+        public async Task<Guid> GetUnitByName(string name)
         {
             using (ImporterDbContext context = factory.CreateDbContext())
             {
-                var unit = context.MeasureUnits.FirstOrDefault(x => x.Name == name);
+                var unit = await context.MeasureUnits.FirstOrDefaultAsync(x => x.Name == name);
                 if (unit != null)
-                    return Task.FromResult(unit.Id);
+                    return await Task.FromResult(unit.Id);
                 else
                 {
                     MeasureUnit newUnit = new MeasureUnit()
@@ -116,7 +117,7 @@ namespace ImportApp.EntityFramework.Services
                         Name = name
                     };
 
-                    return Task.FromResult(newUnit.Id);
+                    return newUnit.Id;
                 }
             }
         }

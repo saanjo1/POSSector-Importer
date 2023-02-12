@@ -39,7 +39,6 @@ namespace ImportApp.WPF.Services
                 ExcelFile = openFIleDialog.FileName;
                 return await Task.FromResult(ExcelFile);
             }
-
             return null;
         }
 
@@ -177,8 +176,6 @@ namespace ImportApp.WPF.Services
                 return null;
             }
         }
-
-
 
         public async Task<ObservableCollection<ImportArticlesModalViewModel>> ReadFromExcel(ConcurrentDictionary<string, string> _myDictionary, ImportArticlesModalViewModel viewModel = null)
         {
