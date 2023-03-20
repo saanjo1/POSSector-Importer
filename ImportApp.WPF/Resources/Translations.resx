@@ -171,6 +171,9 @@
   <data name="ImportException" xml:space="preserve">
     <value>Can not import an empty list of items.</value>
   </data>
+  <data name="InventoryDocuments" xml:space="preserve">
+    <value>Inventory documents</value>
+  </data>
   <data name="NoCategories" xml:space="preserve">
     <value>Create button disabled. No categories in DB.</value>
   </data>

@@ -223,6 +223,15 @@ namespace ImportApp.WPF.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Inventory documents.
+        /// </summary>
+        internal static string InventoryDocuments {
+            get {
+                return ResourceManager.GetString("InventoryDocuments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create button disabled. No categories in DB..
         /// </summary>
         internal static string NoCategories {

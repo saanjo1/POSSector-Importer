@@ -1,6 +1,7 @@
 ﻿using ImportApp.Domain.Models;
 using ImportApp.Domain.Services;
 using ImportApp.EntityFramework.DBContext;
+using System.Collections.ObjectModel;
 
 namespace ImportApp.EntityFramework.Services
 {
@@ -339,6 +340,33 @@ namespace ImportApp.EntityFramework.Services
                 }
 
                 return await Task.FromResult(false);
+            }
+        }
+
+        public Task<ObservableCollection<InventoryDocument>> GetInventoryDocuments()
+        {
+            using (ImporterDbContext context = _contextFactory.CreateDbContext())
+            {
+                ObservableCollection<InventoryDocument> inventoryDocuments = new ObservableCollection<InventoryDocument>(); 
+                var listOfInventoryDocuments = context.InventoryDocuments.OrderBy(x => x.Created).Where(x => x.IsDeleted == false).ToList();
+
+                foreach (var inventoryDocument in listOfInventoryDocuments)
+                {
+                    inventoryDocuments.Add(inventoryDocument);
+                }
+
+                return Task.FromResult(inventoryDocuments);
+
+            }
+        }
+
+        public Task<decimal?> GetTotalInventoryItems(string _documentId)
+        {
+            using (ImporterDbContext context = _contextFactory.CreateDbContext())
+            {
+                var total = context.InventoryItemBases.Where(x => x.Id.ToString() == _documentId).Sum(x => x.Total);
+
+                return Task.FromResult(total);
             }
         }
     }

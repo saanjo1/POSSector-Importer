@@ -1,4 +1,5 @@
 ﻿using ImportApp.Domain.Models;
+using System.Collections.ObjectModel;
 
 namespace ImportApp.Domain.Services
 {
@@ -15,6 +16,10 @@ namespace ImportApp.Domain.Services
         Task<Guid> GetGoodByName(string good);
         Task<bool> CreateInventoryItem(InventoryItemBasis good);
         Task<bool> CreateInventoryDocument(InventoryDocument good);
+
+        Task<ObservableCollection<InventoryDocument>> GetInventoryDocuments();
+
+        Task<decimal?> GetTotalInventoryItems(string _documentId);
 
         Task<bool> DeleteInventoryDocument(Guid good);
 

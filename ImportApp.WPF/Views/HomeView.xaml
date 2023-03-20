@@ -15,7 +15,6 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -55,63 +54,43 @@
             </StackPanel>
 
             </StackPanel>
+        <StackPanel Orientation="Vertical" Margin="10 50" Grid.Row="1" Grid.ColumnSpan="6">
+            <TextBlock Style="{StaticResource textBlockStyle}" Text="{Binding Title}" HorizontalAlignment="Left" FontSize="25" FontWeight="Light" Foreground="{StaticResource titleColor2}"/>
 
-        <Border Grid.Row="1" Grid.Column="0" BorderBrush="White" BorderThickness="1"  Background="{StaticResource BrushPrimary8}" Height="200" Width="400" CornerRadius="10">
-            <StackPanel>
-                <StackPanel Orientation="Vertical" Margin="20">
-                    <StackPanel Orientation="Horizontal" Margin="0 20">
-                        <fa:IconImage Icon="Store" Foreground="{StaticResource color3}" Height="20" Width="20"></fa:IconImage>
-                        <Label Content="  Storages" FontSize="16" FontWeight="Regular" Foreground="White"/>
-                    </StackPanel>
-                    <TextBlock Text="You can organize your storage anytime you" FontSize="18" Foreground="White"/>
-                    <TextBlock Text="want. Store correction button can help you " FontSize="18" Foreground="White"/>
-                    <TextBlock Text="to correct quantities of articles. " FontSize="18" Foreground="White"/>
-                </StackPanel>
-            </StackPanel>
-        </Border>
+            <DataGrid Margin="-15 30"  Grid.ColumnSpan="2" Grid.Row="1" Name="InventoryDocumentsGrid" ItemsSource="{Binding InventoryCollection, Mode=TwoWay}" RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" Style="{DynamicResource DataGridStyle1}">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="Date and time" IsReadOnly="True" Width="500">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Border Width="25" Height="25" CornerRadius="50" Margin="-20" Background="{Binding BgColor}">
+                                        <TextBlock Text="{Binding Character}" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" Margin="0 0 0 1"/>
+                                    </Border>
+                                    <TextBlock Text="{Binding DateTime}" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="Supplier" Binding="{Binding Supplier}" IsReadOnly="false" Width="*"/>
+                    <DataGridTextColumn Header="Total prices per unit" Binding="{Binding TotalInputPrice}" IsReadOnly="false" Width="*"/>
+                    <DataGridTextColumn Header="Total selling price" Binding="{Binding Quantity}" IsReadOnly="false" Width="*"/>
+                    <DataGridTextColumn Header="Total taxes" Binding="{Binding Price}" IsReadOnly="false" Width="*"/>
+                    <DataGridTextColumn Header="Gross profit" Binding="{Binding Price}" IsReadOnly="false" Width="*"/>
+                    <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Margin="15 0 0 0" Style="{StaticResource gridRemoveButton}" Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=DataContext.DeleteArticleCommand}" CommandParameter="{Binding}">
+                                        <fa:IconImage Icon="Remove" Style="{StaticResource gridButtonIcon}"/>
+                                    </Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
 
-        <Border Grid.Row="1" Grid.Column="1"  BorderBrush="White" BorderThickness="1"  Background="{StaticResource BrushPrimary8}" Height="200" Width="400" CornerRadius="10">
-            <StackPanel>
-                <StackPanel Orientation="Vertical" Margin="20">
-                    <StackPanel Orientation="Horizontal" Margin="0 20">
-                        <fa:IconImage Icon="Percent" Foreground="{StaticResource color4}" Height="20" Width="20"></fa:IconImage>
-                        <Label Content="  Discounts" FontSize="16" FontWeight="Regular" Foreground="White"/>
-                    </StackPanel>
-                    <TextBlock Text="Inserting an Excel table with specific discounts" FontSize="18" Foreground="White"/>
-                    <TextBlock Text="and activating them has never been easier. " FontSize="18" Foreground="White"/>
-                    <TextBlock Text="Find it on Discounts page. " FontSize="18" Foreground="White"/>
-                </StackPanel>
-            </StackPanel>
-        </Border>
-
-        <Border Grid.Row="2" Grid.Column="0" BorderBrush="White" BorderThickness="1"   Background="{StaticResource BrushPrimary8}" Height="200" Width="400" CornerRadius="10">
-            <StackPanel>
-                <StackPanel Orientation="Vertical" Margin="20">
-                    <StackPanel Orientation="Horizontal" Margin="0 20">
-                        <fa:IconImage Icon="Upload" Foreground="{StaticResource color6}" Height="20" Width="20"></fa:IconImage>
-                        <Label Content="  Import articles" FontSize="16" FontWeight="Regular" Foreground="White"/>
-                    </StackPanel>
-                    <TextBlock Text="Lists with several hundred items are properly " FontSize="18" Foreground="White"/>
-                    <TextBlock Text="imported into the storage in just a" FontSize="18" Foreground="White"/>
-                    <TextBlock Text="few seconds.. " FontSize="18" Foreground="White"/>
-                </StackPanel>
-            </StackPanel>
-        </Border>
-
-        <Border Grid.Row="2" Grid.Column="1" BorderBrush="White" BorderThickness="1" Background="{StaticResource BrushPrimary8}" Height="200" Width="400" CornerRadius="10">
-            <StackPanel>
-                <StackPanel Orientation="Vertical" Margin="20">
-                    <StackPanel Orientation="Horizontal" Margin="0 20">
-                        <fa:IconImage Icon="Gear" Foreground="{StaticResource color10}" Height="20" Width="20"></fa:IconImage>
-                        <Label Content="  Settings" FontSize="16" FontWeight="Regular" Foreground="White"/>
-                    </StackPanel>
-                    <TextBlock Text="Settings are the most important part of the " FontSize="18" Foreground="White"/>
-                    <TextBlock Text="application. Before each action, check the" FontSize="18" Foreground="White"/>
-                    <TextBlock Text="settings and adjust them to the desired ones." FontSize="18" Foreground="White"/>
-                </StackPanel>
-            </StackPanel>
-        </Border>
-        
         <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="25 50 0 0"  VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.ColumnSpan="3">
             <fa:IconImage Icon="Calendar" Width="25" Height="25" Foreground="{StaticResource color8}"/>
             <TextBlock Margin="10 2 0 0" Style="{StaticResource DateTimeTextBlock}" FontSize="18" Text="{Binding Source={x:Static sys:DateTime.Now},
