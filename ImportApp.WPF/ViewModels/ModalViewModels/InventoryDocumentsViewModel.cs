@@ -27,7 +27,10 @@ namespace ImportApp.WPF.ViewModels.ModalViewModels
         private string totalIncome;
 
         [ObservableProperty]
-        private string totalTaxes;
+        private string totalTaxes;  
+        
+        [ObservableProperty]
+        private decimal pricewithoutTaxes;
 
 
         public InventoryDocumentsViewModel()

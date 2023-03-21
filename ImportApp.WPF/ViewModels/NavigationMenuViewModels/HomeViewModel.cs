@@ -8,6 +8,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Data;
 using ToastNotifications;
 
@@ -25,6 +26,9 @@ namespace ImportApp.WPF.ViewModels
         private string title;
 
         [ObservableProperty]
+        private bool isLoading;
+
+        [ObservableProperty]
         private ObservableCollection<InventoryDocumentsViewModel> listOfInventories;
 
         [ObservableProperty]
@@ -39,24 +43,31 @@ namespace ImportApp.WPF.ViewModels
             LoadInventoryDocuments();
         }
 
-        private void LoadInventoryDocuments()
+        private async void LoadInventoryDocuments()
         {
-            var inventoryDocuments = _categoryService.GetInventoryDocuments().Result;
+            IsLoading = true;
 
-            ListOfInventories = new ObservableCollection<InventoryDocumentsViewModel>();
-
-            foreach (var inventoryDocument in inventoryDocuments.Where(x=>x.SupplierId !=null))
+            await Task.Run(() =>
             {
-                ListOfInventories.Add(new InventoryDocumentsViewModel
+
+                var inventoryDocuments = _categoryService.GetInventoryDocuments().Result;
+
+                ListOfInventories = new ObservableCollection<InventoryDocumentsViewModel>();
+
+                foreach (var inventoryDocument in inventoryDocuments.Where(x => x.SupplierId != null))
                 {
-                    DateTime = inventoryDocument.Created.ToString("dd.MM.yyyy hh:mm"),
-                    TotalInputPrice = GetTotalIncome(inventoryDocument),
-                    Supplier = _supplierDataService.Get(inventoryDocument.SupplierId.ToString()).Result.Name != null ? _supplierDataService.Get(inventoryDocument.SupplierId.ToString()).Result.Name : "- - -"
-                });
-            }
+                    ListOfInventories.Add(new InventoryDocumentsViewModel
+                    {
+                        DateTime = inventoryDocument.Created.ToString("dd.MM.yyyy hh:mm"),
+                        TotalInputPrice = GetTotalIncome(inventoryDocument),
+                        Supplier = _supplierDataService.Get(inventoryDocument.SupplierId.ToString()).Result.Name != null ? _supplierDataService.Get(inventoryDocument.SupplierId.ToString()).Result.Name : "- - -"
+                    });
+                }
 
+                InventoryCollection = CollectionViewSource.GetDefaultView(ListOfInventories);
+            });
 
-            inventoryCollection = CollectionViewSource.GetDefaultView(ListOfInventories);
+            IsLoading = false;
         }
 
 

@@ -5,14 +5,18 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:sys="clr-namespace:System;assembly=System.Runtime"
              xmlns:local="clr-namespace:ImportApp.WPF.Views"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf" xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp" xmlns:modalcontrol="clr-namespace:ModalControl;assembly=ModalControl"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf" xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp" xmlns:modalcontrol="clr-namespace:ModalControl;assembly=ModalControl" xmlns:custom="clr-namespace:LoadingSpinnerControl;assembly=LoadingSpinnerControl"
              x:Class="ImportApp.WPF.Views.HomeView"
              mc:Ignorable="d"
              FontWeight="ExtraLight"
              FontFamily="Lucidatypewriter"
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+    </UserControl.Resources>
     <Grid Margin="10">
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
@@ -54,12 +58,29 @@
             </StackPanel>
 
             </StackPanel>
-        <StackPanel Orientation="Vertical" Margin="10 50" Grid.Row="1" Grid.ColumnSpan="6">
+        <StackPanel Orientation="Vertical" Grid.Row="1" Grid.ColumnSpan="6">
             <TextBlock Style="{StaticResource textBlockStyle}" Text="{Binding Title}" HorizontalAlignment="Left" FontSize="25" FontWeight="Light" Foreground="{StaticResource titleColor2}"/>
+            </StackPanel>
 
-            <DataGrid Margin="-15 30"  Grid.ColumnSpan="2" Grid.Row="1" Name="InventoryDocumentsGrid" ItemsSource="{Binding InventoryCollection, Mode=TwoWay}" RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" Style="{DynamicResource DataGridStyle1}">
+        <Border Grid.Row="2" 
+        Visibility="{Binding IsLoading, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource BoolToVis}}"
+                Margin="30 0" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="5" Panel.ZIndex="3" Background="White" BorderThickness="3" BorderBrush="Black" Padding="20" CornerRadius="20">
+            <Grid>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <custom:LoadingSpinner Color="{StaticResource panelColor}" Thickness="10" IsLoading="{Binding IsLoading, UpdateSourceTrigger=PropertyChanged}" Width="100" Height="100"/>
+                <TextBlock FontWeight="SemiBold"  Grid.Row="1" Foreground="{StaticResource panelActiveColor}" FontSize="28" Margin="0 10" Text="Loading . . . "/>
+
+            </Grid>
+        </Border>
+
+        <DataGrid Margin="-15 60"  Grid.ColumnSpan="2" Grid.Row="2" Name="InventoryDocumentsGrid" ItemsSource="{Binding InventoryCollection, Mode=TwoWay}" RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" Style="{DynamicResource DataGridStyle1}">
                 <DataGrid.Columns>
-                    <DataGridTemplateColumn Header="Date and time" IsReadOnly="True" Width="500">
+                <DataGridTemplateColumn Header="Date and time" IsReadOnly="True" Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
@@ -71,25 +92,25 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn Header="Supplier" Binding="{Binding Supplier}" IsReadOnly="false" Width="*"/>
-                    <DataGridTextColumn Header="Total prices per unit" Binding="{Binding TotalInputPrice}" IsReadOnly="false" Width="*"/>
-                    <DataGridTextColumn Header="Total selling price" Binding="{Binding Quantity}" IsReadOnly="false" Width="*"/>
-                    <DataGridTextColumn Header="Total taxes" Binding="{Binding Price}" IsReadOnly="false" Width="*"/>
-                    <DataGridTextColumn Header="Gross profit" Binding="{Binding Price}" IsReadOnly="false" Width="*"/>
-                    <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="*">
+                <DataGridTextColumn Header="Supplier" Binding="{Binding Supplier}" IsReadOnly="true" Width="*" FontWeight="SemiBold"/>
+                <DataGridTextColumn Header="Total prices per unit" Binding="{Binding TotalInputPrice}" IsReadOnly="true" Width="*" FontWeight="Bold"/>
+                <DataGridTextColumn Header="Total price without taxes" Binding="{Binding BasicPrice}" IsReadOnly="true" Width="*"/>
+                <DataGridTextColumn Header="Total selling price" Binding="{Binding Quantity}" IsReadOnly="true" Width="*"/>
+                <DataGridTextColumn Header="Total taxes" Binding="{Binding Price}" IsReadOnly="true" Width="*"/>
+                <DataGridTextColumn Header="Gross profit" Binding="{Binding Price}" IsReadOnly="true" Width="*"/>
+                <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <Button Margin="15 0 0 0" Style="{StaticResource gridRemoveButton}" Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=DataContext.DeleteArticleCommand}" CommandParameter="{Binding}">
-                                        <fa:IconImage Icon="Remove" Style="{StaticResource gridButtonIcon}"/>
-                                    </Button>
+                                    <Button Margin="15 0 0 0" Style="{StaticResource gridEditButton}" Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=DataContext.DeleteArticleCommand}" CommandParameter="{Binding}">
+                                    <TextBlock Text="Details"/>
+                                </Button>
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
-        </StackPanel>
 
         <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="25 50 0 0"  VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.ColumnSpan="3">
             <fa:IconImage Icon="Calendar" Width="25" Height="25" Foreground="{StaticResource color8}"/>

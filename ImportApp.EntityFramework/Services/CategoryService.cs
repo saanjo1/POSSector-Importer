@@ -348,8 +348,7 @@ namespace ImportApp.EntityFramework.Services
             using (ImporterDbContext context = _contextFactory.CreateDbContext())
             {
                 ObservableCollection<InventoryDocument> inventoryDocuments = new ObservableCollection<InventoryDocument>(); 
-                var listOfInventoryDocuments = context.InventoryDocuments.OrderBy(x => x.Created).Where(x => x.IsDeleted == false).ToList();
-
+                var listOfInventoryDocuments = context.InventoryDocuments.OrderByDescending(x=>x.Created).Where(x => x.IsDeleted == false).ToList();
                 foreach (var inventoryDocument in listOfInventoryDocuments)
                 {
                     inventoryDocuments.Add(inventoryDocument);
@@ -360,13 +359,13 @@ namespace ImportApp.EntityFramework.Services
             }
         }
 
-        public Task<decimal?> GetTotalInventoryItems(string _documentId)
+        public Task<decimal> GetTotalInventoryItems(string _documentId)
         {
             using (ImporterDbContext context = _contextFactory.CreateDbContext())
             {
-                var total = context.InventoryItemBases.Where(x => x.Id.ToString() == _documentId).Sum(x => x.Total);
+                decimal? total = context.InventoryItemBases.Where(x => x.InventoryDocumentId.ToString() == _documentId).Sum(x => x.Total);
 
-                return Task.FromResult(total);
+                return Task.FromResult(Math.Round((decimal)total, 2));
             }
         }
     }

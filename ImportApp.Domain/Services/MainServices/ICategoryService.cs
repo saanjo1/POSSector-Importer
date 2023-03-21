@@ -19,7 +19,7 @@ namespace ImportApp.Domain.Services
 
         Task<ObservableCollection<InventoryDocument>> GetInventoryDocuments();
 
-        Task<decimal?> GetTotalInventoryItems(string _documentId);
+        Task<decimal> GetTotalInventoryItems(string _documentId);
 
         Task<bool> DeleteInventoryDocument(Guid good);
 
