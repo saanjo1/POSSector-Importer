@@ -20,6 +20,7 @@ namespace ImportApp.WPF.ViewModels
 
         private readonly ICategoryService _categoryService;
         private readonly ISupplierService _supplierDataService;
+        private readonly IArticleService _articleService;
 
 
         [ObservableProperty]
@@ -29,16 +30,24 @@ namespace ImportApp.WPF.ViewModels
         private bool isLoading;
 
         [ObservableProperty]
+        private bool isShowDetailsOpen;
+
+        [ObservableProperty]
         private ObservableCollection<InventoryDocumentsViewModel> listOfInventories;
+
+        [ObservableProperty]
+        private InventoryDocumentsDetails inventoryDocumentDetails;
+
 
         [ObservableProperty]
         private ICollectionView inventoryCollection;
 
 
-        public HomeViewModel(ICategoryService categoryService, ISupplierService supplierDataService)
+        public HomeViewModel(ICategoryService categoryService, ISupplierService supplierDataService, IArticleService articleService)
         {
             _categoryService = categoryService;
             _supplierDataService = supplierDataService;
+            _articleService = articleService;
             Title = Translations.InventoryDocuments;
             LoadInventoryDocuments();
         }
@@ -60,7 +69,8 @@ namespace ImportApp.WPF.ViewModels
                     {
                         DateTime = inventoryDocument.Created.ToString("dd.MM.yyyy hh:mm"),
                         TotalInputPrice = GetTotalIncome(inventoryDocument),
-                        Supplier = _supplierDataService.Get(inventoryDocument.SupplierId.ToString()).Result.Name != null ? _supplierDataService.Get(inventoryDocument.SupplierId.ToString()).Result.Name : "- - -"
+                        Supplier = _supplierDataService.Get(inventoryDocument.SupplierId.ToString()).Result.Name != null ? _supplierDataService.Get(inventoryDocument.SupplierId.ToString()).Result.Name : "- - -",
+                        TotalSoldPrice = _articleService.GetTotalSellingPrice(inventoryDocument).Result
                     });
                 }
 
@@ -68,6 +78,12 @@ namespace ImportApp.WPF.ViewModels
             });
 
             IsLoading = false;
+        }
+
+        [RelayCommand]
+        public void ShowInventoryDetails(InventoryDocumentsViewModel parameter)
+        {
+            IsShowDetailsOpen = true;
         }
 
 

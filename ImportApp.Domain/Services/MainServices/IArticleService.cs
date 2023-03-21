@@ -11,6 +11,6 @@ namespace ImportApp.Domain.Services
         Task<Guid> GetGoodId(string name);
         Task<List<Good>> GetGoods();
         Task<decimal> GroupGoodsById(Guid goodId, Guid storageId);
-
+        Task<decimal> GetTotalSellingPrice(InventoryDocument inventoryDocument);
     }
 }

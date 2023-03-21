@@ -26,6 +26,11 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
+        <modalcontrol:Modal Panel.ZIndex="21" Background="Transparent" IsOpen="{Binding IsShowInventoryDetails}" Margin="50 0 0 0" Height="500" Grid.RowSpan="3" Grid.ColumnSpan="5">
+            <ContentControl Content="{Binding EditArticleViewModel}" Background="{StaticResource panelActiveColor}"/>
+        </modalcontrol:Modal>
+        
+        
         <StackPanel Grid.Row="0" Grid.ColumnSpan="2"
                     HorizontalAlignment="Center"
                       Orientation="Horizontal" Margin="0 0 90 20"
@@ -94,15 +99,12 @@
                     </DataGridTemplateColumn>
                 <DataGridTextColumn Header="Supplier" Binding="{Binding Supplier}" IsReadOnly="true" Width="*" FontWeight="SemiBold"/>
                 <DataGridTextColumn Header="Total prices per unit" Binding="{Binding TotalInputPrice}" IsReadOnly="true" Width="*" FontWeight="Bold"/>
-                <DataGridTextColumn Header="Total price without taxes" Binding="{Binding BasicPrice}" IsReadOnly="true" Width="*"/>
-                <DataGridTextColumn Header="Total selling price" Binding="{Binding Quantity}" IsReadOnly="true" Width="*"/>
-                <DataGridTextColumn Header="Total taxes" Binding="{Binding Price}" IsReadOnly="true" Width="*"/>
-                <DataGridTextColumn Header="Gross profit" Binding="{Binding Price}" IsReadOnly="true" Width="*"/>
+                <DataGridTextColumn Header="Total selling price" Binding="{Binding TotalSoldPrice}" IsReadOnly="true" Width="*"/>
                 <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <Button Margin="15 0 0 0" Style="{StaticResource gridEditButton}" Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=DataContext.DeleteArticleCommand}" CommandParameter="{Binding}">
+                                    <Button Margin="15 0 0 0" Style="{StaticResource gridEditButton}" Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=DataContext.ShowInventoryDetailsCommand}" CommandParameter="{Binding}">
                                     <TextBlock Text="Details"/>
                                 </Button>
                                 </StackPanel>

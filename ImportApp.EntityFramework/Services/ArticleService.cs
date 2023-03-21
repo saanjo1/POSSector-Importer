@@ -2,6 +2,8 @@
 using ImportApp.Domain.Services;
 using ImportApp.EntityFramework.DBContext;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
+using System.Security.Cryptography.X509Certificates;
 
 namespace ImportApp.EntityFramework.Services
 {
@@ -168,6 +170,24 @@ namespace ImportApp.EntityFramework.Services
             }
 
             return await Task.FromResult(goods);
+        }
+
+        public Task<decimal> GetTotalSellingPrice(InventoryDocument inventoryDocument)
+        {
+            using (ImporterDbContext context = factory.CreateDbContext())
+            {
+                List<Guid?> listofGoodIds = context.InventoryItemBases.Where(x => x.InventoryDocumentId == inventoryDocument.Id).Select(x=>x.GoodId).ToList();
+                decimal total = 0;
+
+                foreach (var item in listofGoodIds)
+                {
+                    Guid? articleId = context.ArticleGoods.Where(x => x.GoodId == item).Select(x => x.ArticleId).FirstOrDefault();
+                    total += context.Articles.Where(x => x.Id == articleId).Select(x => x.Price).FirstOrDefault();
+                }
+
+
+                return Task.FromResult(Math.Round(total, 2));
+            }
         }
     }
 }

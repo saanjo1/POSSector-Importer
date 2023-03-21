@@ -53,7 +53,7 @@ namespace ImportApp.WPF.State.Navigators
                 switch (viewType)
                 {
                     case ViewType.Home:
-                        this.CurrentViewModel = new HomeViewModel(_categoryService, _supplierDataService);
+                        this.CurrentViewModel = new HomeViewModel(_categoryService, _supplierDataService, _articleService);
                         Caption = Translations.Dashboard;
                         Icon = IconChar.Home;
                         break;
@@ -90,7 +90,7 @@ namespace ImportApp.WPF.State.Navigators
 
         public void DefaultLoad()
         {
-            this.CurrentViewModel = new HomeViewModel(_categoryService, _supplierDataService);
+            this.CurrentViewModel = new HomeViewModel(_categoryService, _supplierDataService, _articleService);
             Caption = "Dashboard";
             Icon = IconChar.Home;
         }
