@@ -23,7 +23,7 @@
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
 
         <modalcontrol:Modal Panel.ZIndex="21" Background="Transparent" IsOpen="{Binding IsShowInventoryDetails}" Margin="50 0 0 0" Height="500" Grid.RowSpan="3" Grid.ColumnSpan="5">
@@ -83,8 +83,16 @@
             </Grid>
         </Border>
 
-        <DataGrid Margin="-15 60"  Grid.ColumnSpan="2" Grid.Row="2" Name="InventoryDocumentsGrid" ItemsSource="{Binding InventoryCollection, Mode=TwoWay}" RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" Style="{DynamicResource DataGridStyle1}">
-                <DataGrid.Columns>
+        <DataGrid Margin="-15 60"  Grid.ColumnSpan="1" Grid.Row="2" Name="InventoryDocumentsGrid" 
+                  ItemsSource="{Binding InventoryCollection, Mode=TwoWay}" RowStyle="{DynamicResource DataGridRowStyle1}"
+                  ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}"
+                  CellStyle="{DynamicResource DataGridCellStyle1}" Style="{DynamicResource DataGridStyle1}">
+            <DataGrid.Resources>
+                <Style x:Key="LeftAlignCellStyle" TargetType="{x:Type TextBlock}">
+                    <Setter Property="HorizontalAlignment" Value="Left" />
+                </Style>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
                 <DataGridTemplateColumn Header="Date and time" IsReadOnly="True" Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -97,13 +105,21 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Supplier" Binding="{Binding Supplier}" IsReadOnly="true" Width="*" FontWeight="SemiBold"/>
-                <DataGridTextColumn Header="Total prices per unit" Binding="{Binding TotalInputPrice}" IsReadOnly="true" Width="*" FontWeight="Bold"/>
-                <DataGridTextColumn Header="Total selling price" Binding="{Binding TotalSoldPrice}" IsReadOnly="true" Width="*"/>
+                <DataGridTextColumn Header="Purchase price" Binding="{Binding TotalInputPrice}" IsReadOnly="true" Width="*" FontWeight="Bold" ElementStyle="{StaticResource LeftAlignCellStyle}"/>
+                <DataGridTextColumn Header="Stock items price" Binding="{Binding TotalSoldPrice}" IsReadOnly="true" Width="*" ElementStyle="{StaticResource LeftAlignCellStyle}"/>
+                <DataGridTextColumn Header="Sold items price" Binding="{Binding TotalSoldPrice}" IsReadOnly="true" Width="*" ElementStyle="{StaticResource LeftAlignCellStyle}"/>
+                <DataGridTextColumn Header="Sold items base price" Binding="{Binding TotalSoldPrice}" IsReadOnly="true" Width="*" ElementStyle="{StaticResource LeftAlignCellStyle}"/>
+                <DataGridTextColumn Header="Sold items tax amount" Binding="{Binding TotalSoldPrice}" IsReadOnly="true" Width="*" ElementStyle="{StaticResource LeftAlignCellStyle}"/>
                 <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="*">
-                        <DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.HeaderStyle>
+                        <Style TargetType="{x:Type DataGridColumnHeader}" BasedOn="{StaticResource DataGridColumnHeaderStyle1}">
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                            <Setter Property="Margin" Value="20 0 0 0" />
+                        </Style>
+                    </DataGridTemplateColumn.HeaderStyle>
+                    <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                     <Button Margin="15 0 0 0" Style="{StaticResource gridEditButton}" Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=DataContext.ShowInventoryDetailsCommand}" CommandParameter="{Binding}">
                                     <TextBlock Text="Details"/>
                                 </Button>
@@ -118,6 +134,10 @@
             <fa:IconImage Icon="Calendar" Width="25" Height="25" Foreground="{StaticResource color8}"/>
             <TextBlock Margin="10 2 0 0" Style="{StaticResource DateTimeTextBlock}" FontSize="18" Text="{Binding Source={x:Static sys:DateTime.Now},
                   StringFormat='{}{0:dddd, MMM dd yyyy}'}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Width="300">
+            
         </StackPanel>
     </Grid>
 </UserControl>

@@ -69,7 +69,6 @@ namespace ImportApp.WPF.ViewModels
                     {
                         DateTime = inventoryDocument.Created.ToString("dd.MM.yyyy hh:mm"),
                         TotalInputPrice = GetTotalIncome(inventoryDocument),
-                        Supplier = _supplierDataService.Get(inventoryDocument.SupplierId.ToString()).Result.Name != null ? _supplierDataService.Get(inventoryDocument.SupplierId.ToString()).Result.Name : "- - -",
                         TotalSoldPrice = _articleService.GetTotalSellingPrice(inventoryDocument).Result
                     });
                 }
@@ -84,6 +83,7 @@ namespace ImportApp.WPF.ViewModels
         public void ShowInventoryDetails(InventoryDocumentsViewModel parameter)
         {
             IsShowDetailsOpen = true;
+            this.InventoryDocumentDetails = new InventoryDocumentsDetails(parameter);
         }
 
 
